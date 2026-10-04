@@ -1,0 +1,1 @@
+{"schemaVersion":1,"id":"seamlessdogs-gametest","version":"1","environment":"server","entrypoints":{"fabric-gametest":["io.github.derkottersberg.seamlessdogs.fabric.gametest.DogsGameTests"]},"depends":{"seamlessdogs":"*","fabric-gametest-api-v1":"*"}}

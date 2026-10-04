@@ -1,0 +1,66 @@
+plugins {
+    id 'base'
+    alias(libs.plugins.architectury)
+    alias(libs.plugins.loom) apply false
+}
+architectury { minecraft = libs.versions.minecraft.get() }
+ext.seamlessApiDirectory = file(providers.gradleProperty('seamlessApiDir').getOrElse('../.ports/github-mc26.3/seamless-api'))
+allprojects {
+    group = rootProject.maven_group
+    version = rootProject.mod_version
+    repositories {
+        mavenCentral()
+        maven { url = 'https://maven.fabricmc.net/' }
+        maven { url = 'https://maven.architectury.dev/' }
+        maven { url = 'https://maven.terraformersmc.com/releases/' }
+    }
+}
+subprojects {
+    apply plugin: 'java-library'
+    java {
+        toolchain.languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
+        withSourcesJar()
+    }
+    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 25 }
+    tasks.withType(Test).configureEach { useJUnitPlatform() }
+    tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
+}
+tasks.register('verifyCommonIsolation') {
+    group = 'verification'
+    doLast {
+        fileTree('common/src').matching { include '**/*.java' }.each { source ->
+            if (source.text =~ /net\.(fabricmc|minecraftforge|neoforged)\./) throw new GradleException("Loader API in ${source}")
+        }
+    }
+}
+tasks.register('verifyLoaderJars') {
+    group = 'verification'
+    dependsOn ':fabric:jar'
+    doLast {
+        def archive = project(':fabric').tasks.named('jar').get().archiveFile.get().asFile
+        assert archive.name == "seamless-dogs-${project.version}-fabric.jar"
+        new java.util.zip.ZipFile(archive).withCloseable { zip ->
+            def metadata = new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
+            assert metadata.id == 'seamlessdogs' && metadata.version == project.version.toString()
+            assert metadata.license == 'All rights reserved' && metadata.depends.minecraft == '26.3'
+            assert metadata.depends.seamlessapi == '>=2.0.2 <3.0.0'
+            assert metadata.depends.java == '>=25'
+            ['seamlessdogs.mixins.json', 'assets/seamlessdogs/icon.png', 'assets/seamlessdogs/lang/en_us.json',
+             'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
+            zip.entries().each { entry ->
+                assert !entry.name.startsWith('com/derko/seamlessapi/')
+                assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
+                assert entry.name != 'META-INF/mods.toml' && entry.name != 'META-INF/neoforge.mods.toml'
+                if (entry.name.endsWith('.class')) {
+                    def stream = new DataInputStream(zip.getInputStream(entry))
+                    assert stream.readInt() == 0xCAFEBABE as int
+                    stream.readUnsignedShort()
+                    assert stream.readUnsignedShort() == 69
+                    stream.close()
+                }
+            }
+        }
+    }
+}
+tasks.named('assemble') { dependsOn subprojects.collect { it.tasks.named('assemble') } }
+tasks.named('check') { dependsOn 'verifyCommonIsolation', 'verifyLoaderJars'; dependsOn subprojects.collect { it.tasks.named('check') } }

@@ -1,0 +1,1 @@
+{"required":true,"package":"qa.dogs.mixin","compatibilityLevel":"JAVA_21","client":["SoundProbe","WolfProbe","RenderProbe","HandProbe","PromptProbe"],"injectors":{"defaultRequire":1}}

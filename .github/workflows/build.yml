@@ -1,0 +1,24 @@
+name: Build Fabric 26.3
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: seamless-dogs
+      - uses: actions/checkout@v4
+        with:
+          repository: DerkOttersberg/seamless-api
+          ref: 8c5f419e0f1a2ff86167e65d06b7f79c0138843c
+          path: seamless-api
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '25'
+      - run: chmod +x gradlew && ./gradlew clean check build -PseamlessApiDir=../seamless-api --no-daemon
+        working-directory: seamless-dogs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: seamless-dogs-fabric-26.3
+          path: seamless-dogs/fabric/build/libs/*-fabric.jar

@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        maven { url = 'https://maven.architectury.dev/' }
+        maven { url = 'https://maven.fabricmc.net/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
+    }
+}
+plugins { id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0' }
+rootProject.name = 'seamless-dogs'
+include 'common', 'fabric'
+gradle.beforeProject { project -> project.ext.set('loom.platform', 'fabric') }
+// Use the matching source line, never the sibling's older default checkout.
+def apiPath = providers.gradleProperty('seamlessApiDir').getOrElse('../.ports/github-mc26.3/seamless-api')
+includeBuild(apiPath)

@@ -1,0 +1,19 @@
+plugins { id 'dev.architectury.loom-no-remap' version '1.17.493' }
+repositories { mavenCentral(); maven { url = 'https://maven.fabricmc.net/' } }
+java { toolchain.languageVersion = JavaLanguageVersion.of(25) }
+tasks.withType(JavaExec).configureEach {
+    maxHeapSize = '1G'; minHeapSize = '256M'
+    systemProperty 'qa.guiScale', providers.gradleProperty('qaGuiScale').getOrElse('2')
+}
+dependencies {
+    minecraft 'com.mojang:minecraft:26.3'
+    implementation 'net.fabricmc:fabric-loader:0.19.5'
+    compileOnly 'net.fabricmc.fabric-api:fabric-api:0.161.0+26.3'
+    compileOnly files('../fabric/build/libs/seamless-dogs-0.1.0+mc26.3-fabric.jar')
+}
+loom { runs { client {
+    client()
+    runDir providers.gradleProperty('qaRunDir').getOrElse('build/run/client')
+    programArgs '--username', 'DogQA', '--graphicsBackend', providers.gradleProperty('qaBackend').getOrElse('vulkan'), '--quickPlaySingleplayer', 'dogs-world'
+} } }
+tasks.named('jar') { archiveFileName = 'seamless-dogs-qa.jar' }

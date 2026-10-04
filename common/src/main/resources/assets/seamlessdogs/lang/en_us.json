@@ -1,0 +1,14 @@
+{
+  "key.category.seamlessdogs.controls": "Seamless Dogs",
+  "key.seamlessdogs.pet": "Pet your dog",
+  "seamlessdogs.prompt": "[%s] Pet your dog",
+  "seamlessdogs.petting": "Good dog!",
+  "seamlessdogs.cooldown": "Give them a moment...",
+  "seamlessdogs.settings": "Seamless Dogs",
+  "seamlessdogs.scope": "This client's visuals",
+  "seamlessdogs.setting.prompt": "Petting prompt",
+  "seamlessdogs.setting.eyes": "Eye expressions",
+  "seamlessdogs.setting.animation": "Petting animations",
+  "seamlessdogs.keyhelp": "Change G in Options > Controls > Key Binds.",
+  "seamlessdogs.save": "Save"
+}

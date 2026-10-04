@@ -1,0 +1,13 @@
+version:5023
+fullscreen:false
+onboardAccessibility:false
+skipMultiplayerWarning:true
+tutorialStep:none
+startedCleanly:true
+pauseOnLostFocus:false
+renderDistance:3
+simulationDistance:5
+maxFps:30
+guiScale:2
+graphicsMode:0
+entityShadows:true
