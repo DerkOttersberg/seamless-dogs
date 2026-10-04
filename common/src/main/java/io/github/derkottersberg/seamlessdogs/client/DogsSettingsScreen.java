@@ -1,6 +1,6 @@
 package io.github.derkottersberg.seamlessdogs.client;
 
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -23,13 +23,13 @@ public final class DogsSettingsScreen extends Screen {
         }).bounds(x + (bw + 6) * 2, height - 28, bw, 20).build());
     }
     private Component label(String key, boolean enabled) { return Component.translatable(key).append(": ").append(Component.translatable(enabled ? "options.on" : "options.off")); }
-    public void onClose() { minecraft.setScreenAndShow(parent); }
-    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partial) {
+    public void onClose() { minecraft.setScreen(parent); }
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partial) {
         graphics.fill(0, 0, width, height, 0xF0182125);
-        graphics.centeredText(font, title, width / 2, 14, 0xFFFFFFFF);
-        graphics.centeredText(font, Component.translatable("seamlessdogs.scope"), width / 2, 32, 0xFFB7E8BD);
-        graphics.centeredText(font, Component.translatable("seamlessdogs.keyhelp"), width / 2, 140, 0xFFCCCCCC);
-        if (!error.isEmpty()) graphics.centeredText(font, error, width / 2, height - 44, 0xFFFF8888);
-        super.extractRenderState(graphics, mouseX, mouseY, partial);
+        graphics.drawCenteredString(font, title, width / 2, 14, 0xFFFFFFFF);
+        graphics.drawCenteredString(font, Component.translatable("seamlessdogs.scope"), width / 2, 32, 0xFFB7E8BD);
+        graphics.drawCenteredString(font, Component.translatable("seamlessdogs.keyhelp"), width / 2, 140, 0xFFCCCCCC);
+        if (!error.isEmpty()) graphics.drawCenteredString(font, error, width / 2, height - 44, 0xFFFF8888);
+        super.render(graphics, mouseX, mouseY, partial);
     }
 }

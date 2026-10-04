@@ -2,11 +2,11 @@ package io.github.derkottersberg.seamlessdogs.internal;
 
 import java.nio.file.Path;
 import net.minecraft.client.KeyMapping;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import io.github.derkottersberg.seamlessdogs.internal.DogsPayload;
 
 public interface ClientPlatformServices {
     Path configDirectory();
     KeyMapping petKey();
     boolean serverSupportsPetting();
-    void sendToServer(CustomPacketPayload payload);
+    void sendToServer(DogsPayload payload);
 }

@@ -6,7 +6,7 @@ import io.github.derkottersberg.seamlessdogs.network.PetState;
 import java.nio.file.Path;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import io.github.derkottersberg.seamlessdogs.internal.DogsPayload;
 import net.minecraftforge.client.ConfigScreenHandler;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.event.TickEvent;
@@ -15,10 +15,10 @@ import net.minecraftforge.fml.loading.FMLPaths;
 
 final class DogsForgeClient {
     static void initialize(FMLJavaModLoadingContext context) {
-        RegisterKeyMappingsEvent.BUS.addListener(event -> event.register(DogsKeys.PET));
+        context.getModEventBus().addListener((RegisterKeyMappingsEvent event) -> event.register(DogsKeys.PET));
         DogsClient.initialize(new Services());
-        TickEvent.ClientTickEvent.Post.BUS.addListener(event -> DogsClient.tick(Minecraft.getInstance()));
-        context.getContainer().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> { if(event.phase == TickEvent.Phase.END) DogsClient.tick(Minecraft.getInstance()); });
+        net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
             () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new DogsSettingsScreen(parent)));
     }
     static void receive(PetState packet) { DogsClient.receive(packet); }
@@ -29,6 +29,6 @@ final class DogsForgeClient {
             var connection = Minecraft.getInstance().getConnection();
             return connection != null && DogsForge.supports(connection.getConnection());
         }
-        public void sendToServer(CustomPacketPayload packet) { DogsForge.send(packet); }
+        public void sendToServer(DogsPayload packet) { DogsForge.send(packet); }
     }
 }

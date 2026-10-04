@@ -7,6 +7,6 @@ import net.minecraft.client.KeyMapping;
 /** Every loader exposes the same rebindable action in Minecraft Controls. */
 public final class DogsKeys {
     public static final KeyMapping PET = new KeyMapping("key.seamlessdogs.pet", InputConstants.KEY_G,
-        KeyMapping.Category.register(SeamlessDogs.id("controls")));
+        "key.categories.seamlessdogs");
     private DogsKeys() { }
 }

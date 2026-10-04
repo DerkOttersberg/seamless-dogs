@@ -1,7 +1,0 @@
-{
-  "type": "minecraft:function",
-  "environment": "minecraft:default",
-  "function": "seamlessdogs:codecroundtrip",
-  "max_ticks": 80,
-  "structure": "forge:empty3x3x3"
-}

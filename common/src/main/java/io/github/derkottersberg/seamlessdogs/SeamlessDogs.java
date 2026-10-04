@@ -6,13 +6,13 @@ import io.github.derkottersberg.seamlessdogs.network.PetState;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.resources.Identifier;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.animal.wolf.Wolf;
+import net.minecraft.world.entity.animal.Wolf;
 
 /** All state changes and authorization run on the logical server thread. */
 public final class SeamlessDogs {
@@ -23,7 +23,7 @@ public final class SeamlessDogs {
     private static final Map<UUID, Session> sessions = new HashMap<>();
     private static final Map<UUID, Long> nextAllowed = new HashMap<>();
     private SeamlessDogs() { }
-    public static Identifier id(String path) { return Identifier.fromNamespaceAndPath("seamlessdogs", path); }
+    public static ResourceLocation id(String path) { return new ResourceLocation("seamlessdogs", path); }
     public static void initialize(PlatformServices services) { platform = services; }
 
     public static boolean canPet(ServerPlayer player, Wolf dog) {
@@ -44,12 +44,7 @@ public final class SeamlessDogs {
         nextAllowed.put(player.getUUID(), now + COOLDOWN);
         dog.getNavigation().stop();
         dog.getLookControl().setLookAt(player, 30, 30);
-        var variant = dog.get(DataComponents.WOLF_SOUND_VARIANT);
-        if (variant != null) {
-            var sounds = dog.isBaby() ? variant.value().babySounds() : variant.value().adultSounds();
-            // Entity-bound sound packet follows the dog, preserving each wolf's voice.
-            dog.level().playSound(null, dog, sounds.pantSound(), SoundSource.NEUTRAL, 0.65F, 1.05F);
-        }
+        dog.level().playSound(null, dog, SoundEvents.WOLF_PANT, SoundSource.NEUTRAL, 0.65F, dog.isBaby() ? 1.35F : 1.05F);
         platform.sendToTrackingAndSelf(player, dog, state(session, DURATION));
         return true;
     }
@@ -75,7 +70,7 @@ public final class SeamlessDogs {
     public static void syncTo(ServerPlayer observer, Entity entity) {
         for (Session s : sessions.values()) {
             if (entity == s.dog || entity == s.player) {
-                int remaining = (int) Math.clamp(DURATION - (s.player.level().getGameTime() - s.start), 0, DURATION);
+                int remaining = (int) Math.max(0, Math.min(DURATION - (s.player.level().getGameTime() - s.start), DURATION));
                 platform.sendToPlayer(observer, state(s, remaining));
             }
         }

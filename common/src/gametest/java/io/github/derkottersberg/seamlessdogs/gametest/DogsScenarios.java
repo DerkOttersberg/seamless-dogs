@@ -4,10 +4,10 @@ import io.github.derkottersberg.seamlessdogs.SeamlessDogs;
 import io.github.derkottersberg.seamlessdogs.network.*;
 import io.netty.buffer.Unpooled;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.wolf.Wolf;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.core.BlockPos;
@@ -16,15 +16,17 @@ import java.util.UUID;
 
 @SuppressWarnings("removal")
 public final class DogsScenarios {
+    private static java.util.function.Function<GameTestHelper, ServerPlayer> playerFactory = GameTestHelper::makeMockServerPlayerInLevel;
+    public static void usePlayerFactory(java.util.function.Function<GameTestHelper, ServerPlayer> factory) { playerFactory = factory; }
     private record Fixture(ServerPlayer owner, Wolf dog) { }
     private static Fixture fixture(GameTestHelper h) {
-        ServerPlayer owner = h.makeMockServerPlayerInLevel();
+        ServerPlayer owner = playerFactory.apply(h);
         for (int x = 0; x < 3; x++) for (int z = 0; z < 4; z++)
             h.setBlock(new BlockPos(x, 0, z), Blocks.STONE.defaultBlockState());
         var pos = h.absolutePos(new BlockPos(1, 1, 1));
         owner.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
         owner.setNoGravity(true);
-        Wolf dog = new Wolf(EntityTypes.WOLF, h.getLevel());
+        Wolf dog = new Wolf(EntityType.WOLF, h.getLevel());
         dog.setPos(owner.getX(), owner.getY(), owner.getZ() + 1);
         dog.setNoGravity(true);
         dog.tame(owner);
@@ -48,7 +50,7 @@ public final class DogsScenarios {
             h.assertTrue(!SeamlessDogs.isPetting(f.owner.getUUID()), "Session did not finish");
             h.assertTrue(f.dog.isOrderedToSit(), "Session changed sit command; health=" + f.dog.getHealth()
                 + " initial=" + health + " alive=" + f.dog.isAlive() + " position=" + f.dog.position());
-            h.assertValueEqual(f.dog.getHealth(), health, "MVP must not heal or harm the dog");
+            h.assertTrue(f.dog.getHealth() == health, "Petting must not heal or harm the dog");
             org.slf4j.LoggerFactory.getLogger("SeamlessDogsTests").info("DOGS_GAMETEST_PASS ownerCanPet");
             h.succeed();
         });
@@ -57,7 +59,7 @@ public final class DogsScenarios {
         var f = fixture(h);
         h.assertTrue(!SeamlessDogs.request(f.owner, new PetRequest(-1)), "Negative target accepted");
         h.assertTrue(!SeamlessDogs.request(f.owner, new PetRequest(Integer.MAX_VALUE)), "Unknown target accepted");
-        f.dog.setOwnerReference(net.minecraft.world.entity.EntityReference.of(UUID.randomUUID()));
+        f.dog.setOwnerUUID(UUID.randomUUID());
         h.assertTrue(!SeamlessDogs.request(f.owner, new PetRequest(f.dog.getId())), "Other owner's dog accepted");
         f.dog.tame(f.owner);
         f.owner.setItemInHand(net.minecraft.world.InteractionHand.MAIN_HAND, new ItemStack(Items.STICK));
@@ -89,12 +91,12 @@ public final class DogsScenarios {
         });
     }
     public static void codecRoundTrip(GameTestHelper h) {
-        var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), h.getLevel().registryAccess());
+        var buffer = new FriendlyByteBuf(Unpooled.buffer());
         try {
             var request = new PetRequest(27); PetRequest.CODEC.encode(buffer, request);
-            h.assertValueEqual(PetRequest.CODEC.decode(buffer), request, "Request codec");
+            h.assertTrue(PetRequest.CODEC.decode(buffer).equals(request), "Request codec");
             var state = new PetState(UUID.randomUUID(), UUID.randomUUID(), 40); PetState.CODEC.encode(buffer, state);
-            h.assertValueEqual(PetState.CODEC.decode(buffer), state, "State codec");
+            h.assertTrue(PetState.CODEC.decode(buffer).equals(state), "State codec");
         } finally { buffer.release(); }
         org.slf4j.LoggerFactory.getLogger("SeamlessDogsTests").info("DOGS_GAMETEST_PASS codecRoundTrip");
         h.succeed();

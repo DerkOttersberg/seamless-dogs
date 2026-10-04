@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.animal.wolf.Wolf;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.phys.EntityHitResult;
 
 public final class DogsClient {
@@ -33,7 +33,7 @@ public final class DogsClient {
         players.values().removeIf(clip -> client.level.getGameTime() - clip.start >= SeamlessDogs.DURATION);
         while (platform.petKey().consumeClick()) {
             Wolf dog = target();
-            if (client.gui.screen() == null && dog != null && client.level.getGameTime() >= nextRequest) {
+            if (client.screen == null && dog != null && client.level.getGameTime() >= nextRequest) {
                 platform.sendToServer(new PetRequest(dog.getId()));
                 nextRequest = client.level.getGameTime() + SeamlessDogs.COOLDOWN;
             }
@@ -62,9 +62,9 @@ public final class DogsClient {
         var c = Minecraft.getInstance();
         return clip == null || c.level == null ? PetAnimation.sample(-1) : PetAnimation.sample(c.level.getGameTime() - clip.start + partial);
     }
-    public static void prompt(GuiGraphicsExtractor graphics) {
+    public static void prompt(GuiGraphics graphics) {
         var c = Minecraft.getInstance();
-        if (!ClientOptions.prompt || c.gui.hud.isHidden() || c.gui.screen() != null || target() == null) return;
+        if (!ClientOptions.prompt || c.options.hideGui || c.screen != null || target() == null) return;
         boolean active = players.containsKey(c.player.getUUID());
         boolean cooldown = c.level.getGameTime() < nextRequest;
         Component text = Component.translatable(active ? "seamlessdogs.petting" : cooldown ? "seamlessdogs.cooldown" : "seamlessdogs.prompt", platform.petKey().getTranslatedKeyMessage());
@@ -72,7 +72,7 @@ public final class DogsClient {
         int x = graphics.guiWidth() / 2;
         int y = graphics.guiHeight() - 58;
         graphics.fill(x - width / 2 - 7, y - 4, x + width / 2 + 7, y + 13, 0xB0182125);
-        graphics.centeredText(c.font, text, x, y, active ? 0xFFB7E8BD : 0xFFF4EEE4);
+        graphics.drawCenteredString(c.font, text, x, y, active ? 0xFFB7E8BD : 0xFFF4EEE4);
     }
     private record Clip(UUID dog, long start) { }
 }

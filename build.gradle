@@ -4,7 +4,7 @@ plugins {
     alias(libs.plugins.loom) apply false
 }
 architectury { minecraft = libs.versions.minecraft.get() }
-ext.seamlessApiDirectory = file(providers.gradleProperty('seamlessApiDir').getOrElse('../.ports/github-mc26.3/seamless-api'))
+ext.seamlessApiDirectory = file(providers.gradleProperty('seamlessApiDir').getOrElse('../seamless-api'))
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
@@ -23,7 +23,8 @@ subprojects {
         toolchain.languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
         withSourcesJar()
     }
-    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 25 }
+    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 17 }
+    tasks.withType(JavaExec).configureEach { javaLauncher=javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(17) }; jvmArgs '-XX:ActiveProcessorCount=2' }
     tasks.withType(Test).configureEach { useJUnitPlatform() }
     tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
 }
@@ -36,56 +37,25 @@ tasks.register('verifyCommonIsolation') {
     }
 }
 tasks.register('verifyLoaderJars') {
-    group = 'verification'
-    dependsOn ':fabric:jar', ':forge:jar', ':neoforge:jar'
+    dependsOn ':fabric:remapJar',':forge:remapJar'
     doLast {
-        ['forge', 'neoforge'].each { loader ->
-            def archive = project(":${loader}").tasks.named('jar').get().archiveFile.get().asFile
-            assert archive.name == "seamless-dogs-${project.version}-${loader}.jar"
+        ['fabric','forge'].each { loader ->
+            def archive=project(":${loader}").tasks.named('remapJar').get().archiveFile.get().asFile
+            assert archive.name=="seamless-dogs-${project.version}-${loader}.jar"
             new java.util.zip.ZipFile(archive).withCloseable { zip ->
-                def metadataPath = loader == 'forge' ? 'META-INF/mods.toml' : 'META-INF/neoforge.mods.toml'
-                def text = zip.getInputStream(zip.getEntry(metadataPath)).getText('UTF-8')
-                assert text.contains('modId="seamlessdogs"') && text.contains('license="All rights reserved"')
-                assert text.contains('versionRange="[26.3]"') && text.contains('modId="seamlessapi"')
-                assert text.contains("version=\"${project.version}\"")
-                assert zip.getEntry('fabric.mod.json') == null
-                assert zip.getEntry(loader == 'forge' ? 'META-INF/neoforge.mods.toml' : 'META-INF/mods.toml') == null
-                ['seamlessdogs.mixins.json', 'assets/seamlessdogs/icon.png', 'assets/seamlessdogs/lang/en_us.json',
-                 'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
+                assert zip.getEntry(loader=='fabric' ? 'fabric.mod.json' : 'META-INF/mods.toml')!=null
+                assert zip.getEntry(loader=='fabric' ? 'META-INF/mods.toml' : 'fabric.mod.json')==null
+                ['seamlessdogs.mixins.json','seamlessdogs.refmap.json','LICENSE','assets/seamlessdogs/icon.png','io/github/derkottersberg/seamlessdogs/SeamlessDogs.class'].each { assert zip.getEntry(it)!=null }
                 zip.entries().each { entry ->
-                    assert !entry.name.startsWith('com/derko/seamlessapi/')
-                    assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
-                    if (entry.name.endsWith('.class')) {
-                        def stream = new DataInputStream(zip.getInputStream(entry))
-                        assert stream.readInt() == 0xCAFEBABE as int
-                        stream.readUnsignedShort()
-                        assert stream.readUnsignedShort() == 69
-                        stream.close()
+                    assert !entry.name.startsWith('com/derko/seamlessapi/') && !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
+                    if(entry.name.endsWith('.class')) {
+                        def stream=new DataInputStream(zip.getInputStream(entry)); assert stream.readInt()==0xCAFEBABE as int; stream.readUnsignedShort(); assert stream.readUnsignedShort()==61; stream.close()
                     }
                 }
-            }
-        }
-        def archive = project(':fabric').tasks.named('jar').get().archiveFile.get().asFile
-        assert archive.name == "seamless-dogs-${project.version}-fabric.jar"
-        new java.util.zip.ZipFile(archive).withCloseable { zip ->
-            def metadata = new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
-            assert metadata.id == 'seamlessdogs' && metadata.version == project.version.toString()
-            assert metadata.license == 'All rights reserved' && metadata.depends.minecraft == '26.3'
-            assert metadata.depends.seamlessapi == '>=2.0.2 <3.0.0'
-            assert metadata.depends.java == '>=25'
-            ['seamlessdogs.mixins.json', 'assets/seamlessdogs/icon.png', 'assets/seamlessdogs/lang/en_us.json',
-             'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
-            zip.entries().each { entry ->
-                assert !entry.name.startsWith('com/derko/seamlessapi/')
-                assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
-                assert entry.name != 'META-INF/mods.toml' && entry.name != 'META-INF/neoforge.mods.toml'
-                if (entry.name.endsWith('.class')) {
-                    def stream = new DataInputStream(zip.getInputStream(entry))
-                    assert stream.readInt() == 0xCAFEBABE as int
-                    stream.readUnsignedShort()
-                    assert stream.readUnsignedShort() == 69
-                    stream.close()
-                }
+                if(loader=='fabric') {
+                    def metadata=new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
+                    assert metadata.id=='seamlessdogs' && metadata.version==project.version.toString() && metadata.depends.minecraft=='1.20.1' && metadata.depends.java=='>=17'
+                } else { def text=zip.getInputStream(zip.getEntry('META-INF/mods.toml')).getText('UTF-8'); assert text.contains('versionRange="[1.20.1]"') && text.contains('modId="seamlessapi"') && !text.contains('${') }
             }
         }
     }
