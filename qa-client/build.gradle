@@ -1,19 +1,51 @@
 plugins { id 'dev.architectury.loom-no-remap' version '1.17.493' }
-repositories { mavenCentral(); maven { url = 'https://maven.fabricmc.net/' } }
+def qaLoader = providers.gradleProperty('qaLoader').getOrElse('fabric')
+if (!(qaLoader in ['fabric', 'forge', 'neoforge'])) throw new GradleException('Unknown QA loader')
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.minecraftforge.net/' }
+    maven { url = 'https://maven.neoforged.net/releases/' }
+}
 java { toolchain.languageVersion = JavaLanguageVersion.of(25) }
+sourceSets.main.java.srcDir "src/${qaLoader}/java"
+sourceSets.main.resources.srcDir "src/${qaLoader}/resources"
 tasks.withType(JavaExec).configureEach {
     maxHeapSize = '1G'; minHeapSize = '256M'
     systemProperty 'qa.guiScale', providers.gradleProperty('qaGuiScale').getOrElse('2')
+    systemProperty 'qa.loader', qaLoader
 }
 dependencies {
     minecraft 'com.mojang:minecraft:26.3'
-    implementation 'net.fabricmc:fabric-loader:0.19.5'
-    compileOnly 'net.fabricmc.fabric-api:fabric-api:0.161.0+26.3'
-    compileOnly files('../fabric/build/libs/seamless-dogs-0.1.0+mc26.3-fabric.jar')
+    if (qaLoader == 'fabric') {
+        implementation 'net.fabricmc:fabric-loader:0.19.5'
+        compileOnly 'net.fabricmc.fabric-api:fabric-api:0.161.0+26.3'
+    } else if (qaLoader == 'forge') {
+        forge 'net.minecraftforge:forge:26.3-66.0.9'
+    } else {
+        neoForge 'net.neoforged:neoforge:26.3.0.48-beta'
+    }
+    compileOnly files("../${qaLoader}/build/libs/seamless-dogs-0.1.0+mc26.3-${qaLoader}.jar")
+}
+if (qaLoader == 'forge') {
+    configurations.forgeRuntimeLibrary {
+        exclude group: 'dev.architectury', module: 'architectury-naming-service'
+        exclude group: 'dev.architectury', module: 'architectury-mixin-remapper-service'
+    }
 }
 loom { runs { client {
     client()
     runDir providers.gradleProperty('qaRunDir').getOrElse('build/run/client')
     programArgs '--username', 'DogQA', '--graphicsBackend', providers.gradleProperty('qaBackend').getOrElse('vulkan'), '--quickPlaySingleplayer', 'dogs-world'
+    if (qaLoader == 'forge') {
+        def identity = file('../gradle/official-named-empty.tiny').absolutePath
+        property 'architectury.naming.mappingsPath', identity
+        property 'architectury.naming.sourceNamespace', 'official'
+        property 'architectury.mixinRemapper.mappingsPath', identity
+        property 'architectury.mixinRemapper.sourceNamespace', 'official'
+    }
 } } }
-tasks.named('jar') { archiveFileName = 'seamless-dogs-qa.jar' }
+tasks.named('jar', Jar) {
+    manifest { attributes 'MixinConfigs': 'dogsqa.mixins.json' }
+    archiveFileName = "seamless-dogs-qa-${qaLoader}.jar"
+}

@@ -8,8 +8,10 @@ pluginManagement {
 }
 plugins { id 'org.gradle.toolchains.foojay-resolver-convention' version '1.0.0' }
 rootProject.name = 'seamless-dogs'
-include 'common', 'fabric'
-gradle.beforeProject { project -> project.ext.set('loom.platform', 'fabric') }
+include 'common', 'fabric', 'forge', 'neoforge'
+gradle.beforeProject { project ->
+    project.ext.set('loom.platform', project.name in ['forge', 'neoforge'] ? project.name : 'fabric')
+}
 // Use the matching source line, never the sibling's older default checkout.
 def apiPath = providers.gradleProperty('seamlessApiDir').getOrElse('../.ports/github-mc26.3/seamless-api')
 includeBuild(apiPath)

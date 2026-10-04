@@ -1,0 +1,75 @@
+plugins { id 'dev.architectury.loom-no-remap' }
+base { archivesName = rootProject.archives_base_name }
+sourceSets.main {
+    java.srcDir rootProject.file('common/src/main/java')
+    resources.srcDir rootProject.file('common/src/main/resources')
+}
+sourceSets {
+    gametest {
+        java.srcDirs = ['src/gametest/java', rootProject.file('common/src/gametest/java')]
+        resources.srcDirs = ['src/gametest/resources']
+        compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
+        runtimeClasspath += output + compileClasspath + sourceSets.main.runtimeClasspath
+    }
+}
+configurations {
+    gametestImplementation.extendsFrom implementation
+    gametestRuntimeOnly.extendsFrom runtimeOnly
+}
+configurations.forgeRuntimeLibrary {
+    exclude group: 'dev.architectury', module: 'architectury-naming-service'
+    exclude group: 'dev.architectury', module: 'architectury-mixin-remapper-service'
+}
+dependencies {
+    minecraft libs.minecraft
+    forge libs.forge
+    def apiJar = files(new File(rootProject.seamlessApiDirectory, "forge/build/libs/seamless-api-${libs.versions.seamless.api.get()}-forge.jar"))
+    apiJar.builtBy gradle.includedBuild('seamless-api').task(':forge:jar')
+    implementation apiJar
+}
+loom {
+    mods {
+        seamlessdogs { sourceSet sourceSets.main }
+        seamlessdogstests { sourceSet sourceSets.gametest }
+    }
+    runs {
+        gameTestServer {
+            runtimeEnvironment = 'gametestserver'
+            forgeTemplate 'gameTestServer'
+            source sourceSets.gametest
+            runDir 'build/gametest'
+            def identity = rootProject.file('gradle/official-named-empty.tiny').absolutePath
+            property 'architectury.naming.mappingsPath', identity
+            property 'architectury.naming.sourceNamespace', 'official'
+            property 'architectury.mixinRemapper.mappingsPath', identity
+            property 'architectury.mixinRemapper.sourceNamespace', 'official'
+            property 'forge.enabledGameTestNamespaces', 'seamlessdogs'
+        }
+    }
+}
+tasks.named('runGameTestServer') {
+    doLast {
+        def logFile = layout.buildDirectory.file('gametest/logs/latest.log').get().asFile
+        def log = logFile.exists() ? logFile.text : ''
+        ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip'].each { name ->
+            if (!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/pending/failed dog scenario ${name}")
+        }
+        if (!(log =~ /All \d+ required tests passed/)) throw new GradleException('Native GameTests did not finish successfully')
+    }
+}
+tasks.named('check') { dependsOn 'runGameTestServer' }
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('META-INF/mods.toml') { expand version: project.version }
+}
+tasks.named('jar', Jar) {
+    from rootProject.file('LICENSE')
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest { attributes 'Automatic-Module-Name': 'io.github.derkottersberg.seamlessdogs', 'MixinConfigs': 'seamlessdogs.mixins.json' }
+    archiveFileName = "seamless-dogs-${project.version}-forge.jar"
+}
+tasks.named('sourcesJar', Jar) {
+    from project(':common').sourceSets.main.allSource
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    archiveFileName = "seamless-dogs-${project.version}-forge-sources.jar"
+}

@@ -1,8 +1,8 @@
 package qa.dogs;
 
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
-import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import com.mojang.brigadier.CommandDispatcher;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -15,10 +15,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.InteractionHand;
 
 /** Creates a private, deterministic fixture, never touches the owner's worlds. */
-public final class ServerProbe implements ModInitializer {
+public final class ServerProbe {
     private Wolf dog;
-    public void onInitialize() {
-        ServerTickEvents.END_SERVER_TICK.register(server -> {
+    public void tick(MinecraftServer server) {
             var player = server.getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogQA")).findFirst().orElse(null);
             if (player == null || dog != null && !dog.isRemoved()) return;
             var level = player.level();
@@ -39,10 +38,17 @@ public final class ServerProbe implements ModInitializer {
             dog.setYRot(180); dog.yBodyRot = 180; dog.yHeadRot = 180;
             level.addFreshEntity(dog);
             System.out.println("DOGS_QA_FIXTURE player=" + player.getUUID() + " dog=" + dog.getId());
-        });
-        CommandRegistrationCallback.EVENT.register((dispatcher, registry, environment) -> dispatcher.register(
+    }
+    public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
+        dispatcher.register(
             Commands.literal("dogsqa")
                 .then(Commands.literal("held").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); return 1; }))
-                .then(Commands.literal("empty").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); return 1; }))));
+                .then(Commands.literal("puppy").executes(context -> {
+                    var player = context.getSource().getPlayerOrException();
+                    for (var entity : player.level().getEntitiesOfClass(Wolf.class, player.getBoundingBox().inflate(5)))
+                        if (entity.isOwnedBy(player)) entity.setAge(-24000);
+                    return 1;
+                }))
+                .then(Commands.literal("empty").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); return 1; })));
     }
 }

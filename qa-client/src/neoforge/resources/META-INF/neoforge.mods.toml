@@ -1,0 +1,9 @@
+modLoader="javafml"
+loaderVersion="[11,)"
+license="All rights reserved"
+[[mods]]
+modId="seamlessdogsqa"
+version="1"
+displayName="Seamless Dogs QA (never distributed)"
+[[mixins]]
+config="dogsqa.mixins.json"

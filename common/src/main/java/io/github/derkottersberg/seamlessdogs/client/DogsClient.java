@@ -22,6 +22,8 @@ public final class DogsClient {
     public static void receive(PetState state) {
         var client = Minecraft.getInstance();
         if (client.level == null) return;
+        // Tracking packets can arrive before the first tick in the new world.
+        if (previousLevel != client.level) { players.clear(); nextRequest = 0; previousLevel = client.level; }
         if (state.remainingTicks() == 0) players.remove(state.player());
         else players.put(state.player(), new Clip(state.dog(), client.level.getGameTime() - (SeamlessDogs.DURATION - state.remainingTicks())));
     }

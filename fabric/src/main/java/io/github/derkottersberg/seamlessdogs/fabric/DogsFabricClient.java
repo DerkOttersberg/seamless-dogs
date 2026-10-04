@@ -13,7 +13,7 @@ import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 public final class DogsFabricClient implements ClientModInitializer {
-    public static final KeyMapping PET = new KeyMapping("key.seamlessdogs.pet", InputConstants.KEY_G, KeyMapping.Category.register(SeamlessDogs.id("controls")));
+    public static final KeyMapping PET = DogsKeys.PET;
     public void onInitializeClient() {
         KeyMappingHelper.registerKeyMapping(PET);
         DogsClient.initialize(new Services());

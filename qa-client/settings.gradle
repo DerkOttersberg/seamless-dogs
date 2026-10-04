@@ -1,2 +1,3 @@
 pluginManagement { repositories { gradlePluginPortal(); maven { url = 'https://maven.architectury.dev/' }; maven { url = 'https://maven.fabricmc.net/' }; maven { url = 'https://maven.minecraftforge.net/' } } }
 rootProject.name = 'seamless-dogs-qa-client'
+gradle.beforeProject { project -> project.ext.set('loom.platform', providers.gradleProperty('qaLoader').getOrElse('fabric')) }

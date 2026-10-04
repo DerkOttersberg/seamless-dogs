@@ -12,6 +12,8 @@ allprojects {
         mavenCentral()
         maven { url = 'https://maven.fabricmc.net/' }
         maven { url = 'https://maven.architectury.dev/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.neoforged.net/releases/' }
         maven { url = 'https://maven.terraformersmc.com/releases/' }
     }
 }
@@ -35,8 +37,34 @@ tasks.register('verifyCommonIsolation') {
 }
 tasks.register('verifyLoaderJars') {
     group = 'verification'
-    dependsOn ':fabric:jar'
+    dependsOn ':fabric:jar', ':forge:jar', ':neoforge:jar'
     doLast {
+        ['forge', 'neoforge'].each { loader ->
+            def archive = project(":${loader}").tasks.named('jar').get().archiveFile.get().asFile
+            assert archive.name == "seamless-dogs-${project.version}-${loader}.jar"
+            new java.util.zip.ZipFile(archive).withCloseable { zip ->
+                def metadataPath = loader == 'forge' ? 'META-INF/mods.toml' : 'META-INF/neoforge.mods.toml'
+                def text = zip.getInputStream(zip.getEntry(metadataPath)).getText('UTF-8')
+                assert text.contains('modId="seamlessdogs"') && text.contains('license="All rights reserved"')
+                assert text.contains('versionRange="[26.3]"') && text.contains('modId="seamlessapi"')
+                assert text.contains("version=\"${project.version}\"")
+                assert zip.getEntry('fabric.mod.json') == null
+                assert zip.getEntry(loader == 'forge' ? 'META-INF/neoforge.mods.toml' : 'META-INF/mods.toml') == null
+                ['seamlessdogs.mixins.json', 'assets/seamlessdogs/icon.png', 'assets/seamlessdogs/lang/en_us.json',
+                 'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
+                zip.entries().each { entry ->
+                    assert !entry.name.startsWith('com/derko/seamlessapi/')
+                    assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
+                    if (entry.name.endsWith('.class')) {
+                        def stream = new DataInputStream(zip.getInputStream(entry))
+                        assert stream.readInt() == 0xCAFEBABE as int
+                        stream.readUnsignedShort()
+                        assert stream.readUnsignedShort() == 69
+                        stream.close()
+                    }
+                }
+            }
+        }
         def archive = project(':fabric').tasks.named('jar').get().archiveFile.get().asFile
         assert archive.name == "seamless-dogs-${project.version}-fabric.jar"
         new java.util.zip.ZipFile(archive).withCloseable { zip ->

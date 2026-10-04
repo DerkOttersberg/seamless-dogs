@@ -1,0 +1,13 @@
+modLoader="javafml"
+loaderVersion="[66,)"
+license="All rights reserved"
+[[mods]]
+modId="seamlessdogstests"
+version="1"
+displayName="Seamless Dogs test driver (never distributed)"
+[[dependencies.seamlessdogstests]]
+modId="seamlessdogs"
+mandatory=true
+versionRange="[0.1,)"
+ordering="AFTER"
+side="BOTH"

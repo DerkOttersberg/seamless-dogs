@@ -2,10 +2,7 @@ package qa.dogs;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import io.github.derkottersberg.seamlessdogs.client.*;
-import io.github.derkottersberg.seamlessdogs.fabric.DogsFabricClient;
 import java.nio.file.Files;
-import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.CameraType;
@@ -14,13 +11,12 @@ import net.minecraft.world.entity.animal.wolf.Wolf;
 import net.minecraft.world.entity.HumanoidArm;
 
 /** Drives the actual keybind and observes production state, render calls, and sound packets. */
-public final class ClientProbe implements ClientModInitializer {
+public final class ClientProbe {
     public static int soundDog = -1, sounds, wolves, hands, playerModels, prompts, expressiveEyes, blinks;
     private int phase, ticks, total, petStart, shutdown;
     private boolean finished;
     private Wolf dog;
-    public void onInitializeClient() { ClientTickEvents.END_CLIENT_TICK.register(this::tick); }
-    private void tick(Minecraft client) {
+    public void tick(Minecraft client) {
         if (finished) { if (++shutdown == 30) client.stop(); return; }
         if (++total > 6000) fail(client, "QA timed out phase=" + phase);
         if (client.player == null || client.level == null) return;
@@ -103,14 +99,28 @@ public final class ClientProbe implements ClientModInitializer {
             case 13 -> {
                 if (ticks > 10) {
                     if (pose.weight() != 0) fail(client, "Pose did not return to vanilla");
-                    write(client, "PASS: packaged Fabric 26.3; real keybind/server packets; first/third/left-hand render; dog rig; happy eyes + idle blink; entity-bound sound; occupied hand; resource reload; settings.\n");
+                    client.getConnection().sendCommand("dogsqa puppy"); next();
+                }
+            }
+            case 14 -> {
+                if (ticks > 25 && dog.isBaby() && DogsClient.target() == dog) {
+                    wolves = expressiveEyes = sounds = hands = 0; click(); next();
+                }
+                if (ticks > 150) fail(client, "Puppy fixture never synchronized");
+            }
+            case 15 -> {
+                if (pose.weight() > 0.7F && wolves > 0 && expressiveEyes > 0 && sounds > 0 && hands > 0) {
+                    capture(client, "07-puppy.png");
+                    log("PASS puppy model, eyelids, hand and entity voice");
+                    write(client, "PASS: packaged " + System.getProperty("qa.loader", "fabric") + " 26.3; real keybind/server packets; first/third/left-hand render; adult and puppy rig/eyes/voice; idle blink; occupied hand; resource reload; settings.\n");
                     finished = true; log("DOGS_CLIENT_PASS");
                 }
+                if (ticks > 150) fail(client, "Puppy feature missing rig=" + wolves + " eyes=" + expressiveEyes + " voice=" + sounds + " hands=" + hands);
             }
         }
     }
     private Wolf findDog(Minecraft c) { for (var entity : c.level.entitiesForRendering()) if (entity instanceof Wolf w && w.isOwnedBy(c.player)) return w; return null; }
-    private void click() { KeyMapping.click(InputConstants.getKey(DogsFabricClient.PET.saveString())); }
+    private void click() { KeyMapping.click(InputConstants.getKey(DogsKeys.PET.saveString())); }
     private void next() { phase++; ticks = 0; log("phase=" + phase); }
     private void capture(Minecraft c, String name) { Screenshot.grab(c.gameDirectory, name, c.gameRenderer.mainRenderTarget(), 1, message -> log(message.getString())); }
     private void write(Minecraft c, String value) { try { Files.writeString(c.gameDirectory.toPath().resolve("dogs-client-passed.txt"), value); } catch (Exception e) { throw new RuntimeException(e); } }

@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="[11,)"
+license="All rights reserved"
+[[mods]]
+modId="seamlessdogs"
+version="${version}"
+displayName="Seamless Dogs"
+authors="Derk Ottersberg"
+iconFile="assets/seamlessdogs/icon.png"
+description="Pet your own tamed wolves with an empty hand and a rebindable key. Dogs respond with expressive eyes, head and tail animation, and their own voice."
+[[mixins]]
+config="seamlessdogs.mixins.json"
+[features.seamlessdogs]
+javaVersion="[25,)"
+[[dependencies.seamlessdogs]]
+modId="neoforge"
+type="required"
+versionRange="[26.3.0.48-beta,26.4)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.seamlessdogs]]
+modId="minecraft"
+type="required"
+versionRange="[26.3]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.seamlessdogs]]
+modId="seamlessapi"
+type="required"
+versionRange="[2.0.2,3.0.0)"
+ordering="AFTER"
+side="BOTH"

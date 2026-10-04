@@ -12,9 +12,9 @@ public abstract class WolfRendererMixin {
     private void seamlessdogs$extract(Wolf dog, WolfRenderState state, float partial, CallbackInfo ci) {
         var sample = ClientOptions.animation ? DogsClient.dogSample(dog.getUUID(), partial) : PetAnimation.sample(-1);
         ((DogRenderData) state).seamlessdogs$sample(sample);
-        if (!ClientOptions.eyes || !dog.isTame() || dog.isAngry() || dog.isBaby()) return;
+        if (!ClientOptions.eyes || !dog.isTame() || dog.isAngry()) return;
         boolean happy = DogsClient.dogSample(dog.getUUID(), partial).weight() > 0.25F;
         int blink = Math.floorMod(dog.tickCount + dog.getUUID().hashCode(), 97);
-        if (happy || blink < 3) state.texture = EyeTextures.expression(state.texture, happy);
+        if (happy || blink < 3) state.texture = EyeTextures.expression(state.texture, happy, dog.isBaby());
     }
 }

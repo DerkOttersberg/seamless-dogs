@@ -1,4 +1,4 @@
-name: Build Fabric 26.3
+name: Build all loaders 26.3
 on: [push, pull_request]
 jobs:
   build:
@@ -20,5 +20,8 @@ jobs:
         working-directory: seamless-dogs
       - uses: actions/upload-artifact@v4
         with:
-          name: seamless-dogs-fabric-26.3
-          path: seamless-dogs/fabric/build/libs/*-fabric.jar
+          name: seamless-dogs-all-loaders-26.3
+          path: |
+            seamless-dogs/fabric/build/libs/*-fabric.jar
+            seamless-dogs/forge/build/libs/*-forge.jar
+            seamless-dogs/neoforge/build/libs/*-neoforge.jar
