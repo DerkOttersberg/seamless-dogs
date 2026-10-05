@@ -1,32 +1,26 @@
 # Animation and asset provenance
 
-This MVP reuses the **Minecraft 26.3 vanilla rig** already installed in the game:
-`WolfModel` (adult/baby), `WolfRenderer`, `PlayerModel`, and
-`FirstPersonHandsAndItemsRenderer`. Signatures and pivots were inspected from
-the actual 26.3 development classes. No third-party rig/animation was imported;
-no Minecraft texture or sound file is distributed inside the mod.
+The clip is original procedural motion on each Minecraft version's vanilla wolf
+and player rigs. No third-party animation, replacement model, GeckoLib, Minecraft
+texture, or sound file is distributed. The small additive pose is applied after
+vanilla prepares the rig and fades over a six-tick entrance/eight-tick exit.
+It tilts the head, wags the tail and strokes the player's main arm for two seconds.
+First person calls vanilla's skin-aware arm renderer. Both handedness settings
+are supported. Motion is stylized; hand contact is not guaranteed at every angle
+or distance. There is no camera takeover, root motion, or inverse kinematics.
 
-The original two-second procedural clip has a six-tick smooth entrance and an
-eight-tick smooth exit, with small sinusoidal strokes. The wolf receives an
-additive head tilt and tail wag after vanilla resets the model. Each extracted
-wolf render state contains its own pose, so rendering one wolf cannot carry the
-pose into another. Third-person arm transforms preserve sleeve child poses,
-skin visibility, handedness, and the vanilla rest animation.
+Idle eyes blink for three ticks every 97 ticks with a UUID offset. Petting adds
+closed-eye smiles. Adult and puppy eye regions derive from the currently active
+resource-pack texture and preserve sampled fur colors. Newer 32x32 puppy UVs
+and the older adult-layout puppy skin are handled by their matching version
+branches. Integer-scaled vanilla UV layouts are supported. Unsupported dimensions
+fall back to the original texture; a pack with custom UVs can disable expressions
+in settings. Temporary textures are released and regenerated on resource reload.
 
-First person calls vanilla's skin-aware arm renderer with a small translated and
-rotated pose. It requires an empty main hand; maps, held items, and item-use
-animations do not enter the petting path. It is a stylized clip, with no root
-motion, camera takeover, or exact hand-to-head IK.
+A real entity-bound wolf pant packet follows the dog's spatial position. Newer
+versions preserve the adult/baby sound variant; older versions use vanilla wolf
+pant with puppy pitch. Minecraft's neutral-sound volume controls apply.
+Background tests use a silent output device and verify the real packet/entity ID.
 
-Adult eyes blink for three ticks every 97 ticks, with a UUID-specific offset.
-During petting, a tiny closed-eye smile replaces the eye region of a temporary
-copy of the **currently active resource-pack texture**. Fur colors are sampled
-from that texture. Derived textures are released and regenerated on resource
-reload. Puppy UVs differ in 26.3; the MVP deliberately retains their eyes.
-
-The server sends an entity-bound pant from the wolf's adult/baby sound variant.
-The sound travels through Minecraft's normal spatial sound and category-volume
-controls. There are no global/UI sound effects or separately licensed samples.
-
-The icon is original pixel art drawn for this project. Project code and icon are
-all rights reserved. Minecraft and dependency assets retain their own licenses.
+The icon is original pixel art. Product code and original icon are all rights
+reserved. SeamlessLib remains MIT; game and dependency assets retain their licenses.

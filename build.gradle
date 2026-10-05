@@ -54,7 +54,7 @@ tasks.register('verifyLoaderJars') {
                  'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
                 zip.entries().each { entry ->
                     assert !entry.name.startsWith('com/derko/seamlessapi/')
-                    assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
+                    assert !entry.name.contains('/gametest/') && !entry.name.startsWith('qa/') && !entry.name.contains('/qa/')
                     if (entry.name.endsWith('.class')) {
                         def stream = new DataInputStream(zip.getInputStream(entry))
                         assert stream.readInt() == 0xCAFEBABE as int
@@ -77,7 +77,7 @@ tasks.register('verifyLoaderJars') {
              'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
             zip.entries().each { entry ->
                 assert !entry.name.startsWith('com/derko/seamlessapi/')
-                assert !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
+                assert !entry.name.contains('/gametest/') && !entry.name.startsWith('qa/') && !entry.name.contains('/qa/')
                 assert entry.name != 'META-INF/mods.toml' && entry.name != 'META-INF/neoforge.mods.toml'
                 if (entry.name.endsWith('.class')) {
                     def stream = new DataInputStream(zip.getInputStream(entry))

@@ -1,5 +1,5 @@
 name: Build all loaders 26.3
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,6 +16,11 @@ jobs:
         with:
           distribution: temurin
           java-version: '25'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: chmod +x gradlew && ./gradlew clean check build --no-daemon
+        working-directory: seamless-api
       - run: chmod +x gradlew && ./gradlew clean check build -PseamlessApiDir=../seamless-api --no-daemon
         working-directory: seamless-dogs
       - uses: actions/upload-artifact@v4
@@ -23,5 +28,8 @@ jobs:
           name: seamless-dogs-all-loaders-26.3
           path: |
             seamless-dogs/fabric/build/libs/*-fabric.jar
+            seamless-api/fabric/build/libs/*-fabric.jar
             seamless-dogs/forge/build/libs/*-forge.jar
+            seamless-api/forge/build/libs/*-forge.jar
             seamless-dogs/neoforge/build/libs/*-neoforge.jar
+            seamless-api/neoforge/build/libs/*-neoforge.jar

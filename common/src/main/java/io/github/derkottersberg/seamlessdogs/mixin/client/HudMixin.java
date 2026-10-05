@@ -8,6 +8,6 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Hud.class)
 public abstract class HudMixin {
-    @Inject(method = "extractRenderState", at = @At("TAIL"))
+    @Inject(method = "extractRenderState", at = @At("RETURN"))
     private void seamlessdogs$prompt(GuiGraphicsExtractor graphics, DeltaTracker delta, CallbackInfo ci) { DogsClient.prompt(graphics); }
 }

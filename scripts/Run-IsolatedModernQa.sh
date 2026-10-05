@@ -18,6 +18,10 @@ cp "$dogjar" "$stage/product/$loader/build/libs/"
 cp "$dogjar" "$apijar" "$stage/client/mods/"
 cp -a "$fixture" "$stage/client/saves/dogs-world"
 cp "$repo/qa-client/options.txt" "$stage/client/options.txt"
+mkdir -p "$stage/client/config"
+# The loader's optional early window uses OpenGL before Minecraft can select
+# Vulkan. Disable that loader splash only in this disposable QA profile.
+printf 'earlyWindowControl=false\n' > "$stage/client/config/fml.toml"
 cp "$repo/common/src/main/resources/pack.mcmeta" "$stage/product/qa-client/src/main/resources/pack.mcmeta"
 if [[ "$loader" == fabric ]]; then
     curl --fail --location --retry 3 --silent --show-error \
@@ -26,11 +30,11 @@ if [[ "$loader" == fabric ]]; then
 fi
 cp "$wrapper" "$stage/isolated-client.sh"
 sed -i 's/\r$//' "$stage/isolated-client.sh" "$stage/product/gradlew"
+# Queue atomically on the same lock; a probe/release before the wrapper can race another job.
+sed -i 's/flock --nonblock 9/flock --wait 600 9/' "$stage/isolated-client.sh"
 chmod +x "$stage/isolated-client.sh" "$stage/product/gradlew"
 sha256sum "$stage/client/mods/"*.jar > "$stage/SHA256SUMS.before.txt"
 cd "$stage/product"
-# Waiting for the shared lock is outside the client wrapper; the wrapper rechecks it atomically.
-flock --wait 50 /tmp/seamless-isolated-minecraft.lock true
 ALSOFT_DRIVERS=null ISOLATED_CLIENT_TIMEOUT_SECONDS=900 \
     "$stage/isolated-client.sh" ./gradlew -p qa-client runClient \
     "-PqaLoader=$loader" "-PqaRunDir=$stage/client" -PqaBackend=vulkan --no-daemon --console=plain \
