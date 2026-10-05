@@ -18,7 +18,21 @@ import net.minecraft.world.InteractionHand;
 public final class ServerProbe {
     private Wolf dog;
     private java.util.UUID positionedObserver;
+    private boolean inspectedCommands;
     public void tick(MinecraftServer server) {
+            if (!inspectedCommands) {
+                inspectedCommands = true;
+                var root = server.getCommands().getDispatcher().getRoot().getChild("dogsqa");
+                System.out.println("DOGS_QA_COMMAND_TREE " + (root == null ? "absent" : root.getChildren()));
+                // The installed Forge 52 test runtime can miss this test mod's
+                // command-registration callback. Ensure disposable fixture
+                // commands exist on the actual server before driving actions.
+                if (root == null) {
+                    registerCommands(server.getCommands().getDispatcher());
+                    for (var player : server.getPlayerList().getPlayers()) server.getCommands().sendCommands(player);
+                    System.out.println("DOGS_QA_COMMANDS_INSTALLED_ON_SERVER");
+                }
+            }
             var observer = server.getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogObserver")).findFirst().orElse(null);
             if (observer != null && !observer.getUUID().equals(positionedObserver)) {
                 observer.setGameMode(GameType.CREATIVE);
@@ -54,7 +68,7 @@ public final class ServerProbe {
                     var observer = context.getSource().getServer().getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogObserver")).findFirst().orElseThrow();
                     observer.connection.teleport(-2.5, 65, 1.4, -90, 20); return 1;
                 }))
-                .then(Commands.literal("held").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); return 1; }))
+                .then(Commands.literal("held").executes(context -> { System.out.println("DOGS_QA_HELD_SOURCE " + context.getSource().getEntity()); context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); return 1; }))
                 .then(Commands.literal("puppy").executes(context -> {
                     var player = context.getSource().getPlayerOrException();
                     for (var entity : player.level().getEntitiesOfClass(Wolf.class, player.getBoundingBox().inflate(5)))

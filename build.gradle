@@ -55,6 +55,8 @@ tasks.register('verifyLoaderJars') {
                 }
                 if(loader=='fabric') {
                     def metadata=new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
+            def entrypointBytes=zip.getInputStream(zip.getEntry('io/github/derkottersberg/seamlessdogs/fabric/DogsFabric.class')).bytes
+            assert !new String(entrypointBytes,java.nio.charset.StandardCharsets.ISO_8859_1).contains('net/minecraft/world/entity/Entity') : 'Fabric runtime jar contains development Minecraft names'
                     assert metadata.id=='seamlessdogs' && metadata.version==project.version.toString() && metadata.depends.minecraft=='1.21.1' && metadata.depends.java=='>=21'
                     assert metadata.license=='All rights reserved' && metadata.depends.seamlessapi=='>=2.0.2 <3.0.0'
                     assert metadata.depends['fabric-api']=='>=0.116.17 <0.117.0'

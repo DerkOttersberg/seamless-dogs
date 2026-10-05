@@ -51,7 +51,7 @@ The build runs unit tests, common isolation, metadata/refmap/bytecode checks,
 and four discovered native scenarios on each loader. Gameplay jars are in each
 loader's `build/libs/`. Common, development, sources and QA jars are not install
 artifacts. SeamlessLib stays a separate dependency. Its verified local source
-commit is `8908c7f924974794e7c1caea43ed6f3e34101fce`; new library source ports have not been published remotely.
+commit is `6bb9de09ed9e01c1b7614149e6eb2e5e461d367e`; new library source ports have not been published remotely.
 
 Background acceptance uses genuine installed servers/clients in private WSL
 profiles, bounded resources and an exclusive Xvfb display lock. Two actual clients
