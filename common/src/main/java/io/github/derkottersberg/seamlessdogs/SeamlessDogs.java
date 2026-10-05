@@ -48,7 +48,7 @@ public final class SeamlessDogs {
         if (variant != null) {
             var sounds = dog.isBaby() ? variant.value().babySounds() : variant.value().adultSounds();
             // Entity-bound sound packet follows the dog, preserving each wolf's voice.
-            dog.level().playSound(null, dog, sounds.pantSound(), SoundSource.NEUTRAL, 0.65F, 1.05F);
+            dog.level().playSeededSound(null, dog, sounds.pantSound(), SoundSource.NEUTRAL, 0.65F, 1.05F, dog.getRandom().nextLong());
         }
         platform.sendToTrackingAndSelf(player, dog, state(session, DURATION));
         return true;

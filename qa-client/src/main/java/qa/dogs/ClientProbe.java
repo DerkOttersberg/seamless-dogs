@@ -13,13 +13,27 @@ import net.minecraft.world.entity.HumanoidArm;
 /** Drives the actual keybind and observes production state, render calls, and sound packets. */
 public final class ClientProbe {
     public static int soundDog = -1, sounds, wolves, hands, playerModels, prompts, expressiveEyes, blinks;
+    public static java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen> settingsOpener = DogsSettingsScreen::new;
     private int phase, ticks, total, petStart, shutdown;
     private boolean finished;
     private Wolf dog;
+    private ObserverProbe observer;
+    private boolean movedObserver;
     public void tick(Minecraft client) {
-        if (finished) { if (++shutdown == 30) client.stop(); return; }
+        if (System.getProperty("qa.role", "single").equals("observer")) {
+            if (observer == null) observer = new ObserverProbe();
+            observer.tick(client); return;
+        }
+        boolean multiplayer = System.getProperty("qa.role", "single").equals("owner");
+        if (finished) {
+            shutdown++;
+            if (multiplayer && shutdown == 70) click();
+            if (shutdown == (multiplayer ? 77 : 30)) client.stop();
+            return;
+        }
         if (++total > 6000) fail(client, "QA timed out phase=" + phase);
         if (client.player == null || client.level == null) return;
+        if (multiplayer && phase == 0 && client.level.players().size() < 2) return;
         if (dog == null || dog.isRemoved()) {
             dog = client.level.entitiesForRendering().iterator().hasNext() ? findDog(client) : null;
             if (dog == null) return;
@@ -35,10 +49,17 @@ public final class ClientProbe {
         // the player's arm. This changes only the QA player's in-game look.
         if (phase == 3 && ticks > 3) { client.player.setYRot(client.player.getYRot() - 35); client.player.setXRot(20); }
         ticks++;
+        if (phase == 0 && ticks % 200 == 0) log("Waiting for initial evidence: target=" + DogsClient.target()
+            + " compatible=" + qa.dogs.mixin.ClientServicesProbe.qa$platform().serverSupportsPetting()
+            + " owned=" + dog.isOwnedBy(client.player) + " hit=" + client.hitResult + " screen=" + client.gui.screen()
+            + " prompt=" + prompts + " blink=" + blinks);
         if (client.gui.overlay() != null) return;
         var pose = DogsClient.playerSample(client.player.getId(), 0);
         switch (phase) {
             case 0 -> {
+                if (ticks > 600) fail(client, "Initial prompt/blink missing: compatible="
+                    + qa.dogs.mixin.ClientServicesProbe.qa$platform().serverSupportsPetting()
+                    + " target=" + DogsClient.target() + " prompts=" + prompts + " blink=" + blinks);
                 if (ticks > 40 && DogsClient.target() == dog && prompts > 0 && blinks > 0) {
                     capture(client, "01-prompt.png"); click(); next();
                 }
@@ -84,14 +105,20 @@ public final class ClientProbe {
                 }
             }
             case 9 -> {
-                if (ticks > 60 && client.gui.overlay() == null && DogsClient.target() == dog) { expressiveEyes = 0; click(); next(); }
+                if (ticks > 60 && client.gui.overlay() == null && DogsClient.target() == dog) { expressiveEyes = 0;
+                    if (multiplayer && !movedObserver) {
+                        client.getConnection().sendCommand("dogsqa observer_far"); movedObserver = true; ticks = 55; return;
+                    }
+                    click(); next(); }
             }
             case 10 -> {
-                if (pose.weight() > 0.7F && expressiveEyes > 0) { capture(client, "05-after-reload.png"); petStart = total; next(); log("PASS eyes regenerated after resource reload"); }
+                if (pose.weight() > 0.7F && expressiveEyes > 0) { capture(client, "05-after-reload.png");
+                    if (multiplayer) client.getConnection().sendCommand("dogsqa observer_near");
+                    petStart = total; next(); log("PASS eyes regenerated after resource reload"); }
                 if (ticks > 150) fail(client, "Reload broke eyes");
             }
             case 11 -> {
-                if (total - petStart > 50) { client.setScreenAndShow(new DogsSettingsScreen(null)); next(); }
+                if (total - petStart > 50) { client.setScreenAndShow(settingsOpener.apply(null)); next(); }
             }
             case 12 -> {
                 if (ticks > 15) { capture(client, "06-settings.png"); client.setScreenAndShow(null); next(); }
@@ -112,7 +139,7 @@ public final class ClientProbe {
                 if (pose.weight() > 0.7F && wolves > 0 && expressiveEyes > 0 && sounds > 0 && hands > 0) {
                     capture(client, "07-puppy.png");
                     log("PASS puppy model, eyelids, hand and entity voice");
-                    write(client, "PASS: packaged " + System.getProperty("qa.loader", "fabric") + " 26.3; real keybind/server packets; first/third/left-hand render; adult and puppy rig/eyes/voice; idle blink; occupied hand; resource reload; settings.\n");
+                    write(client, "PASS: packaged " + System.getProperty("qa.loader", "fabric") + " " + System.getProperty("qa.minecraft", "26.3") + "; real keybind/server packets; first/third/left-hand render; adult and puppy rig/eyes/voice; idle blink; occupied hand; resource reload; settings.\n");
                     finished = true; log("DOGS_CLIENT_PASS");
                 }
                 if (ticks > 150) fail(client, "Puppy feature missing rig=" + wolves + " eyes=" + expressiveEyes + " voice=" + sounds + " hands=" + hands);

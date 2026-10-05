@@ -9,8 +9,8 @@ api="$(realpath "${4:?Matching SeamlessLib checkout}")"
 case "$loader" in fabric|forge|neoforge) ;; *) exit 2 ;; esac
 [[ ! -e "$stage" && -f "$fixture/level.dat" ]] || { echo 'Need a new staging directory and a valid copied world' >&2; exit 2; }
 wrapper="${SEAMLESS_ISOLATED_WRAPPER:-$repo/../tools/Run-IsolatedMinecraftClient.sh}"
-dogjar="$repo/$loader/build/libs/seamless-dogs-0.1.0+mc26.3-$loader.jar"
-apijar="$api/$loader/build/libs/seamless-api-2.0.2+mc26.3-$loader.jar"
+dogjar="$repo/$loader/build/libs/seamless-dogs-0.1.0+mc26.2-$loader.jar"
+apijar="$api/$loader/build/libs/seamless-api-2.0.1+mc26.2-$loader.jar"
 [[ -f "$dogjar" && -f "$apijar" && -f "$wrapper" ]] || exit 2
 mkdir -p "$stage/product/$loader/build/libs" "$stage/client/mods" "$stage/client/saves"
 tar -C "$repo" --exclude=.git --exclude=.gradle --exclude=build -cf - . | tar -C "$stage/product" -xf -
@@ -21,8 +21,8 @@ cp "$repo/qa-client/options.txt" "$stage/client/options.txt"
 cp "$repo/common/src/main/resources/pack.mcmeta" "$stage/product/qa-client/src/main/resources/pack.mcmeta"
 if [[ "$loader" == fabric ]]; then
     curl --fail --location --retry 3 --silent --show-error \
-        'https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/0.161.0+26.3/fabric-api-0.161.0+26.3.jar' \
-        --output "$stage/client/mods/fabric-api-0.161.0+26.3.jar"
+        'https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/0.159.0+26.2/fabric-api-0.159.0+26.2.jar' \
+        --output "$stage/client/mods/fabric-api-0.159.0+26.2.jar"
 fi
 cp "$wrapper" "$stage/isolated-client.sh"
 sed -i 's/\r$//' "$stage/isolated-client.sh" "$stage/product/gradlew"

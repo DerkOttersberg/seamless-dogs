@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[66,)"
+loaderVersion="[65,)"
 license="All rights reserved"
 [[mods]]
 modId="seamlessdogs"
@@ -15,18 +15,18 @@ javaVersion="[25,)"
 [[dependencies.seamlessdogs]]
 modId="forge"
 mandatory=true
-versionRange="[66.0.9,67)"
+versionRange="[65.1.3,66)"
 ordering="NONE"
 side="BOTH"
 [[dependencies.seamlessdogs]]
 modId="minecraft"
 mandatory=true
-versionRange="[26.3]"
+versionRange="[26.2]"
 ordering="NONE"
 side="BOTH"
 [[dependencies.seamlessdogs]]
 modId="seamlessapi"
 mandatory=true
-versionRange="[2.0.2,3.0.0)"
+versionRange="[2.0.1,3.0.0)"
 ordering="AFTER"
 side="BOTH"
