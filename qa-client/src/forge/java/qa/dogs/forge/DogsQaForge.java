@@ -8,8 +8,8 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 public final class DogsQaForge {
     public DogsQaForge() {
         var probe = new ServerProbe();
-        TickEvent.ServerTickEvent.Post.BUS.addListener(event -> probe.tick(event.server()));
-        RegisterCommandsEvent.BUS.addListener(event -> ServerProbe.registerCommands(event.getDispatcher()));
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event) -> { if(event.phase==TickEvent.Phase.END) probe.tick(event.getServer()); });
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> ServerProbe.registerCommands(event.getDispatcher()));
         if (FMLEnvironment.dist.isClient()) DogsQaForgeClient.initialize();
     }
 }

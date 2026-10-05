@@ -42,6 +42,7 @@ public final class DogsScenarios {
     }
     public static void ownerCanPet(GameTestHelper h) {
         var f = fixture(h);
+        f.dog.setHealth(Math.max(1.0F, f.dog.getMaxHealth() - 7.0F));
         float health = f.dog.getHealth();
         h.assertTrue(SeamlessDogs.request(f.owner, new PetRequest(f.dog.getId())), "Owner request rejected");
         h.assertTrue(f.dog.isOrderedToSit(), "Petting changed sit command");

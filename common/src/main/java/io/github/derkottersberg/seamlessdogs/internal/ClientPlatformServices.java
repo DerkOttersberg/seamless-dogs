@@ -8,5 +8,6 @@ public interface ClientPlatformServices {
     Path configDirectory();
     KeyMapping petKey();
     boolean serverSupportsPetting();
+    default boolean usesVanillaHud() { return true; }
     void sendToServer(DogsPayload payload);
 }

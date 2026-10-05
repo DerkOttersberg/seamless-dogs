@@ -62,6 +62,9 @@ public final class DogsClient {
         var c = Minecraft.getInstance();
         return clip == null || c.level == null ? PetAnimation.sample(-1) : PetAnimation.sample(c.level.getGameTime() - clip.start + partial);
     }
+    public static void promptFromVanillaHud(GuiGraphics graphics) {
+        if (platform != null && platform.usesVanillaHud()) prompt(graphics);
+    }
     public static void prompt(GuiGraphics graphics) {
         var c = Minecraft.getInstance();
         if (!ClientOptions.prompt || c.options.hideGui || c.screen != null || target() == null) return;

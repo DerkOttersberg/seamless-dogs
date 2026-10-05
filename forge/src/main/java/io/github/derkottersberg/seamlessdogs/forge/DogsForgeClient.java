@@ -18,6 +18,7 @@ final class DogsForgeClient {
         context.getModEventBus().addListener((RegisterKeyMappingsEvent event) -> event.register(DogsKeys.PET));
         DogsClient.initialize(new Services());
         net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener((TickEvent.ClientTickEvent event) -> { if(event.phase == TickEvent.Phase.END) DogsClient.tick(Minecraft.getInstance()); });
+        net.minecraftforge.common.MinecraftForge.EVENT_BUS.addListener((net.minecraftforge.client.event.RenderGuiEvent.Post event) -> DogsClient.prompt(event.getGuiGraphics()));
         net.minecraftforge.fml.ModLoadingContext.get().registerExtensionPoint(ConfigScreenHandler.ConfigScreenFactory.class,
             () -> new ConfigScreenHandler.ConfigScreenFactory((client, parent) -> new DogsSettingsScreen(parent)));
     }
@@ -25,6 +26,7 @@ final class DogsForgeClient {
     private static final class Services implements ClientPlatformServices {
         public Path configDirectory() { return FMLPaths.CONFIGDIR.get(); }
         public KeyMapping petKey() { return DogsKeys.PET; }
+        public boolean usesVanillaHud() { return false; }
         public boolean serverSupportsPetting() {
             var connection = Minecraft.getInstance().getConnection();
             return connection != null && DogsForge.supports(connection.getConnection());
