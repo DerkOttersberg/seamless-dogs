@@ -1,0 +1,967 @@
+{
+  "product": "Seamless Dogs",
+  "scope": "20 loader/version cells",
+  "complete": true,
+  "cells": [
+    {
+      "minecraft": "26.3",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.3-fabric.jar": "ac1a41ea2b2dc614cf598476c070f40a74119adcc34ef4d53e58e40f47a28301",
+        "seamless-api-2.0.2+mc26.3-fabric.jar": "d57ae1d513e48b47f1b16bccd3f423ae6152d53566601ced750207e862f5fbc9"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-26.3-official-client-1",
+        "server": "/root/seamless-dogs-production-20261005/fabric-26.3-server-matrix-1",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-26.3-pair-2",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-26.3-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "0f27a80840580693daff168a300012268c58ccc8",
+      "librarySourceCommit": "8c5f419e0f1a2ff86167e65d06b7f79c0138843c",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.3-forge.jar": "877706b5567132be28e44193acdc7085603a109ccf7be4d9b0ee9c305d02c3ac",
+        "seamless-api-2.0.2+mc26.3-forge.jar": "c6a29dc473c649b1ffcd598759026b3005f72ddb97bb2f9e9d015d871e92fb7c"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-26.3-official-client-1",
+        "server": "/root/seamless-dogs-production-20261005/forge-26.3-server-matrix-1",
+        "pair": "/root/seamless-dogs-production-20261005/forge-26.3-pair-matrix-1",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-26.3-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "0f27a80840580693daff168a300012268c58ccc8",
+      "librarySourceCommit": "8c5f419e0f1a2ff86167e65d06b7f79c0138843c",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.3-neoforge.jar": "322f233d778af24901051aa69e5f67aa7441c86acdc879cc3f82e1c4d3e52f15",
+        "seamless-api-2.0.2+mc26.3-neoforge.jar": "d246217211e443d0e133d3cfd5ba7cac2e266f41407b79231364cf991b1db7f0"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-26.3-client-matrix-1",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-26.3-server-matrix-1",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-26.3-pair-matrix-1",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-26.3-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "0f27a80840580693daff168a300012268c58ccc8",
+      "librarySourceCommit": "8c5f419e0f1a2ff86167e65d06b7f79c0138843c",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.20.1-fabric.jar": "9d26cd19b20a914822e43badd67bb0f7b20ef4879bb4285d5ef7762d6890b0c8",
+        "seamless-api-2.0.2+mc1.20.1-fabric.jar": "e4c721163a578d5ebd08e014628bc74e94edeeab0771a6812b6947c25a13492c"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.20.1/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-1.20.1-official-client-2",
+        "server": "/root/seamless-dogs-production-20261005/fabric-1.20.1-server-animation-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-1.20.1-pair-matrix-1",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-1.20.1-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "4fb11d63770a2a60fbd8130aa2343cc86b95a891",
+      "librarySourceCommit": "29de4ea42babee29e568837a6be38b863027354f",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.20.1-forge.jar": "a28392a3edf1efbcf493df1cfe7df1429785f5593f7f85428c65b08e37e81217",
+        "seamless-api-2.0.2+mc1.20.1-forge.jar": "48b975e6e3831bfc7ee041997b1a76866b56ed0a4e829d461326c42981df8f72"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.20.1/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-1.20.1-client-matrix-2",
+        "server": "/root/seamless-dogs-production-20261005/forge-1.20.1-server-animation-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/forge-1.20.1-pair-matrix-2",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-1.20.1-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "4fb11d63770a2a60fbd8130aa2343cc86b95a891",
+      "librarySourceCommit": "29de4ea42babee29e568837a6be38b863027354f",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1-fabric.jar": "c7315cb15f11561819316c246a37c1a7e915eba34f35cd886831ead87cec622d",
+        "seamless-api-2.0.2+mc26.1-fabric.jar": "720546b79e39270890d01d9c26aadd808a28c1cf811a6be4cc9ccf562e261ed0"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-26.1-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/fabric-26.1-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-26.1-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-26.1-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "1c97e53c30624aacb8acc1e616b6558abde0e90d",
+      "librarySourceCommit": "f800d0c80dfa517eba6785cac32ad43ecaff71b0",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1-forge.jar": "18af1279f6d3469eff0078dabf9c9ee0ade9c57804f83f924519e65214f224c3",
+        "seamless-api-2.0.2+mc26.1-forge.jar": "06e69158dfb75ebdb8613c5a15cdc9f5297f5b7fe6342a5c466874cbf1a8efb1"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-26.1-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/forge-26.1-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/forge-26.1-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-26.1-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "1c97e53c30624aacb8acc1e616b6558abde0e90d",
+      "librarySourceCommit": "f800d0c80dfa517eba6785cac32ad43ecaff71b0",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1-neoforge.jar": "83ee2b854181ae3f22a9dd7eda1c86b4a52fba8791bd7bafd32dea1605a6618f",
+        "seamless-api-2.0.2+mc26.1-neoforge.jar": "94321a62c63dc90d4a91d9ef630b0cbad630d4cf224c5ec8687b39238a3161c9"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-26.1-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-26.1-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-26.1-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-26.1-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "1c97e53c30624aacb8acc1e616b6558abde0e90d",
+      "librarySourceCommit": "f800d0c80dfa517eba6785cac32ad43ecaff71b0",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1.2",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1.2-fabric.jar": "d76b44eece40f3889c7b56629aea650fb933846d45cbe3e913cc2f688711becd",
+        "seamless-api-2.0.2+mc26.1.2-fabric.jar": "7bd37494a9ee3e8e6bcf1c63c1b0db8f3649d0b2e6f065addafcb710fb79858e"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1.2/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-26.1.2-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/fabric-26.1.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-26.1.2-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-26.1.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "33bcc334a8b4f9100d25ca55ada01dfe116228b1",
+      "librarySourceCommit": "8b6153508f7cc0aafb363981376645d901715ac2",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1.2",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1.2-forge.jar": "27e8bd54759a38d4e384013bca2d8022ce5a24faee1c0f7baabbc3ab793b2e9d",
+        "seamless-api-2.0.2+mc26.1.2-forge.jar": "a2eefec3a5f57973a130b12922af3d2f20ee032f77bb93d79998f4feeebd9f3b"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1.2/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-26.1.2-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/forge-26.1.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/forge-26.1.2-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-26.1.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "33bcc334a8b4f9100d25ca55ada01dfe116228b1",
+      "librarySourceCommit": "8b6153508f7cc0aafb363981376645d901715ac2",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.1.2",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.1.2-neoforge.jar": "db15f9e9b9eb488f38085c74ca99a30c72f36b71415559c3c3094b8ed9835c07",
+        "seamless-api-2.0.2+mc26.1.2-neoforge.jar": "6909cfdee6a24ba1549209d98a15b7acf1412a6fb0e78e2cdc8296f915ec1370"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1.2/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-26.1.2-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-26.1.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-26.1.2-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-26.1.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "33bcc334a8b4f9100d25ca55ada01dfe116228b1",
+      "librarySourceCommit": "8b6153508f7cc0aafb363981376645d901715ac2",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.2-fabric.jar": "db9cb5f2986095c6ed21a6e0739f389b43bc794919344d1465cf958c34c368d7",
+        "seamless-api-2.0.1+mc26.2-fabric.jar": "b67660c79ff523e431a13b6d9bc5eb9d9482bc1fd83a176bb4173fe39311f823"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.2/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-26.2-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/fabric-26.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-26.2-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-26.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "a61b0b2803f1e3a15ab88dc47423cbfcc0be0247",
+      "librarySourceCommit": "664efb8261545a170ebd966a784989fd1315d34f",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.2-forge.jar": "5695c7fa7db83ef7083d170eb59c265069692c2732caea1cbebd82bca1388e64",
+        "seamless-api-2.0.1+mc26.2-forge.jar": "6a69e6bf3f5bc6239903ebc8bb9c03101516244f469e666031af9231611b93b5"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.2/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-26.2-client-matrix-4",
+        "server": "/root/seamless-dogs-production-20261005/forge-26.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/forge-26.2-pair-matrix-4",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-26.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "a61b0b2803f1e3a15ab88dc47423cbfcc0be0247",
+      "librarySourceCommit": "664efb8261545a170ebd966a784989fd1315d34f",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc26.2-neoforge.jar": "4f4e72398d0ed932e62483ec44ffa5288f68f30a49a4443fae5df2dd3ec0257d",
+        "seamless-api-2.0.1+mc26.2-neoforge.jar": "871e729127e3f3be384b1bf4715b2c6d2060b7f0483b8fca07eeef624d7d9fef"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.2/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-26.2-client-matrix-5",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-26.2-server-matrix-2",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-26.2-pair-matrix-5",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-26.2-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "a61b0b2803f1e3a15ab88dc47423cbfcc0be0247",
+      "librarySourceCommit": "664efb8261545a170ebd966a784989fd1315d34f",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.11",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.11-fabric.jar": "ffd1d4a94c9fe2370591e9382d61041ac5a587a43bb158da171fad4f9da77a54",
+        "seamless-api-2.0.2+mc1.21.11-fabric.jar": "d78f4052ad7a59249b7b4aacb2aae67ddd50e013d88d4a8805ecb39b0c2e05e1"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.11/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-1.21.11-client-matrix-5",
+        "server": "/root/seamless-dogs-production-20261005/fabric-1.21.11-server-dual-pack-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-1.21.11-pair-matrix-5",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-1.21.11-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "75454a3ea8d744e9c17bf4b851a6655cb8e873e7",
+      "librarySourceCommit": "df667b29d2a164d24c303c9e20370c39f2b832bb",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.11",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.11-forge.jar": "73ac8084133cd6f73ca6410c78b9500b022f8acc9a762909399f9e23ecdca0aa",
+        "seamless-api-2.0.2+mc1.21.11-forge.jar": "aa9d5a96df2b2f11a2fd395f26b323d27a8033ee68448f8f116f1ab97b06b979"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.11/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-1.21.11-client-matrix-5",
+        "server": "/root/seamless-dogs-production-20261005/forge-1.21.11-server-dual-pack-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/forge-1.21.11-pair-matrix-5",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-1.21.11-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "75454a3ea8d744e9c17bf4b851a6655cb8e873e7",
+      "librarySourceCommit": "df667b29d2a164d24c303c9e20370c39f2b832bb",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.11",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.11-neoforge.jar": "b653779aecd36e93607ec7163fda0b5e5a1644575eccdd8b0efcaeaf7e1ce0a6",
+        "seamless-api-2.0.2+mc1.21.11-neoforge.jar": "b8499dacfff56cc5fc197849eeed195ab9403801cd6adeaec7387dcf7d4be986"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.11/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-1.21.11-client-matrix-5",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-1.21.11-server-dual-pack-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-1.21.11-pair-matrix-5",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-1.21.11-lifecycle-2"
+      },
+      "units": {
+        "dogs": {
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "75454a3ea8d744e9c17bf4b851a6655cb8e873e7",
+      "librarySourceCommit": "df667b29d2a164d24c303c9e20370c39f2b832bb",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.1-fabric.jar": "ee7a5a1d7bd88cd9a380454c010b79bdc7584288ca6d10c0938a0161adb00a4b",
+        "seamless-api-2.0.2+mc1.21.1-fabric.jar": "21902c098f86e496c4e68a09178848a99edf02007b8f9c5de58dcaa651221382"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.1/fabric",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/fabric-1.21.1-client-matrix-6",
+        "server": "/root/seamless-dogs-production-20261005/fabric-1.21.1-server-settings-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/fabric-1.21.1-pair-matrix-6",
+        "lifecycle": "/root/seamless-dogs-production-20261005/fabric-1.21.1-lifecycle-3"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "32f6112237b07bfbebb6eda91cad48c19124a95c",
+      "librarySourceCommit": "6bb9de09ed9e01c1b7614149e6eb2e5e461d367e",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.1-forge.jar": "33bad4724c8ce69415d504675bdc1acd76ac858b5be5f2b0f164dba374a502b4",
+        "seamless-api-2.0.2+mc1.21.1-forge.jar": "2035dc8de9ab3e965969190be4895f974608bc12babc767be9f0ce72e9dc330c"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.1/forge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/forge-1.21.1-client-matrix-6",
+        "server": "/root/seamless-dogs-production-20261005/forge-1.21.1-server-settings-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/forge-1.21.1-pair-matrix-6",
+        "lifecycle": "/root/seamless-dogs-production-20261005/forge-1.21.1-lifecycle-3"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "32f6112237b07bfbebb6eda91cad48c19124a95c",
+      "librarySourceCommit": "6bb9de09ed9e01c1b7614149e6eb2e5e461d367e",
+      "lifecyclePassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.1.0+mc1.21.1-neoforge.jar": "21ada8dc8372389adaffbaf6de4d3c048f81877095383a6c8f50bd593f78a9e2",
+        "seamless-api-2.0.2+mc1.21.1-neoforge.jar": "22aa1d9b0916c48e62e06f4bfb5dbdea4a2e6916e9f2eee48ee1e014750b321a"
+      },
+      "buildPassed": true,
+      "nativePassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.1/neoforge",
+      "linuxProfiles": {
+        "client": "/root/seamless-dogs-production-20261005/neoforge-1.21.1-client-matrix-6",
+        "server": "/root/seamless-dogs-production-20261005/neoforge-1.21.1-server-settings-fix-1",
+        "pair": "/root/seamless-dogs-production-20261005/neoforge-1.21.1-pair-matrix-6",
+        "lifecycle": "/root/seamless-dogs-production-20261005/neoforge-1.21.1-lifecycle-3"
+      },
+      "units": {
+        "dogs": {
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "seamlessLib": {
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "nativeScenarios": [
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "cooldownAndCancellation",
+        "codecRoundTrip"
+      ],
+      "sourceCommit": "32f6112237b07bfbebb6eda91cad48c19124a95c",
+      "librarySourceCommit": "6bb9de09ed9e01c1b7614149e6eb2e5e461d367e",
+      "lifecyclePassed": true
+    }
+  ],
+  "optionalAndCombined": [
+    {
+      "minecraft": "26.3",
+      "loader": "fabric",
+      "combinedSiblings": true,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-26.3-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/fabric/optional-combined"
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "fabric",
+      "combinedSiblings": true,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-1.20.1-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.20.1/fabric/optional-combined"
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "forge",
+      "combinedSiblings": true,
+      "modmenu": false,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/forge-26.3-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/forge/optional-combined"
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "neoforge",
+      "combinedSiblings": true,
+      "modmenu": false,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/neoforge-26.3-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.3/neoforge/optional-combined"
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "forge",
+      "combinedSiblings": true,
+      "modmenu": false,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/forge-1.20.1-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.20.1/forge/optional-combined"
+    },
+    {
+      "minecraft": "26.1",
+      "loader": "fabric",
+      "combinedSiblings": false,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-26.1-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1/fabric/optional-combined"
+    },
+    {
+      "minecraft": "26.1.2",
+      "loader": "fabric",
+      "combinedSiblings": false,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-26.1.2-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.1.2/fabric/optional-combined"
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "fabric",
+      "combinedSiblings": false,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-26.2-optional-combined-1",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc26.2/fabric/optional-combined"
+    },
+    {
+      "minecraft": "1.21.11",
+      "loader": "fabric",
+      "combinedSiblings": false,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-1.21.11-optional-final-3",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.11/fabric/optional-combined"
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "fabric",
+      "combinedSiblings": false,
+      "modmenu": true,
+      "exit": 0,
+      "stage": "/root/seamless-dogs-production-20261005/fabric-1.21.1-optional-settings-final-4",
+      "evidence": "qa-artifacts/seamless-dogs/production-accepted/mc1.21.1/fabric/optional-combined"
+    }
+  ],
+  "environment": "WSL Ubuntu 24.04; private Xvfb; CPU 2, heap 1 GiB/process, low priority, shared lock; software OpenGL on 1.20/1.21 and Vulkan on 26.x; silent output device",
+  "limits": [
+    "hardware GPU and loudspeaker audibility",
+    "arbitrary mod packs/custom UV layouts",
+    "all wolf variants/armor and classic/slim skin combinations",
+    "lifecycle coverage exercises genuine transitions but does not cover every portal, death, latency and connection-failure permutation"
+  ],
+  "remotePublication": "not requested; local source commits and artifacts only"
+}

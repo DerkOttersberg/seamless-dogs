@@ -16,6 +16,7 @@ HELPER = runpy.run_path(str(Path(__file__).with_name('run-packaged-server.py')))
 
 def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
 def commit(repo): return subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
+def write(path, value): path.write_text(value, encoding='utf-8')
 
 
 def main():
@@ -64,11 +65,11 @@ def main():
         folder = target / f'mc{version}' / loader
         mods = folder / 'mods'; mods.mkdir(parents=True)
         for jar in jars: shutil.copy2(jar, mods / jar.name)
-        (folder / 'LICENSE-Seamless-Dogs.txt').write_text((repo / 'LICENSE').read_text())
-        (folder / 'LICENSE-SeamlessLib-MIT.txt').write_text(api_license)
+        write(folder / 'LICENSE-Seamless-Dogs.txt', (repo / 'LICENSE').read_text())
+        write(folder / 'LICENSE-SeamlessLib-MIT.txt', api_license)
         extra = (f"Fabric API {pins['fabric-api']} is also required; download the official jar:\n"
                  f"https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/{pins['fabric-api']}/fabric-api-{pins['fabric-api']}.jar\n") if loader == 'fabric' else ''
-        (folder / 'INSTALL.txt').write_text(
+        write(folder / 'INSTALL.txt',
             f"Seamless Dogs — Minecraft Java {version}, {loader}, Java {pins['java']}\n\n"
             f"Install the selected loader ({pins['fabric-loader' if loader == 'fabric' else loader]}).\n"
             "Copy both mods/*.jar files to the matching client/server mods folder.\n" + extra +
@@ -84,7 +85,7 @@ def main():
             "Motion is stylized; custom texture UVs can disable eye expressions.\n"
             + ("This NeoForge runtime is an upstream beta.\n" if loader == 'neoforge' and 'beta' in pins[loader] else ''))
         sums = ''.join(f'{sha(jar)}  mods/{jar.name}\n' for jar in jars)
-        (folder / 'SHA256SUMS.txt').write_text(sums)
+        write(folder / 'SHA256SUMS.txt', sums)
         archive_path = target / f'seamless-dogs-mc{version}-{loader}-install.zip'
         with zipfile.ZipFile(archive_path, 'w', zipfile.ZIP_DEFLATED) as archive:
             for path in sorted(folder.rglob('*')):
@@ -96,8 +97,14 @@ def main():
             'sourceCommit': commit(repo), 'librarySourceCommit': commit(api),
             'jars': {jar.name: sha(jar) for jar in jars},
             'installZip': archive_path.name, 'installZipSha256': sha(archive_path)})
-    (target / 'artifacts.json').write_text(json.dumps(manifest, indent=2) + '\n')
-    (target / 'README.md').write_text(
+    write(target / 'artifacts.json', json.dumps(manifest, indent=2) + '\n')
+    links = {(row['minecraft'], row['loader']): f"[Install ZIP]({row['installZip']})"
+             for row in manifest['artifacts']}
+    matrix = '| Minecraft | Fabric | Forge | NeoForge |\n| --- | --- | --- | --- |\n'
+    for version in VERSIONS:
+        matrix += '| ' + version + ' | ' + ' | '.join(
+            links.get((version, loader), '—') for loader in ('fabric', 'forge', 'neoforge')) + ' |\n'
+    write(target / 'README.md',
         '# Seamless Dogs — verified local release candidates\n\n'
         'Twenty loader/version builds are organized by Minecraft version and loader.\n'
         'Each install zip contains Dogs plus the matching independent MIT SeamlessLib.\n'
@@ -108,7 +115,8 @@ def main():
         'Java 17: 1.20.1. Java 21: 1.21.1/1.21.11. Java 25: 26.x.\n'
         'NeoForge 1.20.1 is excluded; NeoForge 26.1/26.3 pins are upstream betas.\n'
         'Background software-rendered acceptance does not prove all hardware or\n'
-        'arbitrary mod packs. Public publishing and hosted CI have not run.\n')
+        'arbitrary mod packs. Public publishing and hosted CI have not run.\n\n'
+        + matrix)
     print(f'Prepared 20 accepted local install bundles: {target}')
 
 
