@@ -24,12 +24,16 @@ public final class DogsSettingsScreen extends Screen {
     }
     private Component label(String key, boolean enabled) { return Component.translatable(key).append(": ").append(Component.translatable(enabled ? "options.on" : "options.off")); }
     public void onClose() { minecraft.setScreen(parent); }
-    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partial) {
+    @Override
+    public void renderBackground(GuiGraphics graphics, int mouseX, int mouseY, float partial) {
         graphics.fill(0, 0, width, height, 0xF0182125);
+    }
+    public void render(GuiGraphics graphics, int mouseX, int mouseY, float partial) {
+        // 1.21.1 draws its background inside Screen.render, before the widgets.
+        super.render(graphics, mouseX, mouseY, partial);
         graphics.drawCenteredString(font, title, width / 2, 14, 0xFFFFFFFF);
         graphics.drawCenteredString(font, Component.translatable("seamlessdogs.scope"), width / 2, 32, 0xFFB7E8BD);
         graphics.drawCenteredString(font, Component.translatable("seamlessdogs.keyhelp"), width / 2, 140, 0xFFCCCCCC);
         if (!error.isEmpty()) graphics.drawCenteredString(font, error, width / 2, height - 44, 0xFFFF8888);
-        super.render(graphics, mouseX, mouseY, partial);
     }
 }
