@@ -1,0 +1,7 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All rights reserved"
+[[mods]]
+modId="seamlessdogstests"
+version="1"
+displayName="Seamless Dogs native tests (never distributed)"

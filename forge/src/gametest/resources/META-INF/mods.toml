@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[47,)"
+loaderVersion="[52,)"
 license="All rights reserved"
 [[mods]]
 modId="seamlessdogstests"

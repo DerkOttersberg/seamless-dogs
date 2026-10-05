@@ -23,7 +23,7 @@ public final class SeamlessDogs {
     private static final Map<UUID, Session> sessions = new HashMap<>();
     private static final Map<UUID, Long> nextAllowed = new HashMap<>();
     private SeamlessDogs() { }
-    public static ResourceLocation id(String path) { return new ResourceLocation("seamlessdogs", path); }
+    public static ResourceLocation id(String path) { return ResourceLocation.fromNamespaceAndPath("seamlessdogs", path); }
     public static void initialize(PlatformServices services) { platform = services; }
 
     public static boolean canPet(ServerPlayer player, Wolf dog) {

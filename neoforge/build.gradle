@@ -1,0 +1,46 @@
+plugins { id 'dev.architectury.loom' }
+sourceSets.main.java.srcDir rootProject.file('common/src/main/java')
+sourceSets.main.resources.srcDir rootProject.file('common/src/main/resources')
+dependencies {
+    minecraft libs.minecraft
+    mappings loom.officialMojangMappings()
+    neoForge libs.neoforge
+    def apiJar=files(new File(rootProject.seamlessApiDirectory,"neoforge/build/devlibs/seamless-api-${libs.versions.seamless.api.get()}-neoforge-dev.jar"))
+    apiJar.builtBy gradle.includedBuild('seamless-api').task(':neoforge:jar')
+    implementation apiJar
+    loom.mods.create('seamlessapi') {
+        modFiles.from(apiJar)
+        mainResourceDirectory.set(new File(rootProject.seamlessApiDirectory,'neoforge/build/resources/main'))
+    }
+}
+loom {
+    mixin { useLegacyMixinAp=true; defaultRefmapName='seamlessdogs.refmap.json' }
+    mods { seamlessdogs { sourceSet sourceSets.main } }
+}
+sourceSets { gametest {
+    java.srcDirs=['src/gametest/java',rootProject.file('common/src/gametest/java')]
+    resources.srcDirs=['src/gametest/resources']
+    compileClasspath+=sourceSets.main.output+sourceSets.main.compileClasspath
+    runtimeClasspath+=output+compileClasspath+sourceSets.main.runtimeClasspath
+} }
+configurations { gametestImplementation.extendsFrom implementation; gametestRuntimeOnly.extendsFrom runtimeOnly }
+loom { mods { seamlessdogstests { sourceSet sourceSets.gametest } }; runs { gameTestServer {
+    runtimeEnvironment='gametestserver'; forgeTemplate 'gameTestServer'; source sourceSets.gametest; runDir 'build/gametest'
+    property 'neoforge.enabledGameTestNamespaces','seamlessdogs'
+} } }
+apply from: rootProject.file('gradle/empty-gametest-structure.gradle')
+tasks.named('runGameTestServer') { doLast {
+    def log=layout.buildDirectory.file('gametest/logs/latest.log').get().asFile.text
+    ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip'].each { name -> if(!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/failed scenario ${name}") }
+    if(!(log =~ /All 4 required tests passed/)) throw new GradleException('Incomplete native tests')
+} }
+tasks.named('check') { dependsOn 'runGameTestServer' }
+processResources { inputs.property 'version',project.version; filesMatching('META-INF/neoforge.mods.toml') { expand version:project.version } }
+tasks.named('jar',Jar) {
+    from rootProject.file('LICENSE'); duplicatesStrategy=DuplicatesStrategy.EXCLUDE
+    manifest { attributes 'MixinConfigs':'seamlessdogs.mixins.json' }
+    archiveFileName="seamless-dogs-${project.version}-neoforge-dev.jar"
+}
+tasks.named('sourcesJar',Jar) { from project(':common').sourceSets.main.allSource; duplicatesStrategy=DuplicatesStrategy.EXCLUDE }
+tasks.named('remapJar') { archiveFileName="seamless-dogs-${project.version}-neoforge.jar" }
+tasks.named('remapSourcesJar') { archiveFileName="seamless-dogs-${project.version}-neoforge-sources.jar" }

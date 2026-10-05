@@ -18,7 +18,7 @@ public abstract class PlayerModelMixin {
         float sign=right?1:-1;
         arm.xRot+=(-1.15F+0.15F*s.stroke())*s.weight();
         arm.yRot-=sign*0.25F*s.weight(); arm.zRot+=sign*0.12F*s.weight();
-        // In 1.20.1 sleeves are sibling parts and must copy the final arm pose.
+        // In 1.21.1 sleeves are sibling parts and must copy the final arm pose.
         (right ? model.rightSleeve : model.leftSleeve).copyFrom(arm);
     }
 }

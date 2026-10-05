@@ -3,3 +3,5 @@
 **/run/
 .idea/
 *.iml
+qa-client/artifacts/
+**/__pycache__/

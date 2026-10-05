@@ -6,8 +6,8 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.EntityTypes;
-import net.minecraft.world.entity.animal.wolf.Wolf;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.item.ItemStack;
@@ -17,7 +17,14 @@ import net.minecraft.world.InteractionHand;
 /** Creates a private, deterministic fixture, never touches the owner's worlds. */
 public final class ServerProbe {
     private Wolf dog;
+    private java.util.UUID positionedObserver;
     public void tick(MinecraftServer server) {
+            var observer = server.getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogObserver")).findFirst().orElse(null);
+            if (observer != null && !observer.getUUID().equals(positionedObserver)) {
+                observer.setGameMode(GameType.CREATIVE);
+                observer.connection.teleport(-2.5, 65, 1.4, -90, 20);
+                positionedObserver = observer.getUUID();
+            }
             var player = server.getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogQA")).findFirst().orElse(null);
             if (player == null || dog != null && !dog.isRemoved()) return;
             var level = player.level();
@@ -29,10 +36,7 @@ public final class ServerProbe {
             player.setGameMode(GameType.CREATIVE);
             player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
             player.connection.teleport(0.5, 65, 0.5, 0, 32);
-            dog = new Wolf(EntityTypes.WOLF, level);
-            dog.setComponent(net.minecraft.core.component.DataComponents.WOLF_VARIANT,
-                level.registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.WOLF_VARIANT)
-                    .getOrThrow(net.minecraft.world.entity.animal.wolf.WolfVariants.PALE));
+            dog = new Wolf(EntityType.WOLF, level);
             dog.setPos(0.5, 65, 2.0);
             dog.tame(player); dog.setOrderedToSit(true); dog.setInSittingPose(true); dog.setNoAi(true);
             dog.setYRot(180); dog.yBodyRot = 180; dog.yHeadRot = 180;
@@ -42,6 +46,14 @@ public final class ServerProbe {
     public static void registerCommands(CommandDispatcher<CommandSourceStack> dispatcher) {
         dispatcher.register(
             Commands.literal("dogsqa")
+                .then(Commands.literal("observer_far").executes(context -> {
+                    var observer = context.getSource().getServer().getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogObserver")).findFirst().orElseThrow();
+                    observer.connection.teleport(100, 65, 100, 0, 0); return 1;
+                }))
+                .then(Commands.literal("observer_near").executes(context -> {
+                    var observer = context.getSource().getServer().getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogObserver")).findFirst().orElseThrow();
+                    observer.connection.teleport(-2.5, 65, 1.4, -90, 20); return 1;
+                }))
                 .then(Commands.literal("held").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); return 1; }))
                 .then(Commands.literal("puppy").executes(context -> {
                     var player = context.getSource().getPlayerOrException();

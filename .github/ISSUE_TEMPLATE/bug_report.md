@@ -2,9 +2,9 @@
 name: Bug report
 about: Report an interaction or rendering problem
 ---
-Minecraft, Fabric Loader/API, SeamlessLib, and Seamless Dogs versions:
+Minecraft, modloader (Fabric/Forge/NeoForge), loader/API, SeamlessLib and Dogs versions:
 
-Steps to reproduce, perspective/hand, resource pack, and other mods:
+Steps to reproduce, perspective/hand, wolf age/variant/armor, resource pack, and other mods:
 
 Expected behavior / actual behavior:
 

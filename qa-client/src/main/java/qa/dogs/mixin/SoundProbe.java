@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class SoundProbe {
     @Inject(method="handleSoundEntityEvent",at=@At("TAIL"))
     private void qa$sound(ClientboundSoundEntityPacket packet, CallbackInfo ci) {
-        if (packet.getSound().value().location().getPath().contains("wolf") && packet.getSound().value().location().getPath().contains("pant")) {
+        if (packet.getSound().value().getLocation().getPath().contains("wolf") && packet.getSound().value().getLocation().getPath().contains("pant")) {
             ClientProbe.sounds++; ClientProbe.soundDog = packet.getId(); ClientProbe.log("entity-bound pant packet dog=" + packet.getId());
         }
     }

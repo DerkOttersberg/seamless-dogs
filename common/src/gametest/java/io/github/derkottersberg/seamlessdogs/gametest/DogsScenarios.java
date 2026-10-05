@@ -4,7 +4,7 @@ import io.github.derkottersberg.seamlessdogs.SeamlessDogs;
 import io.github.derkottersberg.seamlessdogs.network.*;
 import io.netty.buffer.Unpooled;
 import net.minecraft.gametest.framework.GameTestHelper;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.animal.Wolf;
@@ -42,6 +42,7 @@ public final class DogsScenarios {
     }
     public static void ownerCanPet(GameTestHelper h) {
         var f = fixture(h);
+        f.dog.setHealth(Math.max(1.0F, f.dog.getMaxHealth() - 7.0F));
         float health = f.dog.getHealth();
         h.assertTrue(SeamlessDogs.request(f.owner, new PetRequest(f.dog.getId())), "Owner request rejected");
         h.assertTrue(f.dog.isOrderedToSit(), "Petting changed sit command");
@@ -91,7 +92,7 @@ public final class DogsScenarios {
         });
     }
     public static void codecRoundTrip(GameTestHelper h) {
-        var buffer = new FriendlyByteBuf(Unpooled.buffer());
+        var buffer = new RegistryFriendlyByteBuf(Unpooled.buffer(), h.getLevel().registryAccess());
         try {
             var request = new PetRequest(27); PetRequest.CODEC.encode(buffer, request);
             h.assertTrue(PetRequest.CODEC.decode(buffer).equals(request), "Request codec");

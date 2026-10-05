@@ -11,6 +11,6 @@ public final class DogsQaNeoForge {
         var probe = new ServerProbe();
         NeoForge.EVENT_BUS.addListener((ServerTickEvent.Post event) -> probe.tick(event.getServer()));
         NeoForge.EVENT_BUS.addListener((RegisterCommandsEvent event) -> ServerProbe.registerCommands(event.getDispatcher()));
-        if (FMLEnvironment.getDist().isClient()) DogsQaNeoForgeClient.initialize();
+        if (FMLEnvironment.dist.isClient()) DogsQaNeoForgeClient.initialize();
     }
 }

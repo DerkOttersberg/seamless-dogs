@@ -14,19 +14,19 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.server.ServerStoppedEvent;
 import net.minecraftforge.network.*;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 @Mod("seamlessdogs")
 public final class DogsForge {
-    private static final SimpleChannel NETWORK=NetworkRegistry.newSimpleChannel(SeamlessDogs.id("network"),()->"1",
-        DogsForge::compatible,DogsForge::compatible);
-    private static boolean compatible(String value){return "1".equals(value)||NetworkRegistry.ABSENT.equals(value)||NetworkRegistry.ACCEPTVANILLA.equals(value);}
+    private static final Channel<CustomPacketPayload> REQUEST = ChannelBuilder.named(SeamlessDogs.id("request"))
+        .networkProtocolVersion(1).optional().payloadChannel().play().serverbound()
+        .addMain(PetRequest.TYPE, PetRequest.CODEC, (packet, context) -> {
+            if (context.getSender() != null) SeamlessDogs.request(context.getSender(), packet);
+        }).build();
+    private static final Channel<CustomPacketPayload> STATE = ChannelBuilder.named(SeamlessDogs.id("state"))
+        .networkProtocolVersion(1).optional().payloadChannel().play().clientbound()
+        .addMain(PetState.TYPE, PetState.CODEC, (packet, context) -> DogsForgeClient.receive(packet)).build();
+
     public DogsForge(){
-        NETWORK.registerMessage(0,PetRequest.class,(packet,buffer)->PetRequest.CODEC.encode(buffer,packet),PetRequest.CODEC::decode,(packet,supplier)-> {
-            var context=supplier.get(); context.enqueueWork(()->{if(context.getSender()!=null) SeamlessDogs.request(context.getSender(),packet);}); context.setPacketHandled(true);
-        },Optional.of(NetworkDirection.PLAY_TO_SERVER));
-        NETWORK.registerMessage(1,PetState.class,(packet,buffer)->PetState.CODEC.encode(buffer,packet),PetState.CODEC::decode,(packet,supplier)->{
-            var context=supplier.get(); context.enqueueWork(()->DogsForgeClient.receive(packet)); context.setPacketHandled(true);
-        },Optional.of(NetworkDirection.PLAY_TO_CLIENT));
         SeamlessDogs.initialize(new Services());
         MinecraftForge.EVENT_BUS.addListener((TickEvent.ServerTickEvent event)-> {if(event.phase==TickEvent.Phase.END) SeamlessDogs.tick(event.getServer());});
         MinecraftForge.EVENT_BUS.addListener((ServerStoppedEvent event)->SeamlessDogs.clear());
@@ -38,13 +38,13 @@ public final class DogsForge {
         if(FMLEnvironment.dist.isClient()) DogsForgeClient.initialize(FMLJavaModLoadingContext.get());
     }
     private static void cancel(Entity entity){if(entity instanceof ServerPlayer player) SeamlessDogs.disconnect(player);}
-    static boolean supports(Connection connection){return NETWORK.isRemotePresent(connection);}
-    static void send(DogsPayload packet){NETWORK.sendToServer(packet);}
+    static boolean supports(Connection connection){return REQUEST.isRemotePresent(connection);}
+    static void send(CustomPacketPayload packet){REQUEST.send(packet,PacketDistributor.SERVER.noArg());}
     private static final class Services implements PlatformServices {
-        public void sendToPlayer(ServerPlayer player,DogsPayload packet){if(player.connection!=null && NETWORK.isRemotePresent(player.connection.connection)) NETWORK.send(PacketDistributor.PLAYER.with(()->player),packet);}
-        public void sendToTrackingAndSelf(ServerPlayer player,Entity dog,DogsPayload packet){
+        public void sendToPlayer(ServerPlayer player,CustomPacketPayload packet){if(player.connection!=null && STATE.isRemotePresent(player.connection.getConnection())) STATE.send(packet,PacketDistributor.PLAYER.with(player));}
+        public void sendToTrackingAndSelf(ServerPlayer player,Entity dog,CustomPacketPayload packet){
             var recipients=new java.util.LinkedHashSet<ServerPlayer>();
-            // 1.20.1 has no public per-entity watcher iterator. Chunk watchers are a safe superset;
+            // 1.21.1 has no public per-entity watcher iterator. Chunk watchers are a safe superset;
             // clients render only the UUIDs of entities they currently know.
             if(player.level() instanceof net.minecraft.server.level.ServerLevel level) recipients.addAll(level.getChunkSource().chunkMap.getPlayers(player.chunkPosition(),false));
             if(dog.level() instanceof net.minecraft.server.level.ServerLevel level) recipients.addAll(level.getChunkSource().chunkMap.getPlayers(dog.chunkPosition(),false));

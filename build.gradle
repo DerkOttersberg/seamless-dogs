@@ -23,8 +23,8 @@ subprojects {
         toolchain.languageVersion = JavaLanguageVersion.of(libs.versions.java.get().toInteger())
         withSourcesJar()
     }
-    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 17 }
-    tasks.withType(JavaExec).configureEach { javaLauncher=javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(17) }; jvmArgs '-XX:ActiveProcessorCount=2' }
+    tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8'; options.release = 21 }
+    tasks.withType(JavaExec).configureEach { javaLauncher=javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(21) }; maxHeapSize='1G'; timeout=java.time.Duration.ofMinutes(4); jvmArgs '-XX:ActiveProcessorCount=2' }
     tasks.withType(Test).configureEach { useJUnitPlatform() }
     tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps = false; reproducibleFileOrder = true }
 }
@@ -37,25 +37,33 @@ tasks.register('verifyCommonIsolation') {
     }
 }
 tasks.register('verifyLoaderJars') {
-    dependsOn ':fabric:remapJar',':forge:remapJar'
+    dependsOn ':fabric:remapJar',':forge:remapJar',':neoforge:remapJar'
     doLast {
-        ['fabric','forge'].each { loader ->
+        ['fabric','forge','neoforge'].each { loader ->
             def archive=project(":${loader}").tasks.named('remapJar').get().archiveFile.get().asFile
             assert archive.name=="seamless-dogs-${project.version}-${loader}.jar"
             new java.util.zip.ZipFile(archive).withCloseable { zip ->
-                assert zip.getEntry(loader=='fabric' ? 'fabric.mod.json' : 'META-INF/mods.toml')!=null
-                assert zip.getEntry(loader=='fabric' ? 'META-INF/mods.toml' : 'fabric.mod.json')==null
+                def metadataPath=loader=='fabric' ? 'fabric.mod.json' : loader=='forge' ? 'META-INF/mods.toml' : 'META-INF/neoforge.mods.toml'
+                assert zip.getEntry(metadataPath)!=null
+                ['fabric.mod.json','META-INF/mods.toml','META-INF/neoforge.mods.toml'].findAll { it!=metadataPath }.each { assert zip.getEntry(it)==null }
                 ['seamlessdogs.mixins.json','seamlessdogs.refmap.json','LICENSE','assets/seamlessdogs/icon.png','io/github/derkottersberg/seamlessdogs/SeamlessDogs.class'].each { assert zip.getEntry(it)!=null }
                 zip.entries().each { entry ->
                     assert !entry.name.startsWith('com/derko/seamlessapi/') && !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
                     if(entry.name.endsWith('.class')) {
-                        def stream=new DataInputStream(zip.getInputStream(entry)); assert stream.readInt()==0xCAFEBABE as int; stream.readUnsignedShort(); assert stream.readUnsignedShort()==61; stream.close()
+                        def stream=new DataInputStream(zip.getInputStream(entry)); assert stream.readInt()==0xCAFEBABE as int; stream.readUnsignedShort(); assert stream.readUnsignedShort()==65; stream.close()
                     }
                 }
                 if(loader=='fabric') {
                     def metadata=new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
-                    assert metadata.id=='seamlessdogs' && metadata.version==project.version.toString() && metadata.depends.minecraft=='1.20.1' && metadata.depends.java=='>=17'
-                } else { def text=zip.getInputStream(zip.getEntry('META-INF/mods.toml')).getText('UTF-8'); assert text.contains('versionRange="[1.20.1]"') && text.contains('modId="seamlessapi"') && !text.contains('${') }
+                    assert metadata.id=='seamlessdogs' && metadata.version==project.version.toString() && metadata.depends.minecraft=='1.21.1' && metadata.depends.java=='>=21'
+                    assert metadata.license=='All rights reserved' && metadata.depends.seamlessapi=='>=2.0.2 <3.0.0'
+                    assert metadata.depends['fabric-api']=='>=0.116.17 <0.117.0'
+                } else {
+                    def text=zip.getInputStream(zip.getEntry(metadataPath)).getText('UTF-8')
+                    assert text.contains('versionRange="[1.21.1]"') && text.contains('modId="seamlessapi"') && !text.contains('${')
+                    assert text.contains('license="All rights reserved"') && text.contains('javaVersion="[21,)"') && text.contains('versionRange="[2.0.2,3.0.0)"')
+                    assert text.contains(loader=='forge' ? 'versionRange="[52.1.16,53)"' : 'versionRange="[21.1.255,21.2)"')
+                }
             }
         }
     }
