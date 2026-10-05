@@ -28,6 +28,8 @@ def main():
     if target.exists() or not target.is_relative_to(root / 'release-candidates'):
         raise SystemExit('Need a new owned release-candidate directory')
     acceptance = json.loads(args.acceptance.read_text())
+    if acceptance.get('complete') is not True or len(acceptance.get('optionalAndCombined', [])) != 10:
+        raise SystemExit('Complete feature, lifecycle and optional/combined acceptance is required')
     expected_cells = {(version, loader) for version in VERSIONS
                       for loader in ('fabric', 'forge') + (() if version == '1.20.1' else ('neoforge',))}
     records = acceptance['cells']
@@ -36,7 +38,7 @@ def main():
     prepared = []
     for row in records:
         version, loader = row['minecraft'], row['loader']
-        if not all(row.get(name) is True for name in ('buildPassed', 'nativePassed', 'serverPassed', 'clientPassed', 'multiplayerPassed')):
+        if not all(row.get(name) is True for name in ('buildPassed', 'nativePassed', 'serverPassed', 'clientPassed', 'multiplayerPassed', 'lifecyclePassed')):
             raise SystemExit(f'Incomplete acceptance: {version}/{loader}')
         repo = root / 'seamless-dogs' if version == '26.3' else root / f'.ports/dogs-multiversion/mc{version}/seamless-dogs'
         api = root / '.ports/github-mc26.3/seamless-api' if version == '26.3' else repo.parent / 'seamless-api'

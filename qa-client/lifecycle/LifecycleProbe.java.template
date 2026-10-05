@@ -1,0 +1,105 @@
+package qa.dogs;
+
+import com.mojang.blaze3d.platform.InputConstants;
+import io.github.derkottersberg.seamlessdogs.client.*;
+import java.nio.file.Files;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.KeyMapping;
+import net.minecraft.client.gui.screens.TitleScreen;
+import net.minecraft.client.gui.screens.ConnectScreen;
+import net.minecraft.client.multiplayer.ServerData;
+import net.minecraft.client.multiplayer.resolver.ServerAddress;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.entity.animal.WOLF_PACKAGEWolf;
+import net.minecraft.world.level.Level;
+
+/** Test-only genuine dimension, death/respawn, menu and same-JVM reconnect. */
+public final class LifecycleProbe {
+    private int phase, ticks, total, shutdown;
+    private boolean finished;
+    private java.util.UUID dogUuid;
+    public void tick(Minecraft client) {
+        if (finished) { if (++shutdown == 30) client.stop(); return; }
+        if (++total > 6000) throw new IllegalStateException("Lifecycle timed out phase=" + phase);
+        ticks++;
+        if (phase == 11) {
+            if (client.level == null && ticks > 20) {
+                if (DogsClient.dogSample(dogUuid, 0).weight() != 0) throw new IllegalStateException("Disconnected clip retained");
+                String address = System.getProperty("qa.serverAddress");
+                ServerData data = SERVER_DATA;
+                CONNECT;
+                next();
+            }
+            return;
+        }
+        if (client.player == null || client.level == null) return;
+        if ((phase == 0 || phase == 3 || phase == 7 || phase == 9 || phase == 13)
+            && (OPEN_SCREEN != null || OPEN_OVERLAY != null)) return;
+        client.options.pauseOnLostFocus = false;
+        Wolf dog = null;
+        for (var entity : client.level.entitiesForRendering()) if (entity instanceof Wolf wolf && wolf.isOwnedBy(client.player)) { dog = wolf; break; }
+        if (dog != null) {
+            dogUuid = dog.getUUID();
+            var direction = dog.getEyePosition().subtract(client.player.getEyePosition());
+            client.player.setYRot((float)Math.toDegrees(Math.atan2(-direction.x, direction.z)));
+            client.player.setXRot((float)-Math.toDegrees(Math.atan2(direction.y, Math.sqrt(direction.x*direction.x+direction.z*direction.z))));
+        }
+        float weight = DogsClient.playerSample(client.player.getId(), 0).weight();
+        switch (phase) {
+            case 0 -> { if (ticks > 40 && dog != null && DogsClient.target() == dog) { click(); next(); } }
+            case 1 -> { if (weight > .2F) { command(client, "dimension"); next(); } }
+            case 2 -> {
+                if (client.level.dimension() == Level.NETHER && ticks > 15) {
+                    assertClear(client, "dimension"); ClientProbe.log("DOGS_LIFECYCLE_DIMENSION_PASS");
+                    command(client, "home"); next();
+                }
+            }
+            case 3 -> { if (client.level.dimension() == Level.OVERWORLD && ticks > 80 && dog != null && DogsClient.target() == dog) { click(); next(); } }
+            case 4 -> { if (weight > .2F) { command(client, "die"); next(); } }
+            case 5 -> {
+                if (!client.player.isAlive() && ticks > 15) {
+                    assertClear(client, "death"); client.player.respawn(); next();
+                }
+            }
+            case 6 -> {
+                if (client.player.isAlive() && ticks > 30) {
+                    assertClear(client, "respawn"); ClientProbe.log("DOGS_LIFECYCLE_RESPAWN_PASS");
+                    command(client, "home"); next();
+                }
+            }
+            case 7 -> { if (ticks > 80 && dog != null && DogsClient.target() == dog) { click(); next(); } }
+            case 8 -> {
+                if (weight > .2F && ticks < 50) { SET_SCREEN(new DogsSettingsScreen(null)); ticks = 50; }
+                if (ticks == 130) click();
+                if (ticks > 155) {
+                    assertClear(client, "menu keypress"); ClientProbe.log("DOGS_LIFECYCLE_MENU_PASS");
+                    SET_SCREEN(null); next();
+                }
+            }
+            case 9 -> { if (ticks > 15 && dog != null && DogsClient.target() == dog) { click(); next(); } }
+            case 10 -> {
+                if (weight > .2F) {
+                    client.getConnection().getConnection().disconnect(Component.literal("Isolated lifecycle reconnect"));
+                    DISCONNECT; next();
+                }
+            }
+            case 12 -> { if (ticks > 30) { assertClear(client, "reconnect before request"); command(client, "home"); next(); } }
+            case 13 -> { if (ticks > 80 && dog != null && DogsClient.target() == dog) { click(); next(); } }
+            case 14 -> {
+                if (weight > .2F) {
+                    ClientProbe.log("DOGS_LIFECYCLE_RECONNECT_PASS");
+                    try { Files.writeString(client.gameDirectory.toPath().resolve("dogs-lifecycle-passed.txt"), "PASS actual dimension, death/respawn, menu key rejection and active same-JVM reconnect; new request accepted afterwards.\n"); }
+                    catch (Exception e) { throw new RuntimeException(e); }
+                    finished = true; ClientProbe.log("DOGS_LIFECYCLE_PASS");
+                }
+            }
+        }
+    }
+    private void assertClear(Minecraft client, String cause) {
+        if (DogsClient.playerSample(client.player.getId(), 0).weight() != 0 || dogUuid != null && DogsClient.dogSample(dogUuid, 0).weight() != 0)
+            throw new IllegalStateException("Stale petting after " + cause);
+    }
+    private void click() { KeyMapping.click(InputConstants.getKey(DogsKeys.PET.saveString())); }
+    private void command(Minecraft client, String name) { client.getConnection().sendCommand("dogsqa " + name); }
+    private void next() { phase++; ticks = 0; ClientProbe.log("lifecycle phase=" + phase); }
+}
