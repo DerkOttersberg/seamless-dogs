@@ -56,5 +56,8 @@ commit is `6bb9de09ed9e01c1b7614149e6eb2e5e461d367e`; new library source ports h
 Background acceptance uses genuine installed servers/clients in private WSL
 profiles, bounded resources and an exclusive Xvfb display lock. Two actual clients
 verify remote rendering, dog sound, permissions, tracking and disconnect cleanup.
+Separate lifecycle clients verify dimension change, death/respawn, menu input and
+same-process reconnect. All 20 combinations passed local acceptance; see the
+linked reports for exact hashes and limitations.
 [PORTING.md](PORTING.md) describes the architecture. Product code/icon: **all rights
 reserved**, as requested. SeamlessLib: MIT.

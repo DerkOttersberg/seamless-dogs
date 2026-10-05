@@ -33,6 +33,9 @@ Forge 1.21.11 uses a genuine official installed test server because the current
 Loom joined development patches contain inconsistent anonymous codec classes.
 The QA-only ticker drives native scenarios in that production environment.
 
+The separate `.qa/lifecycle` driver is generated from the version-aware template
+and verifies genuine transitions without overwriting accepted feature-test jars.
+
 Ports must pass the full feature matrix in docs/COMPATIBILITY.md. Changing a
 runtime jar invalidates its SHA-based client/server acceptance. Failed attempts
 remain recorded. Publishing matching library ports and hosted CI is a separate
