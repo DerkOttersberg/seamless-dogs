@@ -5,3 +5,4 @@
 *.iml
 qa-client/artifacts/
 **/__pycache__/
+.qa/
