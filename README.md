@@ -104,3 +104,10 @@ Use the matching [1.20.1](https://github.com/DerkOttersberg/seamless-dogs/tree/1
 [1.21.1](https://github.com/DerkOttersberg/seamless-dogs/tree/1.21.1),
 [26.2](https://github.com/DerkOttersberg/seamless-dogs/tree/26.2) or
 [26.3](https://github.com/DerkOttersberg/seamless-dogs/tree/26.3) branch.
+
+Petting is rebindable per client in **Options → Controls → Key Binds → Seamless Dogs**.
+The **Client visuals → Petting key** button opens that menu. Keyboard keys, mouse
+buttons, conflict warnings and Escape to unbind use Minecraft’s controls. The
+contextual prompt follows the chosen binding and hides when unbound. Bindings
+are saved immediately by Minecraft; the mod’s Save/Cancel buttons apply to its
+visual and world settings. The separate settings key starts unbound.

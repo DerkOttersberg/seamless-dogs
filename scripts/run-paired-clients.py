@@ -86,10 +86,32 @@ def isolated(stage):
         actual = {jar.name: HELPER['digest'](jar) for jar in sorted((server / 'mods').glob('*.jar'))}
         if actual != metadata['jars']:
             raise RuntimeError('Paired server jars changed')
+        if 'DOGS_REBIND_PASS' not in (stage / 'owner/client-console.log').read_text(errors='replace'):
+            raise RuntimeError('Owner did not exercise native rebindings')
+        state_path=server/'dogs-world/serverconfig/seamlessdogs-world.json'
+        before=json.loads(state_path.read_text())
+        for key in ('ownerDigging','ownerNextDig','nextActions','nextReactions'):
+            if not before.get(key): raise RuntimeError(f'No persisted {key} to exercise restart')
+        # Restart the genuine saved world with production mods only. Test helpers are restored afterwards.
+        retired=[]
+        try:
+            for jar in (server/'mods').glob('seamless-dogs-qa-*.jar'):
+                target=server/jar.name;jar.rename(target);retired.append((jar,target))
+            restart_log=stage/'server-restart-console.log';output=restart_log.open('w');outputs.append(output)
+            restarted=subprocess.Popen(metadata['serverCommand'],cwd=server,stdin=subprocess.DEVNULL,stdout=output,stderr=subprocess.STDOUT)
+            processes.append(restarted);wait_for(restarted,restart_log,'Done (')
+            HELPER['rcon'](metadata['rconPort'],metadata['password'],'save-all flush')
+            HELPER['rcon'](metadata['rconPort'],metadata['password'],'stop');restarted.wait(timeout=60)
+            if restarted.returncode:raise RuntimeError('Production world restart failed')
+            after=json.loads(state_path.read_text())
+            if before!=after:raise RuntimeError('Pet preferences/rules/cooldowns changed across genuine restart')
+            (stage/'world-restart-passed.json').write_text(json.dumps({'before':before,'after':after,'productionJars':{j.name:HELPER['digest'](j)for j in (server/'mods').glob('*.jar')}},indent=2))
+        finally:
+            for original,target in retired:target.rename(original)
         (stage / 'pair-passed.json').write_text(json.dumps({
             'minecraft': metadata['minecraft'], 'loader': metadata['loader'], 'jars': actual,
             'gate': 'two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect',
-            'display': os.environ['DISPLAY'],'observerCaptures':captures}, indent=2))
+            'display': os.environ['DISPLAY'],'observerCaptures':captures,'worldRestartPassed':True}, indent=2))
         print(f"PASS paired real clients {metadata['minecraft']}/{metadata['loader']}", flush=True)
     finally:
         for process in reversed(processes):
@@ -118,7 +140,7 @@ def main():
     stage = args.stage.resolve()
     source = args.server_from.resolve()
     client_source = args.client_from.resolve()
-    if stage.exists() or not all(path.is_relative_to(ROOT) for path in (stage, source, client_source)):
+    if stage.exists() or not all(HELPER['owned_profile'](path) for path in (stage, source, client_source)):
         raise SystemExit('Need a fresh owned pair and owned official source installations')
     pins = HELPER['version_catalog'](args.repo / 'gradle/libs.versions.toml')
     accepted = json.loads((source / 'server-passed.json').read_text())

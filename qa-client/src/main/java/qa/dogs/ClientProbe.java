@@ -14,6 +14,7 @@ import net.minecraft.world.entity.HumanoidArm;
 public final class ClientProbe {
     public static int soundDog = -1, sounds, wolves, hands, playerModels, prompts, expressiveEyes, blinks;
     public static java.util.function.Function<net.minecraft.client.gui.screens.Screen, net.minecraft.client.gui.screens.Screen> settingsOpener = DogsSettingsScreen::new;
+    private final RebindProbe rebind = new RebindProbe();
     private int phase, ticks, total, petStart, shutdown;
     private boolean finished;
     private Wolf dog;
@@ -37,6 +38,10 @@ public final class ClientProbe {
         boolean multiplayer = System.getProperty("qa.role", "single").equals("owner");
         if (finished) {
             shutdown++;
+            if (multiplayer && shutdown == 10) DogsClient.saveSettings(true,0,DogsClient.settings.revision());
+            if (multiplayer && shutdown == 30) DogsClient.saveSettings(false,2,DogsClient.settings.revision());
+            if (multiplayer && shutdown == 55 && (DogsClient.settings.flags()&15)!=2)
+                fail(client,"Non-default owner/world settings were not acknowledged before restart");
             if (multiplayer && shutdown == 70) click();
             if (shutdown == (multiplayer ? 77 : 30)) client.stop();
             return;
@@ -65,6 +70,7 @@ public final class ClientProbe {
             + " prompt=" + prompts + " blink=" + blinks);
         if (client.getOverlay() != null) return;
         var pose = DogsClient.playerSample(client.player.getId(), 0);
+        if(phase==0 && ticks>40 && DogsClient.target()==dog && prompts>0 && blinks>0 && !rebind.tick(client)) return;
         switch (phase) {
             case 0 -> {
                 if(ticks==1&&Boolean.getBoolean("qa.protection"))client.getConnection().sendCommand("dogsqa protection_contract");

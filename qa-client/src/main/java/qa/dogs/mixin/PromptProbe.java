@@ -6,6 +6,6 @@ import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(value=DogsClient.class,remap=false)
 public abstract class PromptProbe {
-    @Inject(method="prompt",at=@At("TAIL"))
+    @Inject(method="prompt",at=@At(value="RETURN",ordinal=1))
     private static void qa$prompt(CallbackInfo ci) { if (DogsClient.target() != null) ClientProbe.prompts++; }
 }

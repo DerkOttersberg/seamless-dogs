@@ -156,7 +156,7 @@ public final class DogsClient {
     public static void promptFromVanillaHud(GuiGraphics graphics){if(platform!=null&&platform.usesVanillaHud())prompt(graphics);}
     public static void prompt(GuiGraphics graphics) {
         var c=Minecraft.getInstance();TamableAnimal pet=target();
-        if(!platform.usesVanillaHud() || !ClientOptions.prompt || c.options.hideGui || c.screen!=null || pet==null)return;
+        if(!ClientOptions.prompt || platform.petKey().isUnbound() || c.options.hideGui || c.screen!=null || pet==null)return;
         boolean active=clips.values().stream().anyMatch(p->p.owner.equals(c.player.getUUID())&&p.action.petting());
         boolean cooldown=c.level.getGameTime()<nextRequest;
         Component text=Component.translatable(active ? pet instanceof Cat ? "seamlessdogs.petting_cat" : "seamlessdogs.petting"
