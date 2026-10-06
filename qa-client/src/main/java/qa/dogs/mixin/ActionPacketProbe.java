@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class ActionPacketProbe {
     @Inject(method="receive(Lio/github/derkottersberg/seamlessdogs/network/PetUpdate;)V",at=@At("HEAD"))
     private static void qa$action(PetUpdate state,CallbackInfo ci) {
+        qa.dogs.ClipContinuityProbe.receiveHead(state);
         if(state.action()==7)qa.dogs.PetFeatureProbe.expectedGrooms.put(state.pet(),state.flags());
         else if(state.action()!=5)qa.dogs.PetFeatureProbe.expectedGrooms.remove(state.pet());
         if(state.action()==2&&state.elapsed()>0)qa.dogs.PetFeatureProbe.lateCats++;
@@ -19,4 +20,6 @@ public abstract class ActionPacketProbe {
         if(state.action()>=6&&state.elapsed()>0)qa.dogs.PetFeatureProbe.lateExpressions++;
         if(state.action()==5&&state.status().contains("not saved"))qa.dogs.PetFeatureProbe.rejectedSettings++;
     }
+    @Inject(method="receive(Lio/github/derkottersberg/seamlessdogs/network/PetUpdate;)V",at=@At("TAIL"))
+    private static void qa$continuity(PetUpdate state,CallbackInfo ci) {qa.dogs.ClipContinuityProbe.receiveTail(state);}
 }
