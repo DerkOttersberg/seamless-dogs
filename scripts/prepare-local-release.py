@@ -19,7 +19,7 @@ def main():
     prepared=[]
     for row in rows:
         v,l=row['minecraft'],row['loader'];repo=w/'seamless-dogs' if v=='26.3' else w/f'.ports/dogs-multiversion/mc{v}/seamless-dogs'
-        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','keybindPassed','skinModelsPassed','multiplayerPassed','worldRestartPassed','lifecyclePassed','combinedPassed','combinedServerPassed','visualReviewPassed','extraRendererPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
+        if not all(row.get(k) is True for k in ('buildPassed','unitPassed','nativePassed','serverPassed','clientPassed','keybindPassed','skinModelsPassed','multiplayerPassed','worldRestartPassed','lifecyclePassed','combinedPassed','combinedServerPassed','visualReviewPassed','extraRendererPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
         jars=list((repo/l/'build/libs').glob(f'*-{l}.jar'))
         if len(jars)!=1 or row['jars'].get(jars[0].name)!=sha(jars[0]):raise SystemExit(f'Runtime bytes changed after acceptance: {v}/{l}')
         with zipfile.ZipFile(jars[0]) as z:
@@ -73,6 +73,13 @@ Fabric API is an additional Fabric requirement. SeamlessLib is not included or
 required. Use the exact Minecraft version and loader. The acceptance record
 lists tested combinations, evidence and limitations. Publication is separate.
 ''')
+    aggregate=target/'seamless-dogs-0.2.0-all-eleven-install-bundles.zip'
+    with zipfile.ZipFile(aggregate,'w',zipfile.ZIP_DEFLATED) as z:
+        for name in ('README.md','artifacts.json','acceptance.json'):
+            z.write(target/name,name)
+        for artifact in manifest['artifacts']:
+            z.write(target/artifact['installZip'],artifact['installZip'])
+    write(target/'BUNDLE-SHA256.txt',f'{sha(aggregate)}  {aggregate.name}\n')
     print(f'Prepared eleven accepted standalone install bundles: {target}')
 
 if __name__=='__main__':main()
