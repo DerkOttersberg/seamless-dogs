@@ -23,6 +23,18 @@ public final class AnimationClips {
             parts.forEach((name,p)->{float[] copy=new float[6];for(int i=0;i<6;i++)copy[i]=p[i]*weight*(i>=3?offsetScale:1);result.put(name,copy);});
             return new Pose(result);
         }
+        /** Add an interrupted idle pose while its frozen six-tick recovery fades out. */
+        public Pose combined(Pose other) {
+            if(other.parts.isEmpty())return this;
+            if(parts.isEmpty())return other;
+            Map<String,float[]> result=new HashMap<>();
+            parts.forEach((name,p)->result.put(name,p.clone()));
+            other.parts.forEach((name,p)->{
+                float[] value=result.computeIfAbsent(name,key->new float[6]);
+                for(int i=0;i<6;i++)value[i]+=p[i];
+            });
+            return new Pose(result);
+        }
         public void apply(String name, ModelPart part) {
             float[] p = parts.get(name);
             if (p == null) return;

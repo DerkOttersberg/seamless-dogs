@@ -13,3 +13,7 @@ The observer rejects unauthorized requests and checks late tracking and owner
 logout. Optional runs query real OpenPAC/FTB/CPAPI claims and open Mod Menu.
 Shader acceptance also checks that Iris/Oculus loaded the supplied test pack,
 created its pipeline and did not report compilation/fallback failure.
+
+`ClipContinuityProbe` replays delayed same-sequence dog, cat and chest-cleaning
+packets through the production handler. It also checks the pose at an actual
+G-key idle-to-pet transition and requires the outgoing pose to be preserved.

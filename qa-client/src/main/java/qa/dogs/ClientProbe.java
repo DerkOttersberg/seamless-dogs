@@ -78,6 +78,7 @@ public final class ClientProbe {
             }
             case 1 -> {
                 if (pose.weight() > 0.95F && hands > 0 && wolves > 0 && sounds > 0 && soundDog == dog.getId() && expressiveEyes > 0) {
+                    ClipContinuityProbe.replay(dog.getUUID());
                     capture(client, "02-first-person.png"); petStart = total; next();
                     log("PASS actual key request -> server state -> first person / dog rig / eyes / entity sound");
                 }

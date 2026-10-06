@@ -41,7 +41,7 @@ public final class PetFeatureProbe {
         switch(phase) {
             case 0 -> {if(!eyesValidated){CatEyeProbe.verify(c);eyesValidated=true;}if(ticks>65){command(c,"cat");next();}}
             case 1 -> {if(cat!=null&&DogsClient.target()==cat){c.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.RIGHT);c.options.broadcastOptions();catFrames=catEyes=catSounds=ClientProbe.hands=0;click();next();}}
-            case 2 -> {if(petting.weight()>.8F&&catFrames>0&&catEyes>0&&catSounds>0&&soundCat==cat.getId()&&ClientProbe.hands>0){capture(c,"08-cat-first-person.png");if("owner".equals(System.getProperty("qa.role")))command(c,"observer_far");start=total;next();}}
+            case 2 -> {if(petting.weight()>.8F&&catFrames>0&&catEyes>0&&catSounds>0&&soundCat==cat.getId()&&ClientProbe.hands>0){ClipContinuityProbe.replay(cat.getUUID());capture(c,"08-cat-first-person.png");if("owner".equals(System.getProperty("qa.role")))command(c,"observer_far");start=total;next();}}
             case 3 -> {if(ticks%4==0&&petting.weight()>.1F)capture(c,"08-cat-hand-"+ticks+".png");if(total-start>65){c.options.setCameraType(CameraType.THIRD_PERSON_BACK);ClientProbe.playerModels=0;click();next();}}
             case 4 -> {if(ticks==8&&"owner".equals(System.getProperty("qa.role")))command(c,"observer_near");if(petting.weight()>.8F&&ClientProbe.playerModels>0&&ticks>12&&!backCaptured){capture(c,"09-cat-third-person.png");backCaptured=true;c.options.setCameraType(CameraType.THIRD_PERSON_FRONT);}if(backCaptured&&ticks>23){capture(c,"09-cat-third-person-front.png");start=total;next();}}
             case 5 -> {if(total-start>65){c.options.setCameraType(CameraType.FIRST_PERSON);c.options.mainHand().set(net.minecraft.world.entity.HumanoidArm.LEFT);c.options.broadcastOptions();command(c,"kitten");next();}}
@@ -66,6 +66,7 @@ public final class PetFeatureProbe {
                 String name=switch(phase){case 30->"knead-adult";case 32->"knead-kitten";case 34->"tilt-adult";case 35->"tilt-puppy";case 37->"groom-chest-adult";default->"groom-chest-kitten";};
                 if(ticks==2)command(c,(phase==30||phase==32||phase==37||phase==39)?"view_front":"view_side");
 
+                if(ticks==60&&phase==37){ClipContinuityProbe.replay(cat.getUUID());ClipContinuityProbe.arm(cat.getUUID());click();}
                 if(ticks==48&&(phase==30||phase==32||phase==37||phase==39))command(c,"view_side");
                 if(!pose.parts().isEmpty()){expressionRendered=true;if(ticks%6==0)capture(c,"16-"+name+"-"+ticks+".png");}
                 if(ticks>((phase==34||phase==35)?95:150)) {
@@ -110,7 +111,7 @@ public final class PetFeatureProbe {
         }
         return done;
     }
-    private void finish(Minecraft c){if(renderedGroomVariants!=4)throw new IllegalStateException("Chest grooming did not render");try{Files.writeString(c.gameDirectory.toPath().resolve("pets-feature-passed.txt"),"PASS cat/kitten petting, native rigs, eyes, purr, first/third person, stretch, chest grooming with retired paw washes absent, kneading, head tilts, terrain removal, eleven dog-bound grass/sand scrapes each, owner/server switches and owner cooldown.\n");}catch(Exception e){throw new RuntimeException(e);}done=true;ClientProbe.log("PETS_FEATURE_PASS");}
+    private void finish(Minecraft c){ClipContinuityProbe.verify();if(renderedGroomVariants!=4)throw new IllegalStateException("Chest grooming did not render");try{Files.writeString(c.gameDirectory.toPath().resolve("pets-feature-passed.txt"),"PASS cat/kitten petting, native rigs, eyes, purr, first/third person, stretch, chest grooming with retired paw washes absent, kneading, head tilts, terrain removal, eleven dog-bound grass/sand scrapes each, owner/server switches and owner cooldown.\n");}catch(Exception e){throw new RuntimeException(e);}done=true;ClientProbe.log("PETS_FEATURE_PASS");}
     private void next(){phase++;ticks=0;ClientProbe.log("pets phase="+phase);}
     private static void command(Minecraft c,String name){c.getConnection().sendCommand("dogsqa "+name);}
     private static void click(){KeyMapping.click(InputConstants.getKey(DogsKeys.PET.saveString()));}

@@ -8,11 +8,12 @@ health and sitting commands. Dogs and cats blink; relaxed pets lean into the str
 
 Calm adult dogs attempt a four-second dig every **10–20 minutes**. Standing cats
 and kittens choose a stretch, biscuit kneading or grooming every **3–6 minutes**.
-Biscuits and grooming last six seconds, with alternating paw presses, gentle
-head motion, closed eyes and quiet purring. Idle actions need a grounded, stationary
+Biscuits last six seconds with alternating paw presses. Chest cleaning also lasts
+six seconds, with grounded paws, gentle head motion, closed eyes and quiet purring. Idle actions need a grounded, stationary
 pet within 16 blocks of its online owner. Sitting, sleeping, combat, damage,
 swimming, riding and following the owner prevent them. Petting interrupts idle
-actions. Interrupted attempts keep their cooldown.
+actions with a brief pose recovery. Tracking updates preserve animation progress.
+Interrupted attempts keep their cooldown.
 
 Calm dogs and puppies can tilt their head, tuck one ear and look back when their
 owner watches them within six blocks. These brief reactions have a **1–2 minute**
