@@ -14,7 +14,8 @@ public final class CatEyeProbe {
             int checked=0;
             for(String coat:new String[]{"all_black","black","british_shorthair","calico","jellie","persian","ragdoll","red","siamese","tabby","white"})
                 for(boolean baby:new boolean[]{false}) {
-                    var original=new ResourceLocation("textures/entity/cat/cat_"+coat+(baby?"_baby":"")+".png");
+                    // These releases share one texture between adults and scaled kittens.
+                    var original=new ResourceLocation("textures/entity/cat/"+coat+".png");
                     if(!EyeTextures.catRelaxed(original,baby).equals(original))throw new IllegalStateException("Open eyes must retain the pack texture");
                     try(var input=c.getResourceManager().open(original);var source=NativeImage.read(input)) {
                         for(boolean smile:new boolean[]{false,true}) {
