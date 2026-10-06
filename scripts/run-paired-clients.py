@@ -123,7 +123,7 @@ def main():
     stage.mkdir(parents=True)
     server = stage / 'server'; server.mkdir()
     for directory in ('libraries', 'versions'):
-        if (source / directory).is_dir(): shutil.copytree(source / directory, server / directory)
+        if (source / directory).is_dir(): shutil.copytree(source / directory, server / directory,copy_function=HELPER['copy_cache_file'])
     for pattern in ('*-shim.jar', 'fabric-server-launch.jar', 'fabric-server-launcher.properties', 'server.jar'):
         for path in source.glob(pattern): shutil.copy2(path, server / path.name)
     mods = server / 'mods'; mods.mkdir()

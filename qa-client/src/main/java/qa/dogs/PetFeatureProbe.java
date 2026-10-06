@@ -94,14 +94,14 @@ public final class PetFeatureProbe {
             case 40 -> {if(ticks>125){
                 if(digSounds.getOrDefault("block.sand.hit",0)!=11||!c.level.getBlockState(new BlockPos(0,64,1)).isAir())throw new IllegalStateException("Missing sand dig/block-specific sound: "+digSounds);
                 c.setScreen(new DogsSettingsScreen(null));phase=11;ticks=0;}}
-            case 11 -> {if(ticks>10){press(c,"My pets");capture(c,"14-owner-settings.png");previousRevision=DogsClient.settings.revision();pressPrefix(c,"My dogs can dig:");press(c,"Save");next();}}
+            case 11 -> {if(ticks==11)press(c,"My pets");if(ticks>16){capture(c,"14-owner-settings.png");previousRevision=DogsClient.settings.revision();pressPrefix(c,"My dogs can dig:");press(c,"Save");next();}}
             case 12 -> {if(DogsClient.settings.revision()>previousRevision&&(DogsClient.settings.flags()&8)==0){press(c,"Cancel");command(c,"dig");next();}}
             case 13 -> {if(ticks>100){if(!DogsClient.actionPose(dog.getUUID(),0).parts().isEmpty()||c.level.getBlockState(new BlockPos(0,64,1)).isAir())throw new IllegalStateException("Owner opt-out failed");
                     c.setScreen(new DogsSettingsScreen(null));next();}}
             case 14 -> {if(ticks>10){press(c,"My pets");previousRevision=DogsClient.settings.revision();pressPrefix(c,"My dogs can dig:");press(c,"Save");next();}}
             case 15 -> {if(DogsClient.settings.revision()>previousRevision&&(DogsClient.settings.flags()&8)!=0){press(c,"Cancel");
                 if(DogsClient.settings.admin()){c.setScreen(new DogsSettingsScreen(null));next();}else{command(c,"dig_cooldown");phase=20;ticks=0;}}}
-            case 16 -> {if(ticks>10){press(c,"World/server");capture(c,"15-server-settings.png");previousRevision=DogsClient.settings.revision();pressPrefix(c,"Dogs can dig:");press(c,"Save");next();}}
+            case 16 -> {if(ticks==11)press(c,"World/server");if(ticks>16){capture(c,"15-server-settings.png");previousRevision=DogsClient.settings.revision();pressPrefix(c,"Dogs can dig:");press(c,"Save");next();}}
             case 17 -> {if(DogsClient.settings.revision()>previousRevision&&(DogsClient.settings.flags()&1)==0){press(c,"Cancel");command(c,"dig");next();}}
             case 18 -> {if(ticks>100){if(!DogsClient.actionPose(dog.getUUID(),0).parts().isEmpty()||c.level.getBlockState(new BlockPos(0,64,1)).isAir())throw new IllegalStateException("Server digging switch failed");c.setScreen(new DogsSettingsScreen(null));next();}}
             case 19 -> {if(ticks>10){press(c,"World/server");previousRevision=DogsClient.settings.revision();pressPrefix(c,"Dogs can dig:");press(c,"Save");phase=21;ticks=0;}}

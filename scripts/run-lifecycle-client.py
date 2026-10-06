@@ -68,7 +68,7 @@ def main():
     if accepted['minecraft']!=pins['minecraft'] or accepted['loader']!=args.loader:raise SystemExit('Installation mismatch')
     stage.mkdir(parents=True);server=stage/'server';server.mkdir();mods=server/'mods';mods.mkdir()
     for directory in ('libraries','versions'):
-        if(source/directory).is_dir():shutil.copytree(source/directory,server/directory)
+        if(source/directory).is_dir():shutil.copytree(source/directory,server/directory,copy_function=HELPER['copy_cache_file'])
     for pattern in ('*-shim.jar','fabric-server-launch.jar','fabric-server-launcher.properties','server.jar'):
         for path in source.glob(pattern):shutil.copy2(path,server/path.name)
     properties=dict(line.split('=',1)for line in(args.repo/'gradle.properties').read_text().splitlines()if'='in line and not line.startswith('#'))

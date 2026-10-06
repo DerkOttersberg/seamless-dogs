@@ -26,6 +26,18 @@ except ModuleNotFoundError:  # Windows' existing Python 3.10 is sufficient.
     tomllib = None
 
 
+def copy_cache_file(source, destination):
+    """Share immutable cached JARs; metadata and worlds always remain independent."""
+    source_path=Path(source).resolve()
+    if source_path.suffix=='.jar' and source_path.is_relative_to(Path('/root/seamless-dogs-production-20261005')):
+        try:
+            os.link(source_path,destination)
+            return str(destination)
+        except OSError:
+            pass
+    return shutil.copy2(source,destination)
+
+
 def version_catalog(path: Path) -> dict[str, str]:
     source = path.read_text()
     if tomllib is not None:
@@ -152,7 +164,7 @@ def main() -> None:
         required = source / "libraries" / group / runtime / argument_file
         if not required.is_file():
             raise SystemExit("Cached installation does not match the selected loader version")
-        shutil.copytree(source / "libraries", stage / "libraries", copy_function=shutil.copy2)
+        shutil.copytree(source / "libraries", stage / "libraries", copy_function=copy_cache_file)
         for shim in source.glob("*-shim.jar"):
             shutil.copy2(shim, stage / shim.name)
         (stage / "installer.log").write_text(f"Reused official installer libraries from {source}\n")

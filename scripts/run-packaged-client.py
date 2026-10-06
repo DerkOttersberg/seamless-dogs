@@ -161,7 +161,7 @@ def main() -> None:
                        else f'neoforge-{runtime}')
         if not (source / 'installation/versions' / expected_id / f'{expected_id}.json').is_file():
             raise SystemExit('Cached client loader version does not match the pinned runtime')
-        shutil.copytree(source / 'installation', installation)
+        shutil.copytree(source / 'installation', installation,copy_function=helper['copy_cache_file'])
     else:
         installation.mkdir()
     (installation / 'launcher_profiles.json').write_text('{"profiles":{}}\n')
@@ -237,7 +237,9 @@ def main() -> None:
     inherited = original
     if any('${version_name}.jar' in value for value in modded.get('arguments', {}).get('jvm', []) if isinstance(value, str)):
         inherited = modded_path.with_suffix('.jar')
-        shutil.copy2(original, inherited)
+        if not inherited.exists() or digest(inherited)!=digest(original):
+            if inherited.exists():inherited.unlink()
+            shutil.copy2(original, inherited)
     classpath.append(str(inherited))
     assets = Path('/root/.gradle/caches/fabric-loom/assets')
     index_info = vanilla['assetIndex']
@@ -326,6 +328,13 @@ def main() -> None:
     for marker in required:
         if marker not in log_text:
             raise RuntimeError(f'Packaged client omitted {marker}')
+    if args.shader_pack:
+        if f'Using shaderpack: {args.shader_pack.name}' not in log_text or 'Creating pipeline for dimension' not in log_text:
+            raise RuntimeError('Active QA shader pipeline was not confirmed by Iris/Oculus')
+        failures = ('Failed to compile shader', 'Shader compilation failed', 'Error creating shader',
+                    'Failed to create shader', 'Failed to load shaderpack', 'fallback pipeline')
+        if any(message.lower() in log_text.lower() for message in failures):
+            raise RuntimeError('QA shader compilation failed or used a fallback pipeline')
     (stage / 'client-passed.json').write_text(json.dumps({'minecraft':minecraft,'loader':loader,'jars':after,
         'guiScale':args.gui_scale,'modMenu':args.modmenu,'graphicsBackend':args.graphics_backend if minecraft.startswith('26.') else 'opengl',
         'optionalInputs':inputs if args.extra_mod_dir else None,'shaderPack':args.shader_pack.name if args.shader_pack else None,
