@@ -8,5 +8,6 @@ public interface ClientPlatformServices {
     Path configDirectory();
     KeyMapping petKey();
     boolean serverSupportsPetting();
+    default boolean serverSupportsV2() { return false; }
     void sendToServer(CustomPacketPayload payload);
 }

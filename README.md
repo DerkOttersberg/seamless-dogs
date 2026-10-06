@@ -1,63 +1,106 @@
 # Seamless Dogs
 
-Pet your own tamed wolf: look at it within three blocks with an empty main hand
-and press **G**. The prompt displays your rebound key. A two-second stroke moves
-the hand in first and third person, tilts the dog's head, wags its tail, closes
-its eyes happily, and plays a quiet pant from the dog. Tame adults and puppies
-also blink at rest. Other players see the synchronized reaction.
+Version **0.2.0** adds cats, kittens, occasional dog digging and pet idle expressions.
+Look at your own tamed pet within three blocks, hold an empty main hand and press
+**G**. The contextual prompt shows the key you assigned. Other players see the
+reaction, and the pet’s own voice follows the animal. Petting preserves ownership,
+health and sitting commands. Dogs and cats blink; relaxed pets lean into the stroke.
 
-This branch targets **Minecraft Java 26.2** with **Java 25**.
-Choose exactly one matching loader jar and the same Minecraft/loader's
-**SeamlessLib 2.0.1+mc26.2** (`seamlessapi`). Both clients and server need
-Dogs and SeamlessLib for petting. Fabric also needs **Fabric API 0.159.0+26.2**.
-Optional Fabric **Mod Menu 20.0.3** opens client settings; Forge/NeoForge
-provide a native Mods settings entrypoint. Visual settings can also be changed
-in `config/seamlessdogs-client.properties`.
+Calm adult dogs attempt a four-second dig every **10–20 minutes**. Standing cats
+and kittens choose a stretch, biscuit kneading or grooming every **3–6 minutes**.
+Biscuits and grooming last six seconds, with alternating paw presses, gentle
+head motion, closed eyes and quiet purring. Idle actions need a grounded, stationary
+pet within 16 blocks of its online owner. Sitting, sleeping, combat, damage,
+swimming, riding and following the owner prevent them. Petting interrupts idle
+actions. Interrupted attempts keep their cooldown.
 
-| Loader | Verified build pin |
+Calm dogs and puppies can tilt their head, tuck one ear and look back when their
+owner watches them within six blocks. These brief reactions have a **1–2 minute**
+cooldown, require visibility, and also work while seated. The “Pet idle expressions”
+server switch controls stretches, biscuits, grooming and these gaze reactions.
+Seamless Dogs is standalone: SeamlessLib is neither required nor bundled.
+The 0.2.0 release effort covers the four version branches listed below.
+Fresh acceptance is recorded per loader and final JAR hash.
+
+A completed dig removes one exposed eligible dirt or sand block. Plants, fluids,
+block entities, farmland, paths and unsafe support positions are excluded.
+Most digs yield only that block’s normal drop. Additional finds are 4% stick/bone/
+flint, 0.8% coal/raw copper/raw iron and 0.2% enchanted book. Books can include
+Mending and other treasure enchantments; default books exclude curses. Each owner
+is limited to one successful dig per ten minutes across all their dogs. Block tags,
+loot and enchantment eligibility can be changed by datapacks.
+
+The settings screen has **Client visuals**, **My pets** and **World/server** pages.
+An owner can turn off digging for all their dogs in that world. The singleplayer
+host or a dedicated-server administrator with permission level 2 can change
+all three server rules. Visuals are local. Save applies the displayed page;
+Cancel discards its draft. The settings key starts unbound. Forge/NeoForge provide
+native Mods entries; Fabric supports optional Mod Menu. See
+[settings and datapacks](docs/CONFIGURATION.md).
+
+This branch targets **Minecraft Java 26.2**, **Java 25** and requires Dogs on both client and server.
+Fabric also requires **Fabric API 0.159.0+26.2**. Choose exactly one loader JAR.
+
+| Loader | Build pin |
 | --- | --- |
 | Fabric | `0.19.5` |
 | Forge | `26.2-65.1.3` |
-| Neoforge | `26.2.0.75` |
+| NeoForge | `26.2.0.75` |
 
-The complete product targets seven version branches and 20 loader/version
-combinations. See [compatibility and acceptance](docs/COMPATIBILITY.md) for
-actual completed gates and [local evidence](docs/ACCEPTANCE.md). Beta loader
-pins retain their upstream status. A successful build alone is not release acceptance.
+The active 0.2.0 release matrix has **11 loader/version cells**: 1.20.1 Fabric/Forge;
+1.21.1, 26.2 and 26.3 Fabric/Forge/NeoForge. Older local branches are retained as history.
+**The older 0.1.0 acceptance does not establish readiness of 0.2.0.** Fresh feature
+evidence and final hashes must pass before release; see
+[0.2.0 acceptance](docs/0.2.0-ACCEPTANCE.md). Upstream beta loader pins keep that status.
+Publication is a separate action.
 
-Petting does not heal, tame, feed, or change the sitting command. It stops when
-the player moves away, holds/uses an item, dies or changes dimension,
-or disconnects, or the wolf becomes angry/acquires an attack target. The cooldown is three seconds from the beginning of the clip.
-Servers authorize ownership, distance, visibility and activity; malformed,
-unknown, duplicate and unauthorized requests cannot start a clip. No new world
-content or persistent petting state is registered.
+The server authorizes petting, selects idle actions and generates terrain changes
+and loot. Clients render negotiated action clips. Old dog-petting clients retain
+the original protocol; new idle behaviors require the owner’s new capability.
+Packets reject unauthorized, malformed, stale and excessive requests. World rules,
+owner preferences and cooldowns use world-local atomic saves/backups.
 
-Motion uses original procedural animation on the vanilla rig. Hand contact is
-stylized. Eye expressions preserve active texture-pack colors and support
-scaled vanilla UVs; custom UV layouts can disable expressions. No game texture,
-sound, or foreign rig is bundled. See [animation provenance](docs/ANIMATION.md).
+Digging respects `mobGriefing`, spawn protection and cancellable native breaking
+hooks. Optional Open Parties and Claims and Fabric Common Protection API adapters
+exclude detected claims, including the owner’s own. Unqueryable supported
+integrations disable terrain changes and explain their status in settings.
+FTB Chunks has no matching validated 26.2 build; detection disables digging on
+this line. Other protection systems need verified adapters before claiming
+claim-aware support. See [compatibility](docs/COMPATIBILITY.md) for exact evidence.
 
-## Build
+Rendering adds original poses to vanilla rigs, retaining skins, collars and
+resource-pack textures. Unsupported detected models/layouts fall back; affected
+visuals can be disabled. The [Blockbench authoring sources](animation-source/README.md)
+and [animation provenance](docs/ANIMATION.md) explain the original clips. No game
+texture, audio, downloaded animation or foreign rig is bundled.
 
-Run Gradle with Java 25; matching Java 25 game toolchains are resolved
-separately. Clone this Minecraft branch of SeamlessLib beside the product, then:
+Build this repository independently with a Java 25 Gradle host (game toolchains are selected per branch):
 
 ```powershell
 $env:JAVA_HOME = 'C:/Program Files/Java/jdk-25'
-.\gradlew.bat clean check build -PseamlessApiDir=../seamless-api
+.\gradlew.bat clean check build
 ```
 
-The build runs unit tests, common isolation, metadata/refmap/bytecode checks,
-and four discovered native scenarios on each loader. Gameplay jars are in each
-loader's `build/libs/`. Common, development, sources and QA jars are not install
-artifacts. SeamlessLib stays a separate dependency. Its verified local source
-commit is `664efb8261545a170ebd966a784989fd1315d34f`; new library source ports have not been published remotely.
+Native tests exercise ownership, codecs, cancellation, terrain, permissions,
+scheduling, protection denial, persistence and single bonus-loot generation.
+Background acceptance uses genuine packaged singleplayer/dedicated games and two
+clients on private WSL displays. Test-only fixture JARs never enter install bundles.
+See [PORTING.md](PORTING.md) for common code and explicit loader adapter boundaries.
+Seamless Dogs code and original assets: **All Rights Reserved**.
 
-Background acceptance uses genuine installed servers/clients in private WSL
-profiles, bounded resources and an exclusive Xvfb display lock. Two actual clients
-verify remote rendering, dog sound, permissions, tracking and disconnect cleanup.
-Separate lifecycle clients verify dimension change, death/respawn, menu input and
-same-process reconnect. All 20 combinations passed local acceptance; see the
-linked reports for exact hashes and limitations.
-[PORTING.md](PORTING.md) describes the architecture. Product code/icon: **all rights
-reserved**, as requested. SeamlessLib: MIT.
+The latest 26.2 Fabric review preview fixes disappearing cat eyes, adds left-paw
+washing and chest cleaning alongside the original grooming clip, and refines
+kneading and digging. Server-selected grooming variants synchronize to observers
+and late trackers. Hand withdrawal finishes the stroke, preserves fractional
+frames on interruption and uses a steady client clock. Kneading keeps the
+shoulders beneath the coat. Face grooming uses the exact original adult/kitten
+animation, with a mirrored left-paw wash and the existing chest variant.
+Digging plays the target
+block's hit sound from the dog on alternating paw contacts. The approved animations have been ported to the active four branches; see
+`docs/0.2.0-ACCEPTANCE.md` for the exact validated bytes and remaining release gates.
+
+Source and issues: [DerkOttersberg/seamless-dogs](https://github.com/DerkOttersberg/seamless-dogs).
+Use the matching [1.20.1](https://github.com/DerkOttersberg/seamless-dogs/tree/1.20.1),
+[1.21.1](https://github.com/DerkOttersberg/seamless-dogs/tree/1.21.1),
+[26.2](https://github.com/DerkOttersberg/seamless-dogs/tree/26.2) or
+[26.3](https://github.com/DerkOttersberg/seamless-dogs/tree/26.3) branch.

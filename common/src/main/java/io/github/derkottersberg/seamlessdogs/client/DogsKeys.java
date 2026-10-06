@@ -8,5 +8,6 @@ import net.minecraft.client.KeyMapping;
 public final class DogsKeys {
     public static final KeyMapping PET = new KeyMapping("key.seamlessdogs.pet", InputConstants.KEY_G,
         KeyMapping.Category.register(SeamlessDogs.id("controls")));
+    public static final KeyMapping SETTINGS = new KeyMapping("key.seamlessdogs.settings", InputConstants.UNKNOWN.getValue(), PET.getCategory());
     private DogsKeys() { }
 }

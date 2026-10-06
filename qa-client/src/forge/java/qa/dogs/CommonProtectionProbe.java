@@ -1,0 +1,1 @@
+package qa.dogs; final class CommonProtectionProbe { static void run(net.minecraft.server.level.ServerPlayer owner,net.minecraft.world.entity.TamableAnimal dog,net.minecraft.core.BlockPos pos){throw new IllegalStateException("CPAPI needs Fabric");} }

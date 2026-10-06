@@ -56,23 +56,28 @@ def rules_allow(rules: list[dict] | None) -> bool:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument('--repo', type=Path, required=True)
-    parser.add_argument('--api', type=Path, required=True)
     parser.add_argument('--loader', choices=['fabric', 'forge', 'neoforge'], required=True)
     parser.add_argument('--stage', type=Path, required=True)
     parser.add_argument('--java', required=True)
     parser.add_argument('--fixture', type=Path)
     parser.add_argument('--prepare-only', action='store_true')
+    parser.add_argument('--hand-only', action='store_true', help='Capture baseline and hand-return cases without the longer pet feature sequence')
     parser.add_argument('--installed-from', type=Path, help='Reuse an owned official client installation')
     parser.add_argument('--address', help='Loopback dedicated-server address for paired clients')
     parser.add_argument('--username', default='DogQA')
     parser.add_argument('--role', choices=['single', 'owner', 'observer'], default='single')
     parser.add_argument('--gui-scale', default='2')
+    parser.add_argument('--width', default='1280')
+    parser.add_argument('--height', default='720')
+    parser.add_argument('--graphics-backend', choices=['vulkan', 'opengl'], default='vulkan')
     parser.add_argument('--modmenu', action='store_true', help='Exercise the optional Fabric config entrypoint')
     parser.add_argument('--combined-dir', type=Path, help='Add matching accepted gameplay siblings')
+    parser.add_argument('--extra-mod-dir', type=Path, help='Hash-verified test-only optional integration inputs')
+    parser.add_argument('--shader-pack', type=Path, help='Owned original QA shader pack for an active shader pipeline')
     args = parser.parse_args()
     if os.name != 'posix' or not Path('/proc').exists():
         raise SystemExit('Client QA requires the isolated Linux display workflow')
-    repo, api, stage = args.repo.resolve(), args.api.resolve(), args.stage.resolve()
+    repo, stage = args.repo.resolve(), args.stage.resolve()
     root = Path('/root/seamless-dogs-production-20261005')
     if stage.exists() or not stage.is_relative_to(root):
         raise SystemExit('Need a fresh owned client profile')
@@ -85,7 +90,6 @@ def main() -> None:
     properties = dict(line.split('=', 1) for line in (repo / 'gradle.properties').read_text().splitlines()
                       if '=' in line and not line.startswith('#'))
     jars = [repo / loader / 'build/libs' / f"seamless-dogs-{properties['mod_version']}-{loader}.jar",
-            api / loader / 'build/libs' / f"seamless-api-{pins['seamless-api']}-{loader}.jar",
             repo / 'qa-client/artifacts' / f'seamless-dogs-qa-{loader}.jar']
     for jar in jars:
         if not jar.is_file():
@@ -95,13 +99,26 @@ def main() -> None:
     mods.mkdir(parents=True)
     for jar in jars:
         shutil.copy2(jar, mods / jar.name)
+    if args.extra_mod_dir:
+        source = args.extra_mod_dir.resolve()
+        allowed = Path('/mnt/c/Users/derko/Desktop/minecraft/qa-artifacts/seamless-dogs/standalone-0.2.0/compat-inputs')
+        if not source.is_relative_to(allowed):
+            raise SystemExit('Optional inputs must be under the owned compatibility directory')
+        inputs = json.loads((source / 'manifest.json').read_text())
+        if inputs['minecraft'] != minecraft or inputs['loader'] != loader:
+            raise SystemExit('Optional integration version/loader mismatch')
+        for name, expected in inputs['jars'].items():
+            jar = source / name
+            if jar.name != name or digest(jar) != expected:
+                raise SystemExit('Optional integration hash mismatch')
+            shutil.copy2(jar, mods / name)
     if args.combined_dir:
         source = args.combined_dir.resolve()
         workspace = Path('/mnt/c/Users/derko/Desktop/minecraft')
         if not source.is_relative_to(workspace / 'release-candidates'):
             raise SystemExit('Combined QA accepts only owned local release candidates')
         siblings = [jar for jar in source.glob(f'*-{loader}.jar')
-                    if not jar.name.startswith(('seamless-api-', 'seamless-dogs-'))]
+                    if not jar.name.startswith('seamless-dogs-')]
         if not siblings or any(f'+mc{minecraft}-' not in jar.name for jar in siblings):
             raise SystemExit('Combined candidates do not match the game and loader')
         for jar in siblings:
@@ -112,8 +129,22 @@ def main() -> None:
         menu = pins['modmenu']
         download(f'https://maven.terraformersmc.com/releases/com/terraformersmc/modmenu/{menu}/modmenu-{menu}.jar', mods / f'modmenu-{menu}.jar')
     shutil.copy2(repo / 'qa-client/options.txt', game / 'options.txt')
+    if args.role != 'single':
+        # Two software-rendered clients share the bounded private display.
+        # Keep enough rendered samples for the short withdrawal assertions.
+        options = game / 'options.txt'
+        options.write_text(options.read_text().replace('maxFps:30', 'maxFps:60'))
     (game / 'config').mkdir()
     (game / 'config/fml.toml').write_text('earlyWindowControl=false\n')
+    if args.shader_pack:
+        pack = args.shader_pack.resolve()
+        if not pack.is_relative_to(Path('/mnt/c/Users/derko/Desktop/minecraft/qa-artifacts/seamless-dogs/standalone-0.2.0')):
+            raise SystemExit('Shader QA accepts only the owned local test pack')
+        (game / 'shaderpacks').mkdir()
+        shutil.copy2(pack, game / 'shaderpacks' / pack.name)
+        shader_options = f'enableShaders=true\nshaderPack={pack.name}\n'
+        (game / 'config/iris.properties').write_text(shader_options)
+        (game / 'config/oculus.properties').write_text(shader_options)
     if args.fixture:
         shutil.copytree(args.fixture, game / 'saves/dogs-world')
     installation = stage / 'installation'
@@ -228,7 +259,7 @@ def main() -> None:
                     'game_directory': str(game), 'assets_root': str(assets), 'assets_index_name': index_info['id'],
                     'natives_directory': str(natives), 'launcher_name': 'SeamlessDogsQA', 'launcher_version': '1',
                     'classpath': ':'.join(classpath), 'classpath_separator': ':', 'library_directory': str(installation / 'libraries'),
-                    'resolution_width': '1280', 'resolution_height': '720'}
+                    'resolution_width': args.width, 'resolution_height': args.height}
     def expand(value: str) -> str:
         return re.sub(r'\$\{([^}]+)\}', lambda match: replacements[match[1]], value)
     def arguments(source: dict, kind: str) -> list[str]:
@@ -245,10 +276,19 @@ def main() -> None:
         jvm += ['-cp', ':'.join(classpath)]
     command = [args.java, '-Xms256M', '-Xmx1G', '-XX:ActiveProcessorCount=2',
                f'-Dqa.minecraft={minecraft}', f'-Dqa.loader={loader}', f'-Dqa.role={args.role}', f'-Dqa.guiScale={args.gui_scale}']
+    if args.hand_only:
+        command.append('-Dqa.handOnly=true')
+    if args.extra_mod_dir:
+        if inputs.get('protection'):
+            command.append('-Dqa.protection=true')
+        if inputs.get('ftb'):
+            command.append('-Dqa.ftb=true')
+        if inputs.get('cpapi'):
+            command.append('-Dqa.cpapi=true')
     command += jvm + [modded['mainClass']] + arguments(vanilla, 'game') + arguments(modded, 'game')
     command += ['--quickPlayMultiplayer', args.address] if args.address else ['--quickPlaySingleplayer', 'dogs-world']
     if minecraft.startswith('26.'):
-        command += ['--graphicsBackend', 'vulkan']
+        command += ['--graphicsBackend', args.graphics_backend]
     (stage / 'launch-command.json').write_text(json.dumps(command, indent=2))
     before = {path.name: digest(path) for path in sorted(mods.glob('*.jar'))}
     (stage / 'SHA256SUMS.before.json').write_text(json.dumps(before, indent=2))
@@ -273,6 +313,23 @@ def main() -> None:
     after = {path.name: digest(path) for path in sorted(mods.glob('*.jar'))}
     if before != after:
         raise RuntimeError('Gameplay/test jars changed during client QA')
+    log_text = (stage / 'client-console.log').read_text(errors='replace')
+    required = ['DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
+    if args.modmenu:
+        required.append('DOGS_MODMENU_CONFIG_PASS')
+    if args.extra_mod_dir and inputs.get('protection'):
+        required.append('DOGS_OPENPAC_ACTUAL_CLAIMS_PASS')
+    if args.extra_mod_dir and inputs.get('ftb'):
+        required.append('DOGS_FTB_ACTUAL_CLAIMS_PASS')
+    if args.extra_mod_dir and inputs.get('cpapi'):
+        required.append('DOGS_CPAPI_ACTUAL_PROVIDER_PASS')
+    for marker in required:
+        if marker not in log_text:
+            raise RuntimeError(f'Packaged client omitted {marker}')
+    (stage / 'client-passed.json').write_text(json.dumps({'minecraft':minecraft,'loader':loader,'jars':after,
+        'guiScale':args.gui_scale,'modMenu':args.modmenu,'graphicsBackend':args.graphics_backend if minecraft.startswith('26.') else 'opengl',
+        'optionalInputs':inputs if args.extra_mod_dir else None,'shaderPack':args.shader_pack.name if args.shader_pack else None,
+        'requiredMarkers':required},indent=2))
     print(passed.read_text(), flush=True)
 
 

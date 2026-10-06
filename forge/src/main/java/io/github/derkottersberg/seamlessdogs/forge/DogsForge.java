@@ -3,7 +3,7 @@ package io.github.derkottersberg.seamlessdogs.forge;
 import io.github.derkottersberg.seamlessdogs.SeamlessDogs;
 import io.github.derkottersberg.seamlessdogs.internal.PlatformServices;
 import io.github.derkottersberg.seamlessdogs.network.PetRequest;
-import io.github.derkottersberg.seamlessdogs.network.PetState;
+import io.github.derkottersberg.seamlessdogs.network.*;
 import java.util.LinkedHashSet;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -31,6 +31,13 @@ public final class DogsForge {
         .networkProtocolVersion(1).optional().payloadChannel().play().clientbound()
         .addMain(PetState.TYPE, PetState.CODEC, (packet, context) -> DogsForgeClient.receive(packet)).build();
 
+    private static final Channel<CustomPacketPayload> CONTROL = ChannelBuilder.named(SeamlessDogs.id("control_v2"))
+        .networkProtocolVersion(2).optional().payloadChannel().play().serverbound()
+        .addMain(PetControl.TYPE,PetControl.CODEC,(packet,context)-> { if(context.getSender()!=null)SeamlessDogs.control(context.getSender(),packet); }).build();
+    private static final Channel<CustomPacketPayload> UPDATE = ChannelBuilder.named(SeamlessDogs.id("update_v2"))
+        .networkProtocolVersion(2).optional().payloadChannel().play().clientbound()
+        .addMain(PetUpdate.TYPE,PetUpdate.CODEC,(packet,context)->DogsForgeClient.receive(packet)).build();
+
     public DogsForge(FMLJavaModLoadingContext context) {
         SeamlessDogs.initialize(new Services());
         TickEvent.ServerTickEvent.Post.BUS.addListener(event -> SeamlessDogs.tick(event.server()));
@@ -46,10 +53,17 @@ public final class DogsForge {
     }
     private static void cancel(Entity entity) { if (entity instanceof ServerPlayer player) SeamlessDogs.disconnect(player); }
     static boolean supports(Connection connection) { return REQUEST.isRemotePresent(connection); }
-    static void send(CustomPacketPayload packet) { REQUEST.send(packet, PacketDistributor.SERVER.noArg()); }
+    static boolean supportsV2(Connection connection) { return CONTROL.isRemotePresent(connection); }
+    static void send(CustomPacketPayload packet) { (packet instanceof PetControl ? CONTROL : REQUEST).send(packet, PacketDistributor.SERVER.noArg()); }
 
     private static final class Services implements PlatformServices {
+        public boolean supportsV2(ServerPlayer player) { return player.connection!=null && UPDATE.isRemotePresent(player.connection.getConnection()); }
+        public boolean mayDig(ServerPlayer owner, net.minecraft.world.entity.TamableAnimal pet, net.minecraft.core.BlockPos pos, boolean commit) { return DogsForgeProtection.allowed(owner,pet,pos,commit); }
+        public String protectionStatus() { return DogsForgeProtection.status(); }
         public void sendToPlayer(ServerPlayer player, CustomPacketPayload packet) {
+            if(packet instanceof PetUpdate update&&!SeamlessDogs.mayReceive(player,update))return;
+            if(packet instanceof PetUpdate) { if(supportsV2(player)) UPDATE.send(packet,PacketDistributor.PLAYER.with(player)); return; }
+            if(supportsV2(player)) return;
             if (player.connection != null && STATE.isRemotePresent(player.connection.getConnection()))
                 STATE.send(packet, PacketDistributor.PLAYER.with(player));
         }

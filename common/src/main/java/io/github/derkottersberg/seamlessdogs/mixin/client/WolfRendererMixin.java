@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class WolfRendererMixin {
     @Inject(method = "extractRenderState(Lnet/minecraft/world/entity/animal/wolf/Wolf;Lnet/minecraft/client/renderer/entity/state/WolfRenderState;F)V", at = @At("TAIL"))
     private void seamlessdogs$extract(Wolf dog, WolfRenderState state, float partial, CallbackInfo ci) {
+        ((ActionRenderData)state).seamlessdogs$actionPose(ClientOptions.animation ? DogsClient.actionPose(dog.getUUID(),partial) : AnimationClips.Pose.NONE);
         var sample = ClientOptions.animation ? DogsClient.dogSample(dog.getUUID(), partial) : PetAnimation.sample(-1);
         ((DogRenderData) state).seamlessdogs$sample(sample);
         if (!ClientOptions.eyes || !dog.isTame() || dog.isAngry()) return;

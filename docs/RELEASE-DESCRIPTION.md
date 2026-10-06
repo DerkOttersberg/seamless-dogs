@@ -1,25 +1,35 @@
-# Seamless Dogs
+# Seamless Dogs 0.2.0
 
-Give your tamed wolf a little affection. Look at your own wolf within three
-blocks with an empty main hand and press **G**. The key can be rebound in Controls.
+Pet your own tamed dogs, cats and kittens with an empty main hand and **G**.
+The contextual prompt follows your key binding. Pets lean into the stroke,
+blink and react with their own spatial voice. First and third person, observers,
+left/right handedness and classic/slim player skins are supported.
 
-- A short petting animation in first and third person, including left handed play.
-- A happy head tilt, wagging tail, closed-eye smile and idle blinking.
-- Adult wolves and puppies, with a quiet pant coming from the dog.
-- Other players see the synchronized petting and reaction.
-- Client settings for the prompt, eyes and animation.
+Calm standing cats and kittens occasionally stretch, knead biscuits or groom
+by cleaning their chest. Their idle interval is **3–6 minutes**. Adult dogs
+attempt to dig every **10–20 minutes**, and dogs/puppies can briefly tilt their
+head and tuck one ear while their nearby owner looks at them.
 
-Petting does not heal, feed, tame or change sitting. The server checks ownership,
-reach, line of sight and activity. A three-second cooldown starts with each clip.
+Idle actions require a calm, stationary, grounded pet near its online owner.
+Combat, damage, sitting, sleeping, swimming, riding and following prevent them.
+Petting takes priority. A successful dig removes one safe exposed dirt/sand
+block with normal drops, block-specific sounds and an occasional bonus find.
+Digging honors mobGriefing, spawn protection and supported claim integrations.
 
-Available for Minecraft Java 1.20.1 (Fabric/Forge), and 1.21.1, 1.21.11, 26.1,
-26.1.2, 26.2 and 26.3 (Fabric/Forge/NeoForge). Install the exact matching Dogs and
-SeamlessLib jars on the server and participating clients. Fabric also requires
-Fabric API; Mod Menu is optional. Forge and NeoForge use their native Mods menu.
-NeoForge 26.1/26.3 currently use beta loader pins.
+Settings provide **Client visuals**, **My pets** and **World/server** pages.
+Owners can disable digging for their pets. The singleplayer host or server
+administrators with permission level 2 control the world rules. Fabric supports
+optional Mod Menu; Forge/NeoForge provide native Mods settings entries.
 
-Motion uses original animation on the vanilla rigs and has stylized hand contact.
-Eye expressions preserve active resource-pack colors; custom UV layouts may need
-expressions disabled in settings. No third-party animation library is required.
+**Standalone: SeamlessLib is not required or bundled.** Install the matching
+Dogs JAR on the server and participating clients. Fabric additionally requires
+Fabric API. Choose the exact Minecraft version and loader:
 
-All rights reserved for Seamless Dogs. SeamlessLib is an independent MIT dependency.
+- 1.20.1: Fabric and Forge; Java 17.
+- 1.21.1: Fabric, Forge and NeoForge; Java 21.
+- 26.2 and 26.3: Fabric, Forge and NeoForge; Java 25.
+
+All animations are original poses on vanilla rigs. Resource-pack textures and
+vanilla sound replacements remain active. Unsupported custom rigs/eye layouts
+can fall back; visual switches are available. See the release acceptance record
+for exact tested combinations and limitations. All Rights Reserved.

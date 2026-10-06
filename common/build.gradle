@@ -1,9 +1,6 @@
 plugins { id 'dev.architectury.loom-no-remap' }
 dependencies {
     minecraft libs.minecraft
-    def apiJar = files(new File(rootProject.seamlessApiDirectory, "common/build/libs/seamless-api-${libs.versions.seamless.api.get()}-common.jar"))
-    apiJar.builtBy gradle.includedBuild('seamless-api').task(':common:jar')
-    api apiJar
     compileOnly libs.fabric.loader
     compileOnly libs.mixin
     testImplementation platform(libs.junit.bom)
