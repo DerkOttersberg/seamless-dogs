@@ -10,6 +10,7 @@ public abstract class ActionPacketProbe {
     private static void qa$action(PetUpdate state,CallbackInfo ci) {
         qa.dogs.ClipContinuityProbe.receiveHead(state);
         qa.dogs.ObserverProbe.receive(state);
+        qa.dogs.SkinProbe.receive(state);
         if(state.action()==7)qa.dogs.PetFeatureProbe.expectedGrooms.put(state.pet(),state.flags());
         else if(state.action()!=5)qa.dogs.PetFeatureProbe.expectedGrooms.remove(state.pet());
         if(state.action()==2&&state.elapsed()>0)qa.dogs.PetFeatureProbe.lateCats++;

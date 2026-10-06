@@ -11,7 +11,8 @@
     "PromptProbe",
     "ClientServicesProbe",
     "CatRenderProbe",
-    "ActionPacketProbe"
+    "ActionPacketProbe",
+    "SkinProbeMixin"
   ],
   "injectors": {
     "defaultRequire": 1
