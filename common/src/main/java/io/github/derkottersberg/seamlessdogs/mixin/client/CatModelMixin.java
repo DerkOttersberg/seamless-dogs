@@ -11,7 +11,7 @@ public abstract class CatModelMixin {
     private void seamlessdogs$pose(FelineRenderState state,CallbackInfo ci) {
         if (!(state instanceof CatRenderState) || (((Object)this).getClass()!=AdultCatModel.class && ((Object)this).getClass()!=BabyCatModel.class)) return;
         var pose=((ActionRenderData)state).seamlessdogs$actionPose(); var parts=(FelineParts)this;
-        // Blend away ambient looking before a paw-to-face clip; restore vanilla naturally on recovery.
+        // Blend away ambient looking during the authored idle clip; restore vanilla naturally on recovery.
         var align=pose.parts().get("head_alignment");
         if(align!=null){float keep=1-Math.max(0,Math.min(1,align[0]));parts.seamlessdogs$head().xRot*=keep;parts.seamlessdogs$head().yRot*=keep;parts.seamlessdogs$head().zRot*=keep;}
         pose.apply("head",parts.seamlessdogs$head()); pose.apply("body",parts.seamlessdogs$body());
