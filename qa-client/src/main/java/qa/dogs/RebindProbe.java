@@ -51,7 +51,7 @@ public final class RebindProbe {
         }
         return false;
     }
-    private static void keyboard(KeyBindsScreen screen,int key){screen.keyPressed(key,0,0);}
+    private static void keyboard(KeyBindsScreen screen,int key){screen.keyPressed(key,0,0);screen.keyReleased(key,0,0);}
     private static void persisted(Minecraft c,String expected){
         check(DogsKeys.PET.saveString().equals(expected),"Native binding mismatch: "+DogsKeys.PET.saveString());
         c.options.save();DogsKeys.PET.setKey(DogsKeys.PET.getDefaultKey());KeyMapping.resetMapping();c.options.load();KeyMapping.resetMapping();
