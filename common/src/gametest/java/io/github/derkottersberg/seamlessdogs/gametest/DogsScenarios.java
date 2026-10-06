@@ -19,7 +19,7 @@ public final class DogsScenarios {
     private record Fixture(ServerPlayer owner, Wolf dog) { }
     private static Fixture fixture(GameTestHelper h) {
         // A reused native test world may retain rain; keep calm fixtures deterministic.
-        h.getLevel().setWeatherParameters(0,6000,false,false);
+        h.getLevel().getServer().getCommands().performPrefixedCommand(h.getLevel().getServer().createCommandSourceStack(),"weather clear 300");
         ServerPlayer owner = h.makeMockServerPlayerInLevel();
         for (int x = 0; x < 3; x++) for (int z = 0; z < 4; z++) {
             h.setBlock(new BlockPos(x, 0, z), Blocks.STONE.defaultBlockState());
