@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(Minecraft.class)
 public abstract class FrameCaptureProbe {
     @Inject(method="renderFrame",at=@At("TAIL"))
-    private void qa$completedFrame(CallbackInfo ci) { qa.dogs.HandReturnProbe.captureAfterFrame(Minecraft.getInstance()); qa.dogs.ObserverProbe.captureAfterFrame(Minecraft.getInstance()); }
+    private void qa$completedFrame(CallbackInfo ci) { qa.dogs.RebindProbe.renderedFrames++; qa.dogs.HandReturnProbe.captureAfterFrame(Minecraft.getInstance()); qa.dogs.ObserverProbe.captureAfterFrame(Minecraft.getInstance()); }
 }

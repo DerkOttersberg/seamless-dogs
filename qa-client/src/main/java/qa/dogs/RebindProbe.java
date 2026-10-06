@@ -10,7 +10,9 @@ import java.util.Arrays;
 
 /** Exercises native controls and options persistence in the packaged client. */
 public final class RebindProbe {
+    public static long renderedFrames;
     private int phase,ticks,prompts;
+    private long frameStart,deadline;
     private DogsSettingsScreen parent;
     public boolean tick(Minecraft c) {
         if(phase==3)return true;
@@ -29,11 +31,12 @@ public final class RebindProbe {
             screen.selectedKey=DogsKeys.PET;keyboard(screen,InputConstants.KEY_ESCAPE);
             persisted(c,"key.keyboard.unknown");check(DogsKeys.PET.isUnbound(),"Escape did not unbind");
             screen.onClose();check(c.gui.screen()==parent,"Controls lost settings parent");
-            checkButton(c);c.setScreenAndShow(null);prompts=ClientProbe.prompts;phase=1;ticks=0;
+            checkButton(c);c.setScreenAndShow(null);prompts=ClientProbe.prompts;phase=1;beginWait();
             KeyMapping.click(InputConstants.getKey("key.keyboard.h"));
             return false;
         }
         if(phase==1 && ++ticks>8) {
+            if(renderedFrames-frameStart<3){check(System.nanoTime()<deadline,"No completed frames while testing an unbound prompt");return false;}
             check(ClientProbe.prompts==prompts,"Unbound action still shows a pet prompt");
             check(DogsClient.playerSample(c.player.getId(),0).weight()==0,"Old binding activated an unbound action");
             c.setScreenAndShow(parent);openControls(c);var screen=(KeyBindsScreen)c.gui.screen();
@@ -41,16 +44,20 @@ public final class RebindProbe {
             if(Boolean.getBoolean("qa.petMouse")){screen.mouseClicked(new net.minecraft.client.input.MouseButtonEvent(0,0,new net.minecraft.client.input.MouseButtonInfo(4,0)),false);}else keyboard(screen,InputConstants.KEY_H);
             persisted(c,Boolean.getBoolean("qa.petMouse")?InputConstants.Type.MOUSE.getOrCreate(4).getName():"key.keyboard.h");
             screen.onClose();checkButton(c);c.setScreenAndShow(null);
-            KeyMapping.click(InputConstants.getKey("key.keyboard.g"));phase=2;ticks=0;return false;
+            KeyMapping.click(InputConstants.getKey("key.keyboard.g"));phase=2;beginWait();return false;
         }
         if(phase==2 && ++ticks>8) {
             check(DogsClient.playerSample(c.player.getId(),0).weight()==0,"Old default G still activated petting");
-            check(ClientProbe.prompts>prompts,"Rebound prompt did not recover");
+            if(renderedFrames-frameStart<3||ClientProbe.prompts<=prompts){
+                check(System.nanoTime()<deadline,"Rebound prompt did not recover: frames="+(renderedFrames-frameStart)+" prompts="+ClientProbe.prompts+" initial="+prompts+" key="+DogsKeys.PET.saveString()+" target="+DogsClient.target()+" enabled="+ClientOptions.prompt);
+                return false;
+            }
             try{Files.writeString(c.gameDirectory.toPath().resolve("dogs-rebind-passed.txt"),"PASS native keyboard/mouse/Escape, registration, options save/load, unbound prompt suppression, old default rejection; gameplay continues on "+DogsKeys.PET.saveString()+"\n");}catch(Exception e){throw new RuntimeException(e);}
             ClientProbe.log("DOGS_REBIND_PASS "+DogsKeys.PET.saveString());phase=3;return true;
         }
         return false;
     }
+    private void beginWait(){ticks=0;frameStart=renderedFrames;deadline=System.nanoTime()+20_000_000_000L;}
     private static void keyboard(KeyBindsScreen screen,int key){
         var event=new net.minecraft.client.input.KeyEvent(key,0,0);
         screen.keyPressed(event);screen.keyReleased(event);
