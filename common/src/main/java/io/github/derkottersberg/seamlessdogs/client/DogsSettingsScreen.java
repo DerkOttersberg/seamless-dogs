@@ -49,7 +49,7 @@ public final class DogsSettingsScreen extends Screen {
             available=available&&DogsClient.settings.admin();
             toggle(x,y,w,"Dogs can dig",worldDig,b->{worldDig=!worldDig;serverDirty=true;b.setMessage(label("Dogs can dig",worldDig));},available);
             toggle(x,y+spacing(),w,"Additional digging finds",finds,b->{finds=!finds;serverDirty=true;b.setMessage(label("Additional digging finds",finds));},available);
-            toggle(x,y+2*spacing(),w,"Cats can stretch",stretch,b->{stretch=!stretch;serverDirty=true;b.setMessage(label("Cats can stretch",stretch));},available);
+            toggle(x,y+2*spacing(),w,"Pet idle expressions",stretch,b->{stretch=!stretch;serverDirty=true;b.setMessage(label("Pet idle expressions",stretch));},available);
         }
         int bw=(w-12)/3;
         addRenderableWidget(Button.builder(Component.translatable("controls.reset"),b->{if(page==0)prompt=eyes=animation=true;else {if(page==1)ownDig=true;else worldDig=finds=stretch=true;serverDirty=true;}rebuildWidgets();}).bounds(x,height-28,bw,20).build()).active=page==0||available;

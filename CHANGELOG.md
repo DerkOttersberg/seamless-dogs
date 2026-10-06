@@ -35,3 +35,7 @@ now renders its contextual prompt correctly.
 Fabric-only MVP: G keybind and target prompt, server-authorized petting,
 first/third-person arm stroke, head tilt/tail wag, adult happy/blinking eyes,
 the wolf's own entity-bound pant, client settings, and isolated QA harness.
+
+The World/server switch is labelled Pet idle expressions on all four branches.
+It controls cat stretches, kneading and chest grooming plus dog gaze reactions;
+the existing saved-world flag and protocol bit are preserved.
