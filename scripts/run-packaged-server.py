@@ -91,7 +91,7 @@ def free_port() -> int:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--repo", type=Path, required=True)
-    parser.add_argument("--api", type=Path, required=True)
+    parser.add_argument("--combined-dir", type=Path, help="Matching sibling suite, including its library")
     parser.add_argument("--loader", choices=["fabric", "forge", "neoforge"], required=True)
     parser.add_argument("--stage", type=Path, required=True)
     parser.add_argument("--java", required=True)
@@ -99,7 +99,7 @@ def main() -> None:
     parser.add_argument("--gametest-jar", type=Path, help="Test-only native scenarios, never a release dependency")
     parser.add_argument("--installed-from", type=Path, help="Reuse immutable official libraries from an earlier owned profile")
     args = parser.parse_args()
-    repo, api, stage = args.repo.resolve(), args.api.resolve(), args.stage.resolve()
+    repo, stage = args.repo.resolve(), args.stage.resolve()
     allowed = [repo / ".qa", Path("/root/seamless-dogs-production-20261005")]
     if stage.exists() or not any(stage.is_relative_to(root.resolve()) for root in allowed):
         raise SystemExit("Need a fresh profile under the owned Dogs QA directory")
@@ -110,15 +110,22 @@ def main() -> None:
     version = properties["mod_version"]
     runtime = args.runtime_loader or catalog["fabric-loader" if loader == "fabric" else loader]
     dog_jar = repo / loader / "build/libs" / f"seamless-dogs-{version}-{loader}.jar"
-    api_jar = api / loader / "build/libs" / f"seamless-api-{catalog['seamless-api']}-{loader}.jar"
-    for jar in (dog_jar, api_jar):
+    for jar in (dog_jar,):
         if not jar.is_file():
             raise SystemExit(f"Missing packaged jar: {jar}")
     stage.mkdir(parents=True)
     mods = stage / "mods"
     mods.mkdir()
-    for jar in (dog_jar, api_jar):
+    for jar in (dog_jar,):
         shutil.copy2(jar, mods / jar.name)
+    if args.combined_dir:
+        source=args.combined_dir.resolve()
+        workspace=Path('/mnt/c/Users/derko/Desktop/minecraft')
+        if not source.is_relative_to(workspace/'release-candidates'): raise SystemExit('Combined inputs must be owned release candidates')
+        siblings=list(source.glob(f'*-{loader}.jar'))
+        if not siblings or any(f'+mc{minecraft}-' not in jar.name for jar in siblings): raise SystemExit('Combined input version mismatch')
+        for jar in siblings:
+            if not jar.name.startswith('seamless-dogs-'): shutil.copy2(jar,mods/jar.name)
     if args.gametest_jar:
         shutil.copy2(args.gametest_jar, mods / args.gametest_jar.name)
     base = (["nice", "-n", "10", "taskset", "-c", "0,1"] if os.name == "posix" else [])

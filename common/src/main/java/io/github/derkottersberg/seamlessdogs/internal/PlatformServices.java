@@ -8,4 +8,7 @@ import io.github.derkottersberg.seamlessdogs.internal.DogsPayload;
 public interface PlatformServices {
     void sendToPlayer(ServerPlayer player, DogsPayload payload);
     void sendToTrackingAndSelf(ServerPlayer player, Entity dog, DogsPayload payload);
+    default boolean supportsV2(ServerPlayer player) { return false; }
+    default boolean mayDig(ServerPlayer owner, net.minecraft.world.entity.TamableAnimal pet, net.minecraft.core.BlockPos pos, boolean commit) { return false; }
+    default String protectionStatus() { return "Digging protection is not available"; }
 }

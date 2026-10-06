@@ -18,11 +18,21 @@ public final class ClientProbe {
     private boolean finished;
     private Wolf dog;
     private ObserverProbe observer;
+    private PetFeatureProbe features;
+    private HandReturnScenario handReturn;
+    private boolean handReturnPassed;
     private boolean movedObserver;
     public void tick(Minecraft client) {
         if (System.getProperty("qa.role", "single").equals("observer")) {
             if (observer == null) observer = new ObserverProbe();
             observer.tick(client); return;
+        }
+        if(phase>=16 && !finished) {
+            if(!handReturnPassed){if(handReturn==null)handReturn=new HandReturnScenario();handReturnPassed=handReturn.tick(client);
+                if(handReturnPassed&&Boolean.getBoolean("qa.handOnly")){write(client,"PASS baseline and four packaged hand-return visual/matrix cases.\n");finished=true;log("DOGS_HAND_VISUAL_PASS");}return;}
+            if(features==null)features=new PetFeatureProbe();
+            if(features.tick(client)){write(client,"PASS dogs plus cats, stretch, digging, settings and cooldowns.\n");finished=true;log("DOGS_CLIENT_PASS");}
+            return;
         }
         boolean multiplayer = System.getProperty("qa.role", "single").equals("owner");
         if (finished) {
@@ -57,11 +67,13 @@ public final class ClientProbe {
         var pose = DogsClient.playerSample(client.player.getId(), 0);
         switch (phase) {
             case 0 -> {
+                if(ticks==1&&Boolean.getBoolean("qa.protection"))client.getConnection().sendCommand("dogsqa protection_contract");
                 if (ticks > 600) fail(client, "Initial prompt/blink missing: compatible="
                     + qa.dogs.mixin.ClientServicesProbe.qa$platform().serverSupportsPetting()
                     + " target=" + DogsClient.target() + " prompts=" + prompts + " blink=" + blinks);
                 if (ticks > 40 && DogsClient.target() == dog && prompts > 0 && blinks > 0) {
                     capture(client, "01-prompt.png"); click(); next();
+                    CatEyeProbe.verify(client);
                 }
             }
             case 1 -> {
@@ -81,7 +93,7 @@ public final class ClientProbe {
             case 4 -> {
                 if (total - petStart > 65) {
                     client.options.setCameraType(CameraType.FIRST_PERSON);
-                    client.options.mainHand().set(HumanoidArm.LEFT); hands = 0; click(); next();
+                    client.options.mainHand().set(HumanoidArm.LEFT); client.options.broadcastOptions(); hands = 0; click(); next();
                 }
             }
             case 5 -> {
@@ -140,7 +152,7 @@ public final class ClientProbe {
                     capture(client, "07-puppy.png");
                     log("PASS puppy model, eyelids, hand and entity voice");
                     write(client, "PASS: packaged " + System.getProperty("qa.loader", "fabric") + " " + System.getProperty("qa.minecraft", "26.3") + "; real keybind/server packets; first/third/left-hand render; adult and puppy rig/eyes/voice; idle blink; occupied hand; resource reload; settings.\n");
-                    finished = true; log("DOGS_CLIENT_PASS");
+                    next(); log("DOGS_BASELINE_PASS");
                 }
                 if (ticks > 150) fail(client, "Puppy feature missing rig=" + wolves + " eyes=" + expressiveEyes + " voice=" + sounds + " hands=" + hands);
             }

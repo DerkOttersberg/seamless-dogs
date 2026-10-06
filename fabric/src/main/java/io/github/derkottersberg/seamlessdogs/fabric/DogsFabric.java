@@ -16,6 +16,10 @@ public final class DogsFabric implements ModInitializer {
             var request=PetRequest.CODEC.decode(buffer);
             server.execute(() -> SeamlessDogs.request(player,request));
         });
+        ServerPlayNetworking.registerGlobalReceiver(PetControl.TYPE.id(),(server,player,handler,buffer,response)->{
+            if(buffer.readableBytes()!=10)return;
+            var request=PetControl.CODEC.decode(buffer);server.execute(()->SeamlessDogs.control(player,request));
+        });
         ServerTickEvents.END_SERVER_TICK.register(SeamlessDogs::tick);
         ServerPlayConnectionEvents.DISCONNECT.register((handler,server)->SeamlessDogs.disconnect(handler.player));
         ServerEntityEvents.ENTITY_UNLOAD.register((entity,level)-> { if(entity instanceof ServerPlayer player) SeamlessDogs.disconnect(player); });
@@ -23,9 +27,16 @@ public final class DogsFabric implements ModInitializer {
         ServerLifecycleEvents.SERVER_STOPPED.register(server->SeamlessDogs.clear());
     }
     private static final class Services implements PlatformServices {
+        public boolean supportsV2(ServerPlayer player){return ServerPlayNetworking.canSend(player,PetUpdate.TYPE.id());}
+        public boolean mayDig(ServerPlayer owner,net.minecraft.world.entity.TamableAnimal pet,net.minecraft.core.BlockPos pos,boolean commit){
+            return DogsFabricProtection.allowed(owner,pet,pos)&&(!commit||net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(pet.level(),owner,pos,pet.level().getBlockState(pos),null));
+        }
+        public String protectionStatus(){return DogsFabricProtection.status();}
         public void sendToPlayer(ServerPlayer player,DogsPayload payload) {
+            if(payload instanceof PetUpdate update&&!SeamlessDogs.mayReceive(player,update))return;
+            if(payload instanceof PetState&&supportsV2(player))return;
             if(player.connection==null || !ServerPlayNetworking.canSend(player,payload.type().id())) return;
-            var buffer=PacketByteBufs.create(); PetState.CODEC.encode(buffer,(PetState)payload);
+            var buffer=PacketByteBufs.create();if(payload instanceof PetUpdate update)PetUpdate.CODEC.encode(buffer,update);else PetState.CODEC.encode(buffer,(PetState)payload);
             ServerPlayNetworking.send(player,payload.type().id(),buffer);
         }
         public void sendToTrackingAndSelf(ServerPlayer player,Entity dog,DogsPayload payload) {

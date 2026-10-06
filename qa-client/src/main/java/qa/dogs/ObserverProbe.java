@@ -29,7 +29,9 @@ public final class ObserverProbe {
                     if (entity instanceof Wolf wolf && wolf.isOwnedBy(owner)) { dog = wolf; break; }
             }
             if (dog == null) return;
-            var direction = dog.getEyePosition().subtract(client.player.getEyePosition());
+            net.minecraft.world.entity.Entity look=dog;
+            for(var entity:client.level.entitiesForRendering())if(entity instanceof net.minecraft.world.entity.animal.Cat cat && !DogsClient.actionPose(cat.getUUID(),0).parts().isEmpty())look=cat;
+            var direction = look.getEyePosition().subtract(client.player.getEyePosition());
             client.player.setYRot((float)Math.toDegrees(Math.atan2(-direction.x, direction.z)));
             client.player.setXRot((float)-Math.toDegrees(Math.atan2(direction.y, Math.sqrt(direction.x*direction.x+direction.z*direction.z))));
             if (DogsClient.target() != null || ClientProbe.prompts != 0)
@@ -45,6 +47,7 @@ public final class ObserverProbe {
                     platform.sendToServer(new PetRequest(-1));
                     platform.sendToServer(new PetRequest(Integer.MAX_VALUE));
                     platform.sendToServer(new PetRequest(dog.getId()));
+                    platform.sendToServer(new io.github.derkottersberg.seamlessdogs.network.PetControl(2,0,DogsClient.settings.revision()));
                     ClientProbe.log("DOGS_OBSERVER_RENDER_AND_SOUND_PASS; sent real unauthorized/unknown/negative C2S requests");
                 }
                 if (lostTracking && !lateTracking) { lateTracking = true; ClientProbe.log("DOGS_OBSERVER_LATE_TRACKING_PASS"); }
@@ -55,12 +58,16 @@ public final class ObserverProbe {
                 lostTracking = true;
                 ClientProbe.wolves = ClientProbe.playerModels = ClientProbe.expressiveEyes = 0;
             }
-            if (++disconnected > 10 && lateTracking && dog != null && !dog.isRemoved()) {
+            if (++disconnected > 10 && PetFeatureProbe.catFrames>0 && PetFeatureProbe.catEyes>0 && PetFeatureProbe.catSounds>0
+                && PetFeatureProbe.lateCats>0 && PetFeatureProbe.rejectedSettings>0
+                && PetFeatureProbe.remoteDig>0 && PetFeatureProbe.remoteStretch>0 && lateTracking && dog != null && !dog.isRemoved()) {
+                if(PetFeatureProbe.remoteKnead==0||PetFeatureProbe.remoteGroom==0||PetFeatureProbe.remoteTilt==0||PetFeatureProbe.lateExpressions<3||PetFeatureProbe.groomVariants!=4||PetFeatureProbe.renderedGroomVariants!=4||(PetFeatureProbe.lateGroomVariants&4)!=4)throw new IllegalStateException("New expressive clips or late synchronization missing");
                 if (DogsClient.dogSample(dog.getUUID(), 0).weight() != 0)
                     throw new IllegalStateException("Disconnected owner's clip remained active");
+                if(PetFeatureProbe.digSounds.getOrDefault("block.grass.hit",0)!=11||PetFeatureProbe.digSounds.getOrDefault("block.sand.hit",0)!=11)throw new IllegalStateException("Observer missing block-specific dog digging sounds: "+PetFeatureProbe.digSounds);
                 try {
                     Files.writeString(client.gameDirectory.toPath().resolve("dogs-observer-passed.txt"),
-                        "PASS two real clients: ownership prompt hidden; remote arm/dog/eyes/entity sound; late tracking; active owner disconnect.\n");
+                        "PASS two real clients: ownership prompt hidden; unauthorized pet/settings requests rejected; remote arm/dog/cat/eyes/entity sound; late dog/cat tracking; dig/stretch and biscuits/groom/ear tilt synchronization; three late expressive clips; active owner disconnect.\n");
                 } catch (Exception e) { throw new RuntimeException(e); }
                 finished = true; ClientProbe.log("DOGS_OBSERVER_PASS");
             }

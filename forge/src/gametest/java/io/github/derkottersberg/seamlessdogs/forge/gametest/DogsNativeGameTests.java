@@ -24,7 +24,7 @@ public final class DogsNativeGameTests {
             player.connection = new net.minecraft.server.network.ServerGamePacketListenerImpl(level.getServer(), connection, player);
             var pos = helper.absolutePos(new net.minecraft.core.BlockPos(1, 1, 1));
             player.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
-            level.addNewPlayer(player);
+            level.getServer().getPlayerList().placeNewPlayer(connection,player);
             return player;
         });
     }
@@ -33,4 +33,8 @@ public final class DogsNativeGameTests {
     @GameTest(template="empty",timeoutTicks=80) public static void rejectInvalidRequests(GameTestHelper helper){DogsScenarios.rejectInvalidRequests(helper);}
     @GameTest(template="empty",timeoutTicks=80) public static void cooldownAndCancellation(GameTestHelper helper){DogsScenarios.cooldownAndCancellation(helper);}
     @GameTest(template="empty",timeoutTicks=80) public static void codecRoundTrip(GameTestHelper helper){DogsScenarios.codecRoundTrip(helper);}
+    @GameTest(template="empty",timeoutTicks=80) public static void catOwnership(GameTestHelper helper){DogsScenarios.catOwnership(helper);}
+    @GameTest(template="empty",timeoutTicks=80) public static void diggingTerrain(GameTestHelper helper){DogsScenarios.diggingTerrain(helper);}
+    @GameTest(template="empty",timeoutTicks=80) public static void v2CodecRoundTrip(GameTestHelper helper){DogsScenarios.v2CodecRoundTrip(helper);}
+    @GameTest(template="empty",timeoutTicks=270) public static void idleContracts(GameTestHelper helper){DogsScenarios.idleContracts(helper);}
 }

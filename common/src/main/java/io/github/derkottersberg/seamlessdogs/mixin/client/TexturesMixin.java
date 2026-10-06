@@ -7,5 +7,5 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(TextureManager.class)
 public abstract class TexturesMixin {
     @Inject(method = "reload", at = @At("HEAD"))
-    private void seamlessdogs$reload(CallbackInfoReturnable<?> ci) { EyeTextures.clear(); }
+    private void seamlessdogs$reload(CallbackInfoReturnable<?> ci) { EyeTextures.clear(); io.github.derkottersberg.seamlessdogs.client.AnimationClips.clear(); }
 }

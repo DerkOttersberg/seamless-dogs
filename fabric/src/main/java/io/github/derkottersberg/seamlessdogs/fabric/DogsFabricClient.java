@@ -13,17 +13,22 @@ import net.minecraft.client.KeyMapping;
 public final class DogsFabricClient implements ClientModInitializer {
     public static final KeyMapping PET=DogsKeys.PET;
     public void onInitializeClient() {
-        KeyBindingHelper.registerKeyBinding(PET); DogsClient.initialize(new Services());
+        KeyBindingHelper.registerKeyBinding(PET);KeyBindingHelper.registerKeyBinding(DogsKeys.SETTINGS); DogsClient.initialize(new Services());
         ClientPlayNetworking.registerGlobalReceiver(PetState.TYPE.id(),(client,handler,buffer,response)-> {
             if(buffer.readableBytes()!=33) return;
             var state=PetState.CODEC.decode(buffer); client.execute(()->DogsClient.receive(state));
+        });
+        ClientPlayNetworking.registerGlobalReceiver(PetUpdate.TYPE.id(),(client,handler,buffer,response)->{
+            if(buffer.readableBytes()<52||buffer.readableBytes()>630)return;
+            var state=PetUpdate.CODEC.decode(buffer);client.execute(()->DogsClient.receive(state));
         });
         ClientTickEvents.END_CLIENT_TICK.register(DogsClient::tick);
     }
     private static final class Services implements ClientPlatformServices {
         public Path configDirectory(){return FabricLoader.getInstance().getConfigDir();}
         public KeyMapping petKey(){return PET;}
+        public boolean serverSupportsV2(){return ClientPlayNetworking.canSend(PetControl.TYPE.id());}
         public boolean serverSupportsPetting(){return ClientPlayNetworking.canSend(PetRequest.TYPE.id());}
-        public void sendToServer(DogsPayload packet){var buffer=PacketByteBufs.create(); PetRequest.CODEC.encode(buffer,(PetRequest)packet); ClientPlayNetworking.send(packet.type().id(),buffer);}
+        public void sendToServer(DogsPayload packet){var buffer=PacketByteBufs.create(); if(packet instanceof PetControl control)PetControl.CODEC.encode(buffer,control);else PetRequest.CODEC.encode(buffer,(PetRequest)packet); ClientPlayNetworking.send(packet.type().id(),buffer);}
     }
 }
