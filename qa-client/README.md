@@ -17,3 +17,7 @@ created its pipeline and did not report compilation/fallback failure.
 `ClipContinuityProbe` replays delayed same-sequence dog, cat and chest-cleaning
 packets through the production handler. It also checks the pose at an actual
 G-key idle-to-pet transition and requires the outgoing pose to be preserved.
+
+Observer captures now cover each action in the native second-client viewpoint.
+These capture assertions compile across all eleven cells and await fresh runtime
+execution; earlier packet/render passes do not establish screenshot acceptance.

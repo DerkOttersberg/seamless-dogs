@@ -19,7 +19,7 @@ def main():
     prepared=[]
     for row in rows:
         v,l=row['minecraft'],row['loader'];repo=w/'seamless-dogs' if v=='26.3' else w/f'.ports/dogs-multiversion/mc{v}/seamless-dogs'
-        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','multiplayerPassed','lifecyclePassed','combinedPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
+        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','multiplayerPassed','lifecyclePassed','combinedPassed','combinedServerPassed','visualReviewPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
         jars=list((repo/l/'build/libs').glob(f'*-{l}.jar'))
         if len(jars)!=1 or row['jars'].get(jars[0].name)!=sha(jars[0]):raise SystemExit(f'Runtime bytes changed after acceptance: {v}/{l}')
         with zipfile.ZipFile(jars[0]) as z:

@@ -69,6 +69,10 @@ def isolated(stage):
         for marker in ('DOGS_OBSERVER_RENDER_AND_SOUND_PASS', 'DOGS_OBSERVER_LATE_TRACKING_PASS', 'DOGS_OBSERVER_PASS'):
             if marker not in text:
                 raise RuntimeError(f'Observer omitted {marker}')
+        captures={path.name:HELPER['digest'](path)for path in (stage/'observer/client/screenshots').glob('observer-action-*.png')}
+        for action in (1,2,3,4,6,7,8):
+            if not any(name.startswith(f'observer-action-{action}-')for name in captures):
+                raise RuntimeError(f'Missing observer viewpoint capture for action {action}')
         HELPER['rcon'](metadata['rconPort'], metadata['password'], 'save-all flush')
         HELPER['rcon'](metadata['rconPort'], metadata['password'], 'stop')
         processes[0].wait(timeout=60)
@@ -85,7 +89,7 @@ def isolated(stage):
         (stage / 'pair-passed.json').write_text(json.dumps({
             'minecraft': metadata['minecraft'], 'loader': metadata['loader'], 'jars': actual,
             'gate': 'two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect',
-            'display': os.environ['DISPLAY']}, indent=2))
+            'display': os.environ['DISPLAY'],'observerCaptures':captures}, indent=2))
         print(f"PASS paired real clients {metadata['minecraft']}/{metadata['loader']}", flush=True)
     finally:
         for process in reversed(processes):
