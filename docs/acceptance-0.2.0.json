@@ -1,0 +1,531 @@
+{
+  "product": "Seamless Dogs",
+  "version": "0.2.0",
+  "standalone": true,
+  "pawGroomingRemoved": true,
+  "chestGroomingRetained": true,
+  "complete": false,
+  "releaseReady": false,
+  "checkedAtUtc": "2026-10-06T14:53:19.407393+00:00",
+  "cells": [
+    {
+      "minecraft": "1.20.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "3b12c933dedbc492f18fb7e27d493350c606bff24dd564e48d973d043f3999c3"
+      },
+      "sourceCommit": "cb16d198cbd9c225f9fa1de2a51df294e529a138",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.20.1-playback1.log",
+      "nativeLog": "build-1.20.1-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 17,
+      "loaderVersion": "0.19.5",
+      "fabricApi": "0.92.12+1.20.1",
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "790a0065a51b174383fc4b52e99f7272913ee5f587197cb8198ada0a56d4a441"
+      },
+      "sourceCommit": "cb16d198cbd9c225f9fa1de2a51df294e529a138",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.20.1-playback1.log",
+      "nativeLog": "build-1.20.1-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 17,
+      "loaderVersion": "1.20.1-47.4.26",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1b63d2e2eade980d6a87beedea0cd7dfc9b45f3ad5417bf01c943ff8dbfc568d"
+      },
+      "sourceCommit": "5ba06393662841677de3a4743fa208dd3a1afe70",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.21.1-playback1.log",
+      "nativeLog": "build-1.21.1-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 21,
+      "loaderVersion": "0.19.5",
+      "fabricApi": "0.116.17+1.21.1",
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "177d94a00ce2bf47fefed8d0b89ff6b3ccab8f14288cb7f932f6b59cd8fe150b"
+      },
+      "sourceCommit": "5ba06393662841677de3a4743fa208dd3a1afe70",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.21.1-playback1.log",
+      "nativeLog": "build-1.21.1-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 21,
+      "loaderVersion": "1.21.1-52.1.16",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "ba95e4cb5caebc497838e63166fc005115f8bf72267b4bd11abebed44094b141"
+      },
+      "sourceCommit": "5ba06393662841677de3a4743fa208dd3a1afe70",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.21.1-playback1.log",
+      "nativeLog": "build-1.21.1-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 21,
+      "loaderVersion": "21.1.255",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": false
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.2-fabric.jar": "746359ea13b4ef04aa8cfb2e4a52b745a06c63042ec98168cdaece7fe9ff5a19"
+      },
+      "sourceCommit": "712a69888a43a65d10e649bc4c2e8fe19dedbb14",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.2-playback1.log",
+      "nativeLog": "build-26.2-playback1.log",
+      "evidence": {
+        "server": {
+          "profile": "fabric-26.2-standalone02-server-4",
+          "marker": "server-passed.json",
+          "markerSha256": "c32d55a96de540458638ccb44d439be1ed4d80e4142223ea99c88728d489b073",
+          "testedJars": {
+            "fabric-api-0.159.0+26.2.jar": "3f3a5d96e6a8f554a72e71fb507d6a979ca16d9190c305ceb1300f1d01e733ee",
+            "seamless-dogs-0.2.0+mc26.2-fabric.jar": "746359ea13b4ef04aa8cfb2e4a52b745a06c63042ec98168cdaece7fe9ff5a19"
+          }
+        },
+        "pair": {
+          "profile": "fabric-26.2-standalone02-pair-4",
+          "marker": "pair-passed.json",
+          "markerSha256": "cacec4dde173f3599537aedc859edfcc1ef41dd4e1e7597a14cfeec2f697f491",
+          "testedJars": {
+            "fabric-api-0.159.0+26.2.jar": "3f3a5d96e6a8f554a72e71fb507d6a979ca16d9190c305ceb1300f1d01e733ee",
+            "seamless-dogs-0.2.0+mc26.2-fabric.jar": "746359ea13b4ef04aa8cfb2e4a52b745a06c63042ec98168cdaece7fe9ff5a19",
+            "seamless-dogs-qa-fabric.jar": "6223859c8d96b26a1d6fccdc1120da4d5bfee41762339e26d95d4fc6f163f3eb"
+          },
+          "observerCaptures": {}
+        }
+      },
+      "serverPassed": true,
+      "multiplayerPassed": true,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 25,
+      "loaderVersion": "0.19.5",
+      "fabricApi": "0.159.0+26.2",
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.2-forge.jar": "e329ce04e6066536de5f681ee33e2edf1d22e66c7c4bf39c2a9dd569d281b635"
+      },
+      "sourceCommit": "712a69888a43a65d10e649bc4c2e8fe19dedbb14",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.2-playback1.log",
+      "nativeLog": "build-26.2-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 25,
+      "loaderVersion": "26.2-65.1.3",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.2-neoforge.jar": "6d74de4b08f4542676d39d639567cd9e0b9a7dcb78c23350f999bfa612976920"
+      },
+      "sourceCommit": "712a69888a43a65d10e649bc4c2e8fe19dedbb14",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.2-playback1.log",
+      "nativeLog": "build-26.2-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 25,
+      "loaderVersion": "26.2.0.75",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.3-fabric.jar": "70ffe49feb7c21fac8f2e2e67373328510b96453ee145795b2ef1486d9ab8306"
+      },
+      "sourceCommit": "1db4818450c176344003a507218a9a3dbd0ec9a7",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.3-playback1.log",
+      "nativeLog": "build-26.3-playback1.log",
+      "evidence": {
+        "server": {
+          "profile": "fabric-26.3-standalone02-server-4",
+          "marker": "server-passed.json",
+          "markerSha256": "b2343547ce27d803ced94dba30766b9128e248a6dd83651ccf614f26fa2c7992",
+          "testedJars": {
+            "fabric-api-0.161.0+26.3.jar": "86f16178a3cecc887a85a4cfe9a79d92fa7341d8f39b5951a4d6ad800ab657a6",
+            "seamless-dogs-0.2.0+mc26.3-fabric.jar": "70ffe49feb7c21fac8f2e2e67373328510b96453ee145795b2ef1486d9ab8306"
+          }
+        },
+        "pair": {
+          "profile": "fabric-26.3-standalone02-pair-4",
+          "marker": "pair-passed.json",
+          "markerSha256": "8bb786cc6f21628060dbc97d85e55737adad03695e55dddd06c3e5f3edaf3621",
+          "testedJars": {
+            "fabric-api-0.161.0+26.3.jar": "86f16178a3cecc887a85a4cfe9a79d92fa7341d8f39b5951a4d6ad800ab657a6",
+            "seamless-dogs-0.2.0+mc26.3-fabric.jar": "70ffe49feb7c21fac8f2e2e67373328510b96453ee145795b2ef1486d9ab8306",
+            "seamless-dogs-qa-fabric.jar": "ecde3cde24630a0f3cc4769a46b7759e921172e907f715b18a61e68fc70a6c3c"
+          },
+          "observerCaptures": {}
+        },
+        "single": {
+          "profile": "fabric-26.3-standalone02-single-4",
+          "marker": "client-passed.json",
+          "markerSha256": "5b86de34091705c06297ef0b251443b516c74a66fff6130171b17a6d650b9fd7",
+          "testedJars": {
+            "fabric-api-0.161.0+26.3.jar": "86f16178a3cecc887a85a4cfe9a79d92fa7341d8f39b5951a4d6ad800ab657a6",
+            "seamless-dogs-0.2.0+mc26.3-fabric.jar": "70ffe49feb7c21fac8f2e2e67373328510b96453ee145795b2ef1486d9ab8306",
+            "seamless-dogs-qa-fabric.jar": "ecde3cde24630a0f3cc4769a46b7759e921172e907f715b18a61e68fc70a6c3c"
+          }
+        },
+        "suite-server": {
+          "profile": "fabric-26.3-standalone02-suite-server-3",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "4e03dd31f17fd608cf678f2d16fe4c6620d4836113576df100afc3460f732dd4",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc26.3-fabric.jar": "22a88164adf24dee5689437fcee04aaedfb7573ba2be61e9eee11f7461b0f636",
+            "seamless-api-2.0.2+mc26.3-fabric.jar": "f9b98bd2551c9724ea3f3248a0216a75d12ff3ab6da3e38cc6c1864a1bbc3076",
+            "seamless-crafting-2.1.1+mc26.3-fabric.jar": "f17abddba53b09adf05af745da11c8be3e5102f0f73e105e689a73e813078b50",
+            "seamless-deconstructing-workbench-2.1.1+mc26.3-fabric.jar": "8a23053581bf7fc5244d95b80ca46555e154ce9c6d1282e2a55990f3d5c5b92c",
+            "seamless-dogs-0.2.0+mc26.3-fabric.jar": "70ffe49feb7c21fac8f2e2e67373328510b96453ee145795b2ef1486d9ab8306",
+            "sword-throw-2.1.1+mc26.3-fabric.jar": "0a9d5416b7505943828f251605884f9f2bd0ae38c853df052e69fd498512cdc0"
+          }
+        },
+        "visual": {
+          "manifest": "visual-review/final-26.3-fabric/capture-manifest.json",
+          "sha256": "1c1fb3c4c50ac802b6977a9a0e3caffad10867de59173bf948b9795faf30a53f",
+          "reviewed": false
+        }
+      },
+      "serverPassed": true,
+      "multiplayerPassed": true,
+      "clientPassed": true,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": true,
+      "java": 25,
+      "loaderVersion": "0.19.5",
+      "fabricApi": "0.161.0+26.3",
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.3-forge.jar": "de4960bf6bedb515e6300a30725a78ac3d3e3d26dc448cb1ece567dd6878ee69"
+      },
+      "sourceCommit": "1db4818450c176344003a507218a9a3dbd0ec9a7",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.3-playback1.log",
+      "nativeLog": "build-26.3-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 25,
+      "loaderVersion": "26.3-66.0.9",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "neoforge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc26.3-neoforge.jar": "d925da892c41d788b8a8a968282ac5d80455fc6980a05b3a2e2bd6ede16cb3dc"
+      },
+      "sourceCommit": "1db4818450c176344003a507218a9a3dbd0ec9a7",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 21,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-26.3-playback1.log",
+      "nativeLog": "build-26.3-playback1.log",
+      "evidence": {},
+      "serverPassed": false,
+      "multiplayerPassed": false,
+      "clientPassed": false,
+      "lifecyclePassed": false,
+      "combinedPassed": false,
+      "combinedServerPassed": false,
+      "java": 25,
+      "loaderVersion": "26.3.0.48-beta",
+      "fabricApi": null,
+      "visualReviewPassed": false,
+      "extraRendererPassed": true
+    }
+  ],
+  "hostedCi": {
+    "status": "blocked",
+    "reason": "GitHub account billing lock: jobs do not start.",
+    "exampleRun": "https://github.com/DerkOttersberg/seamless-dogs/actions/runs/37480904230",
+    "checkRun": 112328444209,
+    "annotation": "The job was not started because your account is locked due to a billing issue."
+  },
+  "runtimeStop": {
+    "reason": "C drive fell below 2 GB free; owned runtime dispatchers and descendants stopped before further acceptance launches.",
+    "observedFreeBytes": 1795125248,
+    "userGamesUntouched": true,
+    "remainingGates": "Pending entries require fresh packaged tests on the recorded gameplay bytes; observer capture helpers compiled but not yet exercised."
+  },
+  "limitations": [
+    "Private Xvfb and software rendering do not validate every hardware driver.",
+    "Entity-bound sound events verified with silent audio; audible quality needs interactive testing.",
+    "Only the recorded protection integrations and renderer builds are claimed; other claims/custom rigs need separate verification.",
+    "Modern beta loaders/renderers retain upstream beta status.",
+    "No CurseForge publication performed."
+  ]
+}
