@@ -19,6 +19,8 @@ alternating contacts. Cat idle actions share a 3–6 minute interval.
 On 6 October 2026, both paw-to-face washing clips were removed from the
 server choices, runtime assets and authoring exporter on every active branch.
 Chest cleaning remains. Existing action IDs and world cooldowns are preserved.
+Delayed tracking resends keep the current animation clock, and starting petting
+blends out an interrupted idle pose over six ticks.
 Acceptance is recorded separately for the final standalone JAR hashes.
 
 ## 0.1.0+mc1.21.1

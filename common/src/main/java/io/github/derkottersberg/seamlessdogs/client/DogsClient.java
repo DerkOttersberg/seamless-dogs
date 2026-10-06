@@ -16,6 +16,7 @@ import net.minecraft.world.phys.EntityHitResult;
 public final class DogsClient {
     private static ClientPlatformServices platform;
     private static final Map<UUID,Clip> clips=new HashMap<>();
+    private static final Map<UUID,Clip> outgoing=new HashMap<>();
     private static final Map<UUID,Float> petHeights=new HashMap<>();
     private static final Map<UUID,Long> lastSequence=new HashMap<>();
     private static final Map<UUID,Long> stoppedSequence=new HashMap<>();
@@ -32,7 +33,7 @@ public final class DogsClient {
     private static void level() {
         var c=Minecraft.getInstance();
         if(previousLevel!=c.level || previousPlayer!=c.player) {
-            clips.clear();petHeights.clear();lastSequence.clear();stoppedSequence.clear();nextRequest=nextHello=0;previousLevel=c.level;previousPlayer=c.player;
+            clips.clear();outgoing.clear();petHeights.clear();lastSequence.clear();stoppedSequence.clear();nextRequest=nextHello=0;previousLevel=c.level;previousPlayer=c.player;
             settings=new Settings(0,-1,"Waiting for server settings.");
         }
     }
@@ -60,7 +61,15 @@ public final class DogsClient {
         if(state.action()==0) {stoppedSequence.put(state.pet(),state.sequence());release(state.pet());}
         else {
             var action=PetAction.fromWire(state.action());
-            if(action!=null&&state.elapsed()<action.duration) clips.put(state.pet(),new Clip(state.owner(),action,new AnimationTimeline.Playback(animationTick()-state.elapsed()),state.sequence(),action==PetAction.GROOM&&state.flags()>=0&&state.flags()<=2?state.flags():0));
+            if(action!=null&&state.elapsed()<action.duration) {
+                var current=clips.get(state.pet());
+                // Tracking resends describe the same action; keep its monotonic render clock.
+                if(current!=null && current.sequence==state.sequence())return;
+                if(current!=null && !current.action.petting() && !current.timing.expired(animationTick(),current.action.duration)) {
+                    current.timing.stop(animationTick());outgoing.put(state.pet(),current);
+                }
+                clips.put(state.pet(),new Clip(state.owner(),action,new AnimationTimeline.Playback(animationTick()-state.elapsed()),state.sequence(),action==PetAction.GROOM&&state.flags()>=0&&state.flags()<=2?state.flags():0));
+            }
         }
     }
     public static void tick(Minecraft c) {
@@ -71,6 +80,7 @@ public final class DogsClient {
         if(!settings.ready() && platform.serverSupportsV2() && now>=nextHello) { refreshSettings();nextHello=now+100; }
         long visualNow=animationTick();
         clips.values().removeIf(clip->clip.timing.expired(visualNow,clip.action.duration));
+        outgoing.values().removeIf(clip->clip.timing.expired(visualNow,clip.action.duration));
         petHeights.keySet().retainAll(clips.keySet());
         while(platform.petKey().consumeClick()) {
             TamableAnimal pet=target();
@@ -105,15 +115,22 @@ public final class DogsClient {
     }
     public static AnimationClips.Pose actionPose(UUID pet,float partial) {
         var c=Minecraft.getInstance();Clip clip=clips.get(pet);
-        if(c.level==null || clip==null)return AnimationClips.Pose.NONE;
+        if(c.level==null)return AnimationClips.Pose.NONE;
         boolean kitten=false;
         for(var entity:c.level.entitiesForRendering())if(entity.getUUID().equals(pet)){kitten=false;break;}
+        return pose(clip,partial,kitten).combined(pose(outgoing.get(pet),partial,kitten));
+    }
+    private static AnimationClips.Pose pose(Clip clip,float partial,boolean kitten) {
+        if(clip==null)return AnimationClips.Pose.NONE;
         return AnimationClips.sample(clip.action,clip.timing.elapsed(animationTick(),partial),kitten,clip.variant)
             .scaled(fade(clip,partial),kitten&&clip.action==PetAction.CAT_PET?.5F:1);
     }
     public static boolean stretchingEyes(UUID pet,float partial) {
-        var c=Minecraft.getInstance();Clip clip=clips.get(pet);
-        if(c.level==null||clip==null||!(clip.action==PetAction.STRETCH||clip.action==PetAction.KNEAD||clip.action==PetAction.GROOM))return false;
+        if(Minecraft.getInstance().level==null)return false;
+        return closedEyes(clips.get(pet),partial)||closedEyes(outgoing.get(pet),partial);
+    }
+    private static boolean closedEyes(Clip clip,float partial) {
+        if(clip==null||!(clip.action==PetAction.STRETCH||clip.action==PetAction.KNEAD||clip.action==PetAction.GROOM))return false;
         float elapsed=clip.timing.elapsed(animationTick(),partial);
         return elapsed>=12&&elapsed<clip.action.duration-12&&fade(clip,partial)>.25F;
     }
@@ -148,7 +165,7 @@ public final class DogsClient {
         graphics.drawCenteredString(c.font,text,x,y,active?0xFFB7E8BD:0xFFF4EEE4);
     }
     private static void release(UUID pet) {
-        var c=Minecraft.getInstance();if(c.level==null){clips.remove(pet);return;}
+        var c=Minecraft.getInstance();if(c.level==null){clips.remove(pet);outgoing.remove(pet);return;}
         var clip=clips.get(pet);if(clip!=null)clip.timing.stop(animationTick());
     }
     private static float fade(Clip clip,float partial) {
