@@ -61,6 +61,7 @@ def main() -> None:
     parser.add_argument('--java', required=True)
     parser.add_argument('--fixture', type=Path)
     parser.add_argument('--prepare-only', action='store_true')
+    parser.add_argument('--pet-mouse', action='store_true', help='Run petting gameplay using the native mouse binding')
     parser.add_argument('--hand-only', action='store_true', help='Capture baseline and hand-return cases without the longer pet feature sequence')
     parser.add_argument('--installed-from', type=Path, help='Reuse an owned official client installation')
     parser.add_argument('--address', help='Loopback dedicated-server address for paired clients')
@@ -78,8 +79,7 @@ def main() -> None:
     if os.name != 'posix' or not Path('/proc').exists():
         raise SystemExit('Client QA requires the isolated Linux display workflow')
     repo, stage = args.repo.resolve(), args.stage.resolve()
-    root = Path('/root/seamless-dogs-production-20261005')
-    if stage.exists() or not stage.is_relative_to(root):
+    if stage.exists() or not helper['owned_profile'](stage):
         raise SystemExit('Need a fresh owned client profile')
     if args.address and not re.fullmatch(r'127\.0\.0\.1:\d+', args.address):
         raise SystemExit('Paired clients connect only to the owned loopback server')
@@ -150,7 +150,7 @@ def main() -> None:
     installation = stage / 'installation'
     if args.installed_from:
         source = args.installed_from.resolve()
-        if not source.is_relative_to(root) or not (source / 'installation/versions' / minecraft).is_dir():
+        if not helper['owned_profile'](source) or not (source / 'installation/versions' / minecraft).is_dir():
             raise SystemExit('Cached client must be an owned matching-version profile')
         source_command = json.loads((source / 'launch-command.json').read_text())
         if f'-Dqa.loader={loader}' not in source_command:
@@ -278,6 +278,8 @@ def main() -> None:
         jvm += ['-cp', ':'.join(classpath)]
     command = [args.java, '-Xms256M', '-Xmx1G', '-XX:ActiveProcessorCount=2',
                f'-Dqa.minecraft={minecraft}', f'-Dqa.loader={loader}', f'-Dqa.role={args.role}', f'-Dqa.guiScale={args.gui_scale}']
+    if args.pet_mouse:
+        command.insert(1, '-Dqa.petMouse=true')
     if args.hand_only:
         command.append('-Dqa.handOnly=true')
     if args.extra_mod_dir:
@@ -316,7 +318,7 @@ def main() -> None:
     if before != after:
         raise RuntimeError('Gameplay/test jars changed during client QA')
     log_text = (stage / 'client-console.log').read_text(errors='replace')
-    required = ['DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
+    required = ['DOGS_REBIND_PASS', 'DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
     if args.modmenu:
         required.append('DOGS_MODMENU_CONFIG_PASS')
     if args.extra_mod_dir and inputs.get('protection'):

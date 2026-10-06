@@ -23,6 +23,13 @@ Delayed tracking resends keep the current animation clock, and starting petting
 blends out an interrupted idle pose over six ticks.
 Acceptance is recorded separately for the final standalone JAR hashes.
 
+Petting uses Minecraft's rebindable controls on every loader. Client visuals
+now offers a Petting key button showing the current keyboard/mouse binding and
+opening Key Binds. Escape unbinds the action and hides its prompt. The settings
+key is also registered on 26.2/26.3 NeoForge. The 1.20.1 Forge HUD entrypoint
+now renders its contextual prompt correctly.
+
+
 ## 0.1.0+mc26.3
 
 Fabric-only MVP: G keybind and target prompt, server-authorized petting,

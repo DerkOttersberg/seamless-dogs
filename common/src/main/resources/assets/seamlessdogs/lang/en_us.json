@@ -9,9 +9,10 @@
   "seamlessdogs.setting.prompt": "Petting prompt",
   "seamlessdogs.setting.eyes": "Eye expressions",
   "seamlessdogs.setting.animation": "Petting animations",
-  "seamlessdogs.keyhelp": "Change G in Options > Controls > Key Binds.",
+  "seamlessdogs.keyhelp": "Open Key Binds to choose a key or mouse button. Escape unbinds it. Minecraft saves bindings immediately.",
   "seamlessdogs.save": "Save",
   "key.seamlessdogs.settings": "Pet settings",
   "seamlessdogs.prompt_cat": "[%s] Pet your cat",
-  "seamlessdogs.petting_cat": "Good kitty!"
+  "seamlessdogs.petting_cat": "Good kitty!",
+  "seamlessdogs.setting.pet_key": "Petting key: %s"
 }

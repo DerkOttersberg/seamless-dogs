@@ -2,6 +2,7 @@ package io.github.derkottersberg.seamlessdogs.client;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.screens.options.controls.KeyBindsScreen;
 import net.minecraft.network.chat.Component;
 
 /** Drafts survive page changes/resizing. Server changes are applied only after acknowledgement. */
@@ -38,6 +39,11 @@ public final class DogsSettingsScreen extends Screen {
             toggle(x,y,w,"Petting prompt",prompt,b->{prompt=!prompt;b.setMessage(label("Petting prompt",prompt));},true);
             toggle(x,y+spacing(),w,"Eye expressions",eyes,b->{eyes=!eyes;b.setMessage(label("Eye expressions",eyes));},true);
             toggle(x,y+2*spacing(),w,"Pet animations",animation,b->{animation=!animation;b.setMessage(label("Pet animations",animation));},true);
+            var keyButton=addRenderableWidget(Button.builder(
+                Component.translatable("seamlessdogs.setting.pet_key",DogsKeys.PET.getTranslatedKeyMessage()),
+                b->minecraft.setScreenAndShow(new KeyBindsScreen(this,minecraft.options)))
+                .bounds(x,y+3*spacing(),w,height<230?18:20).build());
+            keyButton.setTooltip(net.minecraft.client.gui.components.Tooltip.create(Component.translatable("seamlessdogs.keyhelp")));
         } else if(page==1) toggle(x,y,w,"My dogs can dig",ownDig,b->{ownDig=!ownDig;serverDirty=true;b.setMessage(label("My dogs can dig",ownDig));},available);
         else {
             available=available&&DogsClient.settings.admin();
@@ -68,8 +74,7 @@ public final class DogsSettingsScreen extends Screen {
         graphics.centeredText(font,title,width/2,height<230?8:14,0xFFFFFFFF);
         String scope=page==0?"This client's visuals":page==1?"Your pets in this world":"Server rules · host or permission level 2";
         graphics.centeredText(font,Component.literal(scope),width/2,height<230?22:32,0xFFB7E8BD);
-        if(page==0)graphics.centeredText(font,Component.translatable("seamlessdogs.keyhelp"),width/2,contentY()+2*spacing()+24,0xFFCCCCCC);
-        else {
+        if(page!=0) {
             String status=page==1 && !worldDig?"Server digging is disabled.":DogsClient.settings.status();
             int y=contentY()+(page==1?28:2*spacing()+28);
             for(var line:font.split(Component.literal(status),Math.min(340,width-24))) {if(y>height-(!error.isEmpty()?54:38))break;graphics.text(font,line,(width-font.width(line))/2,y,0xFFCCCCCC,false);y+=10;}

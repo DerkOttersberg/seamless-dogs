@@ -19,7 +19,7 @@ import net.neoforged.neoforge.network.registration.NetworkRegistry;
 
 final class DogsNeoForgeClient {
     static void initialize(IEventBus bus, ModContainer container) {
-        bus.addListener((RegisterKeyMappingsEvent event) -> event.register(DogsKeys.PET));
+        bus.addListener((RegisterKeyMappingsEvent event) -> {event.register(DogsKeys.PET);event.register(DogsKeys.SETTINGS);});
         DogsClient.initialize(new Services());
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> DogsClient.tick(Minecraft.getInstance()));
         container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new DogsSettingsScreen(parent));
