@@ -17,6 +17,7 @@ public abstract class RenderProbe {
     @Inject(method="submit(Lnet/minecraft/client/renderer/entity/state/LivingEntityRenderState;Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/SubmitNodeCollector;Lnet/minecraft/client/renderer/state/level/CameraRenderState;)V",
         at=@At(value="INVOKE",target="Lnet/minecraft/client/model/EntityModel;setupAnim(Ljava/lang/Object;)V",shift=At.Shift.AFTER))
     private void qa$completedPose(LivingEntityRenderState state, PoseStack pose, SubmitNodeCollector collector, CameraRenderState camera, CallbackInfo ci) {
+        if(state instanceof CatRenderState || state instanceof WolfRenderState)qa.dogs.ObserverProbe.renderedAt(state.x,state.y,state.z);
         if(state instanceof CatRenderState && !((ActionRenderData)state).seamlessdogs$actionPose().parts().isEmpty()) {
             var rig=(io.github.derkottersberg.seamlessdogs.mixin.client.FelineParts)model;
             if(!Float.isFinite(rig.seamlessdogs$head().xRot)||!Float.isFinite(rig.seamlessdogs$body().y))throw new IllegalStateException("Nonfinite cat pose");
@@ -57,6 +58,7 @@ public abstract class RenderProbe {
             if (sample.weight() > 0.2F) {
                 if (!Float.isFinite(player.getArm(avatar.mainArm).xRot) || Math.abs(player.getArm(avatar.mainArm).xRot) < 0.1F || player.leftSleeve.xRot != 0 || player.rightSleeve.xRot != 0)
                     throw new IllegalStateException("Invalid final arm/sleeve transform");
+                qa.dogs.SkinProbe.record(avatar.skin.model().name());
                 ClientProbe.playerModels++;
             }
         }
