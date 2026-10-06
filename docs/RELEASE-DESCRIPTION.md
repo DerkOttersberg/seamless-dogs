@@ -1,7 +1,9 @@
 # Seamless Dogs 0.2.0
 
 Pet your own tamed dogs, cats and kittens with an empty main hand and **G**.
-The contextual prompt follows your key binding. Pets lean into the stroke,
+Change **G** to a keyboard key or mouse button in **Options → Controls →
+Key Binds → Seamless Dogs**, or use **Client visuals → Petting key**. Escape
+unbinds it. The contextual prompt follows your binding and hides when unbound. Pets lean into the stroke,
 blink and react with their own spatial voice. First and third person, observers,
 left/right handedness and classic/slim player skins are supported.
 
@@ -12,7 +14,7 @@ head and tuck one ear while their nearby owner looks at them.
 
 Idle actions require a calm, stationary, grounded pet near its online owner.
 Combat, damage, sitting, sleeping, swimming, riding and following prevent them.
-Petting takes priority. A successful dig removes one safe exposed dirt/sand
+Petting takes priority. Dog gaze reactions can also occur while sitting. A successful dig removes one safe exposed dirt/sand
 block with normal drops, block-specific sounds and an occasional bonus find.
 Digging honors mobGriefing, spawn protection and supported claim integrations.
 

@@ -62,7 +62,7 @@ def main():
     if args.isolated:isolated(args.isolated.resolve());return
     if not all((args.repo,args.stage,args.server_from,args.client_from,args.loader,args.java)):parser.error('Missing lifecycle preparation arguments')
     stage,source,client_source=(path.resolve()for path in (args.stage,args.server_from,args.client_from))
-    if stage.exists() or not all(path.is_relative_to(ROOT)for path in (stage,source,client_source)):raise SystemExit('Need fresh owned lifecycle profile and accepted installations')
+    if stage.exists() or not all(HELPER['owned_profile'](path)for path in (stage,source,client_source)):raise SystemExit('Need fresh owned lifecycle profile and accepted installations')
     pins=HELPER['version_catalog'](args.repo/'gradle/libs.versions.toml')
     accepted=json.loads((source/'server-passed.json').read_text())
     if accepted['minecraft']!=pins['minecraft'] or accepted['loader']!=args.loader:raise SystemExit('Installation mismatch')

@@ -232,25 +232,29 @@ public final class DogsScenarios {
                 h.assertValueEqual(restored.reactionDue(f.dog.getUUID()),state.reactionDue(f.dog.getUUID()),"Gaze reaction cooldown persistence");
                 SeamlessDogs.control(f.owner,new PetControl(0,1,0));
                 f.dog.setNoAi(false);f.dog.setOrderedToSit(true);f.dog.setInSittingPose(true);f.dog.setOnGround(true);f.dog.setDeltaMovement(0,0,0);
+                // Keep the target within the vanilla seated wolf's head-yaw limit.
+                // A target directly behind it otherwise depends on randomized body AI.
+                f.dog.setYRot(0);f.dog.yBodyRot=0;f.dog.yHeadRot=0;
+                f.owner.setPos(f.dog.getX()-1,f.dog.getY(),f.dog.getZ()+1);
                 var look=f.dog.getEyePosition().subtract(f.owner.getEyePosition());
                 f.owner.setYRot((float)Math.toDegrees(Math.atan2(-look.x,look.z)));f.owner.setXRot((float)-Math.toDegrees(Math.atan2(look.y,Math.sqrt(look.x*look.x+look.z*look.z))));
-                state.scheduleReaction(f.dog.getUUID(),0);
+                state.scheduleReaction(f.dog.getUUID(),server.overworld().getGameTime()+5);
             }catch(RuntimeException e){SeamlessDogs.initialize(original);throw e;}
         });
         // The owner keeps looking as native AI settles the sitting pose.
-        for(int tick=206;tick<235;tick++)h.runAfterDelay(tick,()->{
+        for(int tick=206;tick<255;tick++)h.runAfterDelay(tick,()->{
             var look=f.dog.getEyePosition().subtract(f.owner.getEyePosition());
             f.owner.setYRot((float)Math.toDegrees(Math.atan2(-look.x,look.z)));
             f.owner.setXRot((float)-Math.toDegrees(Math.atan2(look.y,Math.sqrt(look.x*look.x+look.z*look.z))));
         });
-        h.runAfterDelay(235,()->{
+        h.runAfterDelay(255,()->{
             h.assertTrue(SeamlessDogs.reactionActive(f.dog),"Gaze did not start a seated dog's native AI reaction: eligible="+SeamlessDogs.reactionEligible(f.owner,f.dog)+" looking="+SeamlessDogs.lookingAt(f.owner,f.dog)+" ground="+f.dog.onGround()+" motion="+f.dog.getDeltaMovement()+" owner="+f.owner.position()+" dog="+f.dog.position()+" due="+state.reactionDue(f.dog.getUUID())+" now="+server.overworld().getGameTime());
             h.assertTrue(f.dog.isOrderedToSit()&&f.dog.getNavigation().isDone(),"Reaction changed the sit command or navigation");
             var look=f.owner.position().subtract(f.dog.position());float yaw=(float)Math.toDegrees(Math.atan2(-look.x,look.z));
-            h.assertTrue(Math.abs(net.minecraft.util.Mth.wrapDegrees(f.dog.yHeadRot-yaw))<20,"Seated dog failed to look back");
+            h.assertTrue(Math.abs(net.minecraft.util.Mth.wrapDegrees(f.dog.yHeadRot-yaw))<20,"Seated dog failed to look back: head="+f.dog.yHeadRot+" body="+f.dog.yBodyRot+" expected="+yaw+" gameTick="+server.overworld().getGameTime());
             f.dog.hurtTime=5;
         });
-        h.runAfterDelay(238,()->{
+        h.runAfterDelay(258,()->{
             try {
                 h.assertTrue(!SeamlessDogs.reactionActive(f.dog),"Damage did not cancel gaze reaction");
                 h.assertTrue(state.reactionDue(f.dog.getUUID())>server.overworld().getGameTime()+1100,"Interrupted reaction lost its cooldown");
