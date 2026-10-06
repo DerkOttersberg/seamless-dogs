@@ -1,0 +1,11 @@
+e9e2cd7316aa52b5c76358502bd838e4925d51b5f6e61e18eca460ebb2ff1f69  mc1.20.1/fabric/seamless-dogs-0.2.0+mc1.20.1-fabric.jar
+4d3806e664aefa0e1b7fd920893d62422d1bd35cc4d5917e9f4b33835d07fb7a  mc1.20.1/forge/seamless-dogs-0.2.0+mc1.20.1-forge.jar
+3f7dff19ea429e1f382533a9b70ec778c83bbefa8610e5ffb81053e48e1e9c6b  mc1.21.1/fabric/seamless-dogs-0.2.0+mc1.21.1-fabric.jar
+f20b90e737055cbe9e3c5350004d428cac56ebcab10567e577e0be934905bfd8  mc1.21.1/forge/seamless-dogs-0.2.0+mc1.21.1-forge.jar
+803b000d60089b26c51367ee374fd4a5ff0f19111100cc2304751cf26adaf149  mc1.21.1/neoforge/seamless-dogs-0.2.0+mc1.21.1-neoforge.jar
+ef470d1251e0411d4b7cf89ca396ccd0de094f68bfcfc9bac86e414805c4e3e5  mc26.2/fabric/seamless-dogs-0.2.0+mc26.2-fabric.jar
+f70091a047639a370acbc25cc2414e665128d926ba8e87a4f822b9a90c0d00bb  mc26.2/forge/seamless-dogs-0.2.0+mc26.2-forge.jar
+55952e683ea21035884440b405cbabd9439c50905e8aab36b37e88e9003f1ff2  mc26.2/neoforge/seamless-dogs-0.2.0+mc26.2-neoforge.jar
+c5bcdaf680991d225ee7ea2c2da4345dc0aee06d2566d014d862d9deaea49c8d  mc26.3/fabric/seamless-dogs-0.2.0+mc26.3-fabric.jar
+56aebaed6739a89b3efc668679d2bfc1ded2ab1a7fe649faf84d4d529feda6f2  mc26.3/forge/seamless-dogs-0.2.0+mc26.3-forge.jar
+77f341648ca1dcf4052a36d70a07f5da719a0c0bb90b96233d7c8858bdf295fd  mc26.3/neoforge/seamless-dogs-0.2.0+mc26.3-neoforge.jar

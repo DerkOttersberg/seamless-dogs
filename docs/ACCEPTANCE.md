@@ -1,3 +1,7 @@
+# Historical 0.1.0 acceptance
+
+This record applies to the earlier 0.1.0 builds. See [current 0.2.0 acceptance](0.2.0-ACCEPTANCE.md) for the standalone eleven-build release.
+
 # Local acceptance — 5 October 2026
 
 **Passed: 20/20 feature cells, 20/20 lifecycle cells, seven Mod Menu profiles and
