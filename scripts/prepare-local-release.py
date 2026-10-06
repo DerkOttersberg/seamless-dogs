@@ -19,7 +19,7 @@ def main():
     prepared=[]
     for row in rows:
         v,l=row['minecraft'],row['loader'];repo=w/'seamless-dogs' if v=='26.3' else w/f'.ports/dogs-multiversion/mc{v}/seamless-dogs'
-        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','multiplayerPassed','lifecyclePassed','combinedPassed','combinedServerPassed','visualReviewPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
+        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','keybindPassed','skinModelsPassed','multiplayerPassed','worldRestartPassed','lifecyclePassed','combinedPassed','combinedServerPassed','visualReviewPassed','extraRendererPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
         jars=list((repo/l/'build/libs').glob(f'*-{l}.jar'))
         if len(jars)!=1 or row['jars'].get(jars[0].name)!=sha(jars[0]):raise SystemExit(f'Runtime bytes changed after acceptance: {v}/{l}')
         with zipfile.ZipFile(jars[0]) as z:
@@ -40,7 +40,9 @@ to the matching client and server mods folders. Choose one Minecraft/loader
 combination. SeamlessLib is not required or bundled.
 {extra}
 Look at your own tamed dog, cat or kitten within three blocks with an empty
-main hand and press G. Rebind it in Options > Controls > Seamless Dogs.
+main hand and press G. Rebind it in Options > Controls > Seamless Dogs,
+or Client visuals > Petting key in the mod's settings. Keyboard and mouse
+bindings are supported. Escape unbinds petting and hides its prompt.
 Petting preserves ownership, health and sitting. Calm cats stretch, knead or
 groom every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes.
 Sounds originate from the pet. Both clients and server need this gameplay mod.

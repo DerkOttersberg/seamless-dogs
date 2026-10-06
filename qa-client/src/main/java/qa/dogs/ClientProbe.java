@@ -32,7 +32,7 @@ public final class ClientProbe {
             if(!handReturnPassed){if(handReturn==null)handReturn=new HandReturnScenario();handReturnPassed=handReturn.tick(client);
                 if(handReturnPassed&&Boolean.getBoolean("qa.handOnly")){write(client,"PASS baseline and four packaged hand-return visual/matrix cases.\n");finished=true;log("DOGS_HAND_VISUAL_PASS");}return;}
             if(features==null)features=new PetFeatureProbe();
-            if(features.tick(client)){write(client,"PASS dogs plus cats, stretch, digging, settings and cooldowns.\n");finished=true;log("DOGS_CLIENT_PASS");}
+            if(features.tick(client)){SkinProbe.verify();write(client,"PASS dogs plus cats, stretch, digging, settings and cooldowns.\n");finished=true;log("DOGS_CLIENT_PASS");}
             return;
         }
         boolean multiplayer = System.getProperty("qa.role", "single").equals("owner");

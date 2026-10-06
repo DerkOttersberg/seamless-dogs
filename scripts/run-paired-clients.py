@@ -15,6 +15,7 @@ import shutil
 import subprocess
 import sys
 import time
+import zipfile
 
 ROOT = Path('/root/seamless-dogs-production-20261005')
 HELPER = runpy.run_path(str(Path(__file__).with_name('run-packaged-server.py')))
@@ -66,7 +67,7 @@ def isolated(stage):
             if not (game / marker).is_file() or (game / 'dogs-client-failed.txt').exists():
                 raise RuntimeError(f'Paired {role} did not pass')
         text = (stage / 'observer/client-console.log').read_text(errors='replace')
-        for marker in ('DOGS_OBSERVER_RENDER_AND_SOUND_PASS', 'DOGS_OBSERVER_LATE_TRACKING_PASS', 'DOGS_OBSERVER_PASS'):
+        for marker in ('DOGS_SKIN_MODELS_PASS', 'DOGS_OBSERVER_RENDER_AND_SOUND_PASS', 'DOGS_OBSERVER_LATE_TRACKING_PASS', 'DOGS_OBSERVER_PASS'):
             if marker not in text:
                 raise RuntimeError(f'Observer omitted {marker}')
         captures={path.name:HELPER['digest'](path)for path in (stage/'observer/client/screenshots').glob('observer-action-*.png')}
@@ -111,7 +112,7 @@ def isolated(stage):
         (stage / 'pair-passed.json').write_text(json.dumps({
             'minecraft': metadata['minecraft'], 'loader': metadata['loader'], 'jars': actual,
             'gate': 'two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect',
-            'display': os.environ['DISPLAY'],'observerCaptures':captures,'worldRestartPassed':True}, indent=2))
+            'display': os.environ['DISPLAY'],'observerCaptures':captures,'worldRestartPassed':True,'captureTiming':'settled camera, native pet submitted, completed frame','skinModelsPassed':True}, indent=2))
         print(f"PASS paired real clients {metadata['minecraft']}/{metadata['loader']}", flush=True)
     finally:
         for process in reversed(processes):
@@ -157,6 +158,9 @@ def main():
     properties = dict(line.split('=', 1) for line in (args.repo / 'gradle.properties').read_text().splitlines() if '=' in line and not line.startswith('#'))
     jars = [args.repo / args.loader / 'build/libs' / f"seamless-dogs-{properties['mod_version']}-{args.loader}.jar",
             args.repo / 'qa-client/artifacts' / f'seamless-dogs-qa-{args.loader}.jar']
+    with zipfile.ZipFile(jars[1]) as archive:
+        if b'captureAfterFrame' not in archive.read('qa/dogs/ObserverProbe.class'):
+            raise SystemExit('Rebuild the observer QA driver with completed-frame capture proof')
     for jar in jars: shutil.copy2(jar, mods / jar.name)
     if args.loader == 'fabric':
         for jar in (source / 'mods').glob('fabric-api-*.jar'): shutil.copy2(jar, mods / jar.name)

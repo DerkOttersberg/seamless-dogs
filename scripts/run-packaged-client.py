@@ -319,6 +319,8 @@ def main() -> None:
         raise RuntimeError('Gameplay/test jars changed during client QA')
     log_text = (stage / 'client-console.log').read_text(errors='replace')
     required = ['DOGS_REBIND_PASS', 'DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
+    if not args.hand_only:
+        required.append('DOGS_SKIN_MODELS_PASS')
     if args.modmenu:
         required.append('DOGS_MODMENU_CONFIG_PASS')
     if args.extra_mod_dir and inputs.get('protection'):

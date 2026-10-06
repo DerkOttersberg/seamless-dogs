@@ -10,7 +10,24 @@ import net.minecraft.world.entity.animal.Wolf;
 public final class ObserverProbe {
     private record Tracked(io.github.derkottersberg.seamlessdogs.network.PetUpdate state,int tick){}
     private static final java.util.Map<java.util.UUID,Tracked> tracked=new java.util.HashMap<>();
-    private final java.util.Set<String> captured=new java.util.HashSet<>();
+    private static final java.util.Set<String> captured=new java.util.HashSet<>();
+    private static final java.util.Map<java.util.UUID,Integer> renderedTick=new java.util.HashMap<>();
+    private static java.util.UUID pendingPet;
+    private java.util.UUID previousLook;
+    private net.minecraft.world.phys.Vec3 previousPosition;
+    private int stableTicks;
+    public static void rendered(java.util.UUID pet){var c=Minecraft.getInstance();if(c.player!=null)renderedTick.put(pet,c.player.tickCount);}
+    public static void renderedAt(double x,double y,double z){
+        if(!"observer".equals(System.getProperty("qa.role")))return;
+        var c=Minecraft.getInstance();if(c.level==null)return;
+        for(var entity:c.level.entitiesForRendering())if(entity.position().distanceToSqr(x,y,z)<.05)rendered(entity.getUUID());
+    }
+    public static void captureAfterFrame(Minecraft c){
+        if(!"observer".equals(System.getProperty("qa.role"))||pendingPet==null||c.player==null||c.level==null)return;
+        var id=pendingPet;pendingPet=null;
+        if(renderedTick.getOrDefault(id,-1)!=c.player.tickCount)return;
+        for(var pet:c.level.entitiesForRendering())if(pet.getUUID().equals(id)){capture(c,pet);return;}
+    }
     public static void receive(io.github.derkottersberg.seamlessdogs.network.PetUpdate state) {
         if(!"observer".equals(System.getProperty("qa.role"))||state.action()==5)return;
         var c=Minecraft.getInstance();if(c.player==null)return;
@@ -18,7 +35,7 @@ public final class ObserverProbe {
         var previous=tracked.get(state.pet());
         if(previous==null||previous.state.sequence()!=state.sequence())tracked.put(state.pet(),new Tracked(state,c.player.tickCount));
     }
-    private void capture(Minecraft client,net.minecraft.world.entity.Entity pet) {
+    private static void capture(Minecraft client,net.minecraft.world.entity.Entity pet) {
         var entry=tracked.get(pet.getUUID());if(entry==null)return;
         int elapsed=entry.state.elapsed()+client.player.tickCount-entry.tick;
         if(elapsed<18||elapsed>58)return;
@@ -51,10 +68,14 @@ public final class ObserverProbe {
             if (dog == null) return;
             net.minecraft.world.entity.Entity look=dog;
             for(var entity:client.level.entitiesForRendering())if(entity instanceof net.minecraft.world.entity.animal.Cat cat && !DogsClient.actionPose(cat.getUUID(),0).parts().isEmpty())look=cat;
-            capture(client,look);
+
             var direction = look.getEyePosition().subtract(client.player.getEyePosition());
             client.player.setYRot((float)Math.toDegrees(Math.atan2(-direction.x, direction.z)));
             client.player.setXRot((float)-Math.toDegrees(Math.atan2(direction.y, Math.sqrt(direction.x*direction.x+direction.z*direction.z))));
+            boolean settled=look.getUUID().equals(previousLook)&&previousPosition!=null
+                &&client.player.position().distanceToSqr(previousPosition)<.01;
+            stableTicks=settled?stableTicks+1:0;previousLook=look.getUUID();previousPosition=client.player.position();
+            if(stableTicks>=2)pendingPet=look.getUUID();
             if (DogsClient.target() != null || ClientProbe.prompts != 0)
                 throw new IllegalStateException("Observer received an ownership prompt");
             if (DogsClient.playerSample(client.player.getId(), 0).weight() != 0)
@@ -91,7 +112,7 @@ public final class ObserverProbe {
                         "PASS two real clients: ownership prompt hidden; unauthorized pet/settings requests rejected; remote arm/dog/cat/eyes/entity sound; late dog/cat tracking; dig/stretch and biscuits/groom/ear tilt synchronization; three late expressive clips; active owner disconnect.\n");
                 } catch (Exception e) { throw new RuntimeException(e); }
                 for(int action:new int[]{1,2,3,4,6,7,8})if(captured.stream().noneMatch(name->name.startsWith("observer-action-"+action+"-")))throw new IllegalStateException("Missing observer capture for action "+action);
-                finished = true; ClientProbe.log("DOGS_OBSERVER_PASS");
+                SkinProbe.verify();finished = true; ClientProbe.log("DOGS_OBSERVER_PASS");
             }
         }
     }
