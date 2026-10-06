@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.loom) apply false
 }
 architectury { minecraft = libs.versions.minecraft.get() }
-ext.seamlessApiDirectory = file(providers.gradleProperty('seamlessApiDir').getOrElse('../seamless-api'))
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
@@ -50,6 +49,7 @@ tasks.register('verifyLoaderJars') {
                 zip.entries().each { entry ->
                     assert !entry.name.startsWith('com/derko/seamlessapi/') && !entry.name.contains('/gametest/') && !entry.name.contains('/qa/')
                     if(entry.name.endsWith('.class')) {
+                        assert !new String(zip.getInputStream(entry).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('com/derko/seamlessapi')
                         def stream=new DataInputStream(zip.getInputStream(entry)); assert stream.readInt()==0xCAFEBABE as int; stream.readUnsignedShort(); assert stream.readUnsignedShort()==65; stream.close()
                     }
                 }
@@ -58,12 +58,12 @@ tasks.register('verifyLoaderJars') {
             def entrypointBytes=zip.getInputStream(zip.getEntry('io/github/derkottersberg/seamlessdogs/fabric/DogsFabric.class')).bytes
             assert !new String(entrypointBytes,java.nio.charset.StandardCharsets.ISO_8859_1).contains('net/minecraft/world/entity/Entity') : 'Fabric runtime jar contains development Minecraft names'
                     assert metadata.id=='seamlessdogs' && metadata.version==project.version.toString() && metadata.depends.minecraft=='1.21.1' && metadata.depends.java=='>=21'
-                    assert metadata.license=='All rights reserved' && metadata.depends.seamlessapi=='>=2.0.2 <3.0.0'
+                    assert metadata.license=='All rights reserved' && !metadata.depends.containsKey('seamlessapi')
                     assert metadata.depends['fabric-api']=='>=0.116.17 <0.117.0'
                 } else {
                     def text=zip.getInputStream(zip.getEntry(metadataPath)).getText('UTF-8')
-                    assert text.contains('versionRange="[1.21.1]"') && text.contains('modId="seamlessapi"') && !text.contains('${')
-                    assert text.contains('license="All rights reserved"') && text.contains('javaVersion="[21,)"') && text.contains('versionRange="[2.0.2,3.0.0)"')
+                    assert text.contains('versionRange="[1.21.1]"') && !text.contains('seamlessapi') && !text.contains('${')
+                    assert text.contains('license="All rights reserved"') && text.contains('javaVersion="[21,)"') && !text.contains('seamlessapi')
                     assert text.contains(loader=='forge' ? 'versionRange="[52.1.16,53)"' : 'versionRange="[21.1.255,21.2)"')
                 }
             }

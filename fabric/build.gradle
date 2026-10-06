@@ -7,9 +7,6 @@ dependencies {
     modImplementation libs.fabric.loader
     modImplementation libs.fabric.api
     modCompileOnly libs.modmenu
-    def apiJar=files(new File(rootProject.seamlessApiDirectory,"fabric/build/devlibs/seamless-api-${libs.versions.seamless.api.get()}-fabric-dev.jar"))
-    apiJar.builtBy gradle.includedBuild('seamless-api').task(':fabric:jar')
-    implementation apiJar
 }
 loom {
     mixin { useLegacyMixinAp=true; defaultRefmapName='seamlessdogs.refmap.json' }
@@ -19,8 +16,8 @@ fabricApi { configureTests { createSourceSet=true; modId='seamlessdogs-gametest'
 sourceSets.gametest.java.srcDir rootProject.file('common/src/gametest/java')
 tasks.named('runGameTest') { doLast {
     def log=layout.buildDirectory.file('run/gameTest/logs/latest.log').get().asFile.text
-    ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip'].each { name -> if(!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/failed scenario ${name}") }
-    if(!(log =~ /All 4 required tests passed/)) throw new GradleException('Incomplete native tests')
+    ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip', 'catOwnership', 'diggingTerrain', 'v2CodecRoundTrip', 'idleContracts'].each { name -> if(!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/failed scenario ${name}") }
+    if(!(log =~ /All (8|9) required tests passed/)) throw new GradleException('Incomplete native tests')
 } }
 tasks.named('check') { dependsOn 'runGameTest' }
 processResources { inputs.property 'version',project.version; filesMatching('fabric.mod.json') { expand version:project.version } }
@@ -32,3 +29,11 @@ tasks.named('jar',Jar) {
 tasks.named('sourcesJar',Jar) { from project(':common').sourceSets.main.allSource; duplicatesStrategy=DuplicatesStrategy.EXCLUDE }
 tasks.named('remapJar') { archiveFileName="seamless-dogs-${project.version}-fabric.jar" }
 tasks.named('remapSourcesJar') { archiveFileName="seamless-dogs-${project.version}-fabric-sources.jar" }
+
+sourceSets.gametest.resources.srcDir rootProject.file('common/src/gametest/resources')
+
+repositories { maven { url='https://api.modrinth.com/maven' }; maven { url='https://maven.nucleoid.xyz/' } }
+dependencies { modCompileOnly('maven.modrinth:open-parties-and-claims:fabric-1.21.1-0.32.7') { transitive=false }; modCompileOnly('eu.pb4:common-protection-api:1.0.0') { transitive=false } }
+
+repositories { maven { url='https://maven.ftb.dev/releases' } }
+dependencies { modCompileOnly('dev.ftb.mods:ftb-chunks-fabric:2101.1.22') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-library-fabric:2101.1.34') { transitive=false } }

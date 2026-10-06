@@ -1,0 +1,1 @@
+{"schemaVersion":1,"id":"seamlessdogsqa","version":"1","name":"Seamless Dogs QA (not for distribution)","environment":"*","entrypoints":{"main":["qa.dogs.fabric.DogsQaFabric"],"client":["qa.dogs.fabric.DogsQaFabricClient"]},"mixins":["dogsqa.mixins.json"],"depends":{"seamlessdogs":"*","fabric-api":"*"}}

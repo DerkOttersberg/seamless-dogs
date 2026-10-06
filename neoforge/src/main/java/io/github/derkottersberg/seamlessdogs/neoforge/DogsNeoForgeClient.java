@@ -19,15 +19,17 @@ import net.neoforged.neoforge.network.registration.NetworkRegistry;
 
 final class DogsNeoForgeClient {
     static void initialize(IEventBus bus, ModContainer container) {
-        bus.addListener((RegisterKeyMappingsEvent event) -> event.register(DogsKeys.PET));
+        bus.addListener((RegisterKeyMappingsEvent event) -> {event.register(DogsKeys.PET);event.register(DogsKeys.SETTINGS);});
         DogsClient.initialize(new Services());
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> DogsClient.tick(Minecraft.getInstance()));
         container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new DogsSettingsScreen(parent));
     }
+    static void receive(PetUpdate packet){DogsClient.receive(packet);}
     static void receive(PetState packet) { DogsClient.receive(packet); }
     private static final class Services implements ClientPlatformServices {
         public Path configDirectory() { return FMLPaths.CONFIGDIR.get(); }
         public KeyMapping petKey() { return DogsKeys.PET; }
+        public boolean serverSupportsV2(){var c=Minecraft.getInstance();return c.getConnection()!=null&&NetworkRegistry.hasChannel(c.getConnection(),PetControl.TYPE.id());}
         public boolean serverSupportsPetting() {
             var connection = Minecraft.getInstance().getConnection();
             return connection != null && NetworkRegistry.hasChannel(connection, PetRequest.TYPE.id());

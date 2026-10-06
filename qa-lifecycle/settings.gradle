@@ -1,0 +1,4 @@
+pluginManagement { repositories { gradlePluginPortal(); maven { url='https://maven.architectury.dev/' }; maven { url='https://maven.fabricmc.net/' }; maven { url='https://maven.minecraftforge.net/' } } }
+rootProject.name='seamless-dogs-lifecycle-qa'
+dependencyResolutionManagement { versionCatalogs { target { from(files('../gradle/libs.versions.toml')) } } }
+gradle.beforeProject { project -> project.ext.set('loom.platform',providers.gradleProperty('qaLoader').getOrElse('fabric')) }

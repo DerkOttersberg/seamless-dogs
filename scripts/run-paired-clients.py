@@ -50,7 +50,8 @@ def isolated(stage):
                                      stdout=output, stderr=subprocess.STDOUT)
             processes.append(child)
             if role == 'owner':
-                wait_for(process, server_log, 'DOGS_QA_FIXTURE', 180)
+                wait_for(child, server_log, 'DOGS_QA_FIXTURE', 180)
+                HELPER['rcon'](metadata['rconPort'], metadata['password'], 'op DogQA')
         deadline = time.monotonic() + 600
         while any(child.poll() is None for child in processes[1:]):
             if processes[0].poll() is not None or time.monotonic() > deadline:
@@ -83,7 +84,7 @@ def isolated(stage):
             raise RuntimeError('Paired server jars changed')
         (stage / 'pair-passed.json').write_text(json.dumps({
             'minecraft': metadata['minecraft'], 'loader': metadata['loader'], 'jars': actual,
-            'gate': 'two real clients: keybind, first/third/left hand, owner-only prompt, hostile C2S rejection, remote dog/arm/eyes/entity sound, resource reload, late tracking, active owner disconnect',
+            'gate': 'two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect',
             'display': os.environ['DISPLAY']}, indent=2))
         print(f"PASS paired real clients {metadata['minecraft']}/{metadata['loader']}", flush=True)
     finally:
@@ -100,7 +101,6 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--isolated', type=Path)
     parser.add_argument('--repo', type=Path)
-    parser.add_argument('--api', type=Path)
     parser.add_argument('--loader', choices=('fabric', 'forge', 'neoforge'))
     parser.add_argument('--stage', type=Path)
     parser.add_argument('--java')
@@ -109,8 +109,8 @@ def main():
     args = parser.parse_args()
     if args.isolated:
         isolated(args.isolated.resolve()); return
-    if not all((args.repo, args.api, args.loader, args.stage, args.java, args.server_from, args.client_from)):
-        parser.error('Preparing a pair requires repo/api/loader/stage/java/server-from/client-from')
+    if not all((args.repo, args.loader, args.stage, args.java, args.server_from, args.client_from)):
+        parser.error('Preparing a pair requires repo/loader/stage/java/server-from/client-from')
     stage = args.stage.resolve()
     source = args.server_from.resolve()
     client_source = args.client_from.resolve()
@@ -130,7 +130,6 @@ def main():
     # Copy current, final production bytes rather than the older source profile's mods.
     properties = dict(line.split('=', 1) for line in (args.repo / 'gradle.properties').read_text().splitlines() if '=' in line and not line.startswith('#'))
     jars = [args.repo / args.loader / 'build/libs' / f"seamless-dogs-{properties['mod_version']}-{args.loader}.jar",
-            args.api / args.loader / 'build/libs' / f"seamless-api-{pins['seamless-api']}-{args.loader}.jar",
             args.repo / 'qa-client/artifacts' / f'seamless-dogs-qa-{args.loader}.jar']
     for jar in jars: shutil.copy2(jar, mods / jar.name)
     if args.loader == 'fabric':
@@ -145,10 +144,10 @@ def main():
         'generator-settings={"layers":[{"block":"minecraft:bedrock","height":1},{"block":"minecraft:dirt","height":2},{"block":"minecraft:grass_block","height":1}],"biome":"minecraft:plains"}\n')
     for role, username in (('owner', 'DogQA'), ('observer', 'DogObserver')):
         command = [sys.executable, str(Path(__file__).with_name('run-packaged-client.py')),
-                   '--repo', str(args.repo), '--api', str(args.api), '--loader', args.loader,
+                   '--repo', str(args.repo), '--loader', args.loader,
                    '--stage', str(stage / role), '--java', args.java, '--installed-from', str(client_source),
                    '--address', f'127.0.0.1:{port}', '--username', username, '--role', role,
-                   '--gui-scale', '3', '--prepare-only']
+                   '--gui-scale', '3', '--width', '640', '--height', '480', '--prepare-only']
         with (stage / f'{role}-prepare.log').open('w') as output:
             subprocess.run(command, stdout=output, stderr=subprocess.STDOUT, check=True, timeout=900)
     launch = [args.java, '-Xms256M', '-Xmx1G', '-XX:ActiveProcessorCount=2']

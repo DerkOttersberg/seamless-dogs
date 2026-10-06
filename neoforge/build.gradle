@@ -5,13 +5,6 @@ dependencies {
     minecraft libs.minecraft
     mappings loom.officialMojangMappings()
     neoForge libs.neoforge
-    def apiJar=files(new File(rootProject.seamlessApiDirectory,"neoforge/build/devlibs/seamless-api-${libs.versions.seamless.api.get()}-neoforge-dev.jar"))
-    apiJar.builtBy gradle.includedBuild('seamless-api').task(':neoforge:jar')
-    implementation apiJar
-    loom.mods.create('seamlessapi') {
-        modFiles.from(apiJar)
-        mainResourceDirectory.set(new File(rootProject.seamlessApiDirectory,'neoforge/build/resources/main'))
-    }
 }
 loom {
     mixin { useLegacyMixinAp=true; defaultRefmapName='seamlessdogs.refmap.json' }
@@ -19,9 +12,9 @@ loom {
 }
 sourceSets { gametest {
     java.srcDirs=['src/gametest/java',rootProject.file('common/src/gametest/java')]
-    resources.srcDirs=['src/gametest/resources']
+    resources.srcDirs=['src/gametest/resources',rootProject.file('common/src/gametest/resources')]
     compileClasspath+=sourceSets.main.output+sourceSets.main.compileClasspath
-    runtimeClasspath+=output+compileClasspath+sourceSets.main.runtimeClasspath
+    runtimeClasspath+=output+sourceSets.main.output+sourceSets.main.runtimeClasspath
 } }
 configurations { gametestImplementation.extendsFrom implementation; gametestRuntimeOnly.extendsFrom runtimeOnly }
 loom { mods { seamlessdogstests { sourceSet sourceSets.gametest } }; runs { gameTestServer {
@@ -31,8 +24,8 @@ loom { mods { seamlessdogstests { sourceSet sourceSets.gametest } }; runs { game
 apply from: rootProject.file('gradle/empty-gametest-structure.gradle')
 tasks.named('runGameTestServer') { doLast {
     def log=layout.buildDirectory.file('gametest/logs/latest.log').get().asFile.text
-    ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip'].each { name -> if(!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/failed scenario ${name}") }
-    if(!(log =~ /All 4 required tests passed/)) throw new GradleException('Incomplete native tests')
+    ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip', 'catOwnership', 'diggingTerrain', 'v2CodecRoundTrip', 'idleContracts'].each { name -> if(!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/failed scenario ${name}") }
+    if(!(log =~ /All (8|9) required tests passed/)) throw new GradleException('Incomplete native tests')
 } }
 tasks.named('check') { dependsOn 'runGameTestServer' }
 processResources { inputs.property 'version',project.version; filesMatching('META-INF/neoforge.mods.toml') { expand version:project.version } }
@@ -44,3 +37,9 @@ tasks.named('jar',Jar) {
 tasks.named('sourcesJar',Jar) { from project(':common').sourceSets.main.allSource; duplicatesStrategy=DuplicatesStrategy.EXCLUDE }
 tasks.named('remapJar') { archiveFileName="seamless-dogs-${project.version}-neoforge.jar" }
 tasks.named('remapSourcesJar') { archiveFileName="seamless-dogs-${project.version}-neoforge-sources.jar" }
+
+repositories { maven { url='https://api.modrinth.com/maven' }; maven { url='https://maven.nucleoid.xyz/' } }
+dependencies { modCompileOnly('maven.modrinth:open-parties-and-claims:neoforge-1.21.1-0.32.7') { transitive=false } }
+
+repositories { maven { url='https://maven.ftb.dev/releases' } }
+dependencies { modCompileOnly('dev.ftb.mods:ftb-chunks-neoforge:2101.1.22') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-library-neoforge:2101.1.34') { transitive=false } }

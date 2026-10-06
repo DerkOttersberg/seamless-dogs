@@ -6,3 +6,7 @@
 qa-client/artifacts/
 **/__pycache__/
 .qa/
+
+**/logs/
+
+qa-lifecycle/artifacts/

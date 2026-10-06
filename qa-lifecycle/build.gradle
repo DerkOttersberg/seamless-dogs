@@ -1,0 +1,61 @@
+plugins { id 'dev.architectury.loom' version '1.17.493' }
+def qaLoader=providers.gradleProperty('qaLoader').getOrElse('fabric')
+def minecraftVersion=target.versions.minecraft.get()
+def modern=minecraftVersion.startsWith('26.')
+def productVersion=new Properties()
+file('../gradle.properties').withInputStream { productVersion.load(it) }
+if (!(qaLoader in ['fabric','forge','neoforge'])) throw new GradleException('Unknown QA loader')
+repositories {
+    mavenCentral()
+    maven { url='https://maven.fabricmc.net/' }
+    maven { url='https://maven.terraformersmc.com/releases/' }
+    maven { url='https://maven.minecraftforge.net/' }
+    maven { url='https://maven.neoforged.net/releases/' }
+}
+java { toolchain.languageVersion=JavaLanguageVersion.of(target.versions.java.get().toInteger()) }
+sourceSets.main.java.srcDir "src/${qaLoader}/java"
+sourceSets.main.resources.srcDir "src/${qaLoader}/resources"
+tasks.withType(JavaExec).configureEach {
+    javaLauncher=javaToolchains.launcherFor { languageVersion=JavaLanguageVersion.of(target.versions.java.get().toInteger()) }
+    maxHeapSize='1G'; minHeapSize='256M'; jvmArgs '-XX:ActiveProcessorCount=2'
+    systemProperty 'qa.guiScale',providers.gradleProperty('qaGuiScale').getOrElse('2')
+    systemProperty 'qa.loader',qaLoader
+    systemProperty 'qa.minecraft',minecraftVersion
+}
+dependencies {
+    minecraft target.minecraft
+    compileOnly target.mixin
+    if(!modern) annotationProcessor target.mixin
+    if(!modern) mappings loom.officialMojangMappings()
+    if(qaLoader=='fabric') { if(modern) compileOnly target.modmenu; else modCompileOnly target.modmenu; implementation target.fabric.loader; if(modern) compileOnly target.fabric.api; else modCompileOnly target.fabric.api }
+    else if(qaLoader=='forge') forge target.forge
+    else neoForge target.neoforge
+    compileOnly files("../${qaLoader}/build/${modern?'libs':'devlibs'}/seamless-dogs-${productVersion.mod_version}-${qaLoader}${modern?'':'-dev'}.jar")
+}
+if(qaLoader=='forge' && modern) configurations.forgeRuntimeLibrary {
+    exclude group:'dev.architectury',module:'architectury-naming-service'
+    exclude group:'dev.architectury',module:'architectury-mixin-remapper-service'
+}
+loom {
+    if(!modern) mixin { useLegacyMixinAp=true; defaultRefmapName='dogsqa.refmap.json' }
+    if(qaLoader=='forge') forge { mixinConfig 'dogsqa.mixins.json' }
+    runs { client {
+        client()
+        runDir providers.gradleProperty('qaRunDir').getOrElse('build/run/client')
+        programArgs '--username','DogQA','--quickPlaySingleplayer','dogs-world'
+        if(modern) programArgs '--graphicsBackend',providers.gradleProperty('qaBackend').getOrElse('vulkan')
+        if(qaLoader=='forge' && modern) {
+            def identity=file('../gradle/official-named-empty.tiny').absolutePath
+            property 'architectury.naming.mappingsPath',identity
+            property 'architectury.naming.sourceNamespace','official'
+            property 'architectury.mixinRemapper.mappingsPath',identity
+            property 'architectury.mixinRemapper.sourceNamespace','official'
+        }
+    } }
+}
+tasks.withType(AbstractArchiveTask).configureEach { preserveFileTimestamps=false; reproducibleFileOrder=true }
+tasks.named('jar',Jar) {
+    manifest { attributes 'MixinConfigs':'dogsqa.mixins.json' }
+    archiveFileName="seamless-dogs-qa-${qaLoader}${modern?'':'-dev'}.jar"
+}
+if(!modern) tasks.named('remapJar') { archiveFileName="seamless-dogs-qa-${qaLoader}.jar" }

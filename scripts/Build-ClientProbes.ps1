@@ -6,7 +6,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 $env:JAVA_HOME=$JavaHome
-foreach($version in @('26.3','1.20.1','1.21.1','1.21.11','26.1','26.1.2','26.2')) {
+foreach($version in @('26.3','26.2','1.21.1','1.20.1')) {
     $repo=if($version -eq '26.3'){Join-Path $Workspace 'seamless-dogs'}else{Join-Path $Workspace ".ports/dogs-multiversion/mc$version/seamless-dogs"}
     $loaders=if($version -eq '1.20.1'){@('fabric','forge')}else{@('fabric','forge','neoforge')}
     if($OnlyLoaders.Count){$loaders=@($loaders | Where-Object {$_ -in $OnlyLoaders})}

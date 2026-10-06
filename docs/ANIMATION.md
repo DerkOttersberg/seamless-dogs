@@ -1,26 +1,33 @@
-# Animation and asset provenance
+# Animation and asset provenance — 0.2.0
 
-The clip is original procedural motion on each Minecraft version's vanilla wolf
-and player rigs. No third-party animation, replacement model, GeckoLib, Minecraft
-texture, or sound file is distributed. The small additive pose is applied after
-vanilla prepares the rig and fades over a six-tick entrance/eight-tick exit.
-It tilts the head, wags the tail and strokes the player's main arm for two seconds.
-First person calls vanilla's skin-aware arm renderer. Both handedness settings
-are supported. Motion is stylized; hand contact is not guaranteed at every angle
-or distance. There is no camera takeover, root motion, or inverse kinematics.
+The original clips are authored as keyframes on each version's vanilla wolf,
+cat and player rigs. Adult/baby retargeting is native to the branch. No foreign
+animation, replacement rig, Minecraft texture or audio file is distributed.
+Blockbench-style authoring sources are in animation-source. Grooming only
+cleans the chest: both paws stay grounded. Paw-to-face washing clips were
+removed at the owner's request on 6 October 2026. Historical snapshots remain
+source-only and are never included as runtime animations.
 
-Idle eyes blink for three ticks every 97 ticks with a UUID offset. Petting adds
-closed-eye smiles. Adult and puppy eye regions derive from the currently active
-resource-pack texture and preserve sampled fur colors. Newer 32x32 puppy UVs
-and the older adult-layout puppy skin are handled by their matching version
-branches. Integer-scaled vanilla UV layouts are supported. Unsupported dimensions
-fall back to the original texture; a pack with custom UVs can disable expressions
-in settings. Temporary textures are released and regenerated on resource reload.
+Vanilla animation prepares each rig before the additive action pose. Legacy
+models reset part poses before that vanilla preparation to prevent accumulation.
+Every clip blends back to vanilla on completion or interruption. Hand withdrawal
+finishes the stroke and uses a steady client clock, with frozen fractional
+frames on cancellation and a gradual return of vanilla swing.
 
-A real entity-bound wolf pant packet follows the dog's spatial position. Newer
-versions preserve the adult/baby sound variant; older versions use vanilla wolf
-pant with puppy pitch. Minecraft's neutral-sound volume controls apply.
-Background tests use a silent output device and verify the real packet/entity ID.
+Eye expressions derive from the currently active vanilla-layout resource-pack
+texture, preserving fur, iris and collar colors. Modern adult/baby UV layouts
+and legacy shared layouts use native pixel formats. Closed lids cover the whole
+iris; open eyes use the original texture. Unsupported dimensions fall back.
+Custom UV layouts can disable eyes in settings. Derived textures are released
+and rebuilt on resource reload.
 
-The icon is original pixel art. Product code and original icon are all rights
-reserved. SeamlessLib remains MIT; game and dependency assets retain their licenses.
+Purring, a stretch voice, panting and the target block's eleven alternating
+digging scrapes originate from the pet through native entity-bound sound paths.
+Modern baby/adult variants and resource-pack sound replacements are respected.
+Background tests use a silent audio device and verify the entity and sound IDs;
+audible playback requires an interactive check.
+
+The icon, clips and product code are All Rights Reserved. This product does not
+include or require SeamlessLib. Game and optional integration assets retain
+their own licenses. Motion is stylized on Minecraft's block rigs; hand contact
+is not guaranteed at every viewing angle or distance.

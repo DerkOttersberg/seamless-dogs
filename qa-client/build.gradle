@@ -59,3 +59,11 @@ tasks.named('jar',Jar) {
     archiveFileName="seamless-dogs-qa-${qaLoader}${modern?'':'-dev'}.jar"
 }
 if(!modern) tasks.named('remapJar') { archiveFileName="seamless-dogs-qa-${qaLoader}.jar" }
+
+repositories { maven { url="https://api.modrinth.com/maven" }; maven { url="https://maven.ftb.dev/releases" } }
+dependencies { modCompileOnly("maven.modrinth:open-parties-and-claims:${qaLoader}-1.21.1-0.32.7") { transitive=false } }
+if(qaLoader=='fabric') dependencies { modCompileOnly('dev.ftb.mods:ftb-chunks-fabric:2101.1.22') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-library-fabric:2101.1.34') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-teams-fabric:2101.1.9') { transitive=false } }
+if(qaLoader=='neoforge') dependencies { modCompileOnly('dev.ftb.mods:ftb-chunks-neoforge:2101.1.22') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-library-neoforge:2101.1.34') { transitive=false }; modCompileOnly('dev.ftb.mods:ftb-teams-neoforge:2101.1.9') { transitive=false } }
+
+repositories { maven { url="https://maven.nucleoid.xyz/" } }
+if(qaLoader=="fabric") dependencies { modCompileOnly("eu.pb4:common-protection-api:1.0.0") { transitive=false } }
