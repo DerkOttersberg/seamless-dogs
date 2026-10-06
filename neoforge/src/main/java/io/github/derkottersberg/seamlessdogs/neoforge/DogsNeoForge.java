@@ -40,12 +40,19 @@ public final class DogsNeoForge {
     private static void cancel(Entity entity) { if (entity instanceof ServerPlayer player) SeamlessDogs.disconnect(player); }
     private static void registerPayloads(RegisterPayloadHandlersEvent event) {
         event.registrar("1").optional().executesOn(HandlerThread.MAIN)
+            .playToServer(PetControl.TYPE, PetControl.CODEC, (packet,context) -> { if(context.player() instanceof ServerPlayer player) SeamlessDogs.control(player,packet); })
+            .playToClient(PetUpdate.TYPE,PetUpdate.CODEC,(packet,context)->DogsNeoForgeClient.receive(packet))
             .playToServer(PetRequest.TYPE, PetRequest.CODEC, (packet, context) -> {
                 if (context.player() instanceof ServerPlayer player) SeamlessDogs.request(player, packet);
             }).playToClient(PetState.TYPE, PetState.CODEC, (packet, context) -> DogsNeoForgeClient.receive(packet));
     }
     private static final class Services implements PlatformServices {
+        public boolean supportsV2(ServerPlayer player) { return player.connection != null && NetworkRegistry.hasChannel(player.connection,PetUpdate.TYPE.id()); }
+        public boolean mayDig(ServerPlayer owner, net.minecraft.world.entity.TamableAnimal pet, net.minecraft.core.BlockPos pos, boolean commit) { return DogsNeoForgeProtection.allowed(owner,pet,pos,commit); }
+        public String protectionStatus() { return DogsNeoForgeProtection.status(); }
         public void sendToPlayer(ServerPlayer player, CustomPacketPayload packet) {
+            if(packet instanceof PetUpdate update && !SeamlessDogs.mayReceive(player,update))return;
+            if(packet instanceof PetState && supportsV2(player)) return;
             if (player.connection != null && NetworkRegistry.hasChannel(player.connection, packet.type().id()))
                 PacketDistributor.sendToPlayer(player, packet);
         }

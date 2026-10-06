@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:function",
+  "environment": "minecraft:default",
+  "function": "seamlessdogs:catownership",
+  "max_ticks": 80,
+  "structure": "forge:empty3x3x3"
+}

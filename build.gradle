@@ -4,7 +4,6 @@ plugins {
     alias(libs.plugins.loom) apply false
 }
 architectury { minecraft = libs.versions.minecraft.get() }
-ext.seamlessApiDirectory = file(providers.gradleProperty('seamlessApiDir').getOrElse('../.ports/github-mc26.3/seamless-api'))
 allprojects {
     group = rootProject.maven_group
     version = rootProject.mod_version
@@ -46,7 +45,7 @@ tasks.register('verifyLoaderJars') {
                 def metadataPath = loader == 'forge' ? 'META-INF/mods.toml' : 'META-INF/neoforge.mods.toml'
                 def text = zip.getInputStream(zip.getEntry(metadataPath)).getText('UTF-8')
                 assert text.contains('modId="seamlessdogs"') && text.contains('license="All rights reserved"')
-                assert text.contains('versionRange="[26.3]"') && text.contains('modId="seamlessapi"')
+                assert text.contains('versionRange="[26.3]"') && !text.contains('seamlessapi')
                 assert text.contains("version=\"${project.version}\"")
                 assert zip.getEntry('fabric.mod.json') == null
                 assert zip.getEntry(loader == 'forge' ? 'META-INF/neoforge.mods.toml' : 'META-INF/mods.toml') == null
@@ -56,6 +55,7 @@ tasks.register('verifyLoaderJars') {
                     assert !entry.name.startsWith('com/derko/seamlessapi/')
                     assert !entry.name.contains('/gametest/') && !entry.name.startsWith('qa/') && !entry.name.contains('/qa/')
                     if (entry.name.endsWith('.class')) {
+                        assert !new String(zip.getInputStream(entry).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('com/derko/seamlessapi')
                         def stream = new DataInputStream(zip.getInputStream(entry))
                         assert stream.readInt() == 0xCAFEBABE as int
                         stream.readUnsignedShort()
@@ -71,7 +71,7 @@ tasks.register('verifyLoaderJars') {
             def metadata = new groovy.json.JsonSlurper().parseText(zip.getInputStream(zip.getEntry('fabric.mod.json')).getText('UTF-8'))
             assert metadata.id == 'seamlessdogs' && metadata.version == project.version.toString()
             assert metadata.license == 'All rights reserved' && metadata.depends.minecraft == '26.3'
-            assert metadata.depends.seamlessapi == '>=2.0.2 <3.0.0'
+            assert !metadata.depends.containsKey('seamlessapi')
             assert metadata.depends.java == '>=25'
             ['seamlessdogs.mixins.json', 'assets/seamlessdogs/icon.png', 'assets/seamlessdogs/lang/en_us.json',
              'io/github/derkottersberg/seamlessdogs/SeamlessDogs.class', 'LICENSE'].each { assert zip.getEntry(it) != null }
@@ -80,6 +80,7 @@ tasks.register('verifyLoaderJars') {
                 assert !entry.name.contains('/gametest/') && !entry.name.startsWith('qa/') && !entry.name.contains('/qa/')
                 assert entry.name != 'META-INF/mods.toml' && entry.name != 'META-INF/neoforge.mods.toml'
                 if (entry.name.endsWith('.class')) {
+                        assert !new String(zip.getInputStream(entry).bytes, java.nio.charset.StandardCharsets.ISO_8859_1).contains('com/derko/seamlessapi')
                     def stream = new DataInputStream(zip.getInputStream(entry))
                     assert stream.readInt() == 0xCAFEBABE as int
                     stream.readUnsignedShort()

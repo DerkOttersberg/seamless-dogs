@@ -7,9 +7,9 @@ sourceSets.main {
 sourceSets {
     gametest {
         java.srcDirs = ['src/gametest/java', rootProject.file('common/src/gametest/java')]
-        resources.srcDirs = ['src/gametest/resources']
+        resources.srcDirs = ['src/gametest/resources', rootProject.file('common/src/gametest/resources')]
         compileClasspath += sourceSets.main.output + sourceSets.main.compileClasspath
-        runtimeClasspath += output + compileClasspath + sourceSets.main.runtimeClasspath
+        runtimeClasspath += output + sourceSets.main.output + sourceSets.main.runtimeClasspath
     }
 }
 configurations {
@@ -23,9 +23,6 @@ configurations.forgeRuntimeLibrary {
 dependencies {
     minecraft libs.minecraft
     forge libs.forge
-    def apiJar = files(new File(rootProject.seamlessApiDirectory, "forge/build/libs/seamless-api-${libs.versions.seamless.api.get()}-forge.jar"))
-    apiJar.builtBy gradle.includedBuild('seamless-api').task(':forge:jar')
-    implementation apiJar
 }
 loom {
     mods {
@@ -51,7 +48,7 @@ tasks.named('runGameTestServer') {
     doLast {
         def logFile = layout.buildDirectory.file('gametest/logs/latest.log').get().asFile
         def log = logFile.exists() ? logFile.text : ''
-        ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip'].each { name ->
+        ['ownerCanPet', 'rejectInvalidRequests', 'cooldownAndCancellation', 'codecRoundTrip', 'catOwnership', 'diggingTerrain', 'v2CodecRoundTrip', 'idleContracts'].each { name ->
             if (!log.contains("DOGS_GAMETEST_PASS ${name}")) throw new GradleException("Missing/pending/failed dog scenario ${name}")
         }
         if (!(log =~ /All \d+ required tests passed/)) throw new GradleException('Native GameTests did not finish successfully')
@@ -73,3 +70,6 @@ tasks.named('sourcesJar', Jar) {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     archiveFileName = "seamless-dogs-${project.version}-forge-sources.jar"
 }
+
+repositories { maven { url = "https://api.modrinth.com/maven" }; maven { url = "https://maven.nucleoid.xyz/" } }
+dependencies { compileOnly("maven.modrinth:open-parties-and-claims:forge-26.3-0.32.8") { transitive = false } }

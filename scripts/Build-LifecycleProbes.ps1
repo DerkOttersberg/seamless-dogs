@@ -5,9 +5,7 @@ param(
 )
 $ErrorActionPreference='Stop'
 $env:JAVA_HOME=$JavaHome
-& python (Join-Path $Workspace 'seamless-dogs/scripts/Prepare-LifecycleProbes.py') --workspace $Workspace
-if($LASTEXITCODE -ne 0){throw 'Lifecycle project generation failed'}
-foreach($version in @('26.3','1.20.1','1.21.1','1.21.11','26.1','26.1.2','26.2')) {
+foreach($version in @('26.3','26.2','1.21.1','1.20.1')) {
     $repo=if($version -eq '26.3'){Join-Path $Workspace 'seamless-dogs'}else{Join-Path $Workspace ".ports/dogs-multiversion/mc$version/seamless-dogs"}
     $loaders=if($version -eq '1.20.1'){@('fabric','forge')}else{@('fabric','forge','neoforge')}
     foreach($loader in $loaders) {
@@ -17,13 +15,13 @@ foreach($version in @('26.3','1.20.1','1.21.1','1.21.11','26.1','26.1.2','26.2')
         try {
             $task=if($version.StartsWith('26.')){'jar'}else{'remapJar'}
             $ErrorActionPreference='Continue'
-            & .\gradlew.bat -p .qa/lifecycle clean $task "-PqaLoader=$loader" --no-daemon --console=plain *> $log
+            & .\gradlew.bat -p qa-lifecycle clean $task "-PqaLoader=$loader" --no-daemon --console=plain *> $log
             $buildExit=$LASTEXITCODE
             $ErrorActionPreference='Stop'
             if($buildExit -ne 0){throw "Lifecycle probe $version/$loader failed: $log"}
-            $archiveDirectory=Join-Path $repo '.qa/lifecycle-artifacts'
+            $archiveDirectory=Join-Path $repo 'qa-lifecycle/artifacts'
             New-Item -ItemType Directory -Force $archiveDirectory | Out-Null
-            Copy-Item -LiteralPath (Join-Path $repo ".qa/lifecycle/build/libs/seamless-dogs-qa-$loader.jar") -Destination $archiveDirectory
+            Copy-Item -LiteralPath (Join-Path $repo "qa-lifecycle/build/libs/seamless-dogs-qa-$loader.jar") -Destination $archiveDirectory
             Write-Output "PASS lifecycle probe: $version/$loader"
         } finally {Pop-Location}
     }

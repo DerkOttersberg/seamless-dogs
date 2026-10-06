@@ -24,10 +24,12 @@ final class DogsNeoForgeClient {
         NeoForge.EVENT_BUS.addListener((ClientTickEvent.Post event) -> DogsClient.tick(Minecraft.getInstance()));
         container.registerExtensionPoint(IConfigScreenFactory.class, (mod, parent) -> new DogsSettingsScreen(parent));
     }
+    static void receive(PetUpdate packet) { DogsClient.receive(packet); }
     static void receive(PetState packet) { DogsClient.receive(packet); }
     private static final class Services implements ClientPlatformServices {
         public Path configDirectory() { return FMLPaths.CONFIGDIR.get(); }
         public KeyMapping petKey() { return DogsKeys.PET; }
+        public boolean serverSupportsV2() { var c=Minecraft.getInstance().getConnection(); return c!=null && NetworkRegistry.hasChannel(c,PetControl.TYPE.id()); }
         public boolean serverSupportsPetting() {
             var connection = Minecraft.getInstance().getConnection();
             return connection != null && NetworkRegistry.hasChannel(connection, PetRequest.TYPE.id());

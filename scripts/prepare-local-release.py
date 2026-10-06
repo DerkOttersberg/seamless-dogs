@@ -1,123 +1,76 @@
 #!/usr/bin/env python3
-"""Assemble local release files only after every exact-jar feature gate passed."""
+"""Package the eleven standalone release cells after exact-JAR acceptance."""
 from __future__ import annotations
-import argparse
-import hashlib
-import json
+import argparse,hashlib,json,shutil,subprocess,zipfile
 from pathlib import Path
-import runpy
-import shutil
-import subprocess
-import zipfile
 
-VERSIONS = ('1.20.1', '1.21.1', '1.21.11', '26.1', '26.1.2', '26.2', '26.3')
-HELPER = runpy.run_path(str(Path(__file__).with_name('run-packaged-server.py')))
-
-
-def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
-def commit(repo): return subprocess.check_output(['git', '-C', str(repo), 'rev-parse', 'HEAD'], text=True).strip()
-def write(path, value): path.write_text(value, encoding='utf-8')
-
+VERSIONS=('1.20.1','1.21.1','26.2','26.3')
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def write(path,text):path.write_text(text,encoding='utf-8')
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--workspace', type=Path, required=True)
-    parser.add_argument('--acceptance', type=Path, required=True, help='Consolidated exact-jar matrix and evidence')
-    parser.add_argument('--destination', type=Path, required=True)
-    args = parser.parse_args()
-    root, target = args.workspace.resolve(), args.destination.resolve()
-    if target.exists() or not target.is_relative_to(root / 'release-candidates'):
-        raise SystemExit('Need a new owned release-candidate directory')
-    acceptance = json.loads(args.acceptance.read_text())
-    if acceptance.get('complete') is not True or len(acceptance.get('optionalAndCombined', [])) != 10:
-        raise SystemExit('Complete feature, lifecycle and optional/combined acceptance is required')
-    expected_cells = {(version, loader) for version in VERSIONS
-                      for loader in ('fabric', 'forge') + (() if version == '1.20.1' else ('neoforge',))}
-    records = acceptance['cells']
-    if len(records) != 20 or {(row['minecraft'], row['loader']) for row in records} != expected_cells:
-        raise SystemExit('The complete 20-cell matrix is required')
-    prepared = []
-    for row in records:
-        version, loader = row['minecraft'], row['loader']
-        if not all(row.get(name) is True for name in ('buildPassed', 'nativePassed', 'serverPassed', 'clientPassed', 'multiplayerPassed', 'lifecyclePassed')):
-            raise SystemExit(f'Incomplete acceptance: {version}/{loader}')
-        repo = root / 'seamless-dogs' if version == '26.3' else root / f'.ports/dogs-multiversion/mc{version}/seamless-dogs'
-        api = root / '.ports/github-mc26.3/seamless-api' if version == '26.3' else repo.parent / 'seamless-api'
-        pins = HELPER['version_catalog'](repo / 'gradle/libs.versions.toml')
-        dogs = list((repo / loader / 'build/libs').glob(f'*-{loader}.jar'))
-        library = list((api / loader / 'build/libs').glob(f'*-{loader}.jar'))
-        if len(dogs) != 1 or len(library) != 1:
-            raise SystemExit(f'Ambiguous runtime output: {version}/{loader}')
-        jars = dogs + library
-        if not all(row['jars'].get(jar.name) == sha(jar) for jar in jars):
-            raise SystemExit(f'Runtime bytes changed after acceptance: {version}/{loader}')
-        with zipfile.ZipFile(dogs[0]) as archive:
-            if any(name.startswith('qa/') or '/gametest/' in name for name in archive.namelist()):
-                raise SystemExit('Test code found in release jar')
-        prepared.append((row, repo, api, pins, jars))
+    p=argparse.ArgumentParser();p.add_argument('--workspace',type=Path,required=True);p.add_argument('--acceptance',type=Path,required=True);p.add_argument('--destination',type=Path,required=True);a=p.parse_args()
+    w,target=a.workspace.resolve(),a.destination.resolve()
+    if target.exists() or not target.is_relative_to(w/'release-candidates'):raise SystemExit('Use a fresh owned release directory')
+    acceptance=json.loads(a.acceptance.read_text())
+    cells={(v,l) for v in VERSIONS for l in ('fabric','forge')+(() if v=='1.20.1' else ('neoforge',))}
+    rows=acceptance.get('cells',[])
+    if acceptance.get('complete') is not True or len(rows)!=11 or {(r['minecraft'],r['loader'])for r in rows}!=cells:raise SystemExit('Complete eleven-cell standalone acceptance is required')
+    prepared=[]
+    for row in rows:
+        v,l=row['minecraft'],row['loader'];repo=w/'seamless-dogs' if v=='26.3' else w/f'.ports/dogs-multiversion/mc{v}/seamless-dogs'
+        if not all(row.get(k) is True for k in ('buildPassed','nativePassed','serverPassed','clientPassed','multiplayerPassed','lifecyclePassed','combinedPassed')):raise SystemExit(f'Incomplete acceptance: {v}/{l}')
+        jars=list((repo/l/'build/libs').glob(f'*-{l}.jar'))
+        if len(jars)!=1 or row['jars'].get(jars[0].name)!=sha(jars[0]):raise SystemExit(f'Runtime bytes changed after acceptance: {v}/{l}')
+        with zipfile.ZipFile(jars[0]) as z:
+            if any(n.startswith(('qa/','com/derko/seamlessapi/')) or '/gametest/' in n for n in z.namelist()):raise SystemExit('Test code or library classes found in the gameplay JAR')
+            metadata=z.read('fabric.mod.json' if l=='fabric' else 'META-INF/mods.toml' if l=='forge' else 'META-INF/neoforge.mods.toml').decode()
+            if 'seamlessapi' in metadata:raise SystemExit('Standalone metadata still declares the library')
+        prepared.append((row,repo,jars[0]))
     target.mkdir(parents=True)
-    manifest = {'product': 'Seamless Dogs', 'license': 'All rights reserved', 'publication': 'local only',
-                'localAcceptance': 'passed', 'hostedCi': 'not executed; matching unpublished API refs require publication first',
-                'sourceBranches': list(VERSIONS), 'artifacts': [], 'acceptance': acceptance}
-    api_license = (root / '.ports/dogs-multiversion/mc1.21.1/seamless-api/LICENSE').read_text()
-    for row, repo, api, pins, jars in prepared:
-        version, loader = row['minecraft'], row['loader']
-        folder = target / f'mc{version}' / loader
-        mods = folder / 'mods'; mods.mkdir(parents=True)
-        for jar in jars: shutil.copy2(jar, mods / jar.name)
-        write(folder / 'LICENSE-Seamless-Dogs.txt', (repo / 'LICENSE').read_text())
-        write(folder / 'LICENSE-SeamlessLib-MIT.txt', api_license)
-        extra = (f"Fabric API {pins['fabric-api']} is also required; download the official jar:\n"
-                 f"https://maven.fabricmc.net/net/fabricmc/fabric-api/fabric-api/{pins['fabric-api']}/fabric-api-{pins['fabric-api']}.jar\n") if loader == 'fabric' else ''
-        write(folder / 'INSTALL.txt',
-            f"Seamless Dogs — Minecraft Java {version}, {loader}, Java {pins['java']}\n\n"
-            f"Install the selected loader ({pins['fabric-loader' if loader == 'fabric' else loader]}).\n"
-            "Copy both mods/*.jar files to the matching client/server mods folder.\n" + extra +
-            "Choose exactly one Minecraft/loader combination; never mix branches.\n\n"
-            "Look at your own tamed wolf within three blocks with an empty main\n"
-            "hand and press G. Rebind G in Options > Controls > Seamless Dogs.\n"
-            "The server and participating clients need Dogs and SeamlessLib.\n"
-            "Petting lasts two seconds, with a three-second cooldown from its start.\n"
-            "It does not heal, feed, tame or change sitting. The wolf has expressions\n"
-            "and a spatial pant; the hand/arm animates in both perspectives.\n\n"
-            "Configure visuals through Mod Menu (Fabric) or the native Mods screen.\n"
-            "Client config: config/seamlessdogs-client.properties.\n"
-            "Motion is stylized; custom texture UVs can disable eye expressions.\n"
-            + ("This NeoForge runtime is an upstream beta.\n" if loader == 'neoforge' and 'beta' in pins[loader] else ''))
-        sums = ''.join(f'{sha(jar)}  mods/{jar.name}\n' for jar in jars)
-        write(folder / 'SHA256SUMS.txt', sums)
-        archive_path = target / f'seamless-dogs-mc{version}-{loader}-install.zip'
-        with zipfile.ZipFile(archive_path, 'w', zipfile.ZIP_DEFLATED) as archive:
+    manifest={'product':'Seamless Dogs','version':'0.2.0','license':'All Rights Reserved','standalone':True,'publication':'local only','artifacts':[],'acceptance':acceptance}
+    for row,repo,jar in prepared:
+        v,l=row['minecraft'],row['loader'];folder=target/f'mc{v}'/l;mods=folder/'mods';mods.mkdir(parents=True)
+        shutil.copy2(jar,mods/jar.name);write(folder/'LICENSE.txt',(repo/'LICENSE').read_text())
+        extra=f"Fabric API {row['fabricApi']} is also required. Download it from the official Fabric project.\n" if l=='fabric' else ''
+        write(folder/'INSTALL.txt',f'''Seamless Dogs 0.2.0 — Minecraft {v}, {l}, Java {row['java']}
+
+Install the selected loader ({row['loaderVersion']}). Copy the Dogs JAR in mods/
+to the matching client and server mods folders. Choose one Minecraft/loader
+combination. SeamlessLib is not required or bundled.
+{extra}
+Look at your own tamed dog, cat or kitten within three blocks with an empty
+main hand and press G. Rebind it in Options > Controls > Seamless Dogs.
+Petting preserves ownership, health and sitting. Calm cats stretch, knead or
+groom every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes.
+Sounds originate from the pet. Both clients and server need this gameplay mod.
+
+Settings: optional Fabric Mod Menu or the Forge/NeoForge Mods screen. The
+settings key starts unbound. Client visuals, owner digging preferences and
+administrator world settings have separate scopes and Save/Cancel controls.
+Digging respects mobGriefing and supported claim systems. Unknown protection
+systems need a verified adapter before claim-aware support can be advertised.
+
+Original keyframes use vanilla rigs and resource-pack textures. Custom rigs or
+UV layouts can fall back; individual visuals can be disabled in settings.
+See acceptance.json for exact tests and limitations. All Rights Reserved.
+''')
+        write(folder/'acceptance.json',json.dumps({'cell':row,'limitations':acceptance.get('limitations',[])},indent=2)+'\n')
+        write(folder/'SHA256SUMS.txt',f'{sha(jar)}  mods/{jar.name}\n')
+        archive_path=target/f'seamless-dogs-0.2.0-mc{v}-{l}-standalone-install.zip'
+        with zipfile.ZipFile(archive_path,'w',zipfile.ZIP_DEFLATED) as z:
             for path in sorted(folder.rglob('*')):
-                if path.is_file(): archive.write(path, path.relative_to(folder).as_posix())
-        manifest['artifacts'].append({'minecraft': version, 'loader': loader, 'java': pins['java'],
-            'loaderVersion': pins['fabric-loader' if loader == 'fabric' else loader],
-            'fabricApi': pins['fabric-api'] if loader == 'fabric' else None,
-            'optionalModMenu': pins['modmenu'] if loader == 'fabric' else None,
-            'sourceCommit': commit(repo), 'librarySourceCommit': commit(api),
-            'jars': {jar.name: sha(jar) for jar in jars},
-            'installZip': archive_path.name, 'installZipSha256': sha(archive_path)})
-    write(target / 'artifacts.json', json.dumps(manifest, indent=2) + '\n')
-    links = {(row['minecraft'], row['loader']): f"[Install ZIP]({row['installZip']})"
-             for row in manifest['artifacts']}
-    matrix = '| Minecraft | Fabric | Forge | NeoForge |\n| --- | --- | --- | --- |\n'
-    for version in VERSIONS:
-        matrix += '| ' + version + ' | ' + ' | '.join(
-            links.get((version, loader), '—') for loader in ('fabric', 'forge', 'neoforge')) + ' |\n'
-    write(target / 'README.md',
-        '# Seamless Dogs — verified local release candidates\n\n'
-        'Twenty loader/version builds are organized by Minecraft version and loader.\n'
-        'Each install zip contains Dogs plus the matching independent MIT SeamlessLib.\n'
-        'Fabric API is downloaded separately using the exact link in INSTALL.txt.\n'
-        'Source/dependency commits, SHA-256 hashes and actual feature evidence are\n'
-        'recorded in artifacts.json. Test drivers, game libraries, Minecraft assets,\n'
-        'worlds, development jars and source jars are excluded.\n\n'
-        'Java 17: 1.20.1. Java 21: 1.21.1/1.21.11. Java 25: 26.x.\n'
-        'NeoForge 1.20.1 is excluded; NeoForge 26.1/26.3 pins are upstream betas.\n'
-        'Background software-rendered acceptance does not prove all hardware or\n'
-        'arbitrary mod packs. Public publishing and hosted CI have not run.\n\n'
-        + matrix)
-    print(f'Prepared 20 accepted local install bundles: {target}')
+                if path.is_file():z.write(path,path.relative_to(folder).as_posix())
+        manifest['artifacts'].append({'minecraft':v,'loader':l,'java':row['java'],'loaderVersion':row['loaderVersion'],'fabricApi':row.get('fabricApi'),'sourceCommit':subprocess.check_output(['git','-C',str(repo),'rev-parse','HEAD'],text=True).strip(),'jars':{jar.name:sha(jar)},'installZip':archive_path.name,'installZipSha256':sha(archive_path)})
+    write(target/'artifacts.json',json.dumps(manifest,indent=2)+'\n');write(target/'acceptance.json',json.dumps(acceptance,indent=2)+'\n')
+    write(target/'README.md','''# Seamless Dogs 0.2.0 — standalone install bundles
 
+Eleven builds cover 1.20.1 Fabric/Forge and 1.21.1, 26.2, 26.3 Fabric/Forge/NeoForge.
+Each ZIP contains one Dogs gameplay JAR and its installation/license/hash notes.
+Fabric API is an additional Fabric requirement. SeamlessLib is not included or
+required. Use the exact Minecraft version and loader. The acceptance record
+lists tested combinations, evidence and limitations. Publication is separate.
+''')
+    print(f'Prepared eleven accepted standalone install bundles: {target}')
 
-if __name__ == '__main__': main()
+if __name__=='__main__':main()

@@ -1,6 +1,27 @@
 {
-  "required": true, "minVersion": "0.8", "package": "io.github.derkottersberg.seamlessdogs.mixin.client",
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.derkottersberg.seamlessdogs.mixin",
   "compatibilityLevel": "JAVA_21",
-  "client": ["WolfStateMixin", "WolfRendererMixin", "WolfModelMixin", "PlayerModelMixin", "HandsInvoker", "HandsMixin", "HudMixin", "TexturesMixin"],
-  "injectors": {"defaultRequire": 1}
+  "client": [
+    "client.WolfStateMixin",
+    "client.WolfRendererMixin",
+    "client.WolfModelMixin",
+    "client.WolfEarRigMixin",
+    "client.PlayerModelMixin",
+    "client.HandsMixin",
+    "client.HudMixin",
+    "client.TexturesMixin",
+    "client.CatStateMixin",
+    "client.CatRendererMixin",
+    "client.CatModelMixin",
+    "client.FelineParts"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "MobGoalsAccess",
+    "PetGoalsMixin"
+  ]
 }

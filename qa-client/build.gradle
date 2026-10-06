@@ -59,3 +59,9 @@ tasks.named('jar',Jar) {
     archiveFileName="seamless-dogs-qa-${qaLoader}${modern?'':'-dev'}.jar"
 }
 if(!modern) tasks.named('remapJar') { archiveFileName="seamless-dogs-qa-${qaLoader}.jar" }
+
+repositories { maven { url="https://api.modrinth.com/maven" }; maven { url="https://maven.ftb.dev/releases" } }
+dependencies { compileOnly("maven.modrinth:open-parties-and-claims:${qaLoader}-26.3-0.32.8") { transitive=false } }
+
+repositories { maven { url="https://maven.nucleoid.xyz/" } }
+if(qaLoader=="fabric") dependencies { compileOnly("eu.pb4:common-protection-api:2.0.0") { transitive=false } }

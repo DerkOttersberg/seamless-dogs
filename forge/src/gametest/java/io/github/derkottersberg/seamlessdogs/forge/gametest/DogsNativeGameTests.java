@@ -14,6 +14,10 @@ public final class DogsNativeGameTests {
             event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "rejectinvalidrequests"), () -> DogsScenarios::rejectInvalidRequests);
             event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "cooldownandcancellation"), () -> DogsScenarios::cooldownAndCancellation);
             event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "codecroundtrip"), () -> DogsScenarios::codecRoundTrip);
+            event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "catownership"), () -> DogsScenarios::catOwnership);
+            event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "diggingterrain"), () -> DogsScenarios::diggingTerrain);
+            event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "v2codecroundtrip"), () -> DogsScenarios::v2CodecRoundTrip);
+            event.register(Registries.TEST_FUNCTION, Identifier.fromNamespaceAndPath("seamlessdogs", "idlecontracts"), () -> DogsScenarios::idleContracts);
         });
     }
 }

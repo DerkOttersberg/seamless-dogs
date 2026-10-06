@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "qa.dogs.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": [
+    "SoundProbe",
+    "WolfProbe",
+    "RenderProbe",
+    "HandProbe",
+    "PromptProbe",
+    "ClientServicesProbe"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "IdleStateAccess"
+  ]
+}

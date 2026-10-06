@@ -16,13 +16,16 @@ public final class DogsFabricClient implements ClientModInitializer {
     public static final KeyMapping PET = DogsKeys.PET;
     public void onInitializeClient() {
         KeyMappingHelper.registerKeyMapping(PET);
+        KeyMappingHelper.registerKeyMapping(DogsKeys.SETTINGS);
         DogsClient.initialize(new Services());
         ClientPlayNetworking.registerGlobalReceiver(PetState.TYPE, (state, context) -> context.client().execute(() -> DogsClient.receive(state)));
+        ClientPlayNetworking.registerGlobalReceiver(PetUpdate.TYPE, (state,context) -> context.client().execute(() -> DogsClient.receive(state)));
         ClientTickEvents.END_CLIENT_TICK.register(DogsClient::tick);
     }
     private static final class Services implements ClientPlatformServices {
         public Path configDirectory() { return FabricLoader.getInstance().getConfigDir(); }
         public KeyMapping petKey() { return PET; }
+        public boolean serverSupportsV2() { return ClientPlayNetworking.canSend(PetControl.TYPE); }
         public boolean serverSupportsPetting() { return ClientPlayNetworking.canSend(PetRequest.TYPE); }
         public void sendToServer(CustomPacketPayload packet) { ClientPlayNetworking.send(packet); }
     }

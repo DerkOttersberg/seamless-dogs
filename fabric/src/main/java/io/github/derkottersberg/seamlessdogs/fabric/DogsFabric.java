@@ -13,6 +13,9 @@ public final class DogsFabric implements ModInitializer {
     public void onInitialize() {
         SeamlessDogs.initialize(new Services());
         PayloadTypeRegistry.serverboundPlay().register(PetRequest.TYPE, PetRequest.CODEC);
+        PayloadTypeRegistry.serverboundPlay().register(PetControl.TYPE, PetControl.CODEC);
+        PayloadTypeRegistry.clientboundPlay().register(PetUpdate.TYPE, PetUpdate.CODEC);
+        ServerPlayNetworking.registerGlobalReceiver(PetControl.TYPE, (packet, context) -> context.server().execute(() -> SeamlessDogs.control(context.player(),packet)));
         PayloadTypeRegistry.clientboundPlay().register(PetState.TYPE, PetState.CODEC);
         ServerPlayNetworking.registerGlobalReceiver(PetRequest.TYPE, (packet, context) -> context.server().execute(() -> SeamlessDogs.request(context.player(), packet)));
         ServerTickEvents.END_SERVER_TICK.register(SeamlessDogs::tick);
@@ -22,7 +25,15 @@ public final class DogsFabric implements ModInitializer {
         ServerLifecycleEvents.SERVER_STOPPED.register(server -> SeamlessDogs.clear());
     }
     private static final class Services implements PlatformServices {
+        public boolean supportsV2(ServerPlayer player) { return ServerPlayNetworking.canSend(player,PetUpdate.TYPE); }
+        public boolean mayDig(ServerPlayer owner, net.minecraft.world.entity.TamableAnimal pet, net.minecraft.core.BlockPos pos, boolean commit) {
+            if (!DogsFabricProtection.allowed(owner,pet,pos)) return false;
+            return !commit || net.fabricmc.fabric.api.event.player.PlayerBlockBreakEvents.BEFORE.invoker().beforeBlockBreak(pet.level(),owner,pos,pet.level().getBlockState(pos),null);
+        }
+        public String protectionStatus() { return DogsFabricProtection.status(); }
         public void sendToPlayer(ServerPlayer player, CustomPacketPayload packet) {
+            if(packet instanceof PetUpdate update && !SeamlessDogs.mayReceive(player,update))return;
+            if (packet instanceof PetState && supportsV2(player)) return;
             if (player.connection != null && ServerPlayNetworking.canSend(player, packet.type())) ServerPlayNetworking.send(player, packet);
         }
         public void sendToTrackingAndSelf(ServerPlayer player, Entity dog, CustomPacketPayload packet) {
