@@ -10,7 +10,8 @@
     "FrameCaptureProbe",
     "PromptProbe",
     "ClientServicesProbe",
-    "ActionPacketProbe"
+    "ActionPacketProbe",
+    "SkinProbeMixin"
   ],
   "injectors": {
     "defaultRequire": 1

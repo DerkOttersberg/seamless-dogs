@@ -19,6 +19,9 @@ public abstract class HandProbe {
     @Inject(method="renderPlayerArm",at=@At("TAIL"))
     private void qa$hand(CallbackInfo ci) {
         var player=Minecraft.getInstance().player;
-        if(player!=null&&DogsClient.playerSample(player.getId(),0).weight()>.2F)ClientProbe.hands++;
+        if(player!=null&&DogsClient.playerSample(player.getId(),0).weight()>.2F){
+            ClientProbe.hands++;
+            qa.dogs.SkinProbe.record(player.getSkin().model().name());
+        }
     }
 }

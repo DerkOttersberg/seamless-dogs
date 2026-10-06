@@ -19,6 +19,7 @@ public abstract class RenderProbe {
     @Inject(method="render(Lnet/minecraft/world/entity/LivingEntity;FFLcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;I)V",
         at=@At(value="INVOKE",target="Lnet/minecraft/client/model/EntityModel;setupAnim(Lnet/minecraft/world/entity/Entity;FFFFF)V",shift=At.Shift.AFTER))
     private void qa$completedPose(LivingEntity entity,float yaw,float partial,PoseStack pose,MultiBufferSource buffers,int light,CallbackInfo ci) {
+        if(entity instanceof net.minecraft.world.entity.animal.Cat || entity instanceof Wolf)qa.dogs.ObserverProbe.rendered(entity.getUUID());
         if(entity instanceof net.minecraft.world.entity.animal.Cat cat){
             qa.dogs.PetFeatureProbe.catFrames++;
             var texture=((net.minecraft.client.renderer.entity.CatRenderer)(Object)this).getTextureLocation(cat);
@@ -76,6 +77,7 @@ public abstract class RenderProbe {
                 var sleeve=right?player.rightSleeve:player.leftSleeve;
                 if(!Float.isFinite(arm.xRot) || Math.abs(arm.xRot)<0.1F || Math.abs(sleeve.xRot-arm.xRot)>0.001F)
                     throw new IllegalStateException("Invalid player arm/sleeve");
+                qa.dogs.SkinProbe.record(((net.minecraft.client.player.AbstractClientPlayer)entity).getSkin().model().name());
                 ClientProbe.playerModels++;
             }
         }
