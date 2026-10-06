@@ -26,10 +26,19 @@ except ModuleNotFoundError:  # Windows' existing Python 3.10 is sufficient.
     tomllib = None
 
 
+OWNED_ROOTS = (Path('/root/seamless-dogs-production-20261005'),
+               Path('/mnt/d/SeamlessDogsProduction-20261006'))
+
+
+def owned_profile(path):
+    resolved = Path(path).resolve()
+    return any(resolved != root and resolved.is_relative_to(root) for root in OWNED_ROOTS)
+
+
 def copy_cache_file(source, destination):
     """Share immutable cached JARs; metadata and worlds always remain independent."""
     source_path=Path(source).resolve()
-    if source_path.suffix=='.jar' and source_path.is_relative_to(Path('/root/seamless-dogs-production-20261005')):
+    if source_path.suffix=='.jar' and owned_profile(source_path):
         try:
             os.link(source_path,destination)
             return str(destination)
@@ -112,7 +121,7 @@ def main() -> None:
     parser.add_argument("--installed-from", type=Path, help="Reuse immutable official libraries from an earlier owned profile")
     args = parser.parse_args()
     repo, stage = args.repo.resolve(), args.stage.resolve()
-    allowed = [repo / ".qa", Path("/root/seamless-dogs-production-20261005")]
+    allowed = [repo / ".qa", *OWNED_ROOTS]
     if stage.exists() or not any(stage.is_relative_to(root.resolve()) for root in allowed):
         raise SystemExit("Need a fresh profile under the owned Dogs QA directory")
     catalog = version_catalog(repo / "gradle/libs.versions.toml")
@@ -159,14 +168,23 @@ def main() -> None:
         launch = base + ["-Xms256M", "-Xmx1G", f"@libraries/{group}/{runtime}/{argument_file}", "nogui"]
     if args.installed_from:
         source = args.installed_from.resolve()
-        if loader == "fabric" or not any(source.is_relative_to(root.resolve()) for root in allowed):
+        if not any(source.is_relative_to(root.resolve()) for root in allowed):
             raise SystemExit("Installer reuse requires an owned Forge/NeoForge profile")
-        required = source / "libraries" / group / runtime / argument_file
+        if loader == "fabric":
+            accepted = json.loads((source / 'server-passed.json').read_text())
+            if (accepted['minecraft'], accepted['loader'], accepted['runtimeLoader']) != (minecraft, loader, runtime):
+                raise SystemExit('Cached Fabric installation does not match selected pins')
+            required = source / 'fabric-server-launch.jar'
+        else:
+            required = source / "libraries" / group / runtime / argument_file
         if not required.is_file():
             raise SystemExit("Cached installation does not match the selected loader version")
         shutil.copytree(source / "libraries", stage / "libraries", copy_function=copy_cache_file)
-        for shim in source.glob("*-shim.jar"):
-            shutil.copy2(shim, stage / shim.name)
+        for pattern in ('*-shim.jar', 'fabric-server-launch.jar', 'fabric-server-launcher.properties', 'server.jar'):
+            for shim in source.glob(pattern):
+                shutil.copy2(shim, stage / shim.name)
+        if (source / 'versions').is_dir():
+            shutil.copytree(source / 'versions', stage / 'versions', copy_function=copy_cache_file)
         (stage / "installer.log").write_text(f"Reused official installer libraries from {source}\n")
     else:
         with (stage / "installer.log").open("w") as output:
