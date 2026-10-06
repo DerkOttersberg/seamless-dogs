@@ -35,3 +35,12 @@ now renders its contextual prompt correctly.
 Fabric-only MVP: G keybind and target prompt, server-authorized petting,
 first/third-person arm stroke, head tilt/tail wag, adult happy/blinking eyes,
 the wolf's own entity-bound pant, client settings, and isolated QA harness.
+
+The World/server switch is labelled Pet idle expressions on all four branches.
+It controls cat stretches, kneading and chest grooming plus dog gaze reactions;
+the existing saved-world flag and protocol bit are preserved.
+
+The 1.20.1 native test fixture installs deterministic loot through Fabric's
+replacement event and verifies the loaded table. Reward counting includes all
+mock owners, including those absent from the normal entity query. This fixture
+is isolated in the gametest source set and excluded from gameplay JARs.

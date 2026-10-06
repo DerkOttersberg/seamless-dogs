@@ -17,10 +17,12 @@ import java.util.UUID;
 @SuppressWarnings("removal")
 public final class DogsScenarios {
     private static java.util.function.Function<GameTestHelper,ServerPlayer> playerFactory=GameTestHelper::makeMockServerPlayerInLevel;
+    private static final java.util.Set<ServerPlayer> fixtureOwners=new java.util.HashSet<>();
     public static void usePlayerFactory(java.util.function.Function<GameTestHelper,ServerPlayer> factory){playerFactory=factory;}
     private record Fixture(ServerPlayer owner, Wolf dog) { }
     private static Fixture fixture(GameTestHelper h) {
         ServerPlayer owner = playerFactory.apply(h);
+        fixtureOwners.add(owner);
         for (int x = 0; x < 3; x++) for (int z = 0; z < 4; z++) {
             h.setBlock(new BlockPos(x, 0, z), Blocks.STONE.defaultBlockState());
             // NeoForge's empty template encloses the fixture in barriers.
@@ -152,6 +154,13 @@ public final class DogsScenarios {
         try(var input=server.getResourceManager().open(SeamlessDogs.id("loot_tables/digging/finds.json"))){
             org.slf4j.LoggerFactory.getLogger("SeamlessDogsTests").info("QA selected deterministic loot: {}",new String(input.readAllBytes(),java.nio.charset.StandardCharsets.UTF_8));
         }catch(java.io.IOException failure){throw new IllegalStateException("Missing deterministic native loot fixture",failure);}
+        var lootParams=new net.minecraft.world.level.storage.loot.LootParams.Builder(h.getLevel())
+            .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.ORIGIN,f.dog.position())
+            .withParameter(net.minecraft.world.level.storage.loot.parameters.LootContextParams.THIS_ENTITY,f.dog)
+            .create(net.minecraft.world.level.storage.loot.parameters.LootContextParamSets.GIFT);
+        var fixtureLoot=server.getLootData().getLootTable(SeamlessDogs.id("digging/finds")).getRandomItems(lootParams);
+        h.assertTrue(fixtureLoot.size()==1&&fixtureLoot.get(0).is(Items.BONE)&&fixtureLoot.get(0).getCount()==1,
+            "Loaded native loot table differs from the deterministic fixture: "+fixtureLoot);
 
         var original=privateState("platform",io.github.derkottersberg.seamlessdogs.internal.PlatformServices.class);
         var allow=new java.util.concurrent.atomic.AtomicBoolean(false);
@@ -212,7 +221,11 @@ public final class DogsScenarios {
             int bones=h.getLevel().getEntitiesOfClass(net.minecraft.world.entity.item.ItemEntity.class,f.dog.getBoundingBox().inflate(5)).stream().filter(e->e.getItem().is(Items.BONE)).mapToInt(e->e.getItem().getCount()).sum();
             var nearbyPlayers=new java.util.HashSet<>(h.getLevel().getEntitiesOfClass(ServerPlayer.class,f.dog.getBoundingBox().inflate(128)));
             nearbyPlayers.add(f.owner); // Mock owners need not be present in the level's entity query.
+            // The 1.20.1 mock-player factory can omit other test owners from that query too.
+            nearbyPlayers.addAll(fixtureOwners);
             bones+=nearbyPlayers.stream().flatMap(player->player.getInventory().items.stream()).filter(stack->stack.is(Items.BONE)).mapToInt(ItemStack::getCount).sum();
+            org.slf4j.LoggerFactory.getLogger("SeamlessDogsTests").info("QA completed dig reward count={} mock-owner inventories={}",bones,
+                fixtureOwners.stream().map(p->p.getUUID()+":"+p.getInventory().items.stream().filter(s->s.is(Items.BONE)).mapToInt(ItemStack::getCount).sum()).toList());
             h.assertTrue(bones==1,"Bonus loot generated more than once, or missing deterministic test loot: "+bones);
             h.getLevel().setBlockAndUpdate(site,Blocks.DIRT.defaultBlockState());state.schedule(f.dog.getUUID(),0);
         });
