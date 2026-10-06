@@ -321,6 +321,8 @@ def main() -> None:
     required = ['DOGS_REBIND_PASS', 'DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
     if not args.hand_only:
         required.append('DOGS_SKIN_MODELS_PASS')
+        if minecraft in ('1.20.1','1.21.1'):
+            required.append('DOGS_PLAYER_POSE_PASS')
     if args.modmenu:
         required.append('DOGS_MODMENU_CONFIG_PASS')
     if args.extra_mod_dir and inputs.get('protection'):

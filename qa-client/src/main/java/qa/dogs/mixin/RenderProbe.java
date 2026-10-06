@@ -71,6 +71,10 @@ public abstract class RenderProbe {
         }
         if(model instanceof PlayerModel<?> player) {
             var sample=DogsClient.playerSample(entity.getId(),partial);
+            for(var part:new net.minecraft.client.model.geom.ModelPart[]{player.head,player.hat,player.body,player.jacket,player.leftArm,player.leftSleeve,player.rightArm,player.rightSleeve})
+                if(!Float.isFinite(part.y)||!Float.isFinite(part.z)||Math.abs(part.y)>20||Math.abs(part.z)>20)
+                    throw new IllegalStateException("Accumulating native player pose: y="+part.y+" z="+part.z);
+            if(sample.weight()>0.2F&&DogsClient.bendToPet(entity.getId()))qa.dogs.SkinProbe.playerPoseChecks++;
             if(sample.weight()>0.2F) {
                 boolean right=entity.getMainArm()==HumanoidArm.RIGHT;
                 var arm=right?player.rightArm:player.leftArm;

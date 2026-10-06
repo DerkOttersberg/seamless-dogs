@@ -67,6 +67,10 @@ def isolated(stage):
             if not (game / marker).is_file() or (game / 'dogs-client-failed.txt').exists():
                 raise RuntimeError(f'Paired {role} did not pass')
         text = (stage / 'observer/client-console.log').read_text(errors='replace')
+        if metadata['minecraft'] in ('1.20.1','1.21.1'):
+            for role in ('owner','observer'):
+                if 'DOGS_PLAYER_POSE_PASS' not in (stage/role/'client-console.log').read_text(errors='replace'):
+                    raise RuntimeError(f'{role} omitted native player pose bounds')
         for marker in ('DOGS_SKIN_MODELS_PASS', 'DOGS_OBSERVER_RENDER_AND_SOUND_PASS', 'DOGS_OBSERVER_LATE_TRACKING_PASS', 'DOGS_OBSERVER_PASS'):
             if marker not in text:
                 raise RuntimeError(f'Observer omitted {marker}')
@@ -112,7 +116,7 @@ def isolated(stage):
         (stage / 'pair-passed.json').write_text(json.dumps({
             'minecraft': metadata['minecraft'], 'loader': metadata['loader'], 'jars': actual,
             'gate': 'two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect',
-            'display': os.environ['DISPLAY'],'observerCaptures':captures,'worldRestartPassed':True,'captureTiming':'settled camera, native pet submitted, completed frame','skinModelsPassed':True}, indent=2))
+            'display': os.environ['DISPLAY'],'observerCaptures':captures,'worldRestartPassed':True,'captureTiming':'settled camera, native pet submitted, completed frame','skinModelsPassed':True,'playerPosePassed':True,'playerPoseRequired':metadata['minecraft'] in ('1.20.1','1.21.1')}, indent=2))
         print(f"PASS paired real clients {metadata['minecraft']}/{metadata['loader']}", flush=True)
     finally:
         for process in reversed(processes):
