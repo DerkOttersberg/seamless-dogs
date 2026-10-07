@@ -71,6 +71,8 @@ public final class DogsSettingsScreen extends Screen {
     public void tick(){if(pending&&++pendingTicks>100){pending=false;error="Server did not confirm the save. Refresh and try again.";DogsClient.refreshSettings();rebuildWidgets();}}
     public void render(GuiGraphics graphics,int mouseX,int mouseY,float partial) {
         graphics.fill(0,0,width,height,0xF0182125);
+        // Screen draws its native blurred background before widgets. Labels must follow it.
+        super.render(graphics,mouseX,mouseY,partial);
         graphics.drawCenteredString(font,title,width/2,height<230?8:14,0xFFFFFFFF);
         String scope=page==0?"This client's visuals":page==1?"Your pets in this world":"Server rules · host or permission level 2";
         graphics.drawCenteredString(font,Component.literal(scope),width/2,height<230?22:32,0xFFB7E8BD);
@@ -80,6 +82,5 @@ public final class DogsSettingsScreen extends Screen {
             for(var line:font.split(Component.literal(status),Math.min(340,width-24))) {if(y>height-(!error.isEmpty()?54:38))break;graphics.drawString(font,line,(width-font.width(line))/2,y,0xFFCCCCCC,false);y+=10;}
         }
         if(!error.isEmpty())graphics.drawCenteredString(font,Component.literal(error),width/2,height-44,0xFFFF8888);
-        super.render(graphics,mouseX,mouseY,partial);
     }
 }
