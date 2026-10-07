@@ -1,0 +1,486 @@
+{
+  "schemaVersion": 1,
+  "product": "Seamless Dogs",
+  "version": "0.2.0",
+  "recordedAtUtc": "2026-10-07T11:11:00.061505+00:00",
+  "timezone": "Europe/Amsterdam",
+  "project": {
+    "projectId": 1730435,
+    "title": "Good Boy: Better Pets",
+    "author": "Seamlessmods",
+    "license": "All Rights Reserved",
+    "sourceUrl": "https://github.com/DerkOttersberg/seamless-dogs",
+    "sourceVerified": true,
+    "existingDescriptionPreserved": true,
+    "existingMediaPreserved": true,
+    "projectApprovalPending": true,
+    "publicAvailabilityVerified": false,
+    "publicFilesUrl": "https://www.curseforge.com/minecraft/mc-mods/good-boy-better-pets/files/all?page=1&pageSize=20&showAlphaFiles=hide",
+    "publicFilesObservation": "404 while new project awaits moderator approval; preview Download disabled",
+    "observedAtUtc": "2026-10-07T11:09:57.293Z",
+    "publicationMode": "Automatic once approved",
+    "submittedCount": 11
+  },
+  "uploads": [
+    {
+      "minecraft": "1.20.1",
+      "loader": "fabric",
+      "java": 17,
+      "loaderVersion": "0.19.5",
+      "filename": "seamless-dogs-0.2.0+mc1.20.1-fabric.jar",
+      "sha256": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+      "sourceCommit": "ee91e4874d602c238940c2c1beb3fe3236f6d781",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 1.20.1 - Fabric",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [
+        "Fabric API"
+      ],
+      "optionalProjects": [
+        "Mod Menu"
+      ],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 1.20.1, Fabric, Java 17\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. Requires Fabric API 0.92.12+1.20.1. Mod Menu is optional.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/1.20.1\nAll Rights Reserved.\n",
+      "fileId": 9088340,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088340",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:07:59.738Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "ffbc138bb72682d85f35dcfccffd04ebeea11d20",
+      "evidence": [
+        {
+          "file": "1.20.1-fabric-form.txt",
+          "sha256": "9fd114f06d5c678c33e710750a1b119f78a4fedaa60fefd31026a38923ac85f9"
+        },
+        {
+          "file": "1.20.1-fabric-saved.txt",
+          "sha256": "f4e64b1c5b141ad8ac0f2db608064754a02633b09f1031b483b1f7f1836f16af"
+        },
+        {
+          "file": "1.20.1-fabric-saved.jpg",
+          "sha256": "bbe8b7c6761187747439acab5a4e244854b3bce5ac8ed9a4b98212a9432dcc3d"
+        }
+      ]
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "forge",
+      "java": 17,
+      "loaderVersion": "1.20.1-47.4.26",
+      "filename": "seamless-dogs-0.2.0+mc1.20.1-forge.jar",
+      "sha256": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+      "sourceCommit": "ee91e4874d602c238940c2c1beb3fe3236f6d781",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 1.20.1 - Forge",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 1.20.1, Forge, Java 17\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/1.20.1\nAll Rights Reserved.\n",
+      "fileId": 9088353,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088353",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "ffbc138bb72682d85f35dcfccffd04ebeea11d20",
+      "evidence": [
+        {
+          "file": "1.20.1-forge-form.txt",
+          "sha256": "37f3069016609fa9ba0680c3e262e85b31669e29991baeed6090a814305a3f55"
+        },
+        {
+          "file": "1.20.1-forge-saved.txt",
+          "sha256": "589c1c742a1de47e003e2a092e9d2ea455635c34b2a702a0429aced41b46ad21"
+        },
+        {
+          "file": "1.20.1-forge-saved.jpg",
+          "sha256": "6cd54bc698182febd5a521c0d2bc1e087fcb530f528cbc2201d1e6a796dcb74b"
+        }
+      ]
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "fabric",
+      "java": 21,
+      "loaderVersion": "0.19.5",
+      "filename": "seamless-dogs-0.2.0+mc1.21.1-fabric.jar",
+      "sha256": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+      "sourceCommit": "206012c068e553cce6b73a8060815495f54be044",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 1.21.1 - Fabric",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [
+        "Fabric API"
+      ],
+      "optionalProjects": [
+        "Mod Menu"
+      ],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 1.21.1, Fabric, Java 21\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. Requires Fabric API 0.116.17+1.21.1. Mod Menu is optional.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/1.21.1\nAll Rights Reserved.\n",
+      "fileId": 9088377,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088377",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
+      "evidence": [
+        {
+          "file": "1.21.1-fabric-form.txt",
+          "sha256": "9c5f058ac6bcb8d8c846a9bd8b25976ab55199282415debc538f5b51996a94a1"
+        },
+        {
+          "file": "1.21.1-fabric-saved.txt",
+          "sha256": "b6f192e89fd2611979e5f2f6789cb02dee22dac9c3cd2e5c1e77d70ed606291c"
+        },
+        {
+          "file": "1.21.1-fabric-saved.jpg",
+          "sha256": "04aca493397275b700b326546b2298f3c6a27c0523ca198c9787154221f4ca0f"
+        }
+      ]
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "forge",
+      "java": 21,
+      "loaderVersion": "1.21.1-52.1.16",
+      "filename": "seamless-dogs-0.2.0+mc1.21.1-forge.jar",
+      "sha256": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+      "sourceCommit": "206012c068e553cce6b73a8060815495f54be044",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 1.21.1 - Forge",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 1.21.1, Forge, Java 21\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. Forge 52 singleplayer was validated through the normal title/world flow; early Quick Play startup is outside the accepted launch path.\n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/1.21.1\nAll Rights Reserved.\n",
+      "fileId": 9088382,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088382",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
+      "evidence": [
+        {
+          "file": "1.21.1-forge-form.txt",
+          "sha256": "8018ea7f440416dad6492ff9bb3c2e792189869de8217f0c35ce43d5049c07ad"
+        },
+        {
+          "file": "1.21.1-forge-saved.txt",
+          "sha256": "6a63844d5c0599d76832e1311498f6be9fd20cf01d1398c9faeb92d4521a04ab"
+        },
+        {
+          "file": "1.21.1-forge-saved.jpg",
+          "sha256": "1c831bb361124658e2f013d4a11c6bebf8ada6d3c84e00a9e8426babb0d20188"
+        }
+      ]
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "neoforge",
+      "java": 21,
+      "loaderVersion": "21.1.255",
+      "filename": "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar",
+      "sha256": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+      "sourceCommit": "206012c068e553cce6b73a8060815495f54be044",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 1.21.1 - NeoForge",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 1.21.1, NeoForge, Java 21\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/1.21.1\nAll Rights Reserved.\n",
+      "fileId": 9088387,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088387",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
+      "evidence": [
+        {
+          "file": "1.21.1-neoforge-form.txt",
+          "sha256": "c317ead3e8c15cfb2d094303085cfa51d6c5bca7d2ddc1acc737273bd851ce90"
+        },
+        {
+          "file": "1.21.1-neoforge-saved.txt",
+          "sha256": "846497fa9e3baeccd9aa83f21b045eced3a644b771f4b24d73433fd504d9caaf"
+        },
+        {
+          "file": "1.21.1-neoforge-saved.jpg",
+          "sha256": "04c6b8c1328ff498fdb0b7859c6ce003de1394901ba57db24cb33bce7d761a49"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "fabric",
+      "java": 25,
+      "loaderVersion": "0.19.5",
+      "filename": "seamless-dogs-0.2.0+mc26.2-fabric.jar",
+      "sha256": "ef470d1251e0411d4b7cf89ca396ccd0de094f68bfcfc9bac86e414805c4e3e5",
+      "sourceCommit": "4670b9d77bf867c1ca51ffaed6df373b2cf9c877",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.2 - Fabric",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [
+        "Fabric API"
+      ],
+      "optionalProjects": [
+        "Mod Menu"
+      ],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.2, Fabric, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. Requires Fabric API 0.159.0+26.2. Mod Menu is optional.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.2\nAll Rights Reserved.\n",
+      "fileId": 9088390,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088390",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
+      "evidence": [
+        {
+          "file": "26.2-fabric-form.txt",
+          "sha256": "6583768f78a92f30d7a0364aab7465a6fd40d530f9017754a722b7956a8a4420"
+        },
+        {
+          "file": "26.2-fabric-saved.txt",
+          "sha256": "b98e8ae66b2a472d2cdc6be88b206d8ea34c4c0cf32a4c93f00707a24b3f7a9c"
+        },
+        {
+          "file": "26.2-fabric-saved.jpg",
+          "sha256": "796036d91966f4df49a5001547792ab7554b3a6ba9a42392995aa45d3e39eee2"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "forge",
+      "java": 25,
+      "loaderVersion": "26.2-65.1.3",
+      "filename": "seamless-dogs-0.2.0+mc26.2-forge.jar",
+      "sha256": "f70091a047639a370acbc25cc2414e665128d926ba8e87a4f822b9a90c0d00bb",
+      "sourceCommit": "4670b9d77bf867c1ca51ffaed6df373b2cf9c877",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.2 - Forge",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.2, Forge, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.2\nAll Rights Reserved.\n",
+      "fileId": 9088394,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088394",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
+      "evidence": [
+        {
+          "file": "26.2-forge-form.txt",
+          "sha256": "fa1ada8480cac910a9fe7d65e96c2e596c17bc5b97feb6c747feb68aebeffb11"
+        },
+        {
+          "file": "26.2-forge-saved.txt",
+          "sha256": "98b0f53b867dffbb4cf3ac99aa81ad1dd90d350361dd72e83d2bff6ede6557f2"
+        },
+        {
+          "file": "26.2-forge-saved.jpg",
+          "sha256": "e94413c461c62f1165aad65c09cee73496fcf1556d78628b6c6f351ff164c193"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.2",
+      "loader": "neoforge",
+      "java": 25,
+      "loaderVersion": "26.2.0.75",
+      "filename": "seamless-dogs-0.2.0+mc26.2-neoforge.jar",
+      "sha256": "55952e683ea21035884440b405cbabd9439c50905e8aab36b37e88e9003f1ff2",
+      "sourceCommit": "4670b9d77bf867c1ca51ffaed6df373b2cf9c877",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.2 - NeoForge",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.2, NeoForge, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.2\nAll Rights Reserved.\n",
+      "fileId": 9088396,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088396",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
+      "evidence": [
+        {
+          "file": "26.2-neoforge-form.txt",
+          "sha256": "38533e7bd47e603ff2b871bd210b42a69d322fc9591476daff5cadb8d37b89df"
+        },
+        {
+          "file": "26.2-neoforge-saved.txt",
+          "sha256": "8f588a087598feca4fb00e0a3a0a65e92be92872e5fbbf1ce73586c863d26752"
+        },
+        {
+          "file": "26.2-neoforge-saved.jpg",
+          "sha256": "01d39f74f59d63bff6ef3bdd60f1c8400843b9034fb1b49309193d1c5a13ecea"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "fabric",
+      "java": 25,
+      "loaderVersion": "0.19.5",
+      "filename": "seamless-dogs-0.2.0+mc26.3-fabric.jar",
+      "sha256": "c5bcdaf680991d225ee7ea2c2da4345dc0aee06d2566d014d862d9deaea49c8d",
+      "sourceCommit": "303bcf083031f8e6aae330a2c2676e6994c19c1c",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.3 - Fabric",
+      "releaseType": "Release",
+      "environment": "Client and Server",
+      "requiredProjects": [
+        "Fabric API"
+      ],
+      "optionalProjects": [
+        "Mod Menu"
+      ],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.3, Fabric, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. Requires Fabric API 0.161.0+26.3. Mod Menu is optional.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. \n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.3\nAll Rights Reserved.\n",
+      "fileId": 9088399,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088399",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
+      "evidence": [
+        {
+          "file": "26.3-fabric-form.txt",
+          "sha256": "274a7a2e4a74eb4cc929bb5a9de8b586cd7d5e0d809b36157da5dd3c239e6427"
+        },
+        {
+          "file": "26.3-fabric-saved.txt",
+          "sha256": "21d1f04fe84f340ef4ff5608f2db728267db13aea05f2e78fef59e76910cd05d"
+        },
+        {
+          "file": "26.3-fabric-saved.jpg",
+          "sha256": "fb6097a81245dd96240fd43ff67c92ea70e0a492087c561a856a7d7d40169320"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "forge",
+      "java": 25,
+      "loaderVersion": "26.3-66.0.9",
+      "filename": "seamless-dogs-0.2.0+mc26.3-forge.jar",
+      "sha256": "56aebaed6739a89b3efc668679d2bfc1ded2ab1a7fe649faf84d4d529feda6f2",
+      "sourceCommit": "303bcf083031f8e6aae330a2c2676e6994c19c1c",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.3 - Forge",
+      "releaseType": "Beta",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.3, Forge, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. This build uses an upstream beta loader and is labeled Beta.\n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.3\nAll Rights Reserved.\n",
+      "fileId": 9088400,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088400",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
+      "evidence": [
+        {
+          "file": "26.3-forge-form.txt",
+          "sha256": "75d7fe822537732b8963a25ffdfad17baabdab51ed047a4346615a115aa16acb"
+        },
+        {
+          "file": "26.3-forge-saved.txt",
+          "sha256": "1275e4684a00f4c564389a8f09c7dc98918e23a5d2fe6bbcff226b77b49df5b5"
+        },
+        {
+          "file": "26.3-forge-saved.jpg",
+          "sha256": "8618f32d477ca567fc318c5bbf6ed6fef85d8c42117932aba4dfac9370116d9d"
+        }
+      ]
+    },
+    {
+      "minecraft": "26.3",
+      "loader": "neoforge",
+      "java": 25,
+      "loaderVersion": "26.3.0.48-beta",
+      "filename": "seamless-dogs-0.2.0+mc26.3-neoforge.jar",
+      "sha256": "77f341648ca1dcf4052a36d70a07f5da719a0c0bb90b96233d7c8858bdf295fd",
+      "sourceCommit": "303bcf083031f8e6aae330a2c2676e6994c19c1c",
+      "displayName": "Good Boy: Better Pets 0.2.0 - MC 26.3 - NeoForge",
+      "releaseType": "Beta",
+      "environment": "Client and Server",
+      "requiredProjects": [],
+      "optionalProjects": [],
+      "publicationMode": "Automatic after approval",
+      "changelog": "Good Boy: Better Pets 0.2.0 — Minecraft 26.3, NeoForge, Java 25\n\nInitial standalone release. Pet your owned dogs, cats and kittens with an empty main hand using G. Rebind petting to a keyboard key or mouse button in Minecraft Controls or Client visuals > Petting key; Escape unbinds it and hides the prompt.\n\nOriginal animations fitted to vanilla models: cat stretching, kneading biscuits and chest grooming; dog digging and head/ear reactions. Petting includes eye expressions and sounds from the animal, with first-person hands and third-person observers. Paw-to-face grooming has been removed.\n\nCalm cats act every 3–6 minutes; adult dogs attempt a dig every 10–20 minutes. Dog digging removes one safe exposed eligible block, plays block-specific sounds and can occasionally find a bonus item. Owner preferences and administrator world rules control digging and idle behavior; client visual settings are separate.\n\nInstall this exact Minecraft/loader build on the server and participating clients. SeamlessLib is not required or bundled. No additional runtime library is required.\n\nDigging honors mobGriefing, spawn protection, native cancellation and the tested protection adapters. Other claim systems require verified adapters. Optional renderer/protection combinations and exact tested builds are listed in the repository acceptance documentation. Unsupported custom rigs or eye layouts can fall back; affected visuals can be disabled.\n\nLocal acceptance covers packaged singleplayer, two clients, late tracking, reconnects, save/restart, keybinding persistence, animation/UI captures and recorded optional integrations. Software-rendered tests do not establish compatibility with every hardware driver; silent audio tests verify event routing and engine playback. This build uses an upstream beta loader and is labeled Beta.\n\nSource and detailed acceptance: https://github.com/DerkOttersberg/seamless-dogs/tree/26.3\nAll Rights Reserved.\n",
+      "fileId": 9088402,
+      "managementUrl": "https://authors.curseforge.com/#/projects/1730435/files/9088402",
+      "observedState": "Under Review",
+      "observedAtUtc": "2026-10-07T11:09:22.093Z",
+      "metadataVerified": true,
+      "publicationModeVerified": true,
+      "acceptedBuildSourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
+      "evidence": [
+        {
+          "file": "26.3-neoforge-form.txt",
+          "sha256": "615d33c851c560e79b6d5b4a412705d61025ef086b987d3425a3ab32c7b2cff8"
+        },
+        {
+          "file": "26.3-neoforge-saved.txt",
+          "sha256": "907869f0af749031257d6980c2a4f97bb63d479c2131e03e32cf9ccced78fc9a"
+        },
+        {
+          "file": "26.3-neoforge-saved.jpg",
+          "sha256": "858f454101e4cdc1d82ee621a90736d038dcb98f74fba5a42f34a1029a8af88a"
+        }
+      ]
+    }
+  ],
+  "acceptance": {
+    "file": "acceptance-0.2.0.json",
+    "complete": true,
+    "sha256": "09f2a089d7672fc3ae2bf30f81534773aedda4765cac3091acf79a0ca3bdd115",
+    "hostedCiVerified": false
+  },
+  "temporaryWslCleanup": {
+    "finishedAt": 1791370106.6042516,
+    "targets": [
+      {
+        "path": "/root/.gradle/caches/fabric-loom",
+        "existed": true,
+        "bytesRemoved": 1797644334
+      },
+      {
+        "path": "/root/.cache/JNA",
+        "existed": true,
+        "bytesRemoved": 0
+      },
+      {
+        "path": "/root/.cache/mesa_shader_cache",
+        "existed": true,
+        "bytesRemoved": 2165131
+      },
+      {
+        "path": "/tmp/neoforge_installer6541176261583214649",
+        "existed": false,
+        "bytesRemoved": 0
+      }
+    ],
+    "bytesRemoved": 1799809465,
+    "scope": "Temporary Linux Minecraft asset and native caches only; Windows sources, worlds, install bundles and acceptance evidence preserved",
+    "linuxMinecraftDirectoryPresent": false,
+    "shutdownVerifiedAtUtc": "2026-10-07T10:49:27.449706+00:00",
+    "wslState": "NAME              STATE           VERSION\r\n* Ubuntu-24.04      Stopped         2\r\n  docker-desktop    Stopped         2",
+    "permanentlyDisabled": false
+  }
+}
