@@ -27,6 +27,8 @@ public final class ServerProbe {
             }
             var player = server.getPlayerList().getPlayers().stream().filter(p -> p.getName().getString().equals("DogQA")).findFirst().orElse(null);
             if (player == null || dog != null && !dog.isRemoved()) return;
+            var qaRoot = server.getCommands().getDispatcher().getRoot().getChild("dogsqa");
+            System.out.println("DOGS_QA_SERVER_COMMAND_TREE " + (qaRoot == null ? "missing" : qaRoot.getChildren().stream().map(n -> n.getName()+":"+(n.getCommand()!=null)).toList()));
             var level = player.level();
             server.getCommands().performPrefixedCommand(server.createCommandSourceStack(), "time set 6000");
             for (int x = -6; x <= 6; x++) for (int z = -6; z <= 6; z++) {
@@ -123,7 +125,7 @@ public final class ServerProbe {
                 .then(Commands.literal("dig").executes(context->{prepareDig(context.getSource(),false);return 1;}))
                 .then(Commands.literal("dig_sand").executes(context->{prepareDig(context.getSource(),false);context.getSource().getLevel().setBlockAndUpdate(new BlockPos(0,64,1),Blocks.SAND.defaultBlockState());return 1;}))
                 .then(Commands.literal("dig_cooldown").executes(context->{prepareDig(context.getSource(),true);return 1;}))
-                .then(Commands.literal("held").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); return 1; }))
+                .then(Commands.literal("held").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, new ItemStack(Items.STICK)); System.out.println("DOGS_QA_HELD_EXECUTED"); return 1; }))
                 .then(Commands.literal("puppy").executes(context -> {
                     var player = context.getSource().getPlayerOrException();
                     for (var entity : player.level().getEntitiesOfClass(Wolf.class, player.getBoundingBox().inflate(5)))
@@ -141,5 +143,7 @@ public final class ServerProbe {
                     }return 1;
                 }))
                 .then(Commands.literal("empty").executes(context -> { context.getSource().getPlayerOrException().setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY); return 1; })));
+        var qaRoot = dispatcher.getRoot().getChild("dogsqa");
+        System.out.println("DOGS_QA_REGISTERED_COMMAND_TREE " + qaRoot.getChildren().stream().map(n -> n.getName()+":"+(n.getCommand()!=null)).toList());
     }
 }

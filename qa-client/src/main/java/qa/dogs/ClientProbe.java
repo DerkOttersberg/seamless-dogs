@@ -108,11 +108,15 @@ public final class ClientProbe {
                 if (ticks > 150) fail(client, "Left hand never rendered");
             }
             case 6 -> {
-                if (total - petStart > 65) { client.getConnection().sendCommand("dogsqa held"); next(); }
+                if (total - petStart > 65) {
+                    var qaRoot = client.getConnection().getCommands().getRoot().getChild("dogsqa");
+                    System.out.println("DOGS_QA_CLIENT_COMMAND_TREE " + (qaRoot == null ? "missing" : qaRoot.getChildren().stream().map(n -> n.getName()+":"+(n.getCommand()!=null)).toList()));
+                    client.getConnection().sendCommand("dogsqa held"); next();
+                }
             }
             case 7 -> {
                 if (ticks > 25) {
-                    if (client.player.getMainHandItem().isEmpty() || DogsClient.target() != null || pose.weight() != 0) fail(client, "Held item hides prompt/cancels pose incorrectly");
+                    if (client.player.getMainHandItem().isEmpty() || DogsClient.target() != null || pose.weight() != 0) fail(client, "Held item hides prompt/cancels pose incorrectly: mainHand="+client.player.getMainHandItem()+", target="+DogsClient.target()+", weight="+pose.weight());
                     click(); next();
                 }
             }

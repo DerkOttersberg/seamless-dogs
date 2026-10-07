@@ -290,7 +290,13 @@ def main() -> None:
         if inputs.get('cpapi'):
             command.append('-Dqa.cpapi=true')
     command += jvm + [modded['mainClass']] + arguments(vanilla, 'game') + arguments(modded, 'game')
-    command += ['--quickPlayMultiplayer', args.address] if args.address else ['--quickPlaySingleplayer', 'dogs-world']
+    if minecraft == '1.21.1' and loader == 'forge':
+        # Forge 52 completes mod loading after the Quick Play callback. Opening
+        # an integrated world there skips command and loot reload listeners.
+        # Let the private fixture open/connect through the ordinary title flow.
+        command.insert(1, f'-Dqa.connectAddress={args.address}' if args.address else '-Dqa.openWorld=dogs-world')
+    else:
+        command += ['--quickPlayMultiplayer', args.address] if args.address else ['--quickPlaySingleplayer', 'dogs-world']
     if minecraft.startswith('26.'):
         command += ['--graphicsBackend', args.graphics_backend]
     (stage / 'launch-command.json').write_text(json.dumps(command, indent=2))
@@ -319,6 +325,8 @@ def main() -> None:
         raise RuntimeError('Gameplay/test jars changed during client QA')
     log_text = (stage / 'client-console.log').read_text(errors='replace')
     required = ['DOGS_REBIND_PASS', 'DOGS_HAND_VISUAL_PASS' if args.hand_only else 'DOGS_CLIENT_PASS']
+    if minecraft == '1.21.1' and loader == 'forge':
+        required.extend(['DOGS_QA_POST_LOAD_CONNECT' if args.address else 'DOGS_QA_POST_LOAD_OPEN', 'DOGS_QA_REGISTER_COMMAND_EVENT'])
     if not args.hand_only:
         required.append('DOGS_SKIN_MODELS_PASS')
         if minecraft in ('1.20.1','1.21.1'):
