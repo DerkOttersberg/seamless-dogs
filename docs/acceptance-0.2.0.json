@@ -4,122 +4,22 @@
   "standalone": true,
   "pawGroomingRemoved": true,
   "chestGroomingRetained": true,
-  "complete": false,
+  "complete": true,
   "logAuditPassed": true,
   "logAudit": {
     "file": "log-audit.json",
-    "sha256": "c3f4fda2df588c200d50851ae30e0b20c181ae884b046ecda6f752aef91b8c0f"
+    "sha256": "74aad4c2a4c26ce96035d38add83492cfbfe503627d883266c373c9111b90487"
   },
-  "releaseReady": false,
-  "checkedAtUtc": "2026-10-06T20:49:12.547898+00:00",
+  "releaseReady": true,
+  "checkedAtUtc": "2026-10-07T10:46:32.261575+00:00",
   "cells": [
     {
       "minecraft": "1.20.1",
       "loader": "fabric",
       "jars": {
-        "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "e9e2cd7316aa52b5c76358502bd838e4925d51b5f6e61e18eca460ebb2ff1f69"
+        "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6"
       },
-      "sourceCommit": "45f34da585965e7105e7881cfc77649b5b42662d",
-      "buildPassed": false,
-      "nativePassed": false,
-      "nativeScenarios": [
-        "catOwnership",
-        "codecRoundTrip",
-        "cooldownAndCancellation",
-        "diggingTerrain",
-        "idleContracts",
-        "ownerCanPet",
-        "rejectInvalidRequests",
-        "v2CodecRoundTrip"
-      ],
-      "unitTests": {
-        "tests": 22,
-        "failures": 0,
-        "errors": 0
-      },
-      "buildLog": "build-1.20.1-keybind-14.log",
-      "nativeLog": "build-1.20.1-keybind-14.log",
-      "java": 17,
-      "loaderVersion": "0.19.5",
-      "fabricApi": "0.92.12+1.20.1",
-      "evidence": {},
-      "expectedUnitTests": 22,
-      "unitPassed": true,
-      "nativeRepetitionPassed": false,
-      "serverPassed": false,
-      "clientPassed": false,
-      "multiplayerPassed": false,
-      "lifecyclePassed": false,
-      "combinedPassed": false,
-      "combinedServerPassed": false,
-      "worldRestartPassed": false,
-      "keybindPassed": false,
-      "skinModelsPassed": false,
-      "playerPoseRequired": true,
-      "playerPosePassed": false,
-      "extraRendererPassed": true,
-      "nativeRepetitionRequired": true,
-      "extraRendererRequired": false,
-      "visualReviewPassed": false,
-      "artifactStatus": "Unvalidated output from interrupted build; do not release."
-    },
-    {
-      "minecraft": "1.20.1",
-      "loader": "forge",
-      "jars": {
-        "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "4d3806e664aefa0e1b7fd920893d62422d1bd35cc4d5917e9f4b33835d07fb7a"
-      },
-      "sourceCommit": "45f34da585965e7105e7881cfc77649b5b42662d",
-      "buildPassed": false,
-      "nativePassed": false,
-      "nativeScenarios": [
-        "catOwnership",
-        "codecRoundTrip",
-        "cooldownAndCancellation",
-        "diggingTerrain",
-        "idleContracts",
-        "ownerCanPet",
-        "rejectInvalidRequests",
-        "v2CodecRoundTrip"
-      ],
-      "unitTests": {
-        "tests": 22,
-        "failures": 0,
-        "errors": 0
-      },
-      "buildLog": "build-1.20.1-keybind-14.log",
-      "nativeLog": "build-1.20.1-keybind-14.log",
-      "java": 17,
-      "loaderVersion": "1.20.1-47.4.26",
-      "fabricApi": null,
-      "evidence": {},
-      "expectedUnitTests": 22,
-      "unitPassed": true,
-      "nativeRepetitionPassed": false,
-      "serverPassed": false,
-      "clientPassed": false,
-      "multiplayerPassed": false,
-      "lifecyclePassed": false,
-      "combinedPassed": false,
-      "combinedServerPassed": false,
-      "worldRestartPassed": false,
-      "keybindPassed": false,
-      "skinModelsPassed": false,
-      "playerPoseRequired": true,
-      "playerPosePassed": false,
-      "extraRendererPassed": true,
-      "nativeRepetitionRequired": true,
-      "extraRendererRequired": false,
-      "visualReviewPassed": false,
-      "artifactStatus": "Unvalidated output from interrupted build; do not release."
-    },
-    {
-      "minecraft": "1.21.1",
-      "loader": "fabric",
-      "jars": {
-        "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "3f7dff19ea429e1f382533a9b70ec778c83bbefa8610e5ffb81053e48e1e9c6b"
-      },
-      "sourceCommit": "0dafee83cd4eb8c6abcb7564c2e00ed37095c6a5",
+      "sourceCommit": "ffbc138bb72682d85f35dcfccffd04ebeea11d20",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -137,44 +37,1227 @@
         "failures": 0,
         "errors": 0
       },
-      "buildLog": "build-1.21.1-keybind-14.log",
-      "nativeLog": "build-1.21.1-keybind-14.log",
-      "java": 21,
+      "buildLog": "build-1.20.1-keybind-17.log",
+      "nativeLog": "build-1.20.1-keybind-17.log",
+      "java": 17,
       "loaderVersion": "0.19.5",
-      "fabricApi": "0.116.17+1.21.1",
+      "fabricApi": "0.92.12+1.20.1",
       "evidence": {
+        "nativeRepetition": {
+          "marker": "native-stress-hands-1.20.1-passed.json",
+          "markerSha256": "1eea47f3998cd1331779a8e51e4a604cd9d0112ffc040d0603e54d8a807c6ee0",
+          "iterations": 5,
+          "logs": [
+            "native-stress-hands-1.20.1-1.log",
+            "native-stress-hands-1.20.1-2.log",
+            "native-stress-hands-1.20.1-3.log",
+            "native-stress-hands-1.20.1-4.log",
+            "native-stress-hands-1.20.1-5.log"
+          ]
+        },
+        "server": {
+          "profile": "fabric-1.20.1-server-2",
+          "marker": "server-passed.json",
+          "markerSha256": "98affa2157cc0c203ce054e81b57328255fba6c6a966e511c72492c9f7133191",
+          "testedJars": {
+            "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "runtimeLoader": "0.19.5",
+            "jars": {
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6"
+            },
+            "wolfBefore": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "20.0f",
+              "uuid": "[I; -378228497, 1983858701, -1327182167, 896318805]"
+            },
+            "wolfAfter": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "20.0f",
+              "uuid": "[I; -378228497, 1983858701, -1327182167, 896318805]"
+            },
+            "gate": "official packaged server; clean startup/save/restart; owner/sitting/health/UUID preserved"
+          }
+        },
+        "single": {
+          "profile": "fabric-1.20.1-single-2",
+          "marker": "client-passed.json",
+          "markerSha256": "63f232abaaf344a2ca33e8b88341c39c7a69034f68b0d1e5e7f58bc6788e7b72",
+          "testedJars": {
+            "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "jars": {
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0"
+            },
+            "guiScale": "4",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": null,
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS"
+            ]
+          }
+        },
+        "pair": {
+          "profile": "fabric-1.20.1-pair-2",
+          "marker": "pair-passed.json",
+          "markerSha256": "bb876ea2faaecfa4a7448853cf2ad8722ec05cb44c615587387e32c628d634b7",
+          "testedJars": {
+            "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "jars": {
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0"
+            },
+            "gate": "two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect",
+            "display": ":99",
+            "observerCaptures": {
+              "observer-action-1-adult-early.png": "1603330fc3a27994804353f3b697fb16fb00f435d523f0d1cf881e4f654e48b0",
+              "observer-action-1-adult-held.png": "de39e9a6c6137fa36b795c37f4ca2a0ebcc0207f5d8aecea9015edefcd36f61a",
+              "observer-action-1-baby-early.png": "c3a24bb3d856da603c2b33cc8bb4623c16bb5ce82fb9c8d12e84b4c3198df996",
+              "observer-action-1-baby-held.png": "9e0fdc550a1a727a3d22127a8f7179b9d5b25b91962ee81a68a03cc5d8c50018",
+              "observer-action-2-adult-early.png": "54b3a3ba9c6691e87a4f401286cf63642172a8d5fef4cef8a08625db0d878450",
+              "observer-action-2-adult-held.png": "8fe8d121bd12033e7308c9a2b2d20599bf361b870275f3a72c3b769caaa7a89a",
+              "observer-action-2-baby-early.png": "948586312f7af0e890dbb72c615da7e39296e556f198a231c354e36ad91875e5",
+              "observer-action-2-baby-held.png": "63dcae336eb3b044ea996dc75a1131451d7f326f8bd8bf80eb156128d4f94684",
+              "observer-action-3-adult-early.png": "42e77603a4d13f8d8ab8286fddf3666ba88b5b3aa1547badfd520172150aabf1",
+              "observer-action-3-adult-held.png": "eaa131e5a63d5b2ddb165d02b1c92db40e29544e6a2fde151f36613c521df7ac",
+              "observer-action-4-adult-early.png": "7484a85fafdabb49b031a573739fd100db17eb9c950dae07d6192e8ef0114940",
+              "observer-action-4-adult-held.png": "1fd31379311a7f6022487a0288249acc8ef6bda859b38debe14a637300f6e79b",
+              "observer-action-4-baby-early.png": "db9a0388980cf1206f41bb2b319280e0258b3f5f3aaec9a25bf0e6cf0fd68043",
+              "observer-action-4-baby-held.png": "ff40e5fccb2d934491febf72ed8b4a1a9c2e5dbd06fa93ed055406761e4a2f6a",
+              "observer-action-6-adult-early.png": "0d6cd39b258ed1e5ea504437fac1807d45689f15cfb0aa5f56eeb8c47818a867",
+              "observer-action-6-adult-held.png": "11a58dd91ee1e143f1c9645223493b1a14ac350ff4aa3c91258eaa74474de90f",
+              "observer-action-6-baby-early.png": "aedfbb81be4232c39c243447dc3b187467e4915081323039f398a1facb0598ac",
+              "observer-action-6-baby-held.png": "9cf99e4fd10847f84118b391e3a99251d206a229bb15e310345f7e3ae9eec8ce",
+              "observer-action-7-adult-early.png": "695dc6800066eaeb11fe615e270084c052c766e50e1d111857775550c63a1256",
+              "observer-action-7-adult-held.png": "3185dd4208558f5dde379daea7ab7704007e6e3f307b9a3bbde3750ede359619",
+              "observer-action-7-baby-early.png": "26dbe24a07827500f47f06f752bd805f8f74647b6922e74dd5d4a063523fd3fa",
+              "observer-action-7-baby-held.png": "9f3cfb3a65a4bd3c376edffe61bfe07d2eb2c03d231cd7a2fdf4a54652565cb5",
+              "observer-action-8-adult-held.png": "afad0109b691b44837382babe948abf5b8ec0192b35edf11d89e3ecaa7d1182a",
+              "observer-action-8-baby-early.png": "03192f9b77cb2ab3251ba4399b52a7eac511fb02fd8fca6c0f4964667a4a0a36",
+              "observer-action-8-baby-held.png": "dc7c450d8126a0d3185031cba4b9bc8bcb381b5f3359b8f56524f97409c29c11"
+            },
+            "worldRestartPassed": true,
+            "captureTiming": "settled camera, native pet submitted, completed frame",
+            "skinModelsPassed": true,
+            "playerPosePassed": true,
+            "playerPoseRequired": true
+          }
+        },
+        "lifecycle": {
+          "profile": "fabric-1.20.1-lifecycle-2",
+          "marker": "lifecycle-passed.json",
+          "markerSha256": "412799effd82f7cae9c6d3f8c66311f1efec1264fa3bafc7f39946e69a160873",
+          "testedJars": {
+            "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "seamless-dogs-qa-fabric.jar": "ae03505bc9bc17914b359e254a75f5659b2191dc3b54ab1b0e6a823d3cb363fe"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "clientJars": {
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "seamless-dogs-qa-fabric.jar": "ae03505bc9bc17914b359e254a75f5659b2191dc3b54ab1b0e6a823d3cb363fe"
+            },
+            "serverJars": {
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "seamless-dogs-qa-fabric.jar": "ae03505bc9bc17914b359e254a75f5659b2191dc3b54ab1b0e6a823d3cb363fe"
+            },
+            "gate": "actual dimension, death/respawn, menu, active same-JVM disconnect/reconnect; subsequent request accepted; cat chest-idle dimension/death/reconnect cleanup",
+            "display": ":99"
+          }
+        },
+        "combined": {
+          "profile": "fabric-1.20.1-combined-2",
+          "marker": "client-passed.json",
+          "markerSha256": "828bc12b94e1321192055f741e386c5a9678387edf54149cab3dff94be149cd3",
+          "testedJars": {
+            "ForgeConfigAPIPort-v8.0.3-1.20.1-Fabric.jar": "337a8f6c5ba48ef3b3da828f4f6a75d0552ba33f48ce97d3195befdb570e427a",
+            "architectury-fabric-9.1.12.jar": "28bca0b1976bf79a237fa7a005fce257884f668a693b74b964db36d0b48daabe",
+            "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+            "entity_model_features-3.3.11-1.20.1-fabric.jar": "74019cee3143716221a4c674ed32d2f5c9a5b0eb5acbf7eb2a3a32357fe37b73",
+            "entity_texture_features-7.2.5-1.20.1-fabric.jar": "a6a0da61e32e6b1506162a3fa5adb8c30e5da129f09275f49cb018bea212ebba",
+            "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+            "ftb-chunks-fabric-2001.3.8.jar": "f1a15d9e8bb71d9e69a51106ff1b58a8fe7621cb3f935a819f5a7419c029d2df",
+            "ftb-library-fabric-2001.2.9.jar": "08e80107ae3f73c6608bece1f5a8e487031b5baf37a8f5d266928bd5cc1652ce",
+            "ftb-teams-fabric-2001.3.1.jar": "37d213480a558453d196a7837b6a44fb3006e61cd4bf3a6d86c2d25243ebb1c8",
+            "iris-1.7.6+mc1.20.1.jar": "9eb15e563e0c9ae6eff15b7863f8432dd290cf9f724c7373e9b15b14aa829ed5",
+            "modmenu-7.2.2.jar": "a041b0f0305ffa5eb90120aa23768e1cfbb27583904b1751e3783c0f69382f1a",
+            "notenoughanimations-fabric-1.12.6-mc1.20.1.jar": "cecd3f42d99420574224132a7956f1468611e3364965bbbe0cfe3dacf562ac86",
+            "open-parties-and-claims-fabric-1.20.1-0.32.7.jar": "0e231490285edfc93ef6713c1219a229d2ff85db913c1b6fd8e8a740019ddf70",
+            "pretty-meteors-with-trails-2.0.2+mc1.20.1-fabric.jar": "46990b8241abe992da9b2fcca7f873d72f846bef554b4948979fc384423bd778",
+            "seamless-api-2.0.2+mc1.20.1-fabric.jar": "ae84ae0cc89ab5f46c93a4c4df7113d37570a057a7cd4802b83fd8178882a2d8",
+            "seamless-crafting-2.1.1+mc1.20.1-fabric.jar": "a523840ef43d1f2a0f6e446efa0e4a9816c4ca43b6cfd70ad0cc171b5ee85cd1",
+            "seamless-deconstructing-workbench-2.1.1+mc1.20.1-fabric.jar": "dc8a02dd002335d9e19c3187473389153446737b1a86a81244eeec2f12b8e5b9",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0",
+            "sodium-fabric-0.5.12-beta.2+mc1.20.1.jar": "48e11f72ebd44fcc233e9fc199be43a28feb78e80c6ddc723d6e8a0ddbc21c0b",
+            "sword-throw-2.1.1+mc1.20.1-fabric.jar": "2cd51d2a16d7fbf5db252e3dd5bd90616b0ca251d92d31d12013e4957d8cd9ac"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "jars": {
+              "ForgeConfigAPIPort-v8.0.3-1.20.1-Fabric.jar": "337a8f6c5ba48ef3b3da828f4f6a75d0552ba33f48ce97d3195befdb570e427a",
+              "architectury-fabric-9.1.12.jar": "28bca0b1976bf79a237fa7a005fce257884f668a693b74b964db36d0b48daabe",
+              "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+              "entity_model_features-3.3.11-1.20.1-fabric.jar": "74019cee3143716221a4c674ed32d2f5c9a5b0eb5acbf7eb2a3a32357fe37b73",
+              "entity_texture_features-7.2.5-1.20.1-fabric.jar": "a6a0da61e32e6b1506162a3fa5adb8c30e5da129f09275f49cb018bea212ebba",
+              "fabric-api-0.92.12+1.20.1.jar": "4197ff4fbdac13cffccd267c1bc59e9fbabb2b5683a9d5f8023f4b5ea16a1c1e",
+              "ftb-chunks-fabric-2001.3.8.jar": "f1a15d9e8bb71d9e69a51106ff1b58a8fe7621cb3f935a819f5a7419c029d2df",
+              "ftb-library-fabric-2001.2.9.jar": "08e80107ae3f73c6608bece1f5a8e487031b5baf37a8f5d266928bd5cc1652ce",
+              "ftb-teams-fabric-2001.3.1.jar": "37d213480a558453d196a7837b6a44fb3006e61cd4bf3a6d86c2d25243ebb1c8",
+              "iris-1.7.6+mc1.20.1.jar": "9eb15e563e0c9ae6eff15b7863f8432dd290cf9f724c7373e9b15b14aa829ed5",
+              "modmenu-7.2.2.jar": "a041b0f0305ffa5eb90120aa23768e1cfbb27583904b1751e3783c0f69382f1a",
+              "notenoughanimations-fabric-1.12.6-mc1.20.1.jar": "cecd3f42d99420574224132a7956f1468611e3364965bbbe0cfe3dacf562ac86",
+              "open-parties-and-claims-fabric-1.20.1-0.32.7.jar": "0e231490285edfc93ef6713c1219a229d2ff85db913c1b6fd8e8a740019ddf70",
+              "pretty-meteors-with-trails-2.0.2+mc1.20.1-fabric.jar": "46990b8241abe992da9b2fcca7f873d72f846bef554b4948979fc384423bd778",
+              "seamless-api-2.0.2+mc1.20.1-fabric.jar": "ae84ae0cc89ab5f46c93a4c4df7113d37570a057a7cd4802b83fd8178882a2d8",
+              "seamless-crafting-2.1.1+mc1.20.1-fabric.jar": "a523840ef43d1f2a0f6e446efa0e4a9816c4ca43b6cfd70ad0cc171b5ee85cd1",
+              "seamless-deconstructing-workbench-2.1.1+mc1.20.1-fabric.jar": "dc8a02dd002335d9e19c3187473389153446737b1a86a81244eeec2f12b8e5b9",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "seamless-dogs-qa-fabric.jar": "723dec19adf2498fe1b38fa06e5169d6039814d23abdef3663c0df80527b03c0",
+              "sodium-fabric-0.5.12-beta.2+mc1.20.1.jar": "48e11f72ebd44fcc233e9fc199be43a28feb78e80c6ddc723d6e8a0ddbc21c0b",
+              "sword-throw-2.1.1+mc1.20.1-fabric.jar": "2cd51d2a16d7fbf5db252e3dd5bd90616b0ca251d92d31d12013e4957d8cd9ac"
+            },
+            "guiScale": "3",
+            "modMenu": true,
+            "graphicsBackend": "opengl",
+            "optionalInputs": {
+              "minecraft": "1.20.1",
+              "loader": "fabric",
+              "kind": "combined",
+              "protection": true,
+              "ftb": true,
+              "cpapi": true,
+              "shader": true,
+              "jars": {
+                "architectury-fabric-9.1.12.jar": "28bca0b1976bf79a237fa7a005fce257884f668a693b74b964db36d0b48daabe",
+                "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+                "entity_model_features-3.3.11-1.20.1-fabric.jar": "74019cee3143716221a4c674ed32d2f5c9a5b0eb5acbf7eb2a3a32357fe37b73",
+                "entity_texture_features-7.2.5-1.20.1-fabric.jar": "a6a0da61e32e6b1506162a3fa5adb8c30e5da129f09275f49cb018bea212ebba",
+                "ForgeConfigAPIPort-v8.0.3-1.20.1-Fabric.jar": "337a8f6c5ba48ef3b3da828f4f6a75d0552ba33f48ce97d3195befdb570e427a",
+                "ftb-chunks-fabric-2001.3.8.jar": "f1a15d9e8bb71d9e69a51106ff1b58a8fe7621cb3f935a819f5a7419c029d2df",
+                "ftb-library-fabric-2001.2.9.jar": "08e80107ae3f73c6608bece1f5a8e487031b5baf37a8f5d266928bd5cc1652ce",
+                "ftb-teams-fabric-2001.3.1.jar": "37d213480a558453d196a7837b6a44fb3006e61cd4bf3a6d86c2d25243ebb1c8",
+                "iris-1.7.6+mc1.20.1.jar": "9eb15e563e0c9ae6eff15b7863f8432dd290cf9f724c7373e9b15b14aa829ed5",
+                "notenoughanimations-fabric-1.12.6-mc1.20.1.jar": "cecd3f42d99420574224132a7956f1468611e3364965bbbe0cfe3dacf562ac86",
+                "open-parties-and-claims-fabric-1.20.1-0.32.7.jar": "0e231490285edfc93ef6713c1219a229d2ff85db913c1b6fd8e8a740019ddf70",
+                "sodium-fabric-0.5.12-beta.2+mc1.20.1.jar": "48e11f72ebd44fcc233e9fc199be43a28feb78e80c6ddc723d6e8a0ddbc21c0b"
+              },
+              "sources": [
+                {
+                  "project": null,
+                  "version": "3.3.11-fabric-1.20.1",
+                  "versionId": "rQLv8RBX",
+                  "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/rQLv8RBX/entity_model_features-3.3.11-1.20.1-fabric.jar",
+                  "name": "entity_model_features-3.3.11-1.20.1-fabric.jar",
+                  "sha256": "74019cee3143716221a4c674ed32d2f5c9a5b0eb5acbf7eb2a3a32357fe37b73",
+                  "sha512": "2ca796bb0f7ccade70a1151bd7e60f4d8b0c6861076d5fc5c9b7736707ad06786d4c94e04b7d19613ace1d443847dba86b59dbade1e16e2eac8e23d1fe266700"
+                },
+                {
+                  "project": null,
+                  "version": "7.2.5-fabric-1.20.1",
+                  "versionId": "XtfsASE0",
+                  "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/XtfsASE0/entity_texture_features-7.2.5-1.20.1-fabric.jar",
+                  "name": "entity_texture_features-7.2.5-1.20.1-fabric.jar",
+                  "sha256": "a6a0da61e32e6b1506162a3fa5adb8c30e5da129f09275f49cb018bea212ebba",
+                  "sha512": "dc3e632a74d03941c923ef48be2ca7189957152a8e6c84864d7be982ede682f29ccdb47277bbd7f7eb3d48a4479ca50f937b8925ca2c287c54b62a1f387e7c7d"
+                },
+                {
+                  "project": null,
+                  "version": "1.12.6",
+                  "versionId": "RzJ39lca",
+                  "url": "https://cdn.modrinth.com/data/MPCX6s5C/versions/RzJ39lca/notenoughanimations-fabric-1.12.6-mc1.20.1.jar",
+                  "name": "notenoughanimations-fabric-1.12.6-mc1.20.1.jar",
+                  "sha256": "cecd3f42d99420574224132a7956f1468611e3364965bbbe0cfe3dacf562ac86",
+                  "sha512": "4d1c2d5e842841c097c8f5d75a7bef2a5163c6e23db74037884fd6d693984f1945df776f915c9268047e350a5ce5a5606f91753c43c1c3a2044649f259a6a231"
+                },
+                {
+                  "project": null,
+                  "version": "1.7.6+1.20.1",
+                  "versionId": "s5eFLITc",
+                  "url": "https://cdn.modrinth.com/data/YL57xq9U/versions/s5eFLITc/iris-1.7.6%2Bmc1.20.1.jar",
+                  "name": "iris-1.7.6+mc1.20.1.jar",
+                  "sha256": "9eb15e563e0c9ae6eff15b7863f8432dd290cf9f724c7373e9b15b14aa829ed5",
+                  "sha512": "f1337b0441c31269bd3bfcb28647d521326a83e73128c1ac8d065615f8a5a4ca1e8c96a468b356584236ece5b164ec8d8a52b1878064f4e391ecf4f32885e301"
+                },
+                {
+                  "project": "AANobbMI",
+                  "version": "mc1.20.1-0.5.12-beta.2-fabric",
+                  "versionId": "ryOMVRuG",
+                  "url": "https://cdn.modrinth.com/data/AANobbMI/versions/ryOMVRuG/sodium-fabric-0.5.12-beta.2%2Bmc1.20.1.jar",
+                  "name": "sodium-fabric-0.5.12-beta.2+mc1.20.1.jar",
+                  "sha256": "48e11f72ebd44fcc233e9fc199be43a28feb78e80c6ddc723d6e8a0ddbc21c0b",
+                  "sha512": "e6906b77e709c17bfe445d065353010853cad58a65252f70f9e7e06113156f21c85e91a71e5ccebb4ea0f0168280737bb12ae407e115a9f1df3b5e8d21b87ec5"
+                },
+                {
+                  "project": null,
+                  "version": "fabric-1.20.1-0.32.7",
+                  "versionId": "6YqJ6xMD",
+                  "url": "https://cdn.modrinth.com/data/gF3BGWvG/versions/6YqJ6xMD/open-parties-and-claims-fabric-1.20.1-0.32.7.jar",
+                  "name": "open-parties-and-claims-fabric-1.20.1-0.32.7.jar",
+                  "sha256": "0e231490285edfc93ef6713c1219a229d2ff85db913c1b6fd8e8a740019ddf70",
+                  "sha512": "c66c55fa7c4e5efa633a61196efbe102adf7883642eebcc53c2783943124dc02766a2da15f4580a8d7cd93d2ce6e4e2478a5427a2980ea7108f5171f083fbf30"
+                },
+                {
+                  "project": "ohNO6lps",
+                  "version": "v8.0.3-1.20.1-Fabric",
+                  "versionId": "HvR3IdRE",
+                  "url": "https://cdn.modrinth.com/data/ohNO6lps/versions/HvR3IdRE/ForgeConfigAPIPort-v8.0.3-1.20.1-Fabric.jar",
+                  "name": "ForgeConfigAPIPort-v8.0.3-1.20.1-Fabric.jar",
+                  "sha256": "337a8f6c5ba48ef3b3da828f4f6a75d0552ba33f48ce97d3195befdb570e427a",
+                  "sha512": "15144d6d7b74dfbe2eede6e3b0aa0c841670be1bd6121608bc28f3b1e46846ccd36b506060a081c988da96cf46fce8bf2e55601e3934b9a52d22dc2fa6cbfd32"
+                },
+                {
+                  "name": "ftb-chunks-fabric-2001.3.8.jar",
+                  "version": "2001.3.8",
+                  "sha256": "f1a15d9e8bb71d9e69a51106ff1b58a8fe7621cb3f935a819f5a7419c029d2df",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-chunks-fabric/2001.3.8/ftb-chunks-fabric-2001.3.8.jar"
+                },
+                {
+                  "name": "ftb-library-fabric-2001.2.9.jar",
+                  "version": "2001.2.9",
+                  "sha256": "08e80107ae3f73c6608bece1f5a8e487031b5baf37a8f5d266928bd5cc1652ce",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-library-fabric/2001.2.9/ftb-library-fabric-2001.2.9.jar"
+                },
+                {
+                  "name": "ftb-teams-fabric-2001.3.1.jar",
+                  "version": "2001.3.1",
+                  "sha256": "37d213480a558453d196a7837b6a44fb3006e61cd4bf3a6d86c2d25243ebb1c8",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-teams-fabric/2001.3.1/ftb-teams-fabric-2001.3.1.jar"
+                },
+                {
+                  "name": "architectury-fabric-9.1.12.jar",
+                  "version": "9.1.12",
+                  "sha256": "28bca0b1976bf79a237fa7a005fce257884f668a693b74b964db36d0b48daabe",
+                  "url": "https://maven.architectury.dev/dev/architectury/architectury-fabric/9.1.12/architectury-fabric-9.1.12.jar"
+                },
+                {
+                  "name": "common-protection-api-1.0.0.jar",
+                  "version": "1.0.0",
+                  "sha256": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+                  "url": "https://maven.nucleoid.xyz/eu/pb4/common-protection-api/1.0.0/common-protection-api-1.0.0.jar"
+                }
+              ]
+            },
+            "shaderPack": "SeamlessDogsQa.zip",
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS",
+              "DOGS_MODMENU_CONFIG_PASS",
+              "DOGS_OPENPAC_ACTUAL_CLAIMS_PASS",
+              "DOGS_FTB_ACTUAL_CLAIMS_PASS",
+              "DOGS_CPAPI_ACTUAL_PROVIDER_PASS"
+            ]
+          }
+        },
+        "suite-server": {
+          "profile": "fabric-1.20.1-suite-server-2",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "b2d4768764253e778cfc2c878b24cf3ca736b67db3319472de38e4cd92920aa8",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc1.20.1-fabric.jar": "46990b8241abe992da9b2fcca7f873d72f846bef554b4948979fc384423bd778",
+            "seamless-api-2.0.2+mc1.20.1-fabric.jar": "ae84ae0cc89ab5f46c93a4c4df7113d37570a057a7cd4802b83fd8178882a2d8",
+            "seamless-crafting-2.1.1+mc1.20.1-fabric.jar": "a523840ef43d1f2a0f6e446efa0e4a9816c4ca43b6cfd70ad0cc171b5ee85cd1",
+            "seamless-deconstructing-workbench-2.1.1+mc1.20.1-fabric.jar": "dc8a02dd002335d9e19c3187473389153446737b1a86a81244eeec2f12b8e5b9",
+            "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "sword-throw-2.1.1+mc1.20.1-fabric.jar": "2cd51d2a16d7fbf5db252e3dd5bd90616b0ca251d92d31d12013e4957d8cd9ac"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "fabric",
+            "gate": "suite-server",
+            "attempt": 2,
+            "exit": 0,
+            "stage": "/mnt/d/SeamlessDogsProduction-20261006/fabric-1.20.1-suite-server-2",
+            "log": "/mnt/d/SeamlessDogsProduction-20261006/runtime-1.20.1-fabric-suite-server-2.log",
+            "dogsSha256": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+            "finishedAt": 1791365344.5519679,
+            "jars": {
+              "pretty-meteors-with-trails-2.0.2+mc1.20.1-fabric.jar": "46990b8241abe992da9b2fcca7f873d72f846bef554b4948979fc384423bd778",
+              "seamless-api-2.0.2+mc1.20.1-fabric.jar": "ae84ae0cc89ab5f46c93a4c4df7113d37570a057a7cd4802b83fd8178882a2d8",
+              "seamless-crafting-2.1.1+mc1.20.1-fabric.jar": "a523840ef43d1f2a0f6e446efa0e4a9816c4ca43b6cfd70ad0cc171b5ee85cd1",
+              "seamless-deconstructing-workbench-2.1.1+mc1.20.1-fabric.jar": "dc8a02dd002335d9e19c3187473389153446737b1a86a81244eeec2f12b8e5b9",
+              "seamless-dogs-0.2.0+mc1.20.1-fabric.jar": "6db440a3aef5af1af7ea2f62d8f61ddd9acc0d4db642dcb6df3a34023ef33fd6",
+              "sword-throw-2.1.1+mc1.20.1-fabric.jar": "2cd51d2a16d7fbf5db252e3dd5bd90616b0ca251d92d31d12013e4957d8cd9ac"
+            }
+          }
+        },
         "visual": {
-          "manifest": "visual-review\\1.21.1-fabric\\capture-manifest.json",
-          "manifestSha256": "53cc9300f07953189f212dfbaac6d5468900ac80d17306b65bbe04cb7aa5f54a"
+          "manifest": "visual-review\\1.20.1-fabric\\capture-manifest.json",
+          "manifestSha256": "fcaedf8f07368365a62fc064b0c6cfa6f4ace99a7e4047fb7cfaeacece5a9fda",
+          "reviewRecord": "visual-review\\1.20.1-fabric\\review-log-20261007.json",
+          "reviewRecordSha256": "40961da76bbf83faf95a90cb0605f4396981fdf2b0160294a54a7863cd12c2ba"
         }
       },
       "expectedUnitTests": 22,
       "unitPassed": true,
       "nativeRepetitionPassed": true,
-      "serverPassed": false,
-      "clientPassed": false,
-      "multiplayerPassed": false,
-      "lifecyclePassed": false,
-      "combinedPassed": false,
-      "combinedServerPassed": false,
-      "worldRestartPassed": false,
-      "keybindPassed": false,
-      "skinModelsPassed": false,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "lifecyclePassed": true,
+      "combinedPassed": true,
+      "combinedServerPassed": true,
+      "worldRestartPassed": true,
+      "keybindPassed": true,
+      "skinModelsPassed": true,
       "playerPoseRequired": true,
-      "playerPosePassed": false,
+      "playerPosePassed": true,
+      "extraRendererPassed": true,
+      "nativeRepetitionRequired": true,
+      "extraRendererRequired": false,
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
+    },
+    {
+      "minecraft": "1.20.1",
+      "loader": "forge",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e"
+      },
+      "sourceCommit": "ffbc138bb72682d85f35dcfccffd04ebeea11d20",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.20.1-keybind-17.log",
+      "nativeLog": "build-1.20.1-keybind-17.log",
+      "java": 17,
+      "loaderVersion": "1.20.1-47.4.26",
+      "fabricApi": null,
+      "evidence": {
+        "nativeRepetition": {
+          "marker": "native-stress-hands-1.20.1-passed.json",
+          "markerSha256": "1eea47f3998cd1331779a8e51e4a604cd9d0112ffc040d0603e54d8a807c6ee0",
+          "iterations": 5,
+          "logs": [
+            "native-stress-hands-1.20.1-1.log",
+            "native-stress-hands-1.20.1-2.log",
+            "native-stress-hands-1.20.1-3.log",
+            "native-stress-hands-1.20.1-4.log",
+            "native-stress-hands-1.20.1-5.log"
+          ]
+        },
+        "server": {
+          "profile": "forge-1.20.1-server-2",
+          "marker": "server-passed.json",
+          "markerSha256": "3bc80c80fca2b0505b8fcf8ff5f5e35a2da0887d1edc2bb7a39d8331e6b770e2",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "runtimeLoader": "1.20.1-47.4.26",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e"
+            },
+            "wolfBefore": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "20.0f",
+              "uuid": "[I; -2088056117, 1885292349, -1310450941, 2039442958]"
+            },
+            "wolfAfter": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "20.0f",
+              "uuid": "[I; -2088056117, 1885292349, -1310450941, 2039442958]"
+            },
+            "gate": "official packaged server; clean startup/save/restart; owner/sitting/health/UUID preserved"
+          }
+        },
+        "single": {
+          "profile": "forge-1.20.1-single-2",
+          "marker": "client-passed.json",
+          "markerSha256": "896a207d92ae99c65dbb720fe0031f06aa4c671f27ec7090673952302500c1f6",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d"
+            },
+            "guiScale": "4",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": null,
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS"
+            ]
+          }
+        },
+        "pair": {
+          "profile": "forge-1.20.1-pair-1",
+          "marker": "pair-passed.json",
+          "markerSha256": "765ee5f2fde51d67be75bf4915fc5595b7260fdef998776a0b1edf6ed66ef425",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d"
+            },
+            "gate": "two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect",
+            "display": ":99",
+            "observerCaptures": {
+              "observer-action-1-adult-early.png": "6c0e3de14c773ec7ffe6ea0bf33737795a7eaa8bd33c074930689547d72a9fdb",
+              "observer-action-1-adult-held.png": "54130f76f2080a46327b05490253d2530185f7fd6a733f85dc16caf0c1ced644",
+              "observer-action-1-baby-early.png": "bfaf614194f604ca50df1a69653980dc7242fe163f449b32a796897b3b1b108b",
+              "observer-action-1-baby-held.png": "f06f0ec7bf609dfc4932d14d055a47d30b57b5c4e1b6004d1e31177fdf07a913",
+              "observer-action-2-adult-early.png": "0f627cf2fd1c843ca5973b75136a2b765725e2b7cabe5724384b504755b33820",
+              "observer-action-2-adult-held.png": "e2b916161d2f4fa8b18f03fb8d8a66516e5591a3b2485d69ae6c229cfbaf7b0d",
+              "observer-action-2-baby-early.png": "d87a7ad567027cdd187fc67fa87bdd5eb3fbf2fc7c5e09069dc4033117828245",
+              "observer-action-2-baby-held.png": "032d6168b636d6271f44101d79abe18c00d86aa4107b63bb2fc2826dadf5c055",
+              "observer-action-3-adult-early.png": "58ca52617fb1dfafb1a6514f1033c8d0c422eefd85cbfb7cca73031926c0e88d",
+              "observer-action-3-adult-held.png": "de0e304d69a191d6d2c7cef75d753f200b689b4673d805909e93ebe72ba5dd2f",
+              "observer-action-4-adult-early.png": "0ee613242a63ee040a51ce8515e8d8d27883ea6f51638e9e68c136bc641e3425",
+              "observer-action-4-adult-held.png": "8ef34c5b9d6c1e84205978a527e80fd374d6923adb196e454283a21e6ff1fb08",
+              "observer-action-4-baby-early.png": "4521c9ef424798ab6490b8adcd84a27baea5c3e2c5b8037b8329b5bbc5ffd127",
+              "observer-action-4-baby-held.png": "6810587c4d111b0de05444e5f99dbbd06fefe607ee7779e7d7a2868d8ef5ac99",
+              "observer-action-6-adult-early.png": "96bd61f0dd1e7c2801bdfabcde2024383461784f0bfb1c24c618d94266c551bf",
+              "observer-action-6-adult-held.png": "0d35560e1e75d485ad8264915b4364bf3523f1b0aa0bd69841319980911ee9f7",
+              "observer-action-6-baby-early.png": "8c4793ef038a147fbbcec81dcd3563a0537523feb34503e285d4523ba47b2ac8",
+              "observer-action-6-baby-held.png": "440e94b4e1c809c3eeff6c10686e9de9d0a601fd7d886193fee78252d9afc04f",
+              "observer-action-7-adult-early.png": "ee282dae314688c28eb537a9d543777f05052823f51d8f5a632a6a835d900f1c",
+              "observer-action-7-adult-held.png": "fdce7fb7de3316f61de2fcf7f2d57948bf09617fe70ef596e4bef41d3f513bc0",
+              "observer-action-7-baby-early.png": "7fb3dc788253993a588903d5855a79453dba0af5e5eefa3dd2d8145a7f5a21fc",
+              "observer-action-7-baby-held.png": "4de62e3c1e947dde5f84e8b20fa1c3fe11e68bc32e41d224751e0ad448fec683",
+              "observer-action-8-adult-early.png": "280b6c167ca8258c29d96df1ee5107314bbea0be4c82e2f0e0ed1e802eef1112",
+              "observer-action-8-adult-held.png": "d4f7368f9c2569e4411efc9acc5a2569f6820bfbb885b48e4ace7b27df3edc17",
+              "observer-action-8-baby-early.png": "1223001de749b6eb0da8611b35046734c33175f675c79491da94a861970bf8ea",
+              "observer-action-8-baby-held.png": "c60db8a21b762067cddde85b10fa2821efbd9035ff6e091d19f20f7ce3a5064e"
+            },
+            "worldRestartPassed": true,
+            "captureTiming": "settled camera, native pet submitted, completed frame",
+            "skinModelsPassed": true,
+            "playerPosePassed": true,
+            "playerPoseRequired": true
+          }
+        },
+        "lifecycle": {
+          "profile": "forge-1.20.1-lifecycle-1",
+          "marker": "lifecycle-passed.json",
+          "markerSha256": "a6765367ca59a6a97871ea3594edd9240bd1a959187f709b3bb1dfe43c22292f",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "seamless-dogs-qa-forge.jar": "94bde9d47579abb449a6a98001cbb5b262903303b4c2cc7d397a703de07a9bd4"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "clientJars": {
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "seamless-dogs-qa-forge.jar": "94bde9d47579abb449a6a98001cbb5b262903303b4c2cc7d397a703de07a9bd4"
+            },
+            "serverJars": {
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "seamless-dogs-qa-forge.jar": "94bde9d47579abb449a6a98001cbb5b262903303b4c2cc7d397a703de07a9bd4"
+            },
+            "gate": "actual dimension, death/respawn, menu, active same-JVM disconnect/reconnect; subsequent request accepted; cat chest-idle dimension/death/reconnect cleanup",
+            "display": ":99"
+          }
+        },
+        "combined": {
+          "profile": "forge-1.20.1-combined-1",
+          "marker": "client-passed.json",
+          "markerSha256": "fac9a3c44d6df3cca0d4fbf4b7b9a4436048dcb97bd23328eac8f93180b52772",
+          "testedJars": {
+            "architectury-forge-9.1.12.jar": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
+            "embeddium-0.3.31+mc1.20.1.jar": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+            "entity_model_features-3.3.11-1.20.1-forge.jar": "cb408c2eecf708613e1b8f18b0a70abcc5ff0217a29f6b69c7c7cbf1df8ec374",
+            "entity_texture_features-7.2.5-1.20.1-forge.jar": "c41fc98c079d8a98cc7297641aa2956a56697165abf8884b93b29d129d8c713c",
+            "ftb-chunks-forge-2001.3.8.jar": "783f7aa42089b6f72500801284796f7cc8eb641ecddcf76f65bf586c017efb02",
+            "ftb-library-forge-2001.2.9.jar": "b7d5d19889c485a9746022fdc42f3297aa4d26014559ea0ed35fa7ba816b001d",
+            "ftb-teams-forge-2001.3.1.jar": "d6e3cf8d0bdae7f848764428c613ae2528aecf9d275b4169eb8e15da87b41863",
+            "notenoughanimations-forge-1.12.6-mc1.20.1.jar": "66f1f6d61102dd03a4afafe4c9f1d39be9e55dabc8d0821cb46acca1328b525d",
+            "oculus-mc1.20.1-1.8.0.jar": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+            "open-parties-and-claims-forge-1.20.1-0.32.7.jar": "e315edb21094281e1182697e6fbfbb380bbec424eaf1c3daa1c40d831221f2cb",
+            "pretty-meteors-with-trails-2.0.2+mc1.20.1-forge.jar": "b10416878d348d942c48df250032e51087e02492b19882c2b9591ceff7230834",
+            "seamless-api-2.0.2+mc1.20.1-forge.jar": "3f203160813f0a56a519ecd425c8c13c6d85dfb2e8fa3956644e097d98873c55",
+            "seamless-crafting-2.1.1+mc1.20.1-forge.jar": "faf31378c4f9de35c4178ead198f901b20df2bc1513ae93eef4f2c94bce0f10c",
+            "seamless-deconstructing-workbench-2.1.1+mc1.20.1-forge.jar": "a38e4fe7d6c5b61c4907eb33fbf08c5e5f940f3e5634f5c6622d944a587fd180",
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d",
+            "sword-throw-2.1.1+mc1.20.1-forge.jar": "33ea4d4cc6a06a58f156fc71e877600b13cce68c1f6156d23cc453a034a360e1"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "jars": {
+              "architectury-forge-9.1.12.jar": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
+              "embeddium-0.3.31+mc1.20.1.jar": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+              "entity_model_features-3.3.11-1.20.1-forge.jar": "cb408c2eecf708613e1b8f18b0a70abcc5ff0217a29f6b69c7c7cbf1df8ec374",
+              "entity_texture_features-7.2.5-1.20.1-forge.jar": "c41fc98c079d8a98cc7297641aa2956a56697165abf8884b93b29d129d8c713c",
+              "ftb-chunks-forge-2001.3.8.jar": "783f7aa42089b6f72500801284796f7cc8eb641ecddcf76f65bf586c017efb02",
+              "ftb-library-forge-2001.2.9.jar": "b7d5d19889c485a9746022fdc42f3297aa4d26014559ea0ed35fa7ba816b001d",
+              "ftb-teams-forge-2001.3.1.jar": "d6e3cf8d0bdae7f848764428c613ae2528aecf9d275b4169eb8e15da87b41863",
+              "notenoughanimations-forge-1.12.6-mc1.20.1.jar": "66f1f6d61102dd03a4afafe4c9f1d39be9e55dabc8d0821cb46acca1328b525d",
+              "oculus-mc1.20.1-1.8.0.jar": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+              "open-parties-and-claims-forge-1.20.1-0.32.7.jar": "e315edb21094281e1182697e6fbfbb380bbec424eaf1c3daa1c40d831221f2cb",
+              "pretty-meteors-with-trails-2.0.2+mc1.20.1-forge.jar": "b10416878d348d942c48df250032e51087e02492b19882c2b9591ceff7230834",
+              "seamless-api-2.0.2+mc1.20.1-forge.jar": "3f203160813f0a56a519ecd425c8c13c6d85dfb2e8fa3956644e097d98873c55",
+              "seamless-crafting-2.1.1+mc1.20.1-forge.jar": "faf31378c4f9de35c4178ead198f901b20df2bc1513ae93eef4f2c94bce0f10c",
+              "seamless-deconstructing-workbench-2.1.1+mc1.20.1-forge.jar": "a38e4fe7d6c5b61c4907eb33fbf08c5e5f940f3e5634f5c6622d944a587fd180",
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "seamless-dogs-qa-forge.jar": "e5b44b84318e7dca36c2661b2e5da9c7ffb93142b72c1ee6526a4fa1074f116d",
+              "sword-throw-2.1.1+mc1.20.1-forge.jar": "33ea4d4cc6a06a58f156fc71e877600b13cce68c1f6156d23cc453a034a360e1"
+            },
+            "guiScale": "3",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": {
+              "minecraft": "1.20.1",
+              "loader": "forge",
+              "kind": "combined",
+              "protection": true,
+              "ftb": true,
+              "cpapi": false,
+              "shader": true,
+              "jars": {
+                "architectury-forge-9.1.12.jar": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
+                "embeddium-0.3.31+mc1.20.1.jar": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+                "entity_model_features-3.3.11-1.20.1-forge.jar": "cb408c2eecf708613e1b8f18b0a70abcc5ff0217a29f6b69c7c7cbf1df8ec374",
+                "entity_texture_features-7.2.5-1.20.1-forge.jar": "c41fc98c079d8a98cc7297641aa2956a56697165abf8884b93b29d129d8c713c",
+                "ftb-chunks-forge-2001.3.8.jar": "783f7aa42089b6f72500801284796f7cc8eb641ecddcf76f65bf586c017efb02",
+                "ftb-library-forge-2001.2.9.jar": "b7d5d19889c485a9746022fdc42f3297aa4d26014559ea0ed35fa7ba816b001d",
+                "ftb-teams-forge-2001.3.1.jar": "d6e3cf8d0bdae7f848764428c613ae2528aecf9d275b4169eb8e15da87b41863",
+                "notenoughanimations-forge-1.12.6-mc1.20.1.jar": "66f1f6d61102dd03a4afafe4c9f1d39be9e55dabc8d0821cb46acca1328b525d",
+                "oculus-mc1.20.1-1.8.0.jar": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+                "open-parties-and-claims-forge-1.20.1-0.32.7.jar": "e315edb21094281e1182697e6fbfbb380bbec424eaf1c3daa1c40d831221f2cb"
+              },
+              "sources": [
+                {
+                  "project": null,
+                  "version": "3.3.11-forge-1.20.1",
+                  "versionId": "6RQ5C1J6",
+                  "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/6RQ5C1J6/entity_model_features-3.3.11-1.20.1-forge.jar",
+                  "name": "entity_model_features-3.3.11-1.20.1-forge.jar",
+                  "sha256": "cb408c2eecf708613e1b8f18b0a70abcc5ff0217a29f6b69c7c7cbf1df8ec374",
+                  "sha512": "5b1f8da334931ca5ab157001384fc56e38317d774512522823530504f2e1d6060f9d940181200a4b3c5ec17cb1c77d93cee559e3af58065286d8c94d92907ffa"
+                },
+                {
+                  "project": null,
+                  "version": "7.2.5-forge-1.20.1",
+                  "versionId": "VkWikkyj",
+                  "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/VkWikkyj/entity_texture_features-7.2.5-1.20.1-forge.jar",
+                  "name": "entity_texture_features-7.2.5-1.20.1-forge.jar",
+                  "sha256": "c41fc98c079d8a98cc7297641aa2956a56697165abf8884b93b29d129d8c713c",
+                  "sha512": "a0573d09d468d37ba069a28bc12d530a23fccd5aa491461ef977ebeee54d866e5d77bc57f519cbea51ca261e745ff4c9baf4c0ffa8109bde888437a36d51514c"
+                },
+                {
+                  "project": null,
+                  "version": "1.12.6",
+                  "versionId": "kGjMleOz",
+                  "url": "https://cdn.modrinth.com/data/MPCX6s5C/versions/kGjMleOz/notenoughanimations-forge-1.12.6-mc1.20.1.jar",
+                  "name": "notenoughanimations-forge-1.12.6-mc1.20.1.jar",
+                  "sha256": "66f1f6d61102dd03a4afafe4c9f1d39be9e55dabc8d0821cb46acca1328b525d",
+                  "sha512": "deb10b44e923a5ead4379651328f28c7e7aa862f825f0938ffc4d641119671fedeb5129161553618efb7e4b578d23393c225ade7ce486d1e6e36de256b2ec793"
+                },
+                {
+                  "project": null,
+                  "version": "1.20.1-1.8.0",
+                  "versionId": "iQ1SwGc3",
+                  "url": "https://cdn.modrinth.com/data/GchcoXML/versions/iQ1SwGc3/oculus-mc1.20.1-1.8.0.jar",
+                  "name": "oculus-mc1.20.1-1.8.0.jar",
+                  "sha256": "0945df0cba0f62b3901dd80c3268e5311b770ece78c78037a45db12ac0425fef",
+                  "sha512": "1bb4ac77400d6684347988ed298a692c2cb15cf7923693607eb8739b171a20fef7412259e9e157111d9ce21779badab386029956f7d2283a9e611722a373e9d5"
+                },
+                {
+                  "project": null,
+                  "version": "0.3.31+mc1.20.1",
+                  "versionId": "UTbfe5d1",
+                  "url": "https://cdn.modrinth.com/data/sk9rgfiA/versions/UTbfe5d1/embeddium-0.3.31%2Bmc1.20.1.jar",
+                  "name": "embeddium-0.3.31+mc1.20.1.jar",
+                  "sha256": "eed3d1325f2acc2fd4e69bb495e5ccb91d962126ac5330f0582ebc2a3daf47fb",
+                  "sha512": "ffbf2da4685260a4d5c14c621708bd20722563f084f042d3dfb0a7b87f048e39299648c854a93939129da0d23a15a91ec628560d601e76074b08e275f6e132e9"
+                },
+                {
+                  "project": null,
+                  "version": "forge-1.20.1-0.32.7",
+                  "versionId": "PkZL3SuC",
+                  "url": "https://cdn.modrinth.com/data/gF3BGWvG/versions/PkZL3SuC/open-parties-and-claims-forge-1.20.1-0.32.7.jar",
+                  "name": "open-parties-and-claims-forge-1.20.1-0.32.7.jar",
+                  "sha256": "e315edb21094281e1182697e6fbfbb380bbec424eaf1c3daa1c40d831221f2cb",
+                  "sha512": "eed600ad9daddccb00e797a7e5c5adaa7e9dc492ff1bd07ada3912998fdf46aaf1e5f309c476c7c7ef18d50179d4bfa6896dff8c28cbc78ebcf06c3efa33f1d0"
+                },
+                {
+                  "name": "ftb-chunks-forge-2001.3.8.jar",
+                  "version": "2001.3.8",
+                  "sha256": "783f7aa42089b6f72500801284796f7cc8eb641ecddcf76f65bf586c017efb02",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-chunks-forge/2001.3.8/ftb-chunks-forge-2001.3.8.jar"
+                },
+                {
+                  "name": "ftb-library-forge-2001.2.9.jar",
+                  "version": "2001.2.9",
+                  "sha256": "b7d5d19889c485a9746022fdc42f3297aa4d26014559ea0ed35fa7ba816b001d",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-library-forge/2001.2.9/ftb-library-forge-2001.2.9.jar"
+                },
+                {
+                  "name": "ftb-teams-forge-2001.3.1.jar",
+                  "version": "2001.3.1",
+                  "sha256": "d6e3cf8d0bdae7f848764428c613ae2528aecf9d275b4169eb8e15da87b41863",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-teams-forge/2001.3.1/ftb-teams-forge-2001.3.1.jar"
+                },
+                {
+                  "name": "architectury-forge-9.1.12.jar",
+                  "version": "9.1.12",
+                  "sha256": "61d6ec4d5e1362ec2581bca60cf637ef3d9565d61437a2356654645a8c5cce87",
+                  "url": "https://maven.architectury.dev/dev/architectury/architectury-forge/9.1.12/architectury-forge-9.1.12.jar"
+                }
+              ]
+            },
+            "shaderPack": "SeamlessDogsQa.zip",
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS",
+              "DOGS_OPENPAC_ACTUAL_CLAIMS_PASS",
+              "DOGS_FTB_ACTUAL_CLAIMS_PASS"
+            ]
+          }
+        },
+        "suite-server": {
+          "profile": "forge-1.20.1-suite-server-2",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "b001f94bc93078a5c0c75ce24c0040da953cf395bd41b49c4630f6ffb0d78196",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc1.20.1-forge.jar": "b10416878d348d942c48df250032e51087e02492b19882c2b9591ceff7230834",
+            "seamless-api-2.0.2+mc1.20.1-forge.jar": "3f203160813f0a56a519ecd425c8c13c6d85dfb2e8fa3956644e097d98873c55",
+            "seamless-crafting-2.1.1+mc1.20.1-forge.jar": "faf31378c4f9de35c4178ead198f901b20df2bc1513ae93eef4f2c94bce0f10c",
+            "seamless-deconstructing-workbench-2.1.1+mc1.20.1-forge.jar": "a38e4fe7d6c5b61c4907eb33fbf08c5e5f940f3e5634f5c6622d944a587fd180",
+            "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "sword-throw-2.1.1+mc1.20.1-forge.jar": "33ea4d4cc6a06a58f156fc71e877600b13cce68c1f6156d23cc453a034a360e1"
+          },
+          "details": {
+            "minecraft": "1.20.1",
+            "loader": "forge",
+            "gate": "suite-server",
+            "attempt": 2,
+            "exit": 0,
+            "stage": "/mnt/d/SeamlessDogsProduction-20261006/forge-1.20.1-suite-server-2",
+            "log": "/mnt/d/SeamlessDogsProduction-20261006/runtime-1.20.1-forge-suite-server-2.log",
+            "dogsSha256": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+            "finishedAt": 1791364222.9227397,
+            "jars": {
+              "pretty-meteors-with-trails-2.0.2+mc1.20.1-forge.jar": "b10416878d348d942c48df250032e51087e02492b19882c2b9591ceff7230834",
+              "seamless-api-2.0.2+mc1.20.1-forge.jar": "3f203160813f0a56a519ecd425c8c13c6d85dfb2e8fa3956644e097d98873c55",
+              "seamless-crafting-2.1.1+mc1.20.1-forge.jar": "faf31378c4f9de35c4178ead198f901b20df2bc1513ae93eef4f2c94bce0f10c",
+              "seamless-deconstructing-workbench-2.1.1+mc1.20.1-forge.jar": "a38e4fe7d6c5b61c4907eb33fbf08c5e5f940f3e5634f5c6622d944a587fd180",
+              "seamless-dogs-0.2.0+mc1.20.1-forge.jar": "7d4f24ed68ebb98260966023d402fe421ff84bc7741baa3fad41e6f23fe1878e",
+              "sword-throw-2.1.1+mc1.20.1-forge.jar": "33ea4d4cc6a06a58f156fc71e877600b13cce68c1f6156d23cc453a034a360e1"
+            }
+          }
+        },
+        "visual": {
+          "manifest": "visual-review\\1.20.1-forge\\capture-manifest.json",
+          "manifestSha256": "7b1ee1a8dc5f05674709ac803809eb7f3002edfc883c67a61e91398c9c513c55",
+          "reviewRecord": "visual-review\\1.20.1-forge\\review-log-20261007.json",
+          "reviewRecordSha256": "a466ab17cd1809f637f12135d107a91242362e4ec0ad5d6986a2336e59034a2b"
+        }
+      },
+      "expectedUnitTests": 22,
+      "unitPassed": true,
+      "nativeRepetitionPassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "lifecyclePassed": true,
+      "combinedPassed": true,
+      "combinedServerPassed": true,
+      "worldRestartPassed": true,
+      "keybindPassed": true,
+      "skinModelsPassed": true,
+      "playerPoseRequired": true,
+      "playerPosePassed": true,
+      "extraRendererPassed": true,
+      "nativeRepetitionRequired": true,
+      "extraRendererRequired": false,
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
+    },
+    {
+      "minecraft": "1.21.1",
+      "loader": "fabric",
+      "jars": {
+        "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a"
+      },
+      "sourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
+      "buildPassed": true,
+      "nativePassed": true,
+      "nativeScenarios": [
+        "catOwnership",
+        "codecRoundTrip",
+        "cooldownAndCancellation",
+        "diggingTerrain",
+        "idleContracts",
+        "ownerCanPet",
+        "rejectInvalidRequests",
+        "v2CodecRoundTrip"
+      ],
+      "unitTests": {
+        "tests": 22,
+        "failures": 0,
+        "errors": 0
+      },
+      "buildLog": "build-1.21.1-keybind-17.log",
+      "nativeLog": "build-1.21.1-keybind-17.log",
+      "java": 21,
+      "loaderVersion": "0.19.5",
+      "fabricApi": "0.116.17+1.21.1",
+      "evidence": {
+        "server": {
+          "profile": "fabric-1.21.1-server-3",
+          "marker": "server-passed.json",
+          "markerSha256": "30a962404262d4ab8fc967dd60ed3ac9085c25f0d2022387389fa96848adf64c",
+          "testedJars": {
+            "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "runtimeLoader": "0.19.5",
+            "jars": {
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a"
+            },
+            "wolfBefore": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; 1420248110, 1223117392, -1411471473, 1652475543]"
+            },
+            "wolfAfter": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; 1420248110, 1223117392, -1411471473, 1652475543]"
+            },
+            "gate": "official packaged server; clean startup/save/restart; owner/sitting/health/UUID preserved"
+          }
+        },
+        "single": {
+          "profile": "fabric-1.21.1-single-4",
+          "marker": "client-passed.json",
+          "markerSha256": "d280a51f073ebeea32efb57e2df64c0a2d7d2f186a1a434e58ea3c41cd662af7",
+          "testedJars": {
+            "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "jars": {
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503"
+            },
+            "guiScale": "4",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": null,
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS"
+            ]
+          }
+        },
+        "pair": {
+          "profile": "fabric-1.21.1-pair-3",
+          "marker": "pair-passed.json",
+          "markerSha256": "7756dab1104130c7d1565b0b9e7c256825858ea253a4fdcd7b41a72761ce5d66",
+          "testedJars": {
+            "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "jars": {
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503"
+            },
+            "gate": "two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect",
+            "display": ":99",
+            "observerCaptures": {
+              "observer-action-1-adult-early.png": "9d65c68bec8978c906d63e92f8c42a7aa3a4c02d502fcdb9217107a9a7a07056",
+              "observer-action-1-adult-held.png": "a94354ec7ffae2aa86020caca835fb7400625fab7a6310afe1d6b80c0719f657",
+              "observer-action-1-baby-early.png": "e9899e0b94d89755d543c1813c8b48bb26d59397cabb6edae8184c19bcab2c58",
+              "observer-action-1-baby-held.png": "f0e36d557ae9008ae09eb3e22ea36f52cf193c7cf33242a0a61de2ff6b4e6bd8",
+              "observer-action-2-adult-early.png": "7dd91be72d90a7e33a1db23c00545202b894c302816b1fc1f9fb55d824787a57",
+              "observer-action-2-adult-held.png": "bf82034f208144354628bad69ee5eb7463e68db1d54f6566f2698088687bc907",
+              "observer-action-2-baby-early.png": "7540db829fcb913804b907f6d2e59d21bc814e7e260c573c09c369ecb82fb394",
+              "observer-action-2-baby-held.png": "728da21dd9798254892df7431266686cc05ad80d030528a8786e8e38387aa4f2",
+              "observer-action-3-adult-early.png": "2132872257e4a9a407dec2f2c5d144f75b3250b71263b7821fa247aecab6b49a",
+              "observer-action-3-adult-held.png": "fc5d19159ab677aa7957f82e6b37d05732bb593e68413365f1b3bf82e7f603c3",
+              "observer-action-4-adult-early.png": "8dc60404c6b771282b3b48fc85a373982315147fae0f1baa8d115fff31274f1e",
+              "observer-action-4-adult-held.png": "f07b206ac0232c82d5538a6f6f5e45009330bb8de76d89893a37381bcd9ce273",
+              "observer-action-4-baby-early.png": "6f655ab7d4226f59332262407fc2ba4ac09e9772e687789a6cbf6d6546657484",
+              "observer-action-4-baby-held.png": "ee998737d294a76b6a8249ec861ba761ec00413cb247256b04d98cb85b84aa80",
+              "observer-action-6-adult-early.png": "1480f7cde43cc8411bda0916971e0d1743b5e99f48ce319197877309c3cb3fa5",
+              "observer-action-6-adult-held.png": "9dca0cd6f1a26e3950e6f60e20ecc441f227bac015082ebe23fcccd318698fdc",
+              "observer-action-6-baby-early.png": "786a9d5a03d837c5dfb3cc7a1af5915531b57faa68b078e29493dc15f9532556",
+              "observer-action-6-baby-held.png": "4377c58be62243381a05d8f967971ec32942b4c1dd410a324d67f44dd93e58a8",
+              "observer-action-7-adult-early.png": "9712a41ed3ccc4a51e6fb842d8036dd9780e27841785e4ff543be8cfd6b15b24",
+              "observer-action-7-adult-held.png": "6aab33a6aee085bc2ceef96774ef0ce8ae2779ad29c2a74517ddf215e64d6569",
+              "observer-action-7-baby-early.png": "08af577a5f2d9c2d9b8c7afcee4e255ee0661d5778e953ea71eefc95e103002e",
+              "observer-action-7-baby-held.png": "0eb59ff76ee527825d54b8f1d654ab1a990cede9462b78ee6f546986cb6d0637",
+              "observer-action-8-adult-early.png": "5ffcfd65c6058a2ef41074c9d77369f989d71791cdcbfdaf568f6f8495598144",
+              "observer-action-8-adult-held.png": "76640b2f1aaf4923263bb358e67f05effd50507df1dbb320ce41d0f3fde20edb",
+              "observer-action-8-baby-early.png": "9cf231c9e2dd7d78ccfde49e1ce8cbb6980fb7a49768ee9846b6c89ad1fa25dc",
+              "observer-action-8-baby-held.png": "216dc9d12ff2dfd7131c1c55a43fd5989063421c6de26677f520a475a9f129d7"
+            },
+            "worldRestartPassed": true,
+            "captureTiming": "settled camera, native pet submitted, completed frame",
+            "skinModelsPassed": true,
+            "playerPosePassed": true,
+            "playerPoseRequired": true
+          }
+        },
+        "lifecycle": {
+          "profile": "fabric-1.21.1-lifecycle-2",
+          "marker": "lifecycle-passed.json",
+          "markerSha256": "139f35af2f9e930e460dfca847b0ab763191b210fd914171638e4c743d7e417d",
+          "testedJars": {
+            "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "seamless-dogs-qa-fabric.jar": "397f428e13df7b3518db398f24ec699fd5aa5f19a68135fcdfa50d1832563f3f"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "clientJars": {
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "seamless-dogs-qa-fabric.jar": "397f428e13df7b3518db398f24ec699fd5aa5f19a68135fcdfa50d1832563f3f"
+            },
+            "serverJars": {
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "seamless-dogs-qa-fabric.jar": "397f428e13df7b3518db398f24ec699fd5aa5f19a68135fcdfa50d1832563f3f"
+            },
+            "gate": "actual dimension, death/respawn, menu, active same-JVM disconnect/reconnect; subsequent request accepted; cat chest-idle dimension/death/reconnect cleanup",
+            "display": ":99"
+          }
+        },
+        "combined": {
+          "profile": "fabric-1.21.1-combined-2",
+          "marker": "client-passed.json",
+          "markerSha256": "029877a1804dda4aaa005374f164227ea2e3c0a7c2fddd045a2c020237cc76aa",
+          "testedJars": {
+            "ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar": "2e3a8f0e3bda85a7d722720e7ce879cbd9d028d9395c6fc224d329b3c982d9b1",
+            "architectury-fabric-13.0.8.jar": "0d0f290ecbb5470f989d3c7a4539c04145cb1ae23d6b117e6b0bc94f7620214d",
+            "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+            "entity_model_features-3.3.11-1.21-fabric.jar": "e338605abc4bf8c8bc2bccdc039e51932d6e3e3ddd0ca6ef7d4cd282eaa5bd74",
+            "entity_texture_features-7.2.5-1.21-fabric.jar": "f2fea73af94f479956f8f14d7b1cd22beea7999e5d400a71f71ecc6eabdcc8b6",
+            "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+            "ftb-chunks-fabric-2101.1.22.jar": "6b783610069b64f7b28aa0675a707b3cf171364b6647e0c7b406cf6ca7674215",
+            "ftb-library-fabric-2101.1.34.jar": "df67b359e85d2757aaf29e5c77df2e5608f8246dcb63ae7148548b38293c0df2",
+            "ftb-teams-fabric-2101.1.9.jar": "92fc0626fef1a804d0c5b94ad68236e44e93573228a286417b066d90dafb181d",
+            "iris-fabric-1.8.14-beta.1+mc1.21.1.jar": "0ceb694040b4628bf3fa02286cfe5f0db833195669ab07f8caa4001359763eff",
+            "modmenu-11.0.5.jar": "afa55fe4e7c48560126dbe654fa9647f141bc6ffd3ce35525b65dd65d88251b5",
+            "notenoughanimations-fabric-1.12.6-mc1.21.1.jar": "c122d94d63493de89a90778f761ccebcc53ba009279c93492b99869381f37f45",
+            "open-parties-and-claims-fabric-1.21.1-0.32.7.jar": "736a905f391407cfdb4f87ee88d5e80d818fafbe22fb28512ec4bf57b6894605",
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-fabric.jar": "d99fc0acc42a500c1aef5c9df9ab9ec50890631523ba3cdf390f2f98c3e95132",
+            "seamless-api-2.0.2+mc1.21.1-fabric.jar": "e4e16320a94f809b11d7ff5906f63aa168587cf2f09080638b9cd4c643433312",
+            "seamless-crafting-2.1.1+mc1.21.1-fabric.jar": "f866f276be6b607b4ee82f5e8e8a006b0dd7633f9434479ef167060746473fe9",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-fabric.jar": "5a2bebd16d403f65b637f6385a30d61af33b7906ab49bbc912cf40fc0bf48c63",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503",
+            "sodium-fabric-0.8.12-beta.1+mc1.21.1.jar": "8db17b78aadaa64888d74e9a51c3fe862f280abcace195d0d72ac46e01094b22",
+            "sword-throw-2.1.1+mc1.21.1-fabric.jar": "a5303a93e8212d7b165dd17c068e127d2b241ef0723bb46499f6f3b3c911d9fa"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "jars": {
+              "ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar": "2e3a8f0e3bda85a7d722720e7ce879cbd9d028d9395c6fc224d329b3c982d9b1",
+              "architectury-fabric-13.0.8.jar": "0d0f290ecbb5470f989d3c7a4539c04145cb1ae23d6b117e6b0bc94f7620214d",
+              "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+              "entity_model_features-3.3.11-1.21-fabric.jar": "e338605abc4bf8c8bc2bccdc039e51932d6e3e3ddd0ca6ef7d4cd282eaa5bd74",
+              "entity_texture_features-7.2.5-1.21-fabric.jar": "f2fea73af94f479956f8f14d7b1cd22beea7999e5d400a71f71ecc6eabdcc8b6",
+              "fabric-api-0.116.17+1.21.1.jar": "79ac44b40780acbd884b34c50be1e39af682847e5f5cb3b1fddeeaa768dce800",
+              "ftb-chunks-fabric-2101.1.22.jar": "6b783610069b64f7b28aa0675a707b3cf171364b6647e0c7b406cf6ca7674215",
+              "ftb-library-fabric-2101.1.34.jar": "df67b359e85d2757aaf29e5c77df2e5608f8246dcb63ae7148548b38293c0df2",
+              "ftb-teams-fabric-2101.1.9.jar": "92fc0626fef1a804d0c5b94ad68236e44e93573228a286417b066d90dafb181d",
+              "iris-fabric-1.8.14-beta.1+mc1.21.1.jar": "0ceb694040b4628bf3fa02286cfe5f0db833195669ab07f8caa4001359763eff",
+              "modmenu-11.0.5.jar": "afa55fe4e7c48560126dbe654fa9647f141bc6ffd3ce35525b65dd65d88251b5",
+              "notenoughanimations-fabric-1.12.6-mc1.21.1.jar": "c122d94d63493de89a90778f761ccebcc53ba009279c93492b99869381f37f45",
+              "open-parties-and-claims-fabric-1.21.1-0.32.7.jar": "736a905f391407cfdb4f87ee88d5e80d818fafbe22fb28512ec4bf57b6894605",
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-fabric.jar": "d99fc0acc42a500c1aef5c9df9ab9ec50890631523ba3cdf390f2f98c3e95132",
+              "seamless-api-2.0.2+mc1.21.1-fabric.jar": "e4e16320a94f809b11d7ff5906f63aa168587cf2f09080638b9cd4c643433312",
+              "seamless-crafting-2.1.1+mc1.21.1-fabric.jar": "f866f276be6b607b4ee82f5e8e8a006b0dd7633f9434479ef167060746473fe9",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-fabric.jar": "5a2bebd16d403f65b637f6385a30d61af33b7906ab49bbc912cf40fc0bf48c63",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "seamless-dogs-qa-fabric.jar": "15dcdb470292f46f80e3fc98b44e941c1ce41c531c0cb3f25cd3f05b85ea1503",
+              "sodium-fabric-0.8.12-beta.1+mc1.21.1.jar": "8db17b78aadaa64888d74e9a51c3fe862f280abcace195d0d72ac46e01094b22",
+              "sword-throw-2.1.1+mc1.21.1-fabric.jar": "a5303a93e8212d7b165dd17c068e127d2b241ef0723bb46499f6f3b3c911d9fa"
+            },
+            "guiScale": "3",
+            "modMenu": true,
+            "graphicsBackend": "opengl",
+            "optionalInputs": {
+              "minecraft": "1.21.1",
+              "loader": "fabric",
+              "kind": "combined",
+              "protection": true,
+              "ftb": true,
+              "cpapi": true,
+              "shader": true,
+              "jars": {
+                "architectury-fabric-13.0.8.jar": "0d0f290ecbb5470f989d3c7a4539c04145cb1ae23d6b117e6b0bc94f7620214d",
+                "common-protection-api-1.0.0.jar": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+                "entity_model_features-3.3.11-1.21-fabric.jar": "e338605abc4bf8c8bc2bccdc039e51932d6e3e3ddd0ca6ef7d4cd282eaa5bd74",
+                "entity_texture_features-7.2.5-1.21-fabric.jar": "f2fea73af94f479956f8f14d7b1cd22beea7999e5d400a71f71ecc6eabdcc8b6",
+                "ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar": "2e3a8f0e3bda85a7d722720e7ce879cbd9d028d9395c6fc224d329b3c982d9b1",
+                "ftb-chunks-fabric-2101.1.22.jar": "6b783610069b64f7b28aa0675a707b3cf171364b6647e0c7b406cf6ca7674215",
+                "ftb-library-fabric-2101.1.34.jar": "df67b359e85d2757aaf29e5c77df2e5608f8246dcb63ae7148548b38293c0df2",
+                "ftb-teams-fabric-2101.1.9.jar": "92fc0626fef1a804d0c5b94ad68236e44e93573228a286417b066d90dafb181d",
+                "iris-fabric-1.8.14-beta.1+mc1.21.1.jar": "0ceb694040b4628bf3fa02286cfe5f0db833195669ab07f8caa4001359763eff",
+                "notenoughanimations-fabric-1.12.6-mc1.21.1.jar": "c122d94d63493de89a90778f761ccebcc53ba009279c93492b99869381f37f45",
+                "open-parties-and-claims-fabric-1.21.1-0.32.7.jar": "736a905f391407cfdb4f87ee88d5e80d818fafbe22fb28512ec4bf57b6894605",
+                "sodium-fabric-0.8.12-beta.1+mc1.21.1.jar": "8db17b78aadaa64888d74e9a51c3fe862f280abcace195d0d72ac46e01094b22"
+              },
+              "sources": [
+                {
+                  "project": null,
+                  "version": "3.3.11-fabric-1.21",
+                  "versionId": "VeoAKvQ0",
+                  "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/VeoAKvQ0/entity_model_features-3.3.11-1.21-fabric.jar",
+                  "name": "entity_model_features-3.3.11-1.21-fabric.jar",
+                  "sha256": "e338605abc4bf8c8bc2bccdc039e51932d6e3e3ddd0ca6ef7d4cd282eaa5bd74",
+                  "sha512": "03e6fcc63905f4e8054b26c972a7fb742dd5ec5084a396c23521aa2760915cac33cb38c66ca3b6520e492eedd542e2897956eab6ddd178d34eeeacc63e211c8c"
+                },
+                {
+                  "project": null,
+                  "version": "7.2.5-fabric-1.21",
+                  "versionId": "OVZ7HJXt",
+                  "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/OVZ7HJXt/entity_texture_features-7.2.5-1.21-fabric.jar",
+                  "name": "entity_texture_features-7.2.5-1.21-fabric.jar",
+                  "sha256": "f2fea73af94f479956f8f14d7b1cd22beea7999e5d400a71f71ecc6eabdcc8b6",
+                  "sha512": "dfa14a17b79d7318ef1734b8eae4a094d9e9350a7fab41828e9bef10389afcffdd477d0c73be804112d44fbccce1cc391f308514e801ee9e5968df011fff37af"
+                },
+                {
+                  "project": null,
+                  "version": "1.12.6",
+                  "versionId": "P5COwDnM",
+                  "url": "https://cdn.modrinth.com/data/MPCX6s5C/versions/P5COwDnM/notenoughanimations-fabric-1.12.6-mc1.21.1.jar",
+                  "name": "notenoughanimations-fabric-1.12.6-mc1.21.1.jar",
+                  "sha256": "c122d94d63493de89a90778f761ccebcc53ba009279c93492b99869381f37f45",
+                  "sha512": "0e7da5238701c159f9a8e4f55ad48533a2228ff1b9f598ab420be737dfd25b840f950ad56cdf6be54177b92466063fdc6a9c86e4ab3bbcae5f22299e008dea85"
+                },
+                {
+                  "project": null,
+                  "version": "1.8.14-beta.1+1.21.1-fabric",
+                  "versionId": "bAo1Qhte",
+                  "url": "https://cdn.modrinth.com/data/YL57xq9U/versions/bAo1Qhte/iris-fabric-1.8.14-beta.1%2Bmc1.21.1.jar",
+                  "name": "iris-fabric-1.8.14-beta.1+mc1.21.1.jar",
+                  "sha256": "0ceb694040b4628bf3fa02286cfe5f0db833195669ab07f8caa4001359763eff",
+                  "sha512": "a7fbb629793c52f0be8b049f787cb598879239b1ad8e1de62e103c8b9efff140e3232b93ef1f14e505d262897d8cf9505b1126396429ad4056bff969c8674e52"
+                },
+                {
+                  "project": "AANobbMI",
+                  "version": "mc1.21.1-0.8.12-beta.1-fabric",
+                  "versionId": "s7adptIg",
+                  "url": "https://cdn.modrinth.com/data/AANobbMI/versions/s7adptIg/sodium-fabric-0.8.12-beta.1%2Bmc1.21.1.jar",
+                  "name": "sodium-fabric-0.8.12-beta.1+mc1.21.1.jar",
+                  "sha256": "8db17b78aadaa64888d74e9a51c3fe862f280abcace195d0d72ac46e01094b22",
+                  "sha512": "6d4958fd3c23c0e5fdcbfcdaa3e73511bf89a0988370ab94c93e740ec2452649165b3a331351e12d392ccf924affdc042b3fc01b2e6289b7d9c7c4591c7dbeeb"
+                },
+                {
+                  "project": null,
+                  "version": "fabric-1.21.1-0.32.7",
+                  "versionId": "YnCCrnDV",
+                  "url": "https://cdn.modrinth.com/data/gF3BGWvG/versions/YnCCrnDV/open-parties-and-claims-fabric-1.21.1-0.32.7.jar",
+                  "name": "open-parties-and-claims-fabric-1.21.1-0.32.7.jar",
+                  "sha256": "736a905f391407cfdb4f87ee88d5e80d818fafbe22fb28512ec4bf57b6894605",
+                  "sha512": "5738f761df7f0d524eb934b01dbb23493270b3b5991fe963c4392e67ea43adce1cf28eaa05ae0c5bd4a7b5e859dcc7da660fe7ca8ec99baf1ed7f165bbae95a9"
+                },
+                {
+                  "project": "ohNO6lps",
+                  "version": "v21.1.6-1.21.1-Fabric",
+                  "versionId": "N5qzq0XV",
+                  "url": "https://cdn.modrinth.com/data/ohNO6lps/versions/N5qzq0XV/ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar",
+                  "name": "ForgeConfigAPIPort-v21.1.6-1.21.1-Fabric.jar",
+                  "sha256": "2e3a8f0e3bda85a7d722720e7ce879cbd9d028d9395c6fc224d329b3c982d9b1",
+                  "sha512": "cd9296e78ba969f7aed6e3692aa25eb61c102c79c55ca5f9592576bacaa26feab5d5d48fa30cf07ca852e0f1d42afc4d4558feff69a67b225183d2bc15898cf9"
+                },
+                {
+                  "name": "ftb-chunks-fabric-2101.1.22.jar",
+                  "version": "2101.1.22",
+                  "sha256": "6b783610069b64f7b28aa0675a707b3cf171364b6647e0c7b406cf6ca7674215",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-chunks-fabric/2101.1.22/ftb-chunks-fabric-2101.1.22.jar"
+                },
+                {
+                  "name": "ftb-library-fabric-2101.1.34.jar",
+                  "version": "2101.1.34",
+                  "sha256": "df67b359e85d2757aaf29e5c77df2e5608f8246dcb63ae7148548b38293c0df2",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-library-fabric/2101.1.34/ftb-library-fabric-2101.1.34.jar"
+                },
+                {
+                  "name": "ftb-teams-fabric-2101.1.9.jar",
+                  "version": "2101.1.9",
+                  "sha256": "92fc0626fef1a804d0c5b94ad68236e44e93573228a286417b066d90dafb181d",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-teams-fabric/2101.1.9/ftb-teams-fabric-2101.1.9.jar"
+                },
+                {
+                  "name": "architectury-fabric-13.0.8.jar",
+                  "version": "13.0.8",
+                  "sha256": "0d0f290ecbb5470f989d3c7a4539c04145cb1ae23d6b117e6b0bc94f7620214d",
+                  "url": "https://maven.architectury.dev/dev/architectury/architectury-fabric/13.0.8/architectury-fabric-13.0.8.jar"
+                },
+                {
+                  "name": "common-protection-api-1.0.0.jar",
+                  "version": "1.0.0",
+                  "sha256": "3e2b921664d91ef819d332d2a6af17bd0d6dbf71fd7d8fe86643ca38cea02fcb",
+                  "url": "https://maven.nucleoid.xyz/eu/pb4/common-protection-api/1.0.0/common-protection-api-1.0.0.jar"
+                }
+              ]
+            },
+            "shaderPack": "SeamlessDogsQa.zip",
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS",
+              "DOGS_MODMENU_CONFIG_PASS",
+              "DOGS_OPENPAC_ACTUAL_CLAIMS_PASS",
+              "DOGS_FTB_ACTUAL_CLAIMS_PASS",
+              "DOGS_CPAPI_ACTUAL_PROVIDER_PASS"
+            ]
+          }
+        },
+        "suite-server": {
+          "profile": "fabric-1.21.1-suite-server-2",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "f5727c4676b2c4dea812d3f89798aa092901517ca26cee410ea29f6e30aefdc1",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-fabric.jar": "d99fc0acc42a500c1aef5c9df9ab9ec50890631523ba3cdf390f2f98c3e95132",
+            "seamless-api-2.0.2+mc1.21.1-fabric.jar": "e4e16320a94f809b11d7ff5906f63aa168587cf2f09080638b9cd4c643433312",
+            "seamless-crafting-2.1.1+mc1.21.1-fabric.jar": "f866f276be6b607b4ee82f5e8e8a006b0dd7633f9434479ef167060746473fe9",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-fabric.jar": "5a2bebd16d403f65b637f6385a30d61af33b7906ab49bbc912cf40fc0bf48c63",
+            "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "sword-throw-2.1.1+mc1.21.1-fabric.jar": "a5303a93e8212d7b165dd17c068e127d2b241ef0723bb46499f6f3b3c911d9fa"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "fabric",
+            "gate": "suite-server",
+            "attempt": 2,
+            "exit": 0,
+            "stage": "/mnt/d/SeamlessDogsProduction-20261006/fabric-1.21.1-suite-server-2",
+            "log": "/mnt/d/SeamlessDogsProduction-20261006/runtime-1.21.1-fabric-suite-server-2.log",
+            "dogsSha256": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+            "finishedAt": 1791368624.6987896,
+            "jars": {
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-fabric.jar": "d99fc0acc42a500c1aef5c9df9ab9ec50890631523ba3cdf390f2f98c3e95132",
+              "seamless-api-2.0.2+mc1.21.1-fabric.jar": "e4e16320a94f809b11d7ff5906f63aa168587cf2f09080638b9cd4c643433312",
+              "seamless-crafting-2.1.1+mc1.21.1-fabric.jar": "f866f276be6b607b4ee82f5e8e8a006b0dd7633f9434479ef167060746473fe9",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-fabric.jar": "5a2bebd16d403f65b637f6385a30d61af33b7906ab49bbc912cf40fc0bf48c63",
+              "seamless-dogs-0.2.0+mc1.21.1-fabric.jar": "1c42792a06c4b8856ea3bf1d7a77d98e3ff9f46e7851da9240086a0a4028db6a",
+              "sword-throw-2.1.1+mc1.21.1-fabric.jar": "a5303a93e8212d7b165dd17c068e127d2b241ef0723bb46499f6f3b3c911d9fa"
+            }
+          }
+        },
+        "visual": {
+          "manifest": "visual-review\\1.21.1-fabric\\capture-manifest.json",
+          "manifestSha256": "ea20e0f50388a431eec725b2b87ae56cca651f5c09ac8c6d7c4732f11fc76b44",
+          "reviewRecord": "visual-review\\1.21.1-fabric\\review-log-20261007.json",
+          "reviewRecordSha256": "b775659d005b57f72ecfc75263ed2d5244d54d266a41560f449164bf97cbf2dd"
+        }
+      },
+      "expectedUnitTests": 22,
+      "unitPassed": true,
+      "nativeRepetitionPassed": true,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "lifecyclePassed": true,
+      "combinedPassed": true,
+      "combinedServerPassed": true,
+      "worldRestartPassed": true,
+      "keybindPassed": true,
+      "skinModelsPassed": true,
+      "playerPoseRequired": true,
+      "playerPosePassed": true,
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": false,
-      "artifactStatus": "Built with native/common tests passed; packaged validation of the new player pose fix is pending."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "1.21.1",
       "loader": "forge",
       "jars": {
-        "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "f20b90e737055cbe9e3c5350004d428cac56ebcab10567e577e0be934905bfd8"
+        "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42"
       },
-      "sourceCommit": "0dafee83cd4eb8c6abcb7564c2e00ed37095c6a5",
+      "sourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -192,39 +1275,324 @@
         "failures": 0,
         "errors": 0
       },
-      "buildLog": "build-1.21.1-keybind-14.log",
-      "nativeLog": "build-1.21.1-keybind-14.log",
+      "buildLog": "build-1.21.1-keybind-17.log",
+      "nativeLog": "build-1.21.1-keybind-17.log",
       "java": 21,
       "loaderVersion": "1.21.1-52.1.16",
       "fabricApi": null,
-      "evidence": {},
+      "evidence": {
+        "server": {
+          "profile": "forge-1.21.1-server-2",
+          "marker": "server-passed.json",
+          "markerSha256": "4184f811b7c218e40ed04a6f54e2eadeaa5e1cd1714fd48665e8dcdf788bacf0",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "runtimeLoader": "1.21.1-52.1.16",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42"
+            },
+            "wolfBefore": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; -276489887, 2131249225, -1435041972, 1247977639]"
+            },
+            "wolfAfter": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; -276489887, 2131249225, -1435041972, 1247977639]"
+            },
+            "gate": "official packaged server; clean startup/save/restart; owner/sitting/health/UUID preserved"
+          }
+        },
+        "single": {
+          "profile": "forge-1.21.1-single-5",
+          "marker": "client-passed.json",
+          "markerSha256": "b127bd1a871435f977055b38be995b89649c0ab63048e740c862225bfe8f8d59",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e"
+            },
+            "guiScale": "4",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": null,
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS"
+            ]
+          }
+        },
+        "pair": {
+          "profile": "forge-1.21.1-pair-1",
+          "marker": "pair-passed.json",
+          "markerSha256": "20c84437d50bb13c6b3b8a1656f88799ec4834c2be1337b82cbd108389bf16a9",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e"
+            },
+            "gate": "two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect",
+            "display": ":99",
+            "observerCaptures": {
+              "observer-action-1-adult-early.png": "d95c771054b88b5a715ea55ab3ebbe9e29bc7d52196fdfb6d22cc60e25b90ed0",
+              "observer-action-1-adult-held.png": "4b6ae2ab8ba7d7cfca998a981b6082ada47bbbee4c513c55a3b0869077f53b25",
+              "observer-action-1-baby-early.png": "00a8e25a6650f675a93c4bbc80fae8be283083d45834c35093f79a88183c857a",
+              "observer-action-1-baby-held.png": "746260f2c6686a1dd59ebe761d416acd79f933b5825de0af5d3bb79aedad2382",
+              "observer-action-2-adult-early.png": "2eb01c1cb466724fbc12d3d3f9055dde072074bdb3903fdc762faa5781e13fdc",
+              "observer-action-2-adult-held.png": "dc77de630f192490bad0b00b8bdfb056047373939955f2b0df71aea0d1f09a54",
+              "observer-action-2-baby-early.png": "4918899ceaa1c60d517fa35a321f2a30166828a597108390ca8bbc4950df2da8",
+              "observer-action-2-baby-held.png": "73b8acf5a5b05f7be3596b0c30fe6c81f4c9aac4779e9c289664f792a52f0d66",
+              "observer-action-3-adult-early.png": "04895420d8267bbbdeb735de5301ea02a3d1fcbc2d5742a43c180da8e9ab408d",
+              "observer-action-3-adult-held.png": "fda7f3ce8e12fddb86665959e7a6a36115014f1c0139c302b64c773e03f72295",
+              "observer-action-4-adult-early.png": "4d631b618e245ded8183cd6edd13144fb33698920fa81798bd3180e950bdcfb2",
+              "observer-action-4-adult-held.png": "097912c86eaf85be86c08fff2b09b0ef1cab0d30a9e418204b4e7a871a0ba4a4",
+              "observer-action-4-baby-early.png": "cfb2a4402e8aef3a70b537c9bdf938eec0f0ba698692fcc3c07cd00c2f0af147",
+              "observer-action-4-baby-held.png": "cc3f4ba88e581dba3b1580184022258f670af238b34edc32a681e9da16560e2e",
+              "observer-action-6-adult-early.png": "873c9a1308c64ae32662f69c3ca524f4bda0f9f5214dfc3fa29fbf58a4fb337d",
+              "observer-action-6-adult-held.png": "2476d0d02ab5f1f019fa470fa83506f9775eec0c254e8182ef21061f4bc5a146",
+              "observer-action-6-baby-early.png": "6d04743ec290a06eec18db58a3bfa4a123ebf7f62d31036eef6446beccd79c2d",
+              "observer-action-6-baby-held.png": "061f3a13191b566c4eda01e9ae6501413c017bf3797d32df6b255a18d209a006",
+              "observer-action-7-adult-early.png": "fea0a6e724a395e055c016876b937b0d5041bcc42d55ea72ce7aa79586afc647",
+              "observer-action-7-adult-held.png": "80219b0c59e886508d3c469b2c631411a16f504a5e008fad6d66342620189784",
+              "observer-action-7-baby-early.png": "ade8fd89f061944ac9bdc01f853da01eb12807de835386daf5956015a002151c",
+              "observer-action-7-baby-held.png": "68df6d565db3057803ed6510affebad5ed98fe52b6a04311fc4a04c2d6fd9827",
+              "observer-action-8-adult-early.png": "90d0041ae97b00a41393377e5846de2a97e57ff5c644e084891c73b835a82604",
+              "observer-action-8-adult-held.png": "ee49ee9ab8ccc3fb188a416bf5eac7927c55dcc05a9439ea40d573d6b6f13703",
+              "observer-action-8-baby-early.png": "186d5c35fdf5e06d05f5402119fdfc18aa70168ab98cc50a35919bd4c676c8d8",
+              "observer-action-8-baby-held.png": "5502071485b6209819b94fa46adf73510d7828a5c19978fca81170c524b21030"
+            },
+            "worldRestartPassed": true,
+            "captureTiming": "settled camera, native pet submitted, completed frame",
+            "skinModelsPassed": true,
+            "playerPosePassed": true,
+            "playerPoseRequired": true
+          }
+        },
+        "lifecycle": {
+          "profile": "forge-1.21.1-lifecycle-1",
+          "marker": "lifecycle-passed.json",
+          "markerSha256": "5274be5fbd26017564b6f2ada6a925d401ccbdf3c8bf261071501acab3c12c52",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "seamless-dogs-qa-forge.jar": "72e79c79e287fcbf5b335d6bccf09876c6ca29107a9d420932775e6e141da48a"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "clientJars": {
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "seamless-dogs-qa-forge.jar": "72e79c79e287fcbf5b335d6bccf09876c6ca29107a9d420932775e6e141da48a"
+            },
+            "serverJars": {
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "seamless-dogs-qa-forge.jar": "72e79c79e287fcbf5b335d6bccf09876c6ca29107a9d420932775e6e141da48a"
+            },
+            "gate": "actual dimension, death/respawn, menu, active same-JVM disconnect/reconnect; subsequent request accepted; cat chest-idle dimension/death/reconnect cleanup",
+            "display": ":99"
+          }
+        },
+        "combined": {
+          "profile": "forge-1.21.1-combined-1",
+          "marker": "client-passed.json",
+          "markerSha256": "6e258c3275ef91fbc5a7e301fd826a05b4974c5155ba31c3ff4e6ec761340389",
+          "testedJars": {
+            "ForgeConfigAPIPort-v21.1.6-1.21.1-Forge.jar": "c83919bbb24e6aeb46df2c3fa79e1ef268b38571b11b20a510307ed58ff701e1",
+            "entity_model_features-3.3.11-1.21-forge.jar": "9c185b236fa508346cc64290f27150b99cef4e2264f3c37091cd5c92489745f9",
+            "entity_texture_features-7.2.5-1.21-forge.jar": "3c57d12fc271e8b37baaffeb5dc8e3e60dbcf4de8ddf546e2f8f762765eef451",
+            "notenoughanimations-forge-1.12.6-mc1.21.1.jar": "52231e3cf12bb90135a94fe73d7e686af65a7731a8d750df1e8acd6d031fe81c",
+            "open-parties-and-claims-forge-1.21.1-0.32.7.jar": "c654b8dd4a156ccda8abb57fd70ae5bc54b7903e905d384b0434d1b2ba9b7174",
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-forge.jar": "f7939d1564127e922add9002115c16c9a18b3d91173833813d7730d2c9d4d5bc",
+            "seamless-api-2.0.2+mc1.21.1-forge.jar": "1c7f92667358f924acd9a82b70ce7542057eb0714dcbde58166707f9c91e4bf0",
+            "seamless-crafting-2.1.1+mc1.21.1-forge.jar": "4d5c88f8ef95e012534979144c9a265cccf7b279e7e8d6d8b357578839d85988",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-forge.jar": "abaf876094c5a9c000542d6cd7a0385156ce47ff7d70d2dd0b8c8eec45af4757",
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e",
+            "sword-throw-2.1.1+mc1.21.1-forge.jar": "68fae6626eb1babbde34412ee284e0d6960902bee976abc9a07027def1d7b4db"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "jars": {
+              "ForgeConfigAPIPort-v21.1.6-1.21.1-Forge.jar": "c83919bbb24e6aeb46df2c3fa79e1ef268b38571b11b20a510307ed58ff701e1",
+              "entity_model_features-3.3.11-1.21-forge.jar": "9c185b236fa508346cc64290f27150b99cef4e2264f3c37091cd5c92489745f9",
+              "entity_texture_features-7.2.5-1.21-forge.jar": "3c57d12fc271e8b37baaffeb5dc8e3e60dbcf4de8ddf546e2f8f762765eef451",
+              "notenoughanimations-forge-1.12.6-mc1.21.1.jar": "52231e3cf12bb90135a94fe73d7e686af65a7731a8d750df1e8acd6d031fe81c",
+              "open-parties-and-claims-forge-1.21.1-0.32.7.jar": "c654b8dd4a156ccda8abb57fd70ae5bc54b7903e905d384b0434d1b2ba9b7174",
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-forge.jar": "f7939d1564127e922add9002115c16c9a18b3d91173833813d7730d2c9d4d5bc",
+              "seamless-api-2.0.2+mc1.21.1-forge.jar": "1c7f92667358f924acd9a82b70ce7542057eb0714dcbde58166707f9c91e4bf0",
+              "seamless-crafting-2.1.1+mc1.21.1-forge.jar": "4d5c88f8ef95e012534979144c9a265cccf7b279e7e8d6d8b357578839d85988",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-forge.jar": "abaf876094c5a9c000542d6cd7a0385156ce47ff7d70d2dd0b8c8eec45af4757",
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "seamless-dogs-qa-forge.jar": "18707871bcc4561c71bd626ba6255f65dbcf13e5666cd069bb3d8f85366ecc1e",
+              "sword-throw-2.1.1+mc1.21.1-forge.jar": "68fae6626eb1babbde34412ee284e0d6960902bee976abc9a07027def1d7b4db"
+            },
+            "guiScale": "3",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": {
+              "minecraft": "1.21.1",
+              "loader": "forge",
+              "kind": "combined",
+              "protection": true,
+              "ftb": false,
+              "cpapi": false,
+              "shader": false,
+              "jars": {
+                "entity_model_features-3.3.11-1.21-forge.jar": "9c185b236fa508346cc64290f27150b99cef4e2264f3c37091cd5c92489745f9",
+                "entity_texture_features-7.2.5-1.21-forge.jar": "3c57d12fc271e8b37baaffeb5dc8e3e60dbcf4de8ddf546e2f8f762765eef451",
+                "notenoughanimations-forge-1.12.6-mc1.21.1.jar": "52231e3cf12bb90135a94fe73d7e686af65a7731a8d750df1e8acd6d031fe81c",
+                "open-parties-and-claims-forge-1.21.1-0.32.7.jar": "c654b8dd4a156ccda8abb57fd70ae5bc54b7903e905d384b0434d1b2ba9b7174",
+                "ForgeConfigAPIPort-v21.1.6-1.21.1-Forge.jar": "c83919bbb24e6aeb46df2c3fa79e1ef268b38571b11b20a510307ed58ff701e1"
+              },
+              "sources": [
+                {
+                  "project": "entity-model-features",
+                  "projectId": "4I1XuqiY",
+                  "version": "3.3.11-forge-1.21",
+                  "versionId": "wOlTlh6B",
+                  "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/wOlTlh6B/entity_model_features-3.3.11-1.21-forge.jar",
+                  "sha512": "1c3a2874c424eb556b034fd93495641141ab3498280961391ecfdf14d20b06d025c3cb357b0d727ad9d1c271877737f2a8e5cd8354b39b4a1853001b991fa246",
+                  "filename": "entity_model_features-3.3.11-1.21-forge.jar"
+                },
+                {
+                  "project": "entitytexturefeatures",
+                  "projectId": "BVzZfTc1",
+                  "version": "7.2.5-forge-1.21",
+                  "versionId": "44zU11wr",
+                  "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/44zU11wr/entity_texture_features-7.2.5-1.21-forge.jar",
+                  "sha512": "c5aa191c775344bcdceed8e8a0996fe2c1bc3723bba365762d82da7f6271193d1ebbfa6cd9b50d74a9e9b698c8d4bb4867007fcef69ae6e14567c0829ccb2b87",
+                  "filename": "entity_texture_features-7.2.5-1.21-forge.jar"
+                },
+                {
+                  "project": "not-enough-animations",
+                  "projectId": "MPCX6s5C",
+                  "version": "1.12.6",
+                  "versionId": "IfXEGews",
+                  "url": "https://cdn.modrinth.com/data/MPCX6s5C/versions/IfXEGews/notenoughanimations-forge-1.12.6-mc1.21.1.jar",
+                  "sha512": "3386096eff3b1eaa89d2da9b5019c3f4d058c1f99bc1f1438fc0871359b68f6a4e55e2c64310be4a4e3aebc334d07662de4b74b82431b34de845f145e3340426",
+                  "filename": "notenoughanimations-forge-1.12.6-mc1.21.1.jar"
+                },
+                {
+                  "project": "open-parties-and-claims",
+                  "projectId": "gF3BGWvG",
+                  "version": "forge-1.21.1-0.32.7",
+                  "versionId": "MHTCdNg9",
+                  "url": "https://cdn.modrinth.com/data/gF3BGWvG/versions/MHTCdNg9/open-parties-and-claims-forge-1.21.1-0.32.7.jar",
+                  "sha512": "e430a3a6fc08a87e251ea8be50c159339b5d3105f57ae626ba25f2598a11d6cb4c05d78087151b31acf12e77813f3635cfd0255a3eaea7a74410303ced49b780",
+                  "filename": "open-parties-and-claims-forge-1.21.1-0.32.7.jar"
+                },
+                {
+                  "project": "ohNO6lps",
+                  "projectId": "ohNO6lps",
+                  "version": "v21.1.6-1.21.1-Forge",
+                  "versionId": "uz2Elwpw",
+                  "url": "https://cdn.modrinth.com/data/ohNO6lps/versions/uz2Elwpw/ForgeConfigAPIPort-v21.1.6-1.21.1-Forge.jar",
+                  "sha512": "a11fba6ed4b7047683fec374eb5e935e40f32c3fdb302b76a8264e321c42e1848b85f4914c3898bda9f0712b31496199b5d80268a5208c495715c4e4f86944cc",
+                  "filename": "ForgeConfigAPIPort-v21.1.6-1.21.1-Forge.jar"
+                }
+              ],
+              "preparedAt": 1791364117.8937275
+            },
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_QA_POST_LOAD_OPEN",
+              "DOGS_QA_REGISTER_COMMAND_EVENT",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS",
+              "DOGS_OPENPAC_ACTUAL_CLAIMS_PASS"
+            ]
+          }
+        },
+        "suite-server": {
+          "profile": "forge-1.21.1-suite-server-1",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "2df66d209023158a14c75c3566fcab60d42fdd1b13244820658388efd5d2c4b0",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-forge.jar": "f7939d1564127e922add9002115c16c9a18b3d91173833813d7730d2c9d4d5bc",
+            "seamless-api-2.0.2+mc1.21.1-forge.jar": "1c7f92667358f924acd9a82b70ce7542057eb0714dcbde58166707f9c91e4bf0",
+            "seamless-crafting-2.1.1+mc1.21.1-forge.jar": "4d5c88f8ef95e012534979144c9a265cccf7b279e7e8d6d8b357578839d85988",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-forge.jar": "abaf876094c5a9c000542d6cd7a0385156ce47ff7d70d2dd0b8c8eec45af4757",
+            "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "sword-throw-2.1.1+mc1.21.1-forge.jar": "68fae6626eb1babbde34412ee284e0d6960902bee976abc9a07027def1d7b4db"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "forge",
+            "gate": "suite-server",
+            "attempt": 1,
+            "exit": 0,
+            "stage": "/mnt/d/SeamlessDogsProduction-20261006/forge-1.21.1-suite-server-1",
+            "log": "/mnt/d/SeamlessDogsProduction-20261006/runtime-1.21.1-forge-suite-server-1.log",
+            "dogsSha256": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+            "finishedAt": 1791367580.7667131,
+            "jars": {
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-forge.jar": "f7939d1564127e922add9002115c16c9a18b3d91173833813d7730d2c9d4d5bc",
+              "seamless-api-2.0.2+mc1.21.1-forge.jar": "1c7f92667358f924acd9a82b70ce7542057eb0714dcbde58166707f9c91e4bf0",
+              "seamless-crafting-2.1.1+mc1.21.1-forge.jar": "4d5c88f8ef95e012534979144c9a265cccf7b279e7e8d6d8b357578839d85988",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-forge.jar": "abaf876094c5a9c000542d6cd7a0385156ce47ff7d70d2dd0b8c8eec45af4757",
+              "seamless-dogs-0.2.0+mc1.21.1-forge.jar": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+              "sword-throw-2.1.1+mc1.21.1-forge.jar": "68fae6626eb1babbde34412ee284e0d6960902bee976abc9a07027def1d7b4db"
+            }
+          }
+        },
+        "visual": {
+          "manifest": "visual-review\\1.21.1-forge\\capture-manifest.json",
+          "manifestSha256": "d29df0927671ea3d714c4bc822596d7f8fec15c5990190ad7c83b95eaefdfde3",
+          "reviewRecord": "visual-review\\1.21.1-forge\\review-log-20261007.json",
+          "reviewRecordSha256": "b7aae1f5b83ba05c7b14fdaf3fe7ab48041925c603e841f2e81aaabcaba5478b"
+        }
+      },
       "expectedUnitTests": 22,
       "unitPassed": true,
       "nativeRepetitionPassed": true,
-      "serverPassed": false,
-      "clientPassed": false,
-      "multiplayerPassed": false,
-      "lifecyclePassed": false,
-      "combinedPassed": false,
-      "combinedServerPassed": false,
-      "worldRestartPassed": false,
-      "keybindPassed": false,
-      "skinModelsPassed": false,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "lifecyclePassed": true,
+      "combinedPassed": true,
+      "combinedServerPassed": true,
+      "worldRestartPassed": true,
+      "keybindPassed": true,
+      "skinModelsPassed": true,
       "playerPoseRequired": true,
-      "playerPosePassed": false,
+      "playerPosePassed": true,
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": false,
-      "artifactStatus": "Built with native/common tests passed; packaged validation of the new player pose fix is pending."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "1.21.1",
       "loader": "neoforge",
       "jars": {
-        "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "803b000d60089b26c51367ee374fd4a5ff0f19111100cc2304751cf26adaf149"
+        "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1"
       },
-      "sourceCommit": "0dafee83cd4eb8c6abcb7564c2e00ed37095c6a5",
+      "sourceCommit": "c0570a8a6fad25df1a6f47fbd82fe252757bf796",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -242,31 +1610,373 @@
         "failures": 0,
         "errors": 0
       },
-      "buildLog": "build-1.21.1-keybind-14.log",
-      "nativeLog": "build-1.21.1-keybind-14.log",
+      "buildLog": "build-1.21.1-keybind-17.log",
+      "nativeLog": "build-1.21.1-keybind-17.log",
       "java": 21,
       "loaderVersion": "21.1.255",
       "fabricApi": null,
-      "evidence": {},
+      "evidence": {
+        "server": {
+          "profile": "neoforge-1.21.1-server-1",
+          "marker": "server-passed.json",
+          "markerSha256": "7d4846838973779b92fed3ef35aaada0eb433b7eda2f5239c607e81802f6d717",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "runtimeLoader": "21.1.255",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1"
+            },
+            "wolfBefore": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; 1147191445, 1749304792, -1830822176, -1624050806]"
+            },
+            "wolfAfter": {
+              "owner": "[I; -1295336068, 1462258398, -1910025843, 452560768]",
+              "sitting": "1b",
+              "health": "4.0f",
+              "uuid": "[I; 1147191445, 1749304792, -1830822176, -1624050806]"
+            },
+            "gate": "official packaged server; clean startup/save/restart; owner/sitting/health/UUID preserved"
+          }
+        },
+        "single": {
+          "profile": "neoforge-1.21.1-single-1",
+          "marker": "client-passed.json",
+          "markerSha256": "7cb167e8267819ddac96aeb153eef1569bcfede162e0e50fc2d1f527eb8393ec",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524"
+            },
+            "guiScale": "4",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": null,
+            "shaderPack": null,
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS"
+            ]
+          }
+        },
+        "pair": {
+          "profile": "neoforge-1.21.1-pair-1",
+          "marker": "pair-passed.json",
+          "markerSha256": "d7e42ddc6a6cc922a50a2a6d872d3d70d5e2ff9949c24b71fe27d09bc4f54800",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "jars": {
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524"
+            },
+            "gate": "two real clients: dog/cat keybind, first/third/left hand, owner-only prompt, hostile pet/settings C2S rejection, remote rigs/eyes/entity sounds, resource reload, late dog/cat tracking, dig/stretch, biscuits/groom/ear tilt and late expressive clips, owner/admin settings, active owner disconnect",
+            "display": ":99",
+            "observerCaptures": {
+              "observer-action-1-adult-early.png": "d24228c96362b3eb23e03ce3e6e496bdbfa9c2be9a632c34b6f4e8b357fecf6b",
+              "observer-action-1-adult-held.png": "289070c9261dffb0db3589c5020415c63ae5a31f87d52070b51f635c5c514a1d",
+              "observer-action-1-baby-early.png": "c5d2a678ccbe418f5c94e961c9bb9f8c6767a02d09de780834ae0d04cdcef1d3",
+              "observer-action-1-baby-held.png": "9baa2e7ee842c151f10507ad197084f324305a603b4e424b097c171ff73e87b8",
+              "observer-action-2-adult-early.png": "34711a151e68300f318dfc6e2be1a446bb4dc53339a72d6077bb10fc6ad2f617",
+              "observer-action-2-adult-held.png": "7b8756ee8e900a27ac109b20fa90c68036738ef127dcdc96cf9580da4915b255",
+              "observer-action-2-baby-early.png": "0394d279870f0f952a2d61361049c0a23c03663f5ec028d3cddd7994b99278c4",
+              "observer-action-2-baby-held.png": "8f2e3e792adab33d15325f6c3de6235c62c0bc9a9b8259dc54cdd027a7954d2e",
+              "observer-action-3-adult-early.png": "d57b417be8ea6d558fe7cf89f174d47809ebfb94ff8166cdbffad54a6f15be6e",
+              "observer-action-3-adult-held.png": "ba0010591454c6d0aabdd67f813536be57a79d99cf3a4c6bd45920b7cd851214",
+              "observer-action-4-adult-early.png": "9d4537adef912eba65a9e14964a3a6d61fe0d6554825f8a424de761b40af59db",
+              "observer-action-4-adult-held.png": "368b28f48bab21b69b526c506765091124db7d92d88d5d698a6d3ef27c3badd5",
+              "observer-action-4-baby-early.png": "80930b1bd89515f1f861f6794f11e44690fb149bc23b7b3f6498c6513ac116d3",
+              "observer-action-4-baby-held.png": "86809411f36fd4d712cb917c7fb8055f328330e50848db96ae5af1b96fa345f2",
+              "observer-action-6-adult-early.png": "065f76e1b71243bbacf3aac59e8c9fc0ea5b1a0083d160a2725d44c1c65de389",
+              "observer-action-6-adult-held.png": "aeaadbeb00b11b2a5a50f7c8f911d29c46173d22444f4000fa0b5b4d853d929f",
+              "observer-action-6-baby-early.png": "50adcfffd1a46d4688a325e208201902bc0308e7df758049fd862d2013b62f70",
+              "observer-action-6-baby-held.png": "5c9e6d6293c3cebe95ca621aca11a20cb01600cc83f3e3fa90c1a5dcdad761b1",
+              "observer-action-7-adult-early.png": "7818733bd6d6612dc3bc31146a2561a8bfb498153c9f85a7508bd3e71e2d2b8e",
+              "observer-action-7-adult-held.png": "e3f79f3d8b9bc6b20db0960b9086e6bc6285629cfc323dd45efe9021eb3db4d6",
+              "observer-action-7-baby-early.png": "841251ff606222fee69eda2d9c9b58291c517d03124c665fe1f95bf19759eb10",
+              "observer-action-7-baby-held.png": "664fd93a99cd0e95802c1aa3f2ec3b031b4c78e51e23ca204d6ecad6db0e496c",
+              "observer-action-8-adult-early.png": "fc3fd81031f3384a4cb9ba48f77cf7ed81ee9a338b30e92b7b90bde5b615bd62",
+              "observer-action-8-adult-held.png": "ee49ee9ab8ccc3fb188a416bf5eac7927c55dcc05a9439ea40d573d6b6f13703",
+              "observer-action-8-baby-early.png": "a23ca62dc7d2dd3b617bd4735cf4dae4d1519644d959ea4ac789c81fe35c226d",
+              "observer-action-8-baby-held.png": "403bf19bd12d6c384575e2c96a1c367e907970fe0578ae5f3ccbb2253f183ae5"
+            },
+            "worldRestartPassed": true,
+            "captureTiming": "settled camera, native pet submitted, completed frame",
+            "skinModelsPassed": true,
+            "playerPosePassed": true,
+            "playerPoseRequired": true
+          }
+        },
+        "lifecycle": {
+          "profile": "neoforge-1.21.1-lifecycle-1",
+          "marker": "lifecycle-passed.json",
+          "markerSha256": "4b11f496601cd6910caf36d3add953d2940a4d1210a22be6fe06b4d0b141f0f2",
+          "testedJars": {
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "seamless-dogs-qa-neoforge.jar": "0c7f54a31226845188cd0d66c21073187e2f432d29df2f326d0eacebc99c6856"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "clientJars": {
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "seamless-dogs-qa-neoforge.jar": "0c7f54a31226845188cd0d66c21073187e2f432d29df2f326d0eacebc99c6856"
+            },
+            "serverJars": {
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "seamless-dogs-qa-neoforge.jar": "0c7f54a31226845188cd0d66c21073187e2f432d29df2f326d0eacebc99c6856"
+            },
+            "gate": "actual dimension, death/respawn, menu, active same-JVM disconnect/reconnect; subsequent request accepted; cat chest-idle dimension/death/reconnect cleanup",
+            "display": ":99"
+          }
+        },
+        "combined": {
+          "profile": "neoforge-1.21.1-combined-1",
+          "marker": "client-passed.json",
+          "markerSha256": "fc0123b059a0bb3f13d9e920bdfa2317b25a7b91bdda0608baebbd3ad2934a14",
+          "testedJars": {
+            "architectury-13.0.11-neoforge.jar": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+            "entity_model_features-3.3.11-1.21-neoforge.jar": "8337d6b71c8e026efef852a5905f46631cbeb2620ae16fd200264a9230932296",
+            "entity_texture_features-7.2.5-1.21-neoforge.jar": "2276e6c23e4ebb0c26aac68e5c7b547bc31bdaff0ee60beb9b5060de878fe91c",
+            "ftb-chunks-neoforge-2101.1.22.jar": "4ba1b3352184fa7f6e2aa4bca76edd074867697d62344dfa50dcccdb4dab5217",
+            "ftb-library-neoforge-2101.1.37.jar": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
+            "ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
+            "iris-neoforge-1.8.12+mc1.21.1.jar": "3e3f94d2d5cdcb8145c4385d521974aa2d8669b2cc212351f70cf06488182e83",
+            "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar": "e70609c5638d9f02edfb2c8ec448a7d567345323d7386937c174526aac56cb8f",
+            "open-parties-and-claims-neoforge-1.21.1-0.32.7.jar": "dfe68bc3e655792668f04cebdd10c097e6a80b2c5b89ae5cfb9c3ea96be7c105",
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-neoforge.jar": "78e77149ae39bb4956362a30119c8bc5be834c8939d09612caeda17c0623d79e",
+            "seamless-api-2.0.2+mc1.21.1-neoforge.jar": "5e32e8cc61aa6d51c3bde1d93f8a66fcbabc3e89864a54bb5159a35b3154d77c",
+            "seamless-crafting-2.1.1+mc1.21.1-neoforge.jar": "4ca66044aef05efa13141744c42ee13759ff8a290d20066e5621ac28250be24a",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-neoforge.jar": "234387269efe36495bdb270b79f8bacf343412cdae929fddb9c7cb9f0e0adaaa",
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524",
+            "sodium-neoforge-0.6.13+mc1.21.1.jar": "7acd7af2ef75ec883a6872c17494ead65e38025151eb08a1d60e36d34377f403",
+            "sword-throw-2.1.1+mc1.21.1-neoforge.jar": "13cc18a754de5aef86f0d08ed5020a3591762ae63ed133fd7f461dd93c9957cb"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "jars": {
+              "architectury-13.0.11-neoforge.jar": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+              "entity_model_features-3.3.11-1.21-neoforge.jar": "8337d6b71c8e026efef852a5905f46631cbeb2620ae16fd200264a9230932296",
+              "entity_texture_features-7.2.5-1.21-neoforge.jar": "2276e6c23e4ebb0c26aac68e5c7b547bc31bdaff0ee60beb9b5060de878fe91c",
+              "ftb-chunks-neoforge-2101.1.22.jar": "4ba1b3352184fa7f6e2aa4bca76edd074867697d62344dfa50dcccdb4dab5217",
+              "ftb-library-neoforge-2101.1.37.jar": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
+              "ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655",
+              "iris-neoforge-1.8.12+mc1.21.1.jar": "3e3f94d2d5cdcb8145c4385d521974aa2d8669b2cc212351f70cf06488182e83",
+              "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar": "e70609c5638d9f02edfb2c8ec448a7d567345323d7386937c174526aac56cb8f",
+              "open-parties-and-claims-neoforge-1.21.1-0.32.7.jar": "dfe68bc3e655792668f04cebdd10c097e6a80b2c5b89ae5cfb9c3ea96be7c105",
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-neoforge.jar": "78e77149ae39bb4956362a30119c8bc5be834c8939d09612caeda17c0623d79e",
+              "seamless-api-2.0.2+mc1.21.1-neoforge.jar": "5e32e8cc61aa6d51c3bde1d93f8a66fcbabc3e89864a54bb5159a35b3154d77c",
+              "seamless-crafting-2.1.1+mc1.21.1-neoforge.jar": "4ca66044aef05efa13141744c42ee13759ff8a290d20066e5621ac28250be24a",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-neoforge.jar": "234387269efe36495bdb270b79f8bacf343412cdae929fddb9c7cb9f0e0adaaa",
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "seamless-dogs-qa-neoforge.jar": "291cd2e647347338d751e1b23b3603952a7c70050b3f0d21762fe0f806bf7524",
+              "sodium-neoforge-0.6.13+mc1.21.1.jar": "7acd7af2ef75ec883a6872c17494ead65e38025151eb08a1d60e36d34377f403",
+              "sword-throw-2.1.1+mc1.21.1-neoforge.jar": "13cc18a754de5aef86f0d08ed5020a3591762ae63ed133fd7f461dd93c9957cb"
+            },
+            "guiScale": "3",
+            "modMenu": false,
+            "graphicsBackend": "opengl",
+            "optionalInputs": {
+              "minecraft": "1.21.1",
+              "loader": "neoforge",
+              "kind": "combined",
+              "protection": true,
+              "ftb": true,
+              "cpapi": false,
+              "shader": true,
+              "jars": {
+                "entity_model_features-3.3.11-1.21-neoforge.jar": "8337d6b71c8e026efef852a5905f46631cbeb2620ae16fd200264a9230932296",
+                "entity_texture_features-7.2.5-1.21-neoforge.jar": "2276e6c23e4ebb0c26aac68e5c7b547bc31bdaff0ee60beb9b5060de878fe91c",
+                "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar": "e70609c5638d9f02edfb2c8ec448a7d567345323d7386937c174526aac56cb8f",
+                "open-parties-and-claims-neoforge-1.21.1-0.32.7.jar": "dfe68bc3e655792668f04cebdd10c097e6a80b2c5b89ae5cfb9c3ea96be7c105",
+                "iris-neoforge-1.8.12+mc1.21.1.jar": "3e3f94d2d5cdcb8145c4385d521974aa2d8669b2cc212351f70cf06488182e83",
+                "architectury-13.0.11-neoforge.jar": "9cc92f2c09533fc5482c60f993bd891c655a0e32b637037cdcb7c2b23adedeeb",
+                "sodium-neoforge-0.6.13+mc1.21.1.jar": "7acd7af2ef75ec883a6872c17494ead65e38025151eb08a1d60e36d34377f403",
+                "ftb-chunks-neoforge-2101.1.22.jar": "4ba1b3352184fa7f6e2aa4bca76edd074867697d62344dfa50dcccdb4dab5217",
+                "ftb-library-neoforge-2101.1.37.jar": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2",
+                "ftb-teams-neoforge-2101.1.11.jar": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655"
+              },
+              "sources": [
+                {
+                  "project": "entity-model-features",
+                  "projectId": "4I1XuqiY",
+                  "version": "3.3.11-neoforge-1.21",
+                  "versionId": "bRlX1x4e",
+                  "url": "https://cdn.modrinth.com/data/4I1XuqiY/versions/bRlX1x4e/entity_model_features-3.3.11-1.21-neoforge.jar",
+                  "sha512": "18783cfc82c6668108c150e44359033f5fd4dacecf3255a7779a2e96d3cf6ff5e743059032ff66993e63bf01220d27c4e525a2a862bcdf74f85b9de3651c1ab6",
+                  "filename": "entity_model_features-3.3.11-1.21-neoforge.jar"
+                },
+                {
+                  "project": "entitytexturefeatures",
+                  "projectId": "BVzZfTc1",
+                  "version": "7.2.5-neoforge-1.21",
+                  "versionId": "CfQJbv1u",
+                  "url": "https://cdn.modrinth.com/data/BVzZfTc1/versions/CfQJbv1u/entity_texture_features-7.2.5-1.21-neoforge.jar",
+                  "sha512": "7b126a027aede28ca6a31e65a1c4890212ad88504ff0e252ebcaf54b4e124abd667403ca8d084af028554e159a4964eeebb07acab609cbe7cead39ec7c84394e",
+                  "filename": "entity_texture_features-7.2.5-1.21-neoforge.jar"
+                },
+                {
+                  "project": "not-enough-animations",
+                  "projectId": "MPCX6s5C",
+                  "version": "1.12.6",
+                  "versionId": "VCuMsK45",
+                  "url": "https://cdn.modrinth.com/data/MPCX6s5C/versions/VCuMsK45/notenoughanimations-neoforge-1.12.6-mc1.21.1.jar",
+                  "sha512": "2b392f770cac669abcc796e836fc86579e29c1c70174f773fadbb747d8a49763fefd938835aeef8681a384aee9a7b6a8fa4684aaa1961159ccddea680e936acd",
+                  "filename": "notenoughanimations-neoforge-1.12.6-mc1.21.1.jar"
+                },
+                {
+                  "project": "open-parties-and-claims",
+                  "projectId": "gF3BGWvG",
+                  "version": "neoforge-1.21.1-0.32.7",
+                  "versionId": "qMR7tHTs",
+                  "url": "https://cdn.modrinth.com/data/gF3BGWvG/versions/qMR7tHTs/open-parties-and-claims-neoforge-1.21.1-0.32.7.jar",
+                  "sha512": "d4219891785daab5d1182d829b4821c3778392888fb1ef1c45fa8875e8a26cdd52f847b7604a8a15dc8d6b1a21f781e343c216868d4e63d919eb0ab92408f88e",
+                  "filename": "open-parties-and-claims-neoforge-1.21.1-0.32.7.jar"
+                },
+                {
+                  "project": "iris",
+                  "projectId": "YL57xq9U",
+                  "version": "1.8.12+1.21.1-neoforge",
+                  "versionId": "t3ruzodq",
+                  "url": "https://cdn.modrinth.com/data/YL57xq9U/versions/t3ruzodq/iris-neoforge-1.8.12%2Bmc1.21.1.jar",
+                  "sha512": "57b8026a3c3c433cf6123d63dc6ce7e11f6d480a72926370db1fc7f2b06059bc16a753ecd7e7af659c19e90b592103196b0e89585ce4f0744a4ca433f59bcf1a",
+                  "filename": "iris-neoforge-1.8.12+mc1.21.1.jar"
+                },
+                {
+                  "project": "architectury-api",
+                  "projectId": "lhGA9TYQ",
+                  "version": "13.0.11+neoforge",
+                  "versionId": "1IiqEQGl",
+                  "url": "https://cdn.modrinth.com/data/lhGA9TYQ/versions/1IiqEQGl/architectury-13.0.11-neoforge.jar",
+                  "sha512": "d9f7c3bb8162577dfb461ffdf04bd6a3563c7586934a0e2a744c14421beffb8286f0d88d4c758317003f20f99fe8072a39b9d675af061e036970d36db36027f0",
+                  "filename": "architectury-13.0.11-neoforge.jar"
+                },
+                {
+                  "project": "AANobbMI",
+                  "projectId": "AANobbMI",
+                  "version": "mc1.21.1-0.6.13-neoforge",
+                  "versionId": "Pb3OXVqC",
+                  "url": "https://cdn.modrinth.com/data/AANobbMI/versions/Pb3OXVqC/sodium-neoforge-0.6.13%2Bmc1.21.1.jar",
+                  "sha512": "ce58f34d05d96c0a109a5cea23c741f6bdb2e6be31fc087c5989274cefca5f10ba0c08c62083cf554a51f2c7667bf46e4164383f675c844e77633aef2659996b",
+                  "filename": "sodium-neoforge-0.6.13+mc1.21.1.jar"
+                },
+                {
+                  "project": "ftb-chunks-neoforge",
+                  "version": "2101.1.22",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-chunks-neoforge/2101.1.22/ftb-chunks-neoforge-2101.1.22.jar",
+                  "filename": "ftb-chunks-neoforge-2101.1.22.jar",
+                  "sha256": "4ba1b3352184fa7f6e2aa4bca76edd074867697d62344dfa50dcccdb4dab5217"
+                },
+                {
+                  "project": "ftb-library-neoforge",
+                  "version": "2101.1.37",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-library-neoforge/2101.1.37/ftb-library-neoforge-2101.1.37.jar",
+                  "filename": "ftb-library-neoforge-2101.1.37.jar",
+                  "sha256": "624c2d2d1cbadb946d967e17757bd5b2d129d4d3ed71f2da0c70607d04476ac2"
+                },
+                {
+                  "project": "ftb-teams-neoforge",
+                  "version": "2101.1.11",
+                  "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-teams-neoforge/2101.1.11/ftb-teams-neoforge-2101.1.11.jar",
+                  "filename": "ftb-teams-neoforge-2101.1.11.jar",
+                  "sha256": "e6bcd670493624e6906df872a9c6af4a33fe6405cac57a32c59cd4cd5838c655"
+                }
+              ],
+              "preparedAt": 1791364412.6796422
+            },
+            "shaderPack": "SeamlessDogsQa.zip",
+            "requiredMarkers": [
+              "DOGS_REBIND_PASS",
+              "DOGS_CLIENT_PASS",
+              "DOGS_SKIN_MODELS_PASS",
+              "DOGS_PLAYER_POSE_PASS",
+              "DOGS_OPENPAC_ACTUAL_CLAIMS_PASS",
+              "DOGS_FTB_ACTUAL_CLAIMS_PASS"
+            ]
+          }
+        },
+        "suite-server": {
+          "profile": "neoforge-1.21.1-suite-server-1",
+          "marker": "combined-server-passed.json",
+          "markerSha256": "340d6cbef8a2a358952251a1615f7865c286aa4ea65b9ec092b3b74d718ccb1e",
+          "testedJars": {
+            "pretty-meteors-with-trails-2.0.2+mc1.21.1-neoforge.jar": "78e77149ae39bb4956362a30119c8bc5be834c8939d09612caeda17c0623d79e",
+            "seamless-api-2.0.2+mc1.21.1-neoforge.jar": "5e32e8cc61aa6d51c3bde1d93f8a66fcbabc3e89864a54bb5159a35b3154d77c",
+            "seamless-crafting-2.1.1+mc1.21.1-neoforge.jar": "4ca66044aef05efa13141744c42ee13759ff8a290d20066e5621ac28250be24a",
+            "seamless-deconstructing-workbench-2.1.1+mc1.21.1-neoforge.jar": "234387269efe36495bdb270b79f8bacf343412cdae929fddb9c7cb9f0e0adaaa",
+            "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "sword-throw-2.1.1+mc1.21.1-neoforge.jar": "13cc18a754de5aef86f0d08ed5020a3591762ae63ed133fd7f461dd93c9957cb"
+          },
+          "details": {
+            "minecraft": "1.21.1",
+            "loader": "neoforge",
+            "gate": "suite-server",
+            "attempt": 1,
+            "exit": 0,
+            "stage": "/mnt/d/SeamlessDogsProduction-20261006/neoforge-1.21.1-suite-server-1",
+            "log": "/mnt/d/SeamlessDogsProduction-20261006/runtime-1.21.1-neoforge-suite-server-1.log",
+            "dogsSha256": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+            "finishedAt": 1791369960.5438702,
+            "jars": {
+              "pretty-meteors-with-trails-2.0.2+mc1.21.1-neoforge.jar": "78e77149ae39bb4956362a30119c8bc5be834c8939d09612caeda17c0623d79e",
+              "seamless-api-2.0.2+mc1.21.1-neoforge.jar": "5e32e8cc61aa6d51c3bde1d93f8a66fcbabc3e89864a54bb5159a35b3154d77c",
+              "seamless-crafting-2.1.1+mc1.21.1-neoforge.jar": "4ca66044aef05efa13141744c42ee13759ff8a290d20066e5621ac28250be24a",
+              "seamless-deconstructing-workbench-2.1.1+mc1.21.1-neoforge.jar": "234387269efe36495bdb270b79f8bacf343412cdae929fddb9c7cb9f0e0adaaa",
+              "seamless-dogs-0.2.0+mc1.21.1-neoforge.jar": "cca767422abff94ed4e2114a67e0cf0b76e9f9242072afe0cb9c39a0eee481e1",
+              "sword-throw-2.1.1+mc1.21.1-neoforge.jar": "13cc18a754de5aef86f0d08ed5020a3591762ae63ed133fd7f461dd93c9957cb"
+            }
+          }
+        },
+        "embeddium": {
+          "profile": "neoforge-1.21.1-embeddium-1",
+          "markerSha256": "d47acef4042efaa966d5d91475aaacf7d5f6a5269e69214979251dd4041493bf"
+        },
+        "visual": {
+          "manifest": "visual-review\\1.21.1-neoforge\\capture-manifest.json",
+          "manifestSha256": "eb5de562774b683f72241fded6306a77f3250d3e05ce74b305180602ffc2d1f7",
+          "reviewRecord": "visual-review\\1.21.1-neoforge\\review-log-20261007.json",
+          "reviewRecordSha256": "77180e503d58ce6125cf49e5ac4dc095748916fe6f67f734f155f68e0dbf34fc"
+        }
+      },
       "expectedUnitTests": 22,
       "unitPassed": true,
       "nativeRepetitionPassed": true,
-      "serverPassed": false,
-      "clientPassed": false,
-      "multiplayerPassed": false,
-      "lifecyclePassed": false,
-      "combinedPassed": false,
-      "combinedServerPassed": false,
-      "worldRestartPassed": false,
-      "keybindPassed": false,
-      "skinModelsPassed": false,
+      "serverPassed": true,
+      "clientPassed": true,
+      "multiplayerPassed": true,
+      "lifecyclePassed": true,
+      "combinedPassed": true,
+      "combinedServerPassed": true,
+      "worldRestartPassed": true,
+      "keybindPassed": true,
+      "skinModelsPassed": true,
       "playerPoseRequired": true,
-      "playerPosePassed": false,
-      "extraRendererPassed": false,
+      "playerPosePassed": true,
+      "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": true,
-      "visualReviewPassed": false,
-      "artifactStatus": "Built with native/common tests passed; packaged validation of the new player pose fix is pending."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.2",
@@ -274,7 +1984,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.2-fabric.jar": "ef470d1251e0411d4b7cf89ca396ccd0de094f68bfcfc9bac86e414805c4e3e5"
       },
-      "sourceCommit": "0dc37d0442e1f458e716ea1e41557a2abf35c14d",
+      "sourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -639,8 +2349,8 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.2",
@@ -648,7 +2358,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.2-forge.jar": "f70091a047639a370acbc25cc2414e665128d926ba8e87a4f822b9a90c0d00bb"
       },
-      "sourceCommit": "0dc37d0442e1f458e716ea1e41557a2abf35c14d",
+      "sourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -929,8 +2639,8 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.2",
@@ -938,7 +2648,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.2-neoforge.jar": "55952e683ea21035884440b405cbabd9439c50905e8aab36b37e88e9003f1ff2"
       },
-      "sourceCommit": "0dc37d0442e1f458e716ea1e41557a2abf35c14d",
+      "sourceCommit": "7a0616b3dd75685be7d9db620eab55088ce56fc8",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -1267,8 +2977,8 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.3",
@@ -1276,7 +2986,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.3-fabric.jar": "c5bcdaf680991d225ee7ea2c2da4345dc0aee06d2566d014d862d9deaea49c8d"
       },
-      "sourceCommit": "f75d6235a0a3165dd7ad03bd958b5ac86914b8eb",
+      "sourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -1640,8 +3350,8 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.3",
@@ -1649,7 +3359,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.3-forge.jar": "56aebaed6739a89b3efc668679d2bfc1ded2ab1a7fe649faf84d4d529feda6f2"
       },
-      "sourceCommit": "f75d6235a0a3165dd7ad03bd958b5ac86914b8eb",
+      "sourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -1929,8 +3639,8 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     },
     {
       "minecraft": "26.3",
@@ -1938,7 +3648,7 @@
       "jars": {
         "seamless-dogs-0.2.0+mc26.3-neoforge.jar": "77f341648ca1dcf4052a36d70a07f5da719a0c0bb90b96233d7c8858bdf295fd"
       },
-      "sourceCommit": "f75d6235a0a3165dd7ad03bd958b5ac86914b8eb",
+      "sourceCommit": "64bfa87938839f439c2be2267e20fc217e738b3b",
       "buildPassed": true,
       "nativePassed": true,
       "nativeScenarios": [
@@ -2266,15 +3976,17 @@
       "extraRendererPassed": true,
       "nativeRepetitionRequired": false,
       "extraRendererRequired": false,
-      "visualReviewPassed": true,
-      "artifactStatus": "Exact-hash local acceptance passed; no publication performed."
+      "normalStartupPassed": true,
+      "visualReviewPassed": true
     }
   ],
   "hostedCi": {
     "status": "blocked",
     "reason": "GitHub account billing lock; jobs cannot start.",
-    "exampleRun": "https://github.com/DerkOttersberg/seamless-dogs/actions/runs/37506802601",
-    "checkRun": 112417417378,
+    "exampleRun": "https://github.com/DerkOttersberg/seamless-dogs/actions/runs/37596382924",
+    "checkRun": 112709945000,
+    "sourceCommit": "6f15ca098083aa06ad59694497f7b2702eb9f09f",
+    "verifiedAt": "2026-10-07T08:54:10Z",
     "annotation": "The job was not started because your account is locked due to a billing issue."
   },
   "evidenceRoot": "D:\\SeamlessDogsProduction-20261006",
@@ -2286,17 +3998,68 @@
     "Modern beta loaders/renderers retain upstream beta status.",
     "No CurseForge publication performed."
   ],
-  "localAcceptanceComplete": false,
+  "localAcceptanceComplete": true,
   "releaseReadinessScope": "Local exact-hash acceptance only; hosted CI is reported separately and no publication has occurred.",
   "hostedCiVerified": false,
-  "workStatus": "Stopped at the user request before WSL Minecraft cleanup.",
-  "testEnvironmentStatus": "User requested removal of all Linux Minecraft workspaces and caches, followed by WSL shutdown. Future runtime tests require a new isolated environment.",
-  "remainingWork": [
-    "Complete the interrupted 1.20.1 build of the new player pose restoration fix; output hashes from this interrupted attempt are not release artifacts.",
-    "Validate the new 1.20.1 and 1.21.1 player pose restoration in fresh packaged singleplayer, two-client, restart, lifecycle, integration and visual checks.",
-    "Repeat 1.20.1 native scenarios on the final gameplay bytes; previous repetition evidence belongs to the earlier build.",
-    "Complete the separate 1.21.1 NeoForge Embeddium profile.",
-    "Restore hosted CI after the GitHub account billing lock is resolved.",
-    "Prepare final install bundles only after all eleven acceptance cells pass. Publication remains a separate action."
-  ]
+  "optionalAvailability": {
+    "file": "forge-1.21.1-optional-availability-20261007.json",
+    "sha256": "b0c62d7ea6cfdeb40a26e34603b369c9024e5c35c42e2731696e8b9fdbd489e3",
+    "details": {
+      "checkedAtUtc": "2026-10-07T09:30:35.490965+00:00",
+      "minecraft": "1.21.1",
+      "loader": "forge",
+      "sources": [
+        {
+          "project": "sodium",
+          "url": "https://api.modrinth.com/v2/project/sodium/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22forge%22%5D",
+          "matchingVersions": []
+        },
+        {
+          "project": "embeddium",
+          "url": "https://api.modrinth.com/v2/project/embeddium/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22forge%22%5D",
+          "matchingVersions": []
+        },
+        {
+          "project": "iris",
+          "url": "https://api.modrinth.com/v2/project/iris/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22forge%22%5D",
+          "matchingVersions": []
+        },
+        {
+          "project": "oculus",
+          "url": "https://api.modrinth.com/v2/project/oculus/version?game_versions=%5B%221.21.1%22%5D&loaders=%5B%22forge%22%5D",
+          "matchingVersions": []
+        },
+        {
+          "project": "ftb-chunks-forge",
+          "url": "https://maven.ftb.dev/releases/dev/ftb/mods/ftb-chunks-forge/",
+          "matching2101Versions": []
+        }
+      ]
+    }
+  },
+  "fixtureStartup": {
+    "file": "forge-1.21.1-startup-20261007.json",
+    "sha256": "7d37a9dcf9b417eef92af728af43d41f8f9def6bf18f4d6196c9cf21cacec4f1",
+    "details": {
+      "checkedAtUtc": "2026-10-07T09:53:47.995166+00:00",
+      "gameplayJar": "seamless-dogs-0.2.0+mc1.21.1-forge.jar",
+      "gameplaySha256": "a233603d9cba009cb1ce955a913d9317fd5220f1ccac4f1135964d90b7452d42",
+      "profile": "forge-1.21.1-single-5",
+      "qaBuildLogs": [
+        "qa-client-1.21.1-forge-21.log",
+        "qa-lifecycle-1.21.1-forge-21.log"
+      ],
+      "sourceUrl": "https://github.com/MinecraftForge/MinecraftForge/blob/1.21.1/patches/minecraft/net/minecraft/client/Minecraft.java.patch",
+      "officialSourcesSha256": "3978dccd6621687c945d1c82592d86efb69d50213a1d7e7c84c48acdf0d4b90a",
+      "failedAttempts": [
+        "forge-1.21.1-single-1",
+        "forge-1.21.1-single-2",
+        "forge-1.21.1-single-3",
+        "forge-1.21.1-single-4"
+      ],
+      "finding": "Forge 52 invokes the Quick Play callback before completeModLoading starts the event bus. Early world opening omitted native command and loot reload listeners. The accepted fixture opens through the ordinary title-screen world flow after loading. Native commands, loot processing and full gameplay checks pass without fixture command fallback or loot-manager replacement.",
+      "releaseCodeChanged": false,
+      "limitation": "Early upstream Quick Play startup is outside the accepted launch path."
+    }
+  }
 }
