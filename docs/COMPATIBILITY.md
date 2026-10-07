@@ -326,8 +326,9 @@ need verified adapters before claim-aware support can be advertised.
 Tests use isolated Xvfb software rendering and silent OpenAL. Entity-bound sound
 events and engine playback are checked; audible quality and every hardware
 driver are outside that automated coverage. Upstream beta builds remain beta.
-Hosted CI is reported separately from successful local tests. No CurseForge
-publication was performed.
+Hosted CI is reported separately from successful local tests. All eleven JARs
+are submitted to CurseForge and await moderation; see the
+[publication record](CURSEFORGE-0.2.0-20261007.md).
 
 See [current acceptance](0.2.0-ACCEPTANCE.md) for native, singleplayer, two-client,
 restart, lifecycle and visual gates. The [historical matrix](COMPATIBILITY-0.1.0-HISTORICAL.md)
